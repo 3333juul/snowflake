@@ -11,6 +11,12 @@ configuration {
 
 @import "colors.rasi"
 
+* {
+    background-color:       @background;
+    text-color:             @foreground;
+	font:				 	"Terminess Nerd Font 14";
+}
+
 window {
     enabled:                     true;
     fullscreen:                  false;
