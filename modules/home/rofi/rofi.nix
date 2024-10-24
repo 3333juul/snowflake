@@ -28,7 +28,7 @@
 
   # Symlink all themes
   xdg.configFile."rofi/themes" = {
-    source = config.lib.file.mkOutOfStoreSymlink ./themes;
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/modules/home/rofi/themes";
     recursive = true;
   };
 }
