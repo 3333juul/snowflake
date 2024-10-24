@@ -1,8 +1,10 @@
-{ pkgs, ... }: 
 {
-  home.packages = with pkgs; [ rofi-wayland ];
+  pkgs,
+  config,
+  ...
+}: {
+  home.packages = with pkgs; [rofi-wayland];
 
-  # Zapisanie config.rasi w katalogu ~/.config/rofi/
   xdg.configFile."rofi/config.rasi".text = ''
     configuration {
       show-icons:         true;
@@ -24,9 +26,9 @@
     }
   '';
 
-  # Kopiowanie wszystkich plików .rasi z katalogu themes do ~/.config/rofi/themes/
+  # Symlink all themes
   xdg.configFile."rofi/themes" = {
-    source = ./themes;
-    recursive = true;  # Kopiowanie rekurencyjne wszystkich plików z themes/
+    source = config.lib.file.mkOutOfStoreSymlink ./themes;
+    recursive = true;
   };
 }
