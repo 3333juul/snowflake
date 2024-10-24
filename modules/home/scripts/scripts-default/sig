@@ -1,44 +1,43 @@
 #!/bin/bash
 
-# Pobierz aktualną lokalizację w shellu
+# Get the current location in the shell
 current_location=$(pwd)
 
-# Lista domyślnych ścieżek
-default_paths=(
+# List of excluded paths
+excluded_paths=(
     "$HOME" "$HOME/" "$HOME/Desktop" "$HOME/Downloads" "$HOME/Documents"
     "/" "/bin" "/boot" "/dev" "/etc" "/lib" "/proc" "/root" "/sbin" "/sys" "/usr" "/var"
 )
 
-# Sprawdź, czy bieżąca lokalizacja jest jedną z domyślnych ścieżek
-for path in "${default_paths[@]}"; do
+# Check if the current location is one of the excluded paths
+for path in "${excluded_paths[@]}"; do
     if [[ "$current_location" == "$path" ]]; then
-        echo "Exited. One of the default paths ($path)."
-        notify-send "Exited." "One of the default paths ($path)."
+        echo "Exited. One of the excluded paths ($path)."
+        notify-send "Exited." "One of the excluded paths ($path)."
         exit 0
     fi
 done
 
-# Sprawdź, czy podano argument -o
 if [[ "$1" == "-o" ]]; then
-    # Znajdź wszystkie obrazy tylko w bieżącej lokalizacji
+    # Find all images only in the current location
     images=$(find "$current_location" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" \))
 else
-    # Znajdź wszystkie obrazy w bieżącej lokalizacji i jej podkatalogach
+    # Find all images in the current location and its subdirectories
     images=$(find "$current_location" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" \))
 fi
 
-# Wyświetl menu z listą obrazów (tylko nazwy plików z podkatalogami)
+# Display a menu with the list of images (only file names from subdirectories)
 selected_image=$(for img in $images; do
-    # Usuń bieżącą lokalizację z pełnej ścieżki, aby uzyskać ścieżkę względną
+    # Remove the current location from the full path to get the relative path
     relative_path="${img#$current_location/}"
     echo -en "$relative_path\0icon\x1f$img\n"
 done | rofi -dmenu -i -p "$current_location" -theme ~/.config/rofi/themes/sig.rasi)
 
-# Jeśli wybrano obraz
+# If an image is selected
 if [[ -n $selected_image ]]; then
     full_path="$current_location/$selected_image"
     
-    # Wyświetl menu z opcjami dla wybranego obrazu
+    # Display a menu with options for the selected image
     action=$(echo -e "Open\nCopy image\nChange name\nOpen in GIMP\nCopy path" | rofi -dmenu -i -p "Select action" -theme ~/.config/rofi/themes/launcher3.rasi)
     
     case $action in
@@ -67,4 +66,3 @@ if [[ -n $selected_image ]]; then
             ;;
     esac
 fi
-
