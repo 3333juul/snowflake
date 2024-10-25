@@ -27,6 +27,7 @@
       "float,class:(pulsemixer)"
       "float,class:(floatingterm)"
       "float,class:(swayimg)"
+      "float,class:^([Ss]team)$, title:^((?![Ss]team).*)$"
 
       # Fullscreen
       "fullscreen,class:(mpv)"
@@ -40,6 +41,7 @@
       "tile,title:(todoist)"
       "tile,title:(monkeytype)"
       "tile,class:(scrcpy)"
+      "tile,class:^([Ss]team)$, title:^([Ss]team)$"
 
       # Groups
       "group set,title:(chat.openai)"
@@ -65,7 +67,7 @@
       "workspace 7, class:(vesktop)"
       "workspace 8, class:(mpv)"
       "workspace 8, class:(com.stremio.stremio)"
-      "workspace 8, class:(steam)"
+      "workspace 8 silent, class:(steam)"
 
       # Special workspaces
       "workspace special:music silent, class:(Spotify)"
