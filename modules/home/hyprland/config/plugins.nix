@@ -1,8 +1,10 @@
-{pkgs, ...}: let
-  hypreasymotion = pkgs.callPackage ../../../../pkgs/hyprland-easymotion/default.nix {};
-in {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   wayland.windowManager.hyprland = {
-    plugins = with pkgs; [hypreasymotion];
+    plugins = [inputs.hyprland-easymotion.packages.${pkgs.system}.hyprland-easymotion];
     settings.plugin = {
       easymotion = {
         textsize = 30;

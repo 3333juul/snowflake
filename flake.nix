@@ -22,6 +22,11 @@
       submodules = true;
     };
 
+    hyprland-easymotion = {
+      url = "github:zakk4223/hyprland-easymotion";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     hyprpolkitagent.url = "github:hyprwm/hyprpolkitagent";
   
     home-manager = {
