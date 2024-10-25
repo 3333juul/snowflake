@@ -1,10 +1,13 @@
 { inputs, pkgs, ... }: 
 let 
-  _2048 = pkgs.callPackage ../../pkgs/2048/default.nix {}; 
+  _2048 = pkgs.callPackage ../../pkgs/2048/default.nix {};
+  vocabsieve = pkgs.callPackage ../../pkgs/vocabsieve.nix {}; 
 in
 {
   home.packages = (with pkgs; [
     _2048
+
+    vocabsieve
 
     ## CLI utility
     appimage-run                      # run appimage
