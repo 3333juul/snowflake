@@ -28,7 +28,6 @@ pkgs.python311Packages.buildPythonPackage rec {
     charset-normalizer
     ebooklib
     flask
-    gevent
     loguru
     lxml
     markdown
