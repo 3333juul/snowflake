@@ -30,19 +30,33 @@ choose_sorting_method() {
     esac
 }
 
+# Function to extract a frame from video
+generate_thumbnail() {
+    input_video="$1"
+    output_image="/tmp/${input_video##*/}.png"
+    if [ ! -f "$output_image" ]; then
+        ffmpeg -i "$input_video" -ss 00:00:01.000 -vframes 1 -vf "scale=320:-1" "$output_image"
+    fi
+    echo "$output_image"
+}
+
 # Find and show images
 display_images() {
     local maxdepth_param="-maxdepth ${maxdepth}"
     if [[ $sort_command == *"-n -k1,1"* ]]; then
-        images=$(find "$current_location" $maxdepth_param -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" \) -printf "%T@ %p\n" | $sort_command | cut -d' ' -f2-)
+        images=$(find "$current_location" $maxdepth_param -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.mp4" \) -printf "%T@ %p\n" | $sort_command | cut -d' ' -f2-)
     else
-        images=$(find "$current_location" $maxdepth_param -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" \) | $sort_command)
+        images=$(find "$current_location" $maxdepth_param -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.mp4" \) | $sort_command)
     fi
 
-    # Display a menu with the list of images
     selected_image=$(echo "$images" | while IFS= read -r img; do
         relative_path="${img#$current_location/}"
-        echo -en "$relative_path\0icon\x1f$img\n"
+        if [[ "$img" == *.mp4 ]]; then
+            thumbnail=$(generate_thumbnail "$img")
+            echo -en "$relative_path\0icon\x1f$thumbnail\n"
+        else
+            echo -en "$relative_path\0icon\x1f$img\n"
+        fi
     done | rofi -dmenu -i -p "$current_location" -kb-custom-1 "Ctrl+s" -theme ~/.config/rofi/themes/sig.rasi)
 
     # Check if custom keybinding was pressed
@@ -54,7 +68,7 @@ display_images() {
         if [[ -n $selected_image ]]; then
             full_path="$current_location/$selected_image"
             # Display a menu with options for the selected image
-            action=$(echo -e "Open\nCopy image\nRename\nOpen in GIMP\nCopy path\nDrag & drop" | rofi -dmenu -i -p "Select action" -theme ~/.config/rofi/themes/launcher3.rasi)
+            action=$(echo -e "Open\nCopy image\nDrag & drop\nRename\nOpen in GIMP\nCopy path" | rofi -dmenu -i -p "Select action" -theme ~/.config/rofi/themes/launcher3.rasi)
             case $action in
             "Open")
                 xdg-open "$full_path"
@@ -62,6 +76,9 @@ display_images() {
             "Copy image")
                 mime_type=$(file --mime-type -b "$full_path")
                 wl-copy -t "$mime_type" <"$full_path"
+                ;;
+            "Drag & drop")
+                ripdrag -s 100 -H 100 "$full_path"
                 ;;
             "Rename")
                 new_name=$(rofi -dmenu -i -p "New name" -theme ~/.config/rofi/themes/launcher3.rasi -theme-str "listview { enabled: false;}")
@@ -75,9 +92,6 @@ display_images() {
                 ;;
             "Copy path")
                 echo -n "$full_path" | wl-copy
-                ;;
-            "Drag & drop")
-                ripdrag "$full_path"
                 ;;
             *)
                 echo "Exited"
