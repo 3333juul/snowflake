@@ -8,7 +8,7 @@ sort_command="sort -r -n -k1,1"
 # Default maxdepth value
 maxdepth=1
 
-# Function to display sorting menu and update sort_command
+# Sorting menu
 choose_sorting_method() {
     sorting_method=$(echo -e "Newest to Oldest\nOldest to Newest\nAlphabetical (A-Z)\nAlphabetical (Z-A)" | rofi -dmenu -i -p "Sorting" -theme ~/.config/rofi/themes/launcher3.rasi)
     case $sorting_method in
@@ -30,7 +30,7 @@ choose_sorting_method() {
     esac
 }
 
-# Function to find and sort images
+# Find and show images
 display_images() {
     local maxdepth_param="-maxdepth ${maxdepth}"
     if [[ $sort_command == *"-n -k1,1"* ]]; then
@@ -39,7 +39,7 @@ display_images() {
         images=$(find "$current_location" $maxdepth_param -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" \) | $sort_command)
     fi
 
-    # Display a menu with the list of images (only file names from subdirectories)
+    # Display a menu with the list of images
     selected_image=$(echo "$images" | while IFS= read -r img; do
         relative_path="${img#$current_location/}"
         echo -en "$relative_path\0icon\x1f$img\n"
@@ -87,11 +87,11 @@ display_images() {
     fi
 }
 
-# Parse command line arguments for maxdepth
-for arg in "$@"; do
-    if [[ $arg == --maxdepth=* ]]; then
-        maxdepth="${arg#*=}"
-    fi
-done
+case "$1" in
+--maxdepth)
+    maxdepth="$2"
+    shift
+    ;;
+esac
 
 display_images
