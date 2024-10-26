@@ -7,7 +7,7 @@
     manager.prepend_keymap = [
       {
         on = ["<C-s>"];
-        run = "shell --confirm 'sig -o'";
+        run = "shell --confirm 'sig'";
         desc = "Preview all images in the current directory with rofi";
       }
       {
