@@ -2,25 +2,11 @@
 # Get the current location in the shell
 current_location=$(pwd)
 
-# List of excluded paths
-excluded_paths=(
-    "$HOME" "$HOME/" "$HOME/Desktop" "$HOME/Downloads" "$HOME/Documents"
-    "/" "/bin" "/boot" "/dev" "/etc" "/lib" "/proc" "/root" "/sbin" "/sys" "/usr" "/var"
-)
-
-# Check if the current location is one of the excluded paths
-if [[ "$1" != "-o" ]]; then
-    for path in "${excluded_paths[@]}"; do
-        if [[ "$current_location" == "$path" ]]; then
-            echo "Exited. One of the excluded paths ($path)."
-            notify-send "Exited." "One of the excluded paths ($path)."
-            exit 0
-        fi
-    done
-fi
-
 # Default sorting method (Newest to Oldest)
 sort_command="sort -r -n -k1,1"
+
+# Default maxdepth value
+maxdepth=1
 
 # Function to display sorting menu and update sort_command
 choose_sorting_method() {
@@ -46,16 +32,11 @@ choose_sorting_method() {
 
 # Function to find and sort images
 display_images() {
-    if [[ "$1" == "-o" ]]; then
-        maxdepth="-maxdepth 1"
-    else
-        maxdepth=""
-    fi
-
+    local maxdepth_param="-maxdepth ${maxdepth}"
     if [[ $sort_command == *"-n -k1,1"* ]]; then
-        images=$(find "$current_location" $maxdepth -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" \) -printf "%T@ %p\n" | $sort_command | cut -d' ' -f2-)
+        images=$(find "$current_location" $maxdepth_param -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" \) -printf "%T@ %p\n" | $sort_command | cut -d' ' -f2-)
     else
-        images=$(find "$current_location" $maxdepth -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" \) | $sort_command)
+        images=$(find "$current_location" $maxdepth_param -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" \) | $sort_command)
     fi
 
     # Display a menu with the list of images (only file names from subdirectories)
@@ -67,7 +48,7 @@ display_images() {
     # Check if custom keybinding was pressed
     if [[ $? -eq 10 ]]; then
         choose_sorting_method
-        display_images "$1" # Reload images with new sorting
+        display_images # Reload images with new sorting
     else
         # If an image is selected
         if [[ -n $selected_image ]]; then
@@ -106,4 +87,11 @@ display_images() {
     fi
 }
 
-display_images "$1"
+# Parse command line arguments for maxdepth
+for arg in "$@"; do
+    if [[ $arg == --maxdepth=* ]]; then
+        maxdepth="${arg#*=}"
+    fi
+done
+
+display_images
