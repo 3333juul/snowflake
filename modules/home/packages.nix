@@ -43,6 +43,7 @@ in
     jless
     socat
     imagemagick
+    ripdrag
 
     ## CLI 
     tty-clock                         # cli clock
