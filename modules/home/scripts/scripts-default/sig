@@ -2,11 +2,10 @@
 # Get the current location in the shell
 current_location=$(pwd)
 
-# Default sorting method (Newest to Oldest)
-sort_command="sort -r -n -k1,1"
-
-# Default maxdepth value
+# Default settings
 maxdepth=1
+show_videos=false
+sort_command="sort -r -n -k1,1"
 
 # Sorting menu
 choose_sorting_method() {
@@ -30,29 +29,54 @@ choose_sorting_method() {
     esac
 }
 
-# Function to extract a frame from video
+# Function to extract a frame from video using ffmpegthumbnailer
 generate_thumbnail() {
     input_video="$1"
     output_image="/tmp/${input_video##*/}.png"
     if [ ! -f "$output_image" ]; then
-        ffmpeg -i "$input_video" -ss 00:00:01.000 -vframes 1 -vf "scale=320:-1" "$output_image"
+        ffmpegthumbnailer -i "$input_video" -o "$output_image" -s 320
     fi
     echo "$output_image"
+}
+
+# Generate all thumbnails for mp4 files using ffmpegthumbnailer
+generate_all_thumbnails() {
+    find "$current_location" -type f -iname "*.mp4" | xargs -I {} -P 4 bash -c '
+        input_video="{}"
+        output_image="/tmp/${input_video##*/}.png"
+        if [ ! -f "$output_image" ]; then
+            ffmpegthumbnailer -i "$input_video" -o "$output_image" -s 320
+        fi
+    ' -- {}
 }
 
 # Find and show files
 display_files() {
     local maxdepth_param="-maxdepth ${maxdepth}"
-    if [[ $sort_command == *"-n -k1,1"* ]]; then
-        files=$(find "$current_location" $maxdepth_param -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.mp4" \) -printf "%T@ %p\n" | $sort_command | cut -d' ' -f2-)
+    local file_types
+
+    # Define file types to search for based on whether videos should be included
+    if [[ "$show_videos" == true ]]; then
+        file_types=(-iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.mp4")
     else
-        files=$(find "$current_location" $maxdepth_param -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.mp4" \) | $sort_command)
+        file_types=(-iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg")
     fi
+
+    # Fetch and sort files
+    if [[ $sort_command == *"-n -k1,1"* ]]; then
+        files=$(find "$current_location" $maxdepth_param -type f \( "${file_types[@]}" \) -printf "%T@ %p\n" | $sort_command | cut -d' ' -f2-)
+    else
+        files=$(find "$current_location" $maxdepth_param -type f \( "${file_types[@]}" \) | $sort_command)
+    fi
+
+    # Generate thumbnails in parallel
+    generate_all_thumbnails
 
     selected_file=$(echo "$files" | while IFS= read -r file; do
         relative_path="${file#$current_location/}"
         if [[ "$file" == *.mp4 ]]; then
-            thumbnail=$(generate_thumbnail "$file")
+            #thumbnail=$(generate_thumbnail "$file")
+            thumbnail="/tmp/${file##*/}.png"
             echo -en "$relative_path\0icon\x1f$thumbnail\n"
         else
             echo -en "$relative_path\0icon\x1f$file\n"
@@ -104,6 +128,10 @@ display_files() {
 case "$1" in
 --maxdepth)
     maxdepth="$2"
+    shift
+    ;;
+--show-videos)
+    show_videos=true
     shift
     ;;
 esac
