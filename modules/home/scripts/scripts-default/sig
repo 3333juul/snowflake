@@ -6,6 +6,10 @@ current_location=$(pwd)
 maxdepth=1
 show_videos=false
 sort_command="sort -r -n -k1,1"
+cache_dir="$HOME/.cache/rofi-gridview/${current_location#/}"
+
+# Ensure cache directory exists
+mkdir -p "$cache_dir"
 
 # Sorting menu
 choose_sorting_method() {
@@ -29,25 +33,29 @@ choose_sorting_method() {
     esac
 }
 
-# Function to extract a frame from video using ffmpegthumbnailer
-generate_thumbnail() {
-    input_video="$1"
-    output_image="/tmp/${input_video##*/}.png"
-    if [ ! -f "$output_image" ]; then
-        ffmpegthumbnailer -i "$input_video" -o "$output_image" -s 320
-    fi
-    echo "$output_image"
-}
-
-# Generate all thumbnails for mp4 files using ffmpegthumbnailer
 generate_all_thumbnails() {
-    find "$current_location" -type f -iname "*.mp4" | xargs -I {} -P 4 bash -c '
-        input_video="{}"
-        output_image="/tmp/${input_video##*/}.png"
-        if [ ! -f "$output_image" ]; then
+    if [ ! -f "$cache_dir/diffs.txt" ]; then
+        find "$current_location" -type f -iname "*.mp4" | xargs -I {} -P 4 bash -c '
+            input_video="{}"
+            output_image="'"$cache_dir"'/${input_video##*/}.png"
+            if [ ! -f "$output_image" ]; then
+                ffmpegthumbnailer -i "$input_video" -o "$output_image" -s 320
+            fi
+        ' -- {}
+        du -b "$current_location"/*.mp4 >"$cache_dir/diffs.txt"
+    fi
+
+    du -b "$current_location"/*.mp4 >"$cache_dir/files_new.txt"
+
+    diff "$cache_dir/diffs.txt" "$cache_dir/files_new.txt" | grep '^>' | awk '{print $3}' |
+        xargs -I {} -P 4 bash -c '
+            input_video="{}"
+            output_image="'"$cache_dir"'/${input_video##*/}.png"
             ffmpegthumbnailer -i "$input_video" -o "$output_image" -s 320
-        fi
-    ' -- {}
+        '
+
+    mv "$cache_dir/files_new.txt" "$cache_dir/diffs.txt"
+
 }
 
 # Find and show files
@@ -70,13 +78,14 @@ display_files() {
     fi
 
     # Generate thumbnails in parallel
-    generate_all_thumbnails
+    if [[ "$show_videos" == true ]]; then
+        generate_all_thumbnails
+    fi
 
     selected_file=$(echo "$files" | while IFS= read -r file; do
         relative_path="${file#$current_location/}"
         if [[ "$file" == *.mp4 ]]; then
-            #thumbnail=$(generate_thumbnail "$file")
-            thumbnail="/tmp/${file##*/}.png"
+            thumbnail="$cache_dir/${file##*/}.png"
             echo -en "$relative_path\0icon\x1f$thumbnail\n"
         else
             echo -en "$relative_path\0icon\x1f$file\n"
