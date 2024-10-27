@@ -40,40 +40,40 @@ generate_thumbnail() {
     echo "$output_image"
 }
 
-# Find and show images
-display_images() {
+# Find and show files
+display_files() {
     local maxdepth_param="-maxdepth ${maxdepth}"
     if [[ $sort_command == *"-n -k1,1"* ]]; then
-        images=$(find "$current_location" $maxdepth_param -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.mp4" \) -printf "%T@ %p\n" | $sort_command | cut -d' ' -f2-)
+        files=$(find "$current_location" $maxdepth_param -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.mp4" \) -printf "%T@ %p\n" | $sort_command | cut -d' ' -f2-)
     else
-        images=$(find "$current_location" $maxdepth_param -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.mp4" \) | $sort_command)
+        files=$(find "$current_location" $maxdepth_param -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.mp4" \) | $sort_command)
     fi
 
-    selected_image=$(echo "$images" | while IFS= read -r img; do
-        relative_path="${img#$current_location/}"
-        if [[ "$img" == *.mp4 ]]; then
-            thumbnail=$(generate_thumbnail "$img")
+    selected_file=$(echo "$files" | while IFS= read -r file; do
+        relative_path="${file#$current_location/}"
+        if [[ "$file" == *.mp4 ]]; then
+            thumbnail=$(generate_thumbnail "$file")
             echo -en "$relative_path\0icon\x1f$thumbnail\n"
         else
-            echo -en "$relative_path\0icon\x1f$img\n"
+            echo -en "$relative_path\0icon\x1f$file\n"
         fi
     done | rofi -dmenu -i -p "$current_location" -kb-custom-1 "Ctrl+s" -theme ~/.config/rofi/themes/sig.rasi)
 
     # Check if custom keybinding was pressed
     if [[ $? -eq 10 ]]; then
         choose_sorting_method
-        display_images # Reload images with new sorting
+        display_files # Reload files with new sorting
     else
-        # If an image is selected
-        if [[ -n $selected_image ]]; then
-            full_path="$current_location/$selected_image"
-            # Display a menu with options for the selected image
-            action=$(echo -e "Open\nCopy image\nDrag & drop\nRename\nOpen in GIMP\nCopy path" | rofi -dmenu -i -p "Select action" -theme ~/.config/rofi/themes/launcher3.rasi)
+        # If an file is selected
+        if [[ -n $selected_file ]]; then
+            full_path="$current_location/$selected_file"
+            # Display a menu with options for the selected file
+            action=$(echo -e "Open\nCopy file\nDrag & drop\nRename\nOpen in GIMP\nCopy path" | rofi -dmenu -i -p "Select action" -theme ~/.config/rofi/themes/launcher3.rasi)
             case $action in
             "Open")
                 xdg-open "$full_path"
                 ;;
-            "Copy image")
+            "Copy file")
                 mime_type=$(file --mime-type -b "$full_path")
                 wl-copy -t "$mime_type" <"$full_path"
                 ;;
@@ -108,4 +108,4 @@ case "$1" in
     ;;
 esac
 
-display_images
+display_files
