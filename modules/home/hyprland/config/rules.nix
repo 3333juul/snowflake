@@ -9,6 +9,7 @@
       "size 50% 55%,class:(pulsemixer)"
       "size 90% 80%,class:(floatingterm)"
       "size 90% 80%,class:(swayimg)"
+      "size 380 770,class:(steam),title:(Friends List)"
 
       # Float
       "float,class:^(net.davidotek.pupgui2)$"
@@ -28,6 +29,9 @@
       "float,class:(floatingterm)"
       "float,class:(swayimg)"
       "float,class:^([Ss]team)$, title:^((?![Ss]team).*)$"
+
+      # Move
+      "move 1470 130,class:(steam),title:(Friends List)"
 
       # Fullscreen
       "fullscreen,class:(mpv)"
@@ -112,7 +116,7 @@
       "special:type,gapsin:7,gapsout:64,on-created-empty:brave --app=https://monkeytype.com"
       "special:sound,on-created-empty:kitty --title pulsemixer --class pulsemixer -e pulsemixer"
 
-      # Maximize without no gaps
+      # Maximize without gaps
       "s[false] f[1],gapsin:0,gapsout:0"
     ];
 
