@@ -12,8 +12,7 @@
     };
   };
   config = lib.mkIf config.sys.thumbnailers.enable {
-    # https://moritzmolch.com/blog/1749.html, https://docs.xfce.org/xfce/tumbler/available_plugins
-    # note: apparently xcftools is unmaintained since 2019 and nixpkgs' version has multiple code-execution vulnerabilities, so let's not use xcf2png
+    # delete this file
     xdg.dataFile."thumbnailers/xcf.thumbnailer".text = ''
       [Thumbnailer Entry]
       TryExec=${pkgs.ffmpegthumbnailer}/bin/ffmpegthumbnailer
