@@ -47,7 +47,7 @@ generate_all_thumbnails() {
 
     du -b "$current_location"/*.mp4 >"$cache_dir/diffs_new.txt.txt"
 
-    diff "$cache_dir/diffs.txt" "$cache_dir/diffs_new.txt.txt" | grep '^>' | awk '{print $3}' |
+    diff "$cache_dir/diffs.txt" "$cache_dir/diffs_new.txt.txt" | grep '^>' | awk '{ print substr($0, index($0, $3)) }' |
         xargs -I {} -P 4 bash -c '
             input_video="{}"
             output_image="'"$cache_dir"'/${input_video##*/}.png"
