@@ -44,6 +44,7 @@ in
     socat
     imagemagick
     ripdrag
+    ffmpegthumbnailer
 
     ## CLI 
     tty-clock                         # cli clock
