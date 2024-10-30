@@ -14,6 +14,7 @@
   obsidianspecial = pkgs.writeShellScriptBin "obsidianspecial" (builtins.readFile ./scripts-hyprland/obsidianspecial);
   prevclosespecial = pkgs.writeShellScriptBin "prevclosespecial" (builtins.readFile ./scripts-hyprland/prevclosespecial);
   resetxdgportal = pkgs.writeShellScriptBin "resetxdgportal" (builtins.readFile ./scripts-hyprland/resetxdgportal);
+  riodraw = pkgs.writeShellScriptBin "riodraw" (builtins.readFile ./scripts-hyprland/riodraw);
   screenrecord = pkgs.writeShellScriptBin "screenrecord" (builtins.readFile ./scripts-hyprland/screenrecord);
   selectwallpaper = pkgs.writeShellScriptBin "selectwallpaper" (builtins.readFile ./scripts-hyprland/selectwallpaper);
   special_per_workspace = pkgs.writeShellScriptBin "special_per_workspace" (builtins.readFile ./scripts-hyprland/special_per_workspace);
@@ -53,6 +54,7 @@ in {
     obsidianspecial
     prevclosespecial
     resetxdgportal
+    riodraw
     screenrecord
     selectwallpaper
     special_per_workspace
