@@ -16,7 +16,7 @@ send_back() {
 		hyprctl dispatch movetoworkspacesilent "$original_workspace","address:$active_window_address"
 		sed -i "/$active_window_address/d" "$STORE_FILE"
 	else
-		hyprctl notify -1 1500 "rgb(98971a)" Unknown origin. 
+		hyprctl notify -1 1500 "rgb(98971a)" Unknown origin.
 	fi
 }
 
@@ -38,50 +38,6 @@ toggle_class() {
 
 	if [ "$any_windows_moved" -eq 0 ]; then
 		windows_info=$(hyprctl -j clients | jq --arg CLASS "$window_class" -c '.[] | select(.class == $CLASS)')
-
-		echo "$windows_info" | while IFS= read -r window; do
-			window_address=$(echo "$window" | jq -r '.address')
-			window_workspace=$(echo "$window" | jq -r '.workspace.name')
-
-			if $IGNORE_SPECIAL && [[ $window_workspace == *"special"* ]]; then
-				continue
-			fi
-
-			if grep -q "^$window_address " "$STORE_FILE"; then
-				original_workspace=$(grep "^$window_address " "$STORE_FILE" | cut -d ' ' -f 2)
-				sed -i "/^$window_address /d" "$STORE_FILE"
-				echo "$window_address $window_workspace" >>"$STORE_FILE"
-				hyprctl dispatch movetoworkspace "$active_workspace","address:$window_address"
-			else
-				original_workspace_name=$(hyprctl -j clients | jq --arg ADDRESS "$window_address" '.[] | select(.address == $ADDRESS)' | jq -r '.workspace.name')
-				if [ "$original_workspace_name" != "$active_workspace" ]; then
-					echo "$window_address $window_workspace" >>"$STORE_FILE"
-					hyprctl dispatch movetoworkspace "$active_workspace","address:$window_address"
-				fi
-			fi
-		done
-	fi
-}
-
-toggle_workspace() {
-	workspace_name="$1"
-	active_workspace=$(hyprctl activeworkspace -j | jq -r '.name')
-
-	any_windows_moved=0
-	while IFS= read -r line; do
-		window_address=$(echo "$line" | cut -d ' ' -f 1)
-		original_workspace=$(echo "$line" | cut -d ' ' -f 2)
-		window_workspace=$(hyprctl -j clients | jq --arg ADDRESS "$window_address" '.[] | select(.address == $ADDRESS)' | jq -r '.workspace.name')
-		if [ "$window_workspace" == "$active_workspace" ] && [ "$original_workspace" == "$workspace_name" ]; then
-			hyprctl dispatch movetoworkspacesilent "$original_workspace","address:$window_address"
-			sed -i "/^$window_address /d" "$STORE_FILE"
-			any_windows_moved=1
-		fi
-	done <"$STORE_FILE"
-
-
-	if [ "$any_windows_moved" -eq 0 ]; then
-		windows_info=$(hyprctl -j clients | jq --arg WORKSPACE "$workspace_name" -c '.[] | select(.workspace.name == $WORKSPACE)')
 
 		echo "$windows_info" | while IFS= read -r window; do
 			window_address=$(echo "$window" | jq -r '.address')
@@ -144,7 +100,6 @@ select_window() {
 	echo "$window_address $original_workspace" >>"$STORE_FILE"
 }
 
-
 while getopts "sc:w:r:b" opt; do
 	case ${opt} in
 	s)
@@ -156,13 +111,6 @@ while getopts "sc:w:r:b" opt; do
 			exit 1
 		fi
 		toggle_class "$OPTARG"
-		;;
-	w)
-		if [ -z "$OPTARG" ]; then
-			echo "Usage: $0 -w <workspace_name>"
-			exit 1
-		fi
-		toggle_workspace "$OPTARG"
 		;;
 	r)
 		select_window "$OPTARG"
@@ -176,4 +124,3 @@ while getopts "sc:w:r:b" opt; do
 		;;
 	esac
 done
-
