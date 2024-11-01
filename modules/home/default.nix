@@ -12,6 +12,7 @@
     ./fzf.nix                         # fuzzy finder
     ./gaming.nix                      # packages related to gaming
     ./git.nix                         # version control
+    ./glance.nix                      # home page
     ./gnome.nix                       # gnome apps
     ./gtk.nix                         # gtk theme
     ./hyprland                        # window manager
