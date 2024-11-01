@@ -18,12 +18,13 @@ in {
     terminus_font_ttf
     terminus-nerdfont
     font-awesome
+    noto-fonts
   ];
 
   gtk = {
     enable = true;
     font = {
-      name = "FiraCode Nerd Font";
+      name = "Noto Sans";
       size = 12;
     };
     theme = {
