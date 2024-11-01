@@ -37,6 +37,7 @@
       "$mainMod CTRL, W, exec, pkill tofi || focuswindow tofi"
       "$mainMod CTRL, E, exec, pkill tofi || togglespecial-menu"
       "$mainMod CTRL, Z, exec, pkill rofi || selectwallpaper"
+      "$mainMod CTRL, R, exec, pkill rofi || cd ~/Documents/Syncthing/Memes && sig --show-videos"
 
       #== Screenshot/Screencapture ======================================================================
       "$mainMod CTRL, S, exec, screenshot-wl sf"
@@ -95,13 +96,13 @@
       "$mainMod SHIFT, N, movetoworkspacesilent, r+1"
 
       #== Toggle window =================================================================================
-      "$mainMod CTRL, 2, exec, togglewindow -c Brave-browser"
+      "$mainMod CTRL, 2, exec, togglewindow -c brave-browser"
       "$mainMod CTRL, 3, exec, togglewindow -c neovim"
       "$mainMod CTRL, 4, exec, togglewindow -c yazi"
       "$mainMod CTRL, 5, exec, togglewindow -c obsidian"
       "$mainMod CTRL, 6, exec, togglewindow -c Zotero"
       "$mainMod CTRL, 7, exec, togglewindow -c vesktop"
-      "$mainMod SHIFT, W, exec, togglewindow -c Brave-browser"
+      "$mainMod SHIFT, W, exec, togglewindow -c brave-browser"
       "$mainMod SHIFT, O, exec, togglewindow -c obsidian"
       "$mainMod SHIFT, E, exec, togglewindow -b"
       "$mainMod, E, exec, pkill tofi || togglewindow -r 'tofi --height 400 --prompt-text=Window: '"
@@ -162,6 +163,12 @@
       "$mainMod ALT, down, layoutmsg, orientationbottom"
       "$mainMod ALT, left, layoutmsg, orientationleft"
       "$mainMod ALT, right, layoutmsg, orientationright"
+
+      #== Focus with arrow keys =========================================================================
+      "$mainMod, up, movefocus, u"
+      "$mainMod, down, movefocus, d"
+      "$mainMod, left, movefocus, l"
+      "$mainMod, right, movefocus, r"
 
       #== Plugins =======================================================================================
       "$mainMod, Z, exec, easymotion"
