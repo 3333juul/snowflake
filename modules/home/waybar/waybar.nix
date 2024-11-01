@@ -17,7 +17,8 @@
           "hyprland/window"
         ];
         modules-center = [
-          "custom/windowstate_0"
+          "clock"
+          #"custom/windowstate_0"
         ];
         modules-right = [
           #"custom/spotify"
@@ -29,7 +30,6 @@
           "temperature"
           "pulseaudio"
           "custom/notification"
-          "clock"
           "tray"
         ];
         include = [
@@ -49,7 +49,8 @@
           "hyprland/window"
         ];
         modules-center = [
-          "custom/windowstate_1"
+          "clock"
+          #"custom/windowstate_1"
         ];
         modules-right = [
           #"custom/spotify"
@@ -60,7 +61,6 @@
           "memory"
           "temperature"
           "pulseaudio"
-          "clock"
           "tray"
         ];
         include = [
