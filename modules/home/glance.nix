@@ -91,7 +91,7 @@
                 {
                   type = "weather";
                   hide-location = true;
-                  location = "Łomazy, Poland";
+                  location = "Biała Podlaska, Poland";
                 }
                 {
                   type = "reddit";
@@ -130,6 +130,7 @@
                       collapse-after-rows = 5;
                       channels = [
                         "UCoydhtfFSk1fZXNRnkGnneQ" # ESOTERICA
+                        "UC9dRb4fbJQIbQ3KHJZF_z0g" # Let's Talk Religion
                       ];
                     }
                     {
@@ -188,6 +189,7 @@
                   channels = [
                     "UC_zBdZ0_H_jn41FDRG7q4Tw" # Vimjoyer
                     "UCeZyoDTk0J-UPhd7MUktexw" # LibrePhoenix
+                    "UCld68syR8Wi-GY_n4CaoJGA" # Brodie Robertson
                   ];
                 }
               ];
