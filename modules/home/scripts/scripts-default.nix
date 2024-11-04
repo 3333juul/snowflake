@@ -1,7 +1,8 @@
-{ pkgs, ... }: let
+{pkgs, ...}: let
   changevolume = pkgs.writeShellScriptBin "changevolume" (builtins.readFile ./scripts-default/changevolume);
   confirm = pkgs.writeShellScriptBin "confirm" (builtins.readFile ./scripts-default/confirm);
   fopen = pkgs.writeShellScriptBin "fopen" (builtins.readFile ./scripts-default/fopen);
+  kitty-scrollback = pkgs.writeShellScriptBin "kitty-scrollback" (builtins.readFile ./scripts-default/kitty-scrollback);
   launcher = pkgs.writeShellScriptBin "launcher" (builtins.readFile ./scripts-default/launcher);
   man-zathura = pkgs.writeShellScriptBin "man-zathura" (builtins.readFile ./scripts-default/man-zathura);
   ocr = pkgs.writeShellScriptBin "ocr" (builtins.readFile ./scripts-default/ocr);
@@ -20,6 +21,7 @@ in {
     changevolume
     confirm
     fopen
+    kitty-scrollback
     launcher
     man-zathura
     ocr
