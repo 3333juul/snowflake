@@ -1,9 +1,12 @@
 #!/bin/bash
 
-selected_file=$(find ~ -type f | fzf)
+selected_file=$(find ~ -type f \
+    ! -path "*/.cache/*" \
+    ! -path "*/.git/*" \
+    ! -path "*/.local/*" | fzf)
+
 if [ -n "$selected_file" ]; then
     echo "Selected: $selected_file"
     read -p "Open with: " command
     $command "$selected_file"
 fi
-
