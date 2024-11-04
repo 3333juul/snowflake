@@ -1,23 +1,30 @@
-{ pkgs, host, ... }:
 {
+  pkgs,
+  host,
+  ...
+}: {
   programs.kitty = {
     enable = true;
 
     theme = "Gruvbox Dark";
-    
+
     font = {
       name = "Terminess Nerd Font";
-      size = if (host == "laptop") then 11 else 13.5;
+      size =
+        if (host == "laptop")
+        then 11
+        else 13.5;
     };
 
     settings = {
+      scrollback_pager = "kitty-scrollback 'INPUT_LINE_NUMBER' 'CURSOR_LINE' 'CURSOR_COLUMN'";
       confirm_os_window_close = 0;
       background_opacity = "0.9";
       window_padding_width = 10;
       scrollback_lines = 10000;
       enable_audio_bell = false;
       mouse_hide_wait = 60;
-      
+
       ## Tabs
       tab_title_template = "{index}";
       active_tab_font_style = "normal";
@@ -30,7 +37,7 @@
       inactive_tab_background = "#3C3836";
     };
 
-    keybindings = {  
+    keybindings = {
       ## Tabs
       "alt+1" = "goto_tab 1";
       "alt+2" = "goto_tab 2";
