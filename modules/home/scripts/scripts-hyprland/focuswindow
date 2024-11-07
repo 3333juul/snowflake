@@ -25,13 +25,4 @@ if [ -z "$window_address" ]; then
     exit 1
 fi
 
-# Do czasu aż focusowanie okna będąc w special workspace'ie nie zamknie automatycznie special workspace'u. Powinienem utworzyć issue na githubie
-selected_window_workspace=$(hyprctl -j clients | jq -r ".[] | select(.address==\"$window_address\") | .workspace.name")
-active_monitor=$(hyprctl -j monitors | jq '.[] | select(.focused==true)')
-
-if [ -n "$(echo "$active_monitor" | jq -r '.specialWorkspace.name')" ] && [[ "$selected_window_workspace" != *"special"* ]]; then
-    $HOME/.config/hypr/scripts/closespecial
-fi
-
 hyprctl dispatch focuswindow "address:$window_address"
-
