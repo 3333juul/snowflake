@@ -1,0 +1,12 @@
+#!/bin/bash
+
+monitors=$(hyprctl -j monitors)
+active_workspace=$(echo "$monitors" | jq -r '.[] | select(.focused == true) | if .specialWorkspace.name != "" then .specialWorkspace.name else .activeWorkspace.name end')
+
+hyprctl keyword windowrulev2 "workspace $active_workspace,class:(brave-browser)"
+
+brave
+
+sleep 1
+
+hyprctl keyword windowrulev2 "workspace 2,class:(brave-browser)"

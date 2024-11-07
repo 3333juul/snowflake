@@ -1,5 +1,6 @@
 {pkgs, ...}: let
   betterpin = pkgs.writeShellScriptBin "betterpin" (builtins.readFile ./scripts-hyprland/betterpin);
+  browserhere = pkgs.writeShellScriptBin "browserhere" (builtins.readFile ./scripts-hyprland/browserhere);
   changelayout = pkgs.writeShellScriptBin "changelayout" (builtins.readFile ./scripts-hyprland/changelayout);
   closespecial = pkgs.writeShellScriptBin "closespecial" (builtins.readFile ./scripts-hyprland/closespecial);
   colorpicker = pkgs.writeShellScriptBin "colorpicker" (builtins.readFile ./scripts-hyprland/colorpicker);
@@ -40,6 +41,7 @@
 in {
   home.packages = with pkgs; [
     betterpin
+    browserhere
     changelayout
     closespecial
     colorpicker
