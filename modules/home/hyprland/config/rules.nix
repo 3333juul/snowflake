@@ -1,15 +1,16 @@
 {
   wayland.windowManager.hyprland.settings = {
     windowrulev2 = [
-      "noblur,class:(Xdg-desktop-portal-gtk)"
+      # Noblur
+      "noblur,class:(xdg-desktop-portal-gtk)"
 
       # Size
-      "size 75% 80%,class:(Xdg-desktop-portal-gtk),title:(Open Files)"
-      "size 75% 80%,class:(Xdg-desktop-portal-gtk),title:(All Files)"
+      "size 75% 80%,class:(xdg-desktop-portal-gtk),title:(Open Files)"
+      "size 75% 80%,class:(xdg-desktop-portal-gtk),title:(All Files)"
       "size 50% 55%,class:(pulsemixer)"
       "size 90% 80%,class:(floatingterm)"
       "size 90% 80%,class:(swayimg)"
-      "size 380 770,class:(steam),title:(Friends List)"
+      "size 400 900,class:(steam),title:(Friends List)"
 
       # Float
       "float,class:^(net.davidotek.pupgui2)$"
@@ -23,15 +24,16 @@
       "float,class:^(nm-connection-editor)$"
       "float,class:^(org.kde.polkit-kde-authentication-agent-1)$"
       "float,class:^(com.obsproject.Studio)$,title:^(Controls)$"
-      "float,class:(Xdg-desktop-portal-gtk),title:(Open Files)"
-      "float,class:(Xdg-desktop-portal-gtk),title:(All Files)"
+      "float,class:(xdg-desktop-portal-gtk),title:(Open Files)"
+      "float,class:(xdg-desktop-portal-gtk),title:(All Files)"
       "float,class:(pulsemixer)"
       "float,class:(floatingterm)"
       "float,class:(swayimg)"
       "float,class:^([Ss]team)$, title:^((?![Ss]team).*)$"
+      "float,class:(steam),title:(Steam Settings)"
 
       # Move
-      "move 1470 130,class:(steam),title:(Friends List)"
+      "move 1470 100,class:(steam),title:(Friends List)"
 
       # Fullscreen
       "fullscreen,class:(mpv)"
@@ -115,6 +117,7 @@
       "special:dict,gapsin:7,gapsout:64,on-created-empty:autostart-dict"
       "special:type,gapsin:7,gapsout:64,on-created-empty:brave --app=https://monkeytype.com"
       "special:sound,on-created-empty:kitty --title pulsemixer --class pulsemixer -e pulsemixer"
+      "special:nix,on-created-empty:kitty --hold --class floatingterm -e nh os switch"
 
       # Maximize without gaps
       "s[false] f[1],gapsin:0,gapsout:0"

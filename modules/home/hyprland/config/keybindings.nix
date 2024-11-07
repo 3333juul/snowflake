@@ -133,6 +133,7 @@
       "$mainMod ALT, D, togglespecialworkspace, type"
       "$mainMod CTRL, P, togglespecialworkspace, mail"
       "$mainMod, Y, togglespecialworkspace, sound"
+      "$mainMod CTRL, A, togglespecialworkspace, nix"
 
       #== Dynamic windows ===============================================================================
       "$mainMod, B, exec, dynamicwindow -v special:dynamic"
