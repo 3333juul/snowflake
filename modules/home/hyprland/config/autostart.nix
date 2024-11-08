@@ -37,10 +37,11 @@
       "[workspace 5 silent] obsidian"
 
       # Scripts
-      "windowstate &"
+      "hycov-easymotion &"
       "toggleurgent &"
       "groupbind-run &"
       "selectwallpaper --last &"
+      #"windowstate &"
       #"wallshift &"
     ];
   };

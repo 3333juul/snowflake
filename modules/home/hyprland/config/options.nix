@@ -11,6 +11,10 @@
       resize_on_border = true;
       border_part_of_window = false;
       no_border_on_floating = false;
+      #snap = {
+      #  enabled = true;
+      #  border_overlap = true;
+      #};
     };
 
     input = {
