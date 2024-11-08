@@ -56,7 +56,6 @@ in
     nix-prefetch-github
     pavucontrol                       # pulseaudio volume controle (GUI)
     qalculate-gtk                     # calculator
-    vlc
     winetricks
     wineWowPackages.wayland
     zenity
@@ -103,5 +102,6 @@ in
     #cmatrix
     #pipes                             # terminal screensaver
     #sl
+    #vlc
   ]);
 }
