@@ -71,6 +71,7 @@ in
     anki-bin
     stremio
     qbittorrent
+    obs-studio
 
     # C / C++
     gcc
