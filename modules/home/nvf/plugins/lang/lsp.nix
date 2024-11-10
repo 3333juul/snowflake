@@ -2,7 +2,6 @@
   programs.nvf.settings.vim = {
     lsp = {
       formatOnSave = true;
-      lspkind.enable = true;
       lightbulb.enable = false;
       lspsaga.enable = false;
       trouble.enable = false;

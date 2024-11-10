@@ -14,7 +14,7 @@
 
     ags.url = "github:Aylur/ags";
 
-    nvf.url = "github:notashelf/nvf";
+    nvf.url = "github:notashelf/nvf/v0.7";
 
     hyprland = {
       type = "git";

@@ -1,6 +1,6 @@
 {
   programs.nvf.settings.vim = {
-    autocomplete = {
+    autocomplete.nvim-cmp = {
       enable = true;
     };
   };
