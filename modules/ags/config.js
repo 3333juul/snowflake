@@ -104,7 +104,7 @@ function getGdkMonitorFromName(name) {
 
 // Hook to hide windows when workspace changes
 windows.forEach((window, index) => {
-  window.hook(Hyprland.active.workspace, (self) => {
+  const updateWindowVisibilityAndMonitor = (self) => {
     setTimeout(() => {
       const activeWorkspaces = Hyprland.monitors.map(monitor => monitor.activeWorkspace.id);
       self.visible = activeWorkspaces.includes(widgetConfigs[index].workspace);
@@ -113,12 +113,28 @@ windows.forEach((window, index) => {
       const workspaceMonitor = Hyprland.monitors.find(monitor => monitor.activeWorkspace.id === widgetConfigs[index].workspace);
       if (workspaceMonitor) {
         const gdkMonitor = getGdkMonitorFromName(workspaceMonitor.name);
-        //console.log(`Hyprland monitor name: ${workspaceMonitor.name}`);
-        //console.log(`GTK monitor: ${gdkMonitor}`);
         self.gdkmonitor = gdkMonitor;
       }
     }, 5); // 10ms delay
-  });
+  };
+
+  // Hook for workspace change
+  window.hook(Hyprland.active.workspace, updateWindowVisibilityAndMonitor);
+
+  // Hook for renaming workspace (does the same update as workspace change)
+  window.hook(Hyprland, (self, eventName, data) => {
+    if (eventName === "renameworkspace") {
+      const [renameId, newName] = data.split(",");
+
+      // Hide widgets if the new name is "OVERVIEW"
+      if (newName === "OVERVIEW") {
+        self.visible = false;
+      } else {
+        updateWindowVisibilityAndMonitor(self); // Otherwise, update visibility normally
+      }
+    }
+  }, "event");
 });
+
 
 
