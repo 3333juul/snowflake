@@ -229,28 +229,10 @@
       action = ";<c-g>u";
     }
 
-    # Save file
+    #= Save file ==================================================================================
     {
       key = "<C-s>";
-      mode = "i";
-      desc = "Save File";
-      action = "<cmd>w<cr><esc>";
-    }
-    {
-      key = "<C-s>";
-      mode = "x";
-      desc = "Save File";
-      action = "<cmd>w<cr><esc>";
-    }
-    {
-      key = "<C-s>";
-      mode = "n";
-      desc = "Save File";
-      action = "<cmd>w<cr><esc>";
-    }
-    {
-      key = "<C-s>";
-      mode = "s";
+      mode = ["i" "x" "n" "s"];
       desc = "Save File";
       action = "<cmd>w<cr><esc>";
     }
