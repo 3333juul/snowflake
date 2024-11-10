@@ -35,13 +35,13 @@
 
       groupbar = {
         font_family = "Terminess Nerd Font";
-        font_size = 10;
+        font_size = 12;
         height = 13;
-        #col.active = rgb(6e5050)
-        #col.inactive = rgb(473939)
-        #col.locked_active =
-        #col.locked_inactive =
-        #text_color = rgb(ebdbb2)
+        "col.active" = "rgba(98971AE6)";
+        "col.inactive" = "rgba(282828E6)";
+        #"col.locked_active" = "rgba()";
+        #"col.locked_inactive" = "rgba()";
+        text_color = "rgb(ebdbb2)";
       };
     };
   };
