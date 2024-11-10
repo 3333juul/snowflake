@@ -5,8 +5,9 @@ last_wallpapers_file="$HOME/.config/hypr/lastwallpapers.txt"
 # Select a wallpaper using rofi
 select_wallpaper() {
     wallpapers=$(find "$HOME/Pictures/Backgrounds" -type f)
-    
-    selected_wallpaper=$(for a in $wallpapers; do
+
+    #selected_wallpaper=$(for a in $wallpapers; do
+    selected_wallpaper=$(echo "$wallpapers" | while IFS= read -r a; do
         echo -en "${a##*/}\0icon\x1f$a\n"
     done | rofi -dmenu -i -p "WALLPAPER" -theme ~/.config/rofi/themes/wallpaper.rasi)
 
@@ -41,7 +42,7 @@ set_wallpaper() {
     hyprctl hyprpaper wallpaper "$monitor,$wallpaper_path"
 
     # Save the active wallpapers to a file
-    hyprctl hyprpaper listactive > "$last_wallpapers_file"
+    hyprctl hyprpaper listactive >"$last_wallpapers_file"
 }
 
 # Load last saved wallpapers from the file
@@ -49,7 +50,7 @@ load_last_wallpapers() {
     if [[ -f "$last_wallpapers_file" ]]; then
         available_monitors=$(hyprctl -j monitors | jq -r '.[].name')
 
-        sleep 0.1  # Wait for hyprpaper to load
+        sleep 0.1 # Wait for hyprpaper to load
 
         # Load wallpapers from the file
         while IFS=' = ' read -r monitor wallpaper_path; do
@@ -63,7 +64,7 @@ load_last_wallpapers() {
                     echo "Monitor $monitor is not connected."
                 fi
             fi
-        done < "$last_wallpapers_file"
+        done <"$last_wallpapers_file"
 
         # Get the list of active wallpapers
         active_paths=$(hyprctl hyprpaper listactive | awk -F ' = ' '{print $2}')
@@ -83,11 +84,11 @@ load_last_wallpapers() {
 
 # Argument handling
 case "$1" in
-  --last)
+--last)
     load_last_wallpapers
     ;;
-  
-  --path)
+
+--path)
     if [[ -n $2 && -f $2 ]]; then
         selected_monitor=$(select_monitor)
         if [[ -n $selected_monitor ]]; then
@@ -98,7 +99,7 @@ case "$1" in
     fi
     ;;
 
-  *)
+*)
     selected_wallpaper=$(select_wallpaper)
     if [[ -n $selected_wallpaper ]]; then
         selected_monitor=$(select_monitor)
