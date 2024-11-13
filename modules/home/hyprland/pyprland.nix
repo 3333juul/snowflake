@@ -1,7 +1,10 @@
-{pkgs, ...}: 
 {
+  pkgs,
+  inputs,
+  ...
+}: {
   home.packages = with pkgs; [
-    pyprland
+    inputs.pyprland.packages.${pkgs.system}.pyprland
   ];
   home.file.".config/hypr/pyprland.toml".text = ''
     [pyprland]
@@ -12,3 +15,4 @@
     ]
   '';
 }
+
