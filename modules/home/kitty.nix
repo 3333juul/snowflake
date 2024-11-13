@@ -9,7 +9,7 @@
     theme = "Gruvbox Dark";
 
     font = {
-      name = "Terminess Nerd Font";
+      name = "Iosevka Nerd Font";
       size =
         if (host == "laptop")
         then 11
