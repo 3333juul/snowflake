@@ -33,6 +33,8 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    pyprland.url = "github:hyprland-community/pyprland";
+
     hyprpolkitagent.url = "github:hyprwm/hyprpolkitagent";
 
     home-manager = {
