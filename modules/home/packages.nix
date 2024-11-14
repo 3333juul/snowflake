@@ -1,41 +1,42 @@
-{ inputs, pkgs, ... }: 
-let 
-  _2048 = pkgs.callPackage ../../pkgs/2048/default.nix {};
-  vocabsieve = pkgs.callPackage ../../pkgs/vocabsieve.nix {}; 
-in
 {
-  home.packages = (with pkgs; [
+  inputs,
+  pkgs,
+  ...
+}: let
+  _2048 = pkgs.callPackage ../../pkgs/2048/default.nix {};
+  vocabsieve = pkgs.callPackage ../../pkgs/vocabsieve.nix {};
+in {
+  home.packages = with pkgs; [
     _2048
 
     vocabsieve
 
     ## CLI utility
-    appimage-run                      # run appimage
-    cliphist                          # clipboard manager
-    eza                               # ls replacement
-    entr                              # perform action when file change
-    fd                                # find replacement
+    appimage-run # run appimage
+    cliphist # clipboard manager
+    eza # ls replacement
+    entr # perform action when file change
+    fd # find replacement
     ffmpeg
-    file                              # Show file information 
-    translate-shell                   # translate
-    gtrash                            # rm replacement, put deleted files in system trash
+    file # Show file information
+    translate-shell # translate
+    gtrash # rm replacement, put deleted files in system trash
     hexdump
     killall
-    lazygit
     libnotify
-	  man-pages					            	  # extra man pages
-    mpv                               # video player
-    ncdu                              # disk space
+    man-pages # extra man pages
+    mpv # video player
+    ncdu # disk space
     openssl
-    onefetch                          # fetch utility for git repo
-    pamixer                           # pulseaudio command line mixer
-    playerctl                         # controller for media players
+    onefetch # fetch utility for git repo
+    pamixer # pulseaudio command line mixer
+    playerctl # controller for media players
     poweralertd
     programmer-calculator
-    ripgrep                           # grep replacement
+    ripgrep # grep replacement
     tldr
     unzip
-    wl-clipboard                      # clipboard utils for wayland (wl-copy, wl-paste)
+    wl-clipboard # clipboard utils for wayland (wl-copy, wl-paste)
     wget
     yt-dlp-light
     xdg-utils
@@ -46,16 +47,16 @@ in
     ripdrag
     ffmpegthumbnailer
 
-    ## CLI 
-    tty-clock                         # cli clock
+    ## CLI
+    tty-clock # cli clock
 
     ## GUI Apps
-    bleachbit                         # cache cleaner
+    bleachbit # cache cleaner
     gimp
     libreoffice
     nix-prefetch-github
-    pavucontrol                       # pulseaudio volume controle (GUI)
-    qalculate-gtk                     # calculator
+    pavucontrol # pulseaudio volume controle (GUI)
+    qalculate-gtk # calculator
     winetricks
     wineWowPackages.wayland
     zenity
@@ -103,5 +104,5 @@ in
     #pipes                             # terminal screensaver
     #sl
     #vlc
-  ]);
+  ];
 }
