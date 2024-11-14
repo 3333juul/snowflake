@@ -20,7 +20,7 @@
     ./foot.nix                        # terminal
     ./swaync/swaync.nix               # notification deamon
     ./nvf/nvf.nix                     # neovim config framework
-    ./lazyvim/nvim.nix                # neovim editor
+    #./lazyvim/nvim.nix                # neovim editor
     ./packages.nix                    # other packages
     ./rofi/rofi.nix                   # launcher
     ./scripts                         # personal scripts
