@@ -30,6 +30,7 @@
     ./ui/lualine.nix
     ./ui/noice.nix
     ./ui/nvim-notify.nix
+    ./ui/rainbow-delimiters.nix
     ./ui/theme.nix
 
     # util
