@@ -1,0 +1,35 @@
+#!/bin/sh
+
+WORKSPACE_FILE="/tmp/previous_workspace.txt"
+
+handle() {
+    case $1 in
+    workspacev2* | focusedmon*)
+        # Extract the current workspace number from the input format:
+        # - "workspacev2>>3,3" or "focusedmon>>DVI-D-1,5"
+        current_workspace=$(echo "$1" | sed -E 's/(workspacev2>>|focusedmon>>[^,]+,)([0-9]+).*/\2/')
+
+        # If `previous_workspace` is already set, save it to the file
+        if [ -n "$previous_workspace" ]; then
+            echo "$previous_workspace" >"$WORKSPACE_FILE"
+        fi
+
+        # Update `previous_workspace` to the current workspace
+        previous_workspace="$current_workspace"
+        ;;
+    esac
+}
+
+if [ "$1" = "--focus-prev" ]; then
+    if [ -f "$WORKSPACE_FILE" ]; then
+        previous_workspace=$(cat "$WORKSPACE_FILE")
+        echo "Focusing on previous workspace: $previous_workspace"
+        hyprctl dispatch focusworkspaceoncurrentmonitor "$previous_workspace"
+    else
+        echo "No previous workspace saved."
+    fi
+else
+    socat -U - UNIX-CONNECT:"$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" | while read -r line; do
+        handle "$line"
+    done
+fi
