@@ -13,136 +13,136 @@ mkdir -p "$cache_dir"
 
 # Sorting menu
 choose_sorting_method() {
-    sorting_method=$(echo -e "Newest to Oldest\nOldest to Newest\nAlphabetical (A-Z)\nAlphabetical (Z-A)" | rofi -dmenu -i -p "Sorting" -theme ~/.config/rofi/themes/launcher3.rasi)
-    case $sorting_method in
-    "Newest to Oldest")
-        sort_command="sort -r -n -k1,1"
-        ;;
-    "Oldest to Newest")
-        sort_command="sort -n -k1,1"
-        ;;
-    "Alphabetical (A-Z)")
-        sort_command="sort"
-        ;;
-    "Alphabetical (Z-A)")
-        sort_command="sort -r"
-        ;;
-    *)
-        exit 0
-        ;;
-    esac
+	sorting_method=$(echo -e "Newest to Oldest\nOldest to Newest\nAlphabetical (A-Z)\nAlphabetical (Z-A)" | rofi -dmenu -i -p "Sorting" -theme ~/.config/rofi/themes/launcher3.rasi)
+	case $sorting_method in
+	"Newest to Oldest")
+		sort_command="sort -r -n -k1,1"
+		;;
+	"Oldest to Newest")
+		sort_command="sort -n -k1,1"
+		;;
+	"Alphabetical (A-Z)")
+		sort_command="sort"
+		;;
+	"Alphabetical (Z-A)")
+		sort_command="sort -r"
+		;;
+	*)
+		exit 0
+		;;
+	esac
 }
 
 generate_all_thumbnails() {
-    if [ ! -f "$cache_dir/diffs.txt" ]; then
-        find "$current_location" -type f -iname "*.mp4" | xargs -I {} -P 4 bash -c '
+	if [ ! -f "$cache_dir/diffs.txt" ]; then
+		find "$current_location" -type f -iname "*.mp4" | xargs -I {} -P 4 bash -c '
             input_video="{}"
             output_image="'"$cache_dir"'/${input_video##*/}.png"
             if [ ! -f "$output_image" ]; then
                 ffmpegthumbnailer -i "$input_video" -o "$output_image" -s 320
             fi
         ' -- {}
-        du -b "$current_location"/*.mp4 >"$cache_dir/diffs.txt"
-    fi
+		du -b "$current_location"/*.mp4 >"$cache_dir/diffs.txt"
+	fi
 
-    du -b "$current_location"/*.mp4 >"$cache_dir/diffs_new.txt.txt"
+	du -b "$current_location"/*.mp4 >"$cache_dir/diffs_new.txt.txt"
 
-    diff "$cache_dir/diffs.txt" "$cache_dir/diffs_new.txt.txt" | grep '^>' | awk '{ print substr($0, index($0, $3)) }' |
-        xargs -I {} -P 4 bash -c '
+	diff "$cache_dir/diffs.txt" "$cache_dir/diffs_new.txt.txt" | grep '^>' | awk '{ print substr($0, index($0, $3)) }' |
+		xargs -I {} -P 4 bash -c '
             input_video="{}"
             output_image="'"$cache_dir"'/${input_video##*/}.png"
             ffmpegthumbnailer -i "$input_video" -o "$output_image" -s 320
         '
 
-    mv "$cache_dir/diffs_new.txt.txt" "$cache_dir/diffs.txt"
+	mv "$cache_dir/diffs_new.txt.txt" "$cache_dir/diffs.txt"
 
 }
 
 # Find and show files
 display_files() {
-    local maxdepth_param="-maxdepth ${maxdepth}"
-    local file_types
+	local maxdepth_param="-maxdepth ${maxdepth}"
+	local file_types
 
-    # Define file types to search for based on whether videos should be included
-    if [[ "$show_videos" == true ]]; then
-        file_types=(-iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.mp4")
-    else
-        file_types=(-iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg")
-    fi
+	# Define file types to search for based on whether videos should be included
+	if [[ "$show_videos" == true ]]; then
+		file_types=(-iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp" -o -iname "*.mp4")
+	else
+		file_types=(-iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp")
+	fi
 
-    # Fetch and sort files
-    if [[ $sort_command == *"-n -k1,1"* ]]; then
-        files=$(find "$current_location" $maxdepth_param -type f \( "${file_types[@]}" \) -printf "%T@ %p\n" | $sort_command | cut -d' ' -f2-)
-    else
-        files=$(find "$current_location" $maxdepth_param -type f \( "${file_types[@]}" \) | $sort_command)
-    fi
+	# Fetch and sort files
+	if [[ $sort_command == *"-n -k1,1"* ]]; then
+		files=$(find "$current_location" $maxdepth_param -type f \( "${file_types[@]}" \) -printf "%T@ %p\n" | $sort_command | cut -d' ' -f2-)
+	else
+		files=$(find "$current_location" $maxdepth_param -type f \( "${file_types[@]}" \) | $sort_command)
+	fi
 
-    # Generate thumbnails in parallel
-    if [[ "$show_videos" == true ]]; then
-        generate_all_thumbnails
-    fi
+	# Generate thumbnails in parallel
+	if [[ "$show_videos" == true ]]; then
+		generate_all_thumbnails
+	fi
 
-    selected_file=$(echo "$files" | while IFS= read -r file; do
-        relative_path="${file#$current_location/}"
-        if [[ "$file" == *.mp4 ]]; then
-            thumbnail="$cache_dir/${file##*/}.png"
-            echo -en "$relative_path\0icon\x1f$thumbnail\n"
-        else
-            echo -en "$relative_path\0icon\x1f$file\n"
-        fi
-    done | rofi -dmenu -i -p "$current_location" -kb-custom-1 "Ctrl+s" -theme ~/.config/rofi/themes/sig.rasi)
+	selected_file=$(echo "$files" | while IFS= read -r file; do
+		relative_path="${file#$current_location/}"
+		if [[ "$file" == *.mp4 ]]; then
+			thumbnail="$cache_dir/${file##*/}.png"
+			echo -en "$relative_path\0icon\x1f$thumbnail\n"
+		else
+			echo -en "$relative_path\0icon\x1f$file\n"
+		fi
+	done | rofi -dmenu -i -p "$current_location" -kb-custom-1 "Ctrl+s" -theme ~/.config/rofi/themes/sig.rasi)
 
-    # Check if custom keybinding was pressed
-    if [[ $? -eq 10 ]]; then
-        choose_sorting_method
-        display_files # Reload files with new sorting
-    else
-        # If an file is selected
-        if [[ -n $selected_file ]]; then
-            full_path="$current_location/$selected_file"
-            # Display a menu with options for the selected file
-            action=$(echo -e "Open\nCopy file\nDrag & drop\nRename\nOpen in GIMP\nCopy path" | rofi -dmenu -i -p "Select action" -theme ~/.config/rofi/themes/launcher3.rasi)
-            case $action in
-            "Open")
-                xdg-open "$full_path"
-                ;;
-            "Copy file")
-                mime_type=$(file --mime-type -b "$full_path")
-                wl-copy -t "$mime_type" <"$full_path"
-                ;;
-            "Drag & drop")
-                ripdrag -s 100 -H 100 "$full_path"
-                ;;
-            "Rename")
-                new_name=$(rofi -dmenu -i -p "New name" -theme ~/.config/rofi/themes/launcher3.rasi -theme-str "listview { enabled: false;}")
-                if [[ -n $new_name ]]; then
-                    extension="${full_path##*.}"
-                    mv "$full_path" "$(dirname "$full_path")/$new_name.$extension"
-                fi
-                ;;
-            "Open in GIMP")
-                gimp "$full_path"
-                ;;
-            "Copy path")
-                echo -n "$full_path" | wl-copy
-                ;;
-            *)
-                echo "Exited"
-                ;;
-            esac
-        fi
-    fi
+	# Check if custom keybinding was pressed
+	if [[ $? -eq 10 ]]; then
+		choose_sorting_method
+		display_files # Reload files with new sorting
+	else
+		# If an file is selected
+		if [[ -n $selected_file ]]; then
+			full_path="$current_location/$selected_file"
+			# Display a menu with options for the selected file
+			action=$(echo -e "Open\nCopy file\nDrag & drop\nRename\nOpen in GIMP\nCopy path" | rofi -dmenu -i -p "Select action" -theme ~/.config/rofi/themes/launcher3.rasi)
+			case $action in
+			"Open")
+				xdg-open "$full_path"
+				;;
+			"Copy file")
+				mime_type=$(file --mime-type -b "$full_path")
+				wl-copy -t "$mime_type" <"$full_path"
+				;;
+			"Drag & drop")
+				ripdrag -s 100 -H 100 "$full_path"
+				;;
+			"Rename")
+				new_name=$(rofi -dmenu -i -p "New name" -theme ~/.config/rofi/themes/launcher3.rasi -theme-str "listview { enabled: false;}")
+				if [[ -n $new_name ]]; then
+					extension="${full_path##*.}"
+					mv "$full_path" "$(dirname "$full_path")/$new_name.$extension"
+				fi
+				;;
+			"Open in GIMP")
+				gimp "$full_path"
+				;;
+			"Copy path")
+				echo -n "$full_path" | wl-copy
+				;;
+			*)
+				echo "Exited"
+				;;
+			esac
+		fi
+	fi
 }
 
 case "$1" in
 --maxdepth)
-    maxdepth="$2"
-    shift
-    ;;
+	maxdepth="$2"
+	shift
+	;;
 --show-videos)
-    show_videos=true
-    shift
-    ;;
+	show_videos=true
+	shift
+	;;
 esac
 
 display_files
