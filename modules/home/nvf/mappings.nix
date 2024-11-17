@@ -125,36 +125,36 @@
     }
 
     #= Buffers ====================================================================================
-    {
-      key = "<S-h>";
-      mode = "n";
-      desc = "Prev Buffer";
-      action = "<cmd>bprevious<cr>";
-    }
-    {
-      key = "<S-l>";
-      mode = "n";
-      desc = "Next Buffer";
-      action = "<cmd>bnext<cr>";
-    }
-    {
-      key = "[b";
-      mode = "n";
-      desc = "Prev Buffer";
-      action = "<cmd>bprevious<cr>";
-    }
-    {
-      key = "]b";
-      mode = "n";
-      desc = "Next Buffer";
-      action = "<cmd>bnext<cr>";
-    }
-    {
-      key = "<leader>bb";
-      mode = "n";
-      desc = "Switch to Other Buffer";
-      action = "<cmd>e #<cr>";
-    }
+    # {
+    #   key = "<S-h>";
+    #   mode = "n";
+    #   desc = "Prev Buffer";
+    #   action = "<cmd>bprevious<cr>";
+    # }
+    # {
+    #   key = "<S-l>";
+    #   mode = "n";
+    #   desc = "Next Buffer";
+    #   action = "<cmd>bnext<cr>";
+    # }
+    # {
+    #   key = "[b";
+    #   mode = "n";
+    #   desc = "Prev Buffer";
+    #   action = "<cmd>bprevious<cr>";
+    # }
+    # {
+    #   key = "]b";
+    #   mode = "n";
+    #   desc = "Next Buffer";
+    #   action = "<cmd>bnext<cr>";
+    # }
+    # {
+    #   key = "<leader>bb";
+    #   mode = "n";
+    #   desc = "Switch to Other Buffer";
+    #   action = "<cmd>e #<cr>";
+    # }
     {
       key = "<leader>`";
       mode = "n";
