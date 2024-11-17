@@ -1,69 +1,68 @@
 #!/bin/bash
 
 rofi_command="rofi -dmenu -theme $HOME/.config/rofi/themes/quicklinks.rasi -i -p "Q-LINKS:" -selected-row 0"
-dmenu_command="dmenu -l 25 -i -p "Q-LINKS:""
 tofi_command="tofi --width 300 --height 300 --prompt-text="Q-LINKS:""
-hypr_scripts="~/.config/hypr/scripts"
 
 if [ "$1" == "--foot" ]; then
-  NVIM="foot -T neovim -a neovim nvim"
-  FM="foot -T yazi -a yazi yazi"
-  LAUNCHER="$tofi_command"
+	NVIM="foot -T neovim -a neovim nvim"
+	FM="foot -T yazi -a yazi yazi"
+	LAUNCHER="$tofi_command"
 elif [ "$1" == "--kitty" ]; then
-  NVIM="kitty --class neovim -e nvim"
-  FM="kitty --class yazi -e yazi"
-  LAUNCHER="$tofi_command"
+	NVIM="kitty --class neovim -e nvim"
+	FM="kitty --class yazi -e yazi"
+	LAUNCHER="$tofi_command"
 elif [ "$1" == "--alacritty" ]; then
-  NVIM="alacritty --class neovim -e nvim"
-  FM="alacritty --class yazi -e yazi"
-  LAUNCHER="$rofi_command"
+	NVIM="alacritty --class neovim -e nvim"
+	FM="alacritty --class yazi -e yazi"
+	LAUNCHER="$rofi_command"
 else
-  echo "Options:"
-  echo "--foot"
-  echo "--kitty"
-  echo "--alacritty"
-  exit 1
+	echo "Options:"
+	echo "--foot"
+	echo "--kitty"
+	echo "--alacritty"
+	exit 1
 fi
 
 function ags_restart() {
-  if pgrep "ags" >/dev/null; then
-    pkill ags
-  fi
-  ags -c ~/nixos-config/modules/ags/config.js &
+	if pgrep "ags" >/dev/null; then
+		pkill ags
+	fi
+	ags -c ~/nixos-config/modules/ags/config.js &
 }
 
 # Define options in a format "label:command"
 options=(
-  "NIXOS-NEOVIM:              cd ~/nixos-config && $NVIM ."
-  "NIXOS-VSCODE:              cd ~/nixos-config && codium ~/nixos-config"
-  "NIXOS-REBUILD:             kitty --hold --class floatingterm -e nh os switch"
-  "NIXOS-UPDATE:              kitty --hold --class floatingterm -e nh os switch --update"
-  "NIXOS-CLEAN:               kitty --hold --class floatingterm -e nh clean all --keep 5"
-  "HYPRLAND:                  cd ~/nixos-config && $NVIM ~/nixos-config/modules/home/hyprland"
-  "HYPRKEYS:                  cd ~/nixos-config && $NVIM ~/nixos-config/modules/home/hyprland/config/keybindings.nix"
-  ".CONFIG:                   $FM ~/.config"
-  "DOWNLOADS:                 $FM ~/Downloads"
-  "PICTURES:                  $FM ~/Pictures"
-  "BACKGROUNDS:               $FM ~/Pictures/Backgrounds"
-  "HYPR-TOGGLEANIMATIONS:     toggleanimations"
-  "HYPR-COLORPICKER:          colorpicker"
-  "HYPR-FOCUSWINDOW:          focuswindow tofi"
-  "HYPR-TOGGLESPECIAL-MENU:   togglespecial-menu"
-  "HYPR-SELECTWALLPAPER:      selectwallpaper"
-  "HYPR-WALLSHIFT:            wallshift"
-  "HYPR-WALLSELECT:           wallselect"
-  "HYPR-KILLWALLSHIFT:        killwallshift"
-  "HYPR-CLIPHIST:             cliphist list | tofi | cliphist decode | wl-copy"
-  "HYPR-ERROR:                hyprctl seterror disable"
-  "AGS-RESTART:               ags_restart &"
-  "AGS-KILL:                  pkill ags"
-  "BLUETOOTH:                 rofi-bluetooth"
-  "GIT-REPO:                  xdg-open https://github.com/luravoid/nixos-config"
-  "SCRIPTS:                   cd ~/nixos-config && $NVIM ~/nixos-config/modules/home/scripts/scripts-default.nix"
-  "SCRIPTS-HYPRLAND:          cd ~/nixos-config && $NVIM ~/nixos-config/modules/home/scripts/scripts-hyprland.nix"
-  "SYNCTHING:                 xdg-open http://localhost:8384"
-  "QUICK-LINKS:               cd ~/nixos-config && $NVIM ~/nixos-config/modules/home/scripts/scripts-default/quicklinks"
-  #"MEMES:                     $FM ~/Documents/Phone\ Media/Pictures/Memes"
+	"NIXOS-NEOVIM:              cd ~/nixos-config && $NVIM ."
+	"NIXOS-VSCODE:              cd ~/nixos-config && codium ~/nixos-config"
+	"NIXOS-REBUILD:             kitty --hold --class floatingterm -e nh os switch"
+	"NIXOS-UPDATE:              kitty --hold --class floatingterm -e nh os switch --update"
+	"NIXOS-CLEAN:               kitty --hold --class floatingterm -e nh clean all --keep 5"
+	"HYPRLAND:                  cd ~/nixos-config && $NVIM ~/nixos-config/modules/home/hyprland"
+	"HYPRKEYS:                  cd ~/nixos-config && $NVIM ~/nixos-config/modules/home/hyprland/config/keybindings.nix"
+	".CONFIG:                   $FM ~/.config"
+	"DOWNLOADS:                 $FM ~/Downloads"
+	"PICTURES:                  $FM ~/Pictures"
+	"BACKGROUNDS:               $FM ~/Pictures/Backgrounds"
+	"HYPR-TOGGLEANIMATIONS:     toggleanimations"
+	"HYPR-COLORPICKER:          colorpicker"
+	"HYPR-FOCUSWINDOW:          focuswindow tofi"
+	"HYPR-TOGGLESPECIAL-MENU:   togglespecial-menu"
+	"HYPR-SELECTWALLPAPER:      selectwallpaper"
+	"HYPR-WALLSHIFT:            wallshift"
+	"HYPR-WALLSELECT:           wallselect"
+	"HYPR-KILLWALLSHIFT:        killwallshift"
+	"HYPR-CLIPHIST:             cliphist list | tofi | cliphist decode | wl-copy"
+	"HYPR-ERROR:                hyprctl seterror disable"
+	"AGS-RESTART:               ags_restart &"
+	"AGS-KILL:                  pkill ags"
+	"BLUETOOTH:                 rofi-bluetooth"
+	"GIT-REPO:                  xdg-open https://github.com/luravoid/nixos-config"
+	"SCRIPTS:                   cd ~/nixos-config && $NVIM ~/nixos-config/modules/home/scripts/scripts-default.nix"
+	"SCRIPTS-HYPRLAND:          cd ~/nixos-config && $NVIM ~/nixos-config/modules/home/scripts/scripts-hyprland.nix"
+	"SYNCTHING:                 xdg-open http://localhost:8384"
+	"CAMBRIDGE-DICT:            brave --app=https://dictionary.cambridge.org/"
+	"QUICK-LINKS:               cd ~/nixos-config && $NVIM ~/nixos-config/modules/home/scripts/scripts-default/quicklinks"
+	#"MEMES:                     $FM ~/Documents/Phone\ Media/Pictures/Memes"
 )
 
 # Create a newline-separated string of labels for rofi
@@ -74,10 +73,10 @@ chosen=$(echo -e "$labels_string" | $LAUNCHER)
 
 # Find and execute the command corresponding to the chosen option
 for option in "${options[@]}"; do
-  if [[ "${option%%:*}" == "$chosen" ]]; then
-    eval "${option#*:}"
-    exit 0
-  fi
+	if [[ "${option%%:*}" == "$chosen" ]]; then
+		eval "${option#*:}"
+		exit 0
+	fi
 done
 
 echo "Exited."
