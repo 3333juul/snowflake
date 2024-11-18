@@ -212,6 +212,14 @@
       expr = true;
     }
 
+    #= Clear search ===============================================================================
+    {
+      key = "<esc>";
+      mode = ["i" "n"];
+      desc = "Escape and Clear hlsearch";
+      action = "<cmd>noh<cr><esc>";
+    }
+
     #= Add undo break-points ======================================================================
     {
       key = ",";
