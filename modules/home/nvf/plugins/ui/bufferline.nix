@@ -7,6 +7,11 @@
         cyclePrevious = "<S-h>";
         closeCurrent = "<leader>bb";
       };
+      setupOpts = {
+        options = {
+          numbers = "none";
+        };
+      };
     };
   };
 }
