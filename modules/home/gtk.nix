@@ -1,10 +1,10 @@
 {
   pkgs,
-  config,
+  inputs,
   ...
 }: let
-  monolisa = pkgs.callPackage ../../pkgs/monolisa/monolisa.nix {};
-  monolisa-nerd = pkgs.callPackage ../../pkgs/monolisa/monolisa-nerd.nix {inherit monolisa;};
+  #monolisa = pkgs.callPackage ../../pkgs/monolisa/monolisa.nix {};
+  #monolisa-nerd = pkgs.callPackage ../../pkgs/monolisa/monolisa-nerd.nix {inherit monolisa;};
   gruvbox-material-gtk = pkgs.callPackage ../../pkgs/gruvbox-material-gtk.nix {};
 in {
   fonts.fontconfig.enable = true;
@@ -26,6 +26,10 @@ in {
     terminus-nerdfont
     font-awesome
     noto-fonts
+
+    #noto-fonts-color-emoji
+    #material-icons
+    #material-design-icons
   ];
 
   gtk = {
@@ -48,6 +52,33 @@ in {
       size = 24;
     };
   };
+
+  qt = {
+    enable = true;
+    platformTheme = "qtct";
+    style = {
+      name = "kvantum";
+    };
+  };
+
+  xdg.configFile = {
+    "Kvantum/Gruvbox-Dark-Blue".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox-Dark-Blue";
+    "Kvantum/Gruvbox-Dark-Brown".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox-Dark-Brown";
+    "Kvantum/Gruvbox-Dark-Green".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox-Dark-Green";
+    "Kvantum/Gruvbox_Light_Blue".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox_Light_Blue";
+    "Kvantum/Gruvbox_Light_Brown".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox_Light_Brown";
+    "Kvantum/Gruvbox_Light_Green".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox_Light_Green";
+
+    "Kvantum/kvantum.kvconfig".text = ''
+      [General]
+      theme=Gruvbox-Dark-Brown
+    '';
+  };
+
+  # xdg.configFile = {
+  #   "Kvantum/gruvbox-kvantum/".source = "${inputs.gruvbox-kvantum}/gruvbox-kvantum/";
+  #   "Kvantum/kvantum.kvconfig".text = "[General]\ntheme=gruvbox-kvantum";
+  # };
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {

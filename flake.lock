@@ -215,6 +215,38 @@
         "type": "github"
       }
     },
+    "gruvbox-kvantum": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1727610972,
+        "narHash": "sha256-o3EEpd8fsrKPNA6TmiK7KLxy6hld+MpSrtLAKPhtJOE=",
+        "owner": "isouravgope",
+        "repo": "Gruvbox-Kvantum",
+        "rev": "29ba1f05affba26ef0e718de6ddb96c21ccd182e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "isouravgope",
+        "repo": "Gruvbox-Kvantum",
+        "type": "github"
+      }
+    },
+    "gruvbox-kvantum-themes": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1696096968,
+        "narHash": "sha256-u2J4Zf9HuMjNCt3qVpgEffkytl/t277FzOvWL8Nm8os=",
+        "owner": "sachnr",
+        "repo": "gruvbox-kvantum-themes",
+        "rev": "f47670be407c1f07c64890ad53884ee9977a7db1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sachnr",
+        "repo": "gruvbox-kvantum-themes",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -2989,6 +3021,8 @@
       "inputs": {
         "ags": "ags",
         "alejandra": "alejandra",
+        "gruvbox-kvantum": "gruvbox-kvantum",
+        "gruvbox-kvantum-themes": "gruvbox-kvantum-themes",
         "home-manager": "home-manager",
         "hycov": "hycov",
         "hypr-contrib": "hypr-contrib",

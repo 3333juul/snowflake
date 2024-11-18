@@ -46,6 +46,16 @@
       url = "github:gerg-l/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    gruvbox-kvantum-themes = {
+      url = "github:sachnr/gruvbox-kvantum-themes";
+      flake = false;
+    };
+
+    gruvbox-kvantum = {
+      url = "github:isouravgope/Gruvbox-Kvantum";
+      flake = false;
+    };
   };
 
   outputs = {
