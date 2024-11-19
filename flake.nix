@@ -51,11 +51,6 @@
       url = "github:sachnr/gruvbox-kvantum-themes";
       flake = false;
     };
-
-    gruvbox-kvantum = {
-      url = "github:isouravgope/Gruvbox-Kvantum";
-      flake = false;
-    };
   };
 
   outputs = {
