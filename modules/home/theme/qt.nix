@@ -85,6 +85,10 @@ in {
 
       # Tell Calibre to use the dark theme
       CALIBRE_USE_DARK_PALETTE = "1";
+
+      # Already set by config options
+      #QT_QPA_PLATFORMTHEME = "qt5ct";
+      #QT_STYLE_OVERRIDE = "kvantum";
     };
   };
 }
