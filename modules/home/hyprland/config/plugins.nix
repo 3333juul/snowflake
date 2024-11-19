@@ -6,7 +6,7 @@
   wayland.windowManager.hyprland = {
     plugins = [
       inputs.hycov.packages.${pkgs.system}.hycov
-      inputs.hyprland-easymotion.packages.${pkgs.system}.hyprland-easymotion
+      #inputs.hyprland-easymotion.packages.${pkgs.system}.hyprland-easymotion
     ];
     settings.plugin = {
       easymotion = {

@@ -10,21 +10,23 @@
 
     decoration = {
       rounding = 0;
+      dim_special = 0.7;
+
       blur = {
         enabled = true;
         size = 10;
         passes = 6;
         noise = 0.3;
       };
-      drop_shadow = true;
-      dim_special = 0.7;
 
-      # shadows
-      shadow_ignore_window = true;
-      shadow_offset = "6 6";
-      shadow_render_power = 4;
-      shadow_range = 30;
-      #"col.shadow" = "rgba(00000055)";
+      shadow = {
+        enabled = true;
+        ignore_window = true;
+        offset = "6 6";
+        render_power = 4;
+        range = 30;
+        #color = "rgba(00000055)";
+      };
     };
 
     group = {
