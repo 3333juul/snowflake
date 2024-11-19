@@ -19,12 +19,12 @@
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/hyprland";
-      ref = "refs/tags/v0.43.0";
+      ref = "refs/tags/v0.45.1";
       submodules = true;
     };
 
     hyprland-easymotion = {
-      url = "github:zakk4223/hyprland-easymotion/abb0a02a256041b0cd1b1d68de8c8d6de70a5b51";
+      url = "github:zakk4223/hyprland-easymotion";
       inputs.hyprland.follows = "hyprland";
     };
 
