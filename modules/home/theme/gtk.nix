@@ -28,6 +28,10 @@ in {
     };
   };
 
+  home.sessionVariables = {
+    GTK_THEME = "Gruvbox-Material-Dark";
+  };
+
   home.pointerCursor = {
     name = "Bibata-Modern-Ice";
     package = pkgs.bibata-cursors;
