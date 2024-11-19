@@ -12,7 +12,6 @@
     glib
     wayland
     direnv
-    inputs.hyprpolkitagent.packages.${pkgs.system}.hyprpolkitagent
     swappy
     #wl-clip-persist
   ];

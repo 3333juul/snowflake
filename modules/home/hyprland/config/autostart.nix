@@ -7,9 +7,6 @@
       "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &"
       "poweralertd &"
 
-      # Polkit
-      "systemctl --user start hyprpolkitagent &"
-
       # Bar
       "waybar &"
 
