@@ -3,7 +3,12 @@
   config,
   ...
 }: {
-  home.packages = with pkgs; [rofi-wayland];
+  #home.packages = with pkgs; [rofi-wayland];
+
+  programs.rofi = {
+    enable = true;
+    package = pkgs.callPackage ../../../pkgs/rofi.nix {};
+  };
 
   xdg.configFile."rofi/config.rasi".text = ''
     configuration {
