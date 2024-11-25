@@ -90,7 +90,7 @@ display_files() {
 		else
 			echo -en "$relative_path\0icon\x1f$file\n"
 		fi
-	done | rofi -dmenu -i -p "$current_location" -kb-custom-1 "Ctrl+s" -theme ~/.config/rofi/themes/sig.rasi)
+	done | rofi -dmenu -i -p "$current_location" -kb-custom-1 "Ctrl+s" -theme ~/.config/rofi/themes/rofi-gridview.rasi)
 
 	# Check if custom keybinding was pressed
 	if [[ $? -eq 10 ]]; then

@@ -10,10 +10,10 @@
   powermenu = pkgs.writeShellScriptBin "powermenu" (builtins.readFile ./scripts-default/powermenu);
   quicklinks = pkgs.writeShellScriptBin "quicklinks" (builtins.readFile ./scripts-default/quicklinks);
   rofi-bluetooth = pkgs.writeShellScriptBin "rofi-bluetooth" (builtins.readFile ./scripts-default/rofi-bluetooth);
+  rofi-gridview = pkgs.writeShellScriptBin "rofi-gridview" (builtins.readFile ./scripts-default/rofi-gridview);
   rofi-prompts = pkgs.writeShellScriptBin "rofi-prompts" (builtins.readFile ./scripts-default/rofi-prompts);
   rofi-translate = pkgs.writeShellScriptBin "rofi-translate" (builtins.readFile ./scripts-default/rofi-translate);
   screenshot-wl = pkgs.writeShellScriptBin "screenshot-wl" (builtins.readFile ./scripts-default/screenshot-wl);
-  sig = pkgs.writeShellScriptBin "sig" (builtins.readFile ./scripts-default/sig);
   s-img = pkgs.writeShellScriptBin "s-img" (builtins.readFile ./scripts-default/s-img);
   windows = pkgs.writeShellScriptBin "windows" (builtins.readFile ./scripts-default/windows);
 in {
@@ -29,10 +29,10 @@ in {
     powermenu
     quicklinks
     rofi-bluetooth
+    rofi-gridview
     rofi-prompts
     rofi-translate
     screenshot-wl
-    sig
     s-img
     windows
   ];
