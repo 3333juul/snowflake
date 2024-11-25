@@ -1,4 +1,3 @@
-// # z0mbi3 -  https://github.com/gh0stzk/dotfiles
 
 configuration {
     modi:                        "drun";
@@ -33,7 +32,7 @@ window {
 
 mainbox {
     enabled:                     true;
-    children:                    [ "inputbar", "listview" ];
+    children:                    [ "inputbar", "listview-split" ];
     background-color:            @background;
 }
 
@@ -55,7 +54,7 @@ prompt {
     padding:                     15px 15px 15px 15px;
     border:                      0px 1px 0px 0px;
     border-color:                @foreground;
-    background-color:            @background;
+    background-color:            transparent;
     text-color:                  inherit;
 }
 textbox-prompt-colon {
@@ -69,11 +68,17 @@ entry {
     enabled:                     true;
     border-radius:               10px;
     padding:                     15px;
-    background-color:            @background;
+    background-color:            transparent;
     text-color:                  inherit;
     cursor:                      text;
     placeholder:                 "Search...";
     placeholder-color:           inherit;
+}
+
+/** We add an extra child to this is PREVIEW=true */
+listview-split {
+  orientation: horizontal;
+  children: [listview];
 }
 
 listview {
@@ -105,12 +110,6 @@ element {
     text-color:                  @foreground;
 }
 
-@media(max-aspect-ratio: 1.8) {
-    element {
-        orientation:             vertical;
-    }
-}
-
 element selected.normal {
     background-color:            @foreground;
     text-color:                  @background;
@@ -131,4 +130,44 @@ element-text {
     cursor:                      inherit;
     background-color:            transparent;
     text-color:                  inherit;
+}
+
+/**
+ * Launching rofi with environment PREVIEW set to true
+ * will split the screen and show a preview widget.
+ */
+@media ( enabled: env(PREVIEW, false)) {
+  /** preview widget */
+
+   window {
+     width:                      95%;
+   }
+
+  icon-current-entry {
+    expand:                      true;
+    size:                        80%;
+    background-color:            transparent;
+    text-color:                  inherit;
+    border:                      0px 0px 0px 1px;
+    border-color:                @foreground;
+	horizontal-align: 0.5;
+	vertical-align: 0.1;
+  }
+
+  listview-split {
+    children: [listview, icon-current-entry];
+    background-color:            transparent;
+    text-color:                  inherit;
+    //spacing:                  -20px;
+    margin:                     -2px;
+  }
+
+  listview {
+    columns:                     4;
+    lines:                       4;
+  }
+  element-icon {
+    size:                        170px;
+  }
+
 }
