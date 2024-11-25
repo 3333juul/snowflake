@@ -2,11 +2,14 @@
   pkgs,
   inputs,
   ...
-}: {
+}: let
+  hyprNStack = pkgs.callPackage ../../../../pkgs/hyprnstack.nix {};
+in {
   wayland.windowManager.hyprland = {
     plugins = [
       inputs.hycov.packages.${pkgs.system}.hycov
-      #inputs.hyprland-easymotion.packages.${pkgs.system}.hyprland-easymotion
+      inputs.hyprland-easymotion.packages.${pkgs.system}.hyprland-easymotion
+      #hyprNStack
     ];
     settings.plugin = {
       easymotion = {
@@ -14,7 +17,7 @@
         textcolor = "rgb(ebdbb2)";
         bgcolor = "rgba(40,40,40,1)";
         textfont = "Terminus";
-        textpadding = "7,15,7,15";
+        textpadding = "8,16,8,16";
         bordersize = 1;
         bordercolor = "rgb(ebdbb2)";
         rounding = 0;
@@ -43,6 +46,21 @@
         click_in_cursor = 1;
         hight_of_titlebar = 0;
         show_special = 0;
+      };
+      nstack = {
+        layout = {
+          orientation = "left";
+          new_on_top = 0;
+          new_is_master = 0;
+          no_gaps_when_only = -1;
+          special_scale_factor = 0;
+          inherit_fullscreen = 1;
+          stacks = 4;
+          center_single_master = 0;
+          mfact = 0;
+          single_mfact = 0;
+          orientationvcenter = "bottom";
+        };
       };
     };
   };
