@@ -1,34 +1,33 @@
 {
-  stdenv,
+  lib,
   fetchFromGitHub,
-  pkgs,
-  ...
+  hyprland,
+  hyprlandPlugins,
+  pkg-config,
 }:
-with pkgs;
-  stdenv.mkDerivation rec {
-    name = "hyprNStack";
-    pname = name;
+hyprlandPlugins.mkHyprlandPlugin hyprland {
+  pluginName = "hyprNStack";
+  version = "0eb3c1fee1f33c632498dc598488412133ca5e3c";
 
-    src = fetchFromGitHub {
-      owner = "zakk4223";
-      repo = "hyprNStack";
-      rev = "d9368100dc18df6fecf8cc7b9239518b5b8af733";
-      hash = "sha256-/AZ5fJNr0RjwovpVvdwcGAKylwFJ+Jjcp3/FjQHjRT8=";
-    };
+  src = fetchFromGitHub {
+    owner = "zakk4223";
+    repo = "hyprNStack";
+    rev = "0eb3c1fee1f33c632498dc598488412133ca5e3c";
+    hash = "sha256-0ZLPe6dRbLqHGj8yssP1EGNUnHJKe1fIJCqypTuhg5E=";
+  };
 
-    nativeBuildInputs = [
-      pkg-config
-      hyprland
-    ];
+  # Native build tools required for the plugin
+  nativeBuildInputs = [pkg-config]; # nie jestem tego pewnien czy to jest potrzebne
 
-    buildInputs = [hyprland] ++ hyprland.buildInputs;
+  # Set additional build inputs if required
+  # Hyprland and its dependencies are included by default
+  buildInputs = [];
 
-    buildPhase = ''
-      make all
-    '';
-
-    installPhase = ''
-      mkdir -p $out/lib
-      cp ./nstackLayoutPlugin.so $out/lib/libhyprNStack.so
-    '';
-  }
+  # Metadata about the plugin
+  meta = {
+    homepage = "https://github.com/zakk4223/hyprNStack";
+    description = "Hyprland plugin for N-stack layout";
+    license = lib.licenses.mit;
+    platforms = lib.platforms.linux;
+  };
+}
