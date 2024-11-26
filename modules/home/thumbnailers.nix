@@ -1,27 +1,15 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
-  options = {
-    sys.thumbnailers.enable = lib.mkOption {
-      description = "Whether to enable thumbnailers.";
-      type = lib.types.bool;
-      default = true;
-    };
-  };
-  config = lib.mkIf config.sys.thumbnailers.enable {
-    # delete this file
-    xdg.dataFile."thumbnailers/xcf.thumbnailer".text = ''
-      [Thumbnailer Entry]
-      TryExec=${pkgs.ffmpegthumbnailer}/bin/ffmpegthumbnailer
-      Exec=${pkgs.ffmpegthumbnailer}/bin/ffmpegthumbnailer -s %s -i %i -o %o -c png -f -t 10
-      MimeType=video/flv;video/webm;video/mkv;video/mp4;video/mpeg;video/avi;video/ogg
-      ;video/quicktime;video/x-avi;video/x-flv;video/x-mp4;video/x-mpeg;video/x-webm;v
-      ideo/x-mkv;application/x-extension-webm;video/x-matroska;video/x-ms-wmv;video/x-
-      msvideo;video/x-msvideo/avi;video/x-theora/ogg;video/x-theora/ogv;video/x-ms-asf
-      ;video/x-m4v;
-    '';
-  };
+{pkgs, ...}: {
+  # xdg.dataFile."thumbnailers/ffmpegthumbnailer.thumbnailer".text = ''
+  #   [Thumbnailer Entry]
+  #   TryExec=${pkgs.ffmpegthumbnailer}/bin/ffmpegthumbnailer
+  #   Exec=${pkgs.ffmpegthumbnailer}/bin/ffmpegthumbnailer -i %i -o %o -s %s -f
+  #   MimeType=video/3gpp;video/3gpp2;video/annodex;video/dv;video/isivideo;video/mj2;video/mp2t;video/mp4;video/mpeg;video/ogg;video/quicktime;video/vnd.avi;video/vnd.mpegurl;video/vnd.radgamettools.bink;video/vnd.radgamettools.smacker;video/vnd.rn-realvideo;video/vnd.vivo;video/vnd.youtube.yt;video/wavelet;video/webm;video/x-anim;video/x-flic;video/x-flv;video/x-javafx;video/x-matroska;video/x-matroska-3d;video/x-mjpeg;video/x-mng;video/x-ms-wmv;video/x-nsv;video/x-ogm+ogg;video/x-sgi-movie;video/x-theora+ogg;application/mxf;application/vnd.ms-asf;application/vnd.rn-realmedia;application/x-matroska;application/ogg;
+  # '';
+
+  xdg.dataFile."thumbnailers/gdk-pixbuf-thumbnailer.thumbnailer".text = ''
+    [Thumbnailer Entry]
+    TryExec=gdk-pixbuf-thumbnailer
+    Exec=gdk-pixbuf-thumbnailer -s %s %u %o
+    MimeType=application/x-navi-animation;image/png;image/bmp;image/x-bmp;image/x-MS-bmp;image/gif;image/x-icon;image/x-ico;image/x-win-bitmap;image/vnd.microsoft.icon;application/ico;image/ico;image/icon;text/ico;image/jpeg;image/x-portable-anymap;image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap;image/tiff;image/x-xpixmap;image/x-xbitmap;image/x-tga;image/x-icns;image/x-quicktime;image/qtif;image/x-webp;image/webp;
+  '';
 }

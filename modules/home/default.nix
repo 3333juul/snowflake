@@ -31,6 +31,7 @@
     ./starship.nix # shell prompt
     ./swayimg.nix # image viewer
     ./theme # gtk/qt/font/cursor
+    ./thumbnailers.nix
     ./tofi.nix # launcher
     ./yazi # file manager
     ./vscodium.nix # vscode forck
