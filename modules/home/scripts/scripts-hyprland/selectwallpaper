@@ -8,7 +8,7 @@ select_wallpaper() {
 
 	#selected_wallpaper=$(for a in $wallpapers; do
 	selected_wallpaper=$(echo "$wallpapers" | while IFS= read -r a; do
-		echo -en "${a##*/}\0icon\x1f$a\n"
+		echo -en "${a##*/}\0icon\x1fthumbnail://$a\n"
 	done | PREVIEW=true rofi -dmenu -i -p "WALLPAPER" -theme ~/.config/rofi/themes/wallpaper.rasi)
 
 	echo "$selected_wallpaper"
