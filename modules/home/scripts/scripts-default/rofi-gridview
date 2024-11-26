@@ -4,7 +4,6 @@ current_location=$(pwd)
 
 # Default settings
 maxdepth=1
-show_videos=false
 sort_command="sort -r -n -k1,1"
 cache_dir="$HOME/.cache/rofi-gridview/${current_location#/}"
 
@@ -33,42 +32,13 @@ choose_sorting_method() {
 	esac
 }
 
-generate_all_thumbnails() {
-	if [ ! -f "$cache_dir/diffs.txt" ]; then
-		find "$current_location" -type f -iname "*.mp4" | xargs -I {} -P 4 bash -c '
-            input_video="{}"
-            output_image="'"$cache_dir"'/${input_video##*/}.png"
-            if [ ! -f "$output_image" ]; then
-                ffmpegthumbnailer -i "$input_video" -o "$output_image" -s 320
-            fi
-        ' -- {}
-		du -b "$current_location"/*.mp4 >"$cache_dir/diffs.txt"
-	fi
-
-	du -b "$current_location"/*.mp4 >"$cache_dir/diffs_new.txt.txt"
-
-	diff "$cache_dir/diffs.txt" "$cache_dir/diffs_new.txt.txt" | grep '^>' | awk '{ print substr($0, index($0, $3)) }' |
-		xargs -I {} -P 4 bash -c '
-            input_video="{}"
-            output_image="'"$cache_dir"'/${input_video##*/}.png"
-            ffmpegthumbnailer -i "$input_video" -o "$output_image" -s 320
-        '
-
-	mv "$cache_dir/diffs_new.txt.txt" "$cache_dir/diffs.txt"
-
-}
-
 # Find and show files
 display_files() {
 	local maxdepth_param="-maxdepth ${maxdepth}"
 	local file_types
 
 	# Define file types to search for based on whether videos should be included
-	if [[ "$show_videos" == true ]]; then
-		file_types=(-iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp" -o -iname "*.mp4")
-	else
-		file_types=(-iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp")
-	fi
+	file_types=(-iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp" -o -iname "*.mp4")
 
 	# Fetch and sort files
 	if [[ $sort_command == *"-n -k1,1"* ]]; then
@@ -77,19 +47,9 @@ display_files() {
 		files=$(find "$current_location" $maxdepth_param -type f \( "${file_types[@]}" \) | $sort_command)
 	fi
 
-	# Generate thumbnails in parallel
-	if [[ "$show_videos" == true ]]; then
-		generate_all_thumbnails
-	fi
-
 	selected_file=$(echo "$files" | while IFS= read -r file; do
 		relative_path="${file#$current_location/}"
-		if [[ "$file" == *.mp4 ]]; then
-			thumbnail="$cache_dir/${file##*/}.png"
-			echo -en "$relative_path\0icon\x1f$thumbnail\n"
-		else
-			echo -en "$relative_path\0icon\x1f$file\n"
-		fi
+		echo -en "$relative_path\0icon\x1fthumbnail://$file\n"
 	done | rofi -dmenu -i -p "$current_location" -kb-custom-1 "Ctrl+s" -theme ~/.config/rofi/themes/rofi-gridview.rasi)
 
 	# Check if custom keybinding was pressed
@@ -137,10 +97,6 @@ display_files() {
 case "$1" in
 --maxdepth)
 	maxdepth="$2"
-	shift
-	;;
---show-videos)
-	show_videos=true
 	shift
 	;;
 esac
