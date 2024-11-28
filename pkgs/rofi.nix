@@ -49,7 +49,7 @@ with pkgs;
       doxygen
       cppcheck
 
-      # fix svg icons
+      # fix svg icons - https://github.com/NixOS/nixpkgs/pull/107156
       wrapGAppsHook
 
       # idk
