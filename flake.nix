@@ -51,6 +51,8 @@
       url = "github:sachnr/gruvbox-kvantum-themes";
       flake = false;
     };
+
+    zen-browser.url = "github:ch4og/zen-browser-flake";
   };
 
   outputs = {
