@@ -5,8 +5,8 @@
       lightbulb.enable = false;
       lspsaga.enable = false;
       trouble.enable = false;
-      lspSignature.enable = false;
-      lsplines.enable = true;
+      lspSignature.enable = true;
+      lsplines.enable = false;
       lspconfig.enable = true;
     };
   };
