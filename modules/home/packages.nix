@@ -27,6 +27,7 @@ in {
     openssl
     onefetch # fetch utility for git repo
     pamixer # pulseaudio command line mixer
+    pulsemixer
     playerctl # controller for media players
     poweralertd
     programmer-calculator
@@ -62,7 +63,7 @@ in {
     xfce.xfconf
     xfce.tumbler
     obsidian
-    #calibre
+    calibre
     zotero
     microsoft-edge
     font-manager
