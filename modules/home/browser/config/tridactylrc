@@ -1,0 +1,101 @@
+" vim: filetype=vim
+
+" This wipes all existing settings. This means that if a setting in this file
+" is removed, then it will return to default. In other words, this file serves
+" as an enforced single point of truth for Tridactyl's configuration.
+sanitize tridactyllocal tridactylsync
+
+" Just use a blank page for new tab. It would be nicer to use the standard
+" Firefox homepage, but Tridactyl doesn't support this yet.
+"set newtab about:blank
+
+" Use vim in tmux for editor.
+set editorcmd terminal -e tmux -u new vim -S /home/andrew/.vim/tridactyl.vim
+
+" Ctrl-F should use the browser's native 'find' functionality.
+unbind <C-f>
+
+" But also support Tridactyl search too.
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+
+" Use sensitive case. Smart case would be nice here, but it doesn't work.
+"set findcase sensitive
+
+" Smooth scrolling, yes please. This is still a bit janky in Tridactyl.
+"set smoothscroll true
+
+" The default jump of 10 is a bit much.
+bind j scrollline 8
+bind k scrollline -8
+
+" K and J should move between tabs. x should close them.
+bind K tabprev
+bind J tabnext
+bind x tabclose
+unbind d
+
+bind gr reader
+
+bind --mode=normal <C-i> mode ignore
+bind --mode=ignore <C-i> mode normal
+
+"bind --mode=insert <Escape> composite unfocus | mode normal
+
+" Make sure <Escape> isn't bound, so it is directly sent to the page in most cases.
+" (necessary for some popups like the Ctrl-k search popups, reddit post preview, ...)
+"
+" NOTE for insert mode: Since most websites that care about UX bind `Escape` only when an input is
+" focused, Tridactyl's default of going back to normal mode followed by me sending Escape to the
+" page itself would not invoke the website's handler to hide some UI/popups..
+" Use `<A-Escape>` in insert mode to go back to normal mode without sending `Escape` to the page.
+"
+" NOTE for visual mode: Tridactyl's default in visual mode is NOT disabled, use `Escape-Escape` to
+" go back to normal mode, then send actual `Escape` to the page.
+unbind               <Escape>
+unbind --mode=insert <Escape>
+
+" Remove search highlighting.
+bind <Escape> nohlsearch
+
+" Go back to normal mode in tridactyl (page itself doesn't receive `Escape`)
+bind               <A-Escape> mode normal
+bind --mode=insert <A-Escape> composite unfocus ; mode normal
+bind --mode=insert <A-q> composite unfocus ; mode normal
+
+bind <C-t> tabopen
+bind t tabopen
+bind O fillcmdline tabopen
+
+bind --mode=hint <C-h> hint.focusLeftHint
+bind --mode=hint <C-j> hint.focusBottomHint
+bind --mode=hint <C-k> hint.focusTopHint
+bind --mode=hint <C-l> hint.focusRightHint
+
+bind --mode=ex <C-j> ex.next_completion
+bind --mode=ex <C-k> ex.prev_completion
+
+"doesn't work
+"bind --mode=insert <Escape> nmode ignore 1 mode normal
+
+bind i nmode ignore 1 mode normal
+"autocmd DocLoad .* no_mouse_mode
+
+bind <Escape> nmode ignore 1 mode normal
+
+
+
+
+
+" Don't run Tridactyl on some web sites because it doesn't work well, or
+" because the web site has its own keybindings.
+autocmd DocStart mail.google.com mode ignore
+
+" Sometimes the status bar in the bottom left corner overlaps the Tridactyl
+" command line, so set an option to move the status bar to the right.
+guiset_quiet hoverlink right
+
+" Set up some shortcuts for running custom scripts.
+bind zz composite jsb tri.native.run('cat /home/andrew/.config/tridactyl/rustdoc-condensed.js') | js -p eval(JS_ARG.content)

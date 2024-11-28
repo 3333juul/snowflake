@@ -5,15 +5,14 @@
   ...
 }: {
   imports = [
-    #./ags.nix # widgets
+    ./ags.nix # widgets
     ./aichat.nix # ai
     ./bat.nix # better cat command
     ./btop.nix # resouces monitor
+    ./browser # browsers
     #./cava.nix                        # audio visualizer
     ./discord/discord.nix # discord with catppuccin theme
     ./fastfetch.nix # fetch tool
-    ./floorp/floorp.nix # firefox based browser
-    ./brave.nix # brave browser
     ./fzf.nix # fuzzy finder
     ./gaming.nix # packages related to gaming
     ./git.nix # version control

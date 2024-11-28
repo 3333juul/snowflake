@@ -1,0 +1,82 @@
+{
+	"name": "Vimium C",
+	"@time": "11/27/2024, 1:59:24 AM",
+	"time": 1732669164168,
+	"environment": {
+		"extension": "2.11.3",
+		"platform": "linux",
+		"chromium": 130
+	},
+	"exclusionRules": [
+		{
+			"passKeys": "",
+			"pattern": ":https://mail.google.com/"
+		},
+		{
+			"passKeys": "1 2 3 ` ",
+			"pattern": ":https://www.youtube.com/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://monkeytype.com/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://app.todoist.com/"
+		}
+	],
+	"keyMappings": [
+		"#!no-check",
+		"unmap `",
+		"unmap 1",
+		"unmap 2",
+		"unmap 3",
+		"unmap 4",
+		"",
+		"unmap J",
+		"unmap K",
+		"",
+		"map J nextTab",
+		"map K previousTab",
+		"",
+		"mapkey <c-d> <s-delete>",
+		""
+	],
+	"keyupTime": 70,
+	"searchEngines": [
+		"g|go|gg|google|Google: https://www.google.com/search?q=%s \\",
+		"  www.google.com re=/^(?:\\.[a-z]{2,4})?\\/search\\b.*?[#&?]q=([^#&]*)/i\\",
+		"  blank=https://www.google.com/ Google",
+		"qw|qwant: https://www.qwant.com/?q=%s Qwant",
+		"ya|yd|yandex: https://yandex.com/search/?text=%s Yandex",
+		"yh|yahoo: https://search.yahoo.com/search?p=%s Yahoo",
+		"maru|mailru|mail.ru: https://go.mail.ru/search?q=%s Mail.ru",
+		"",
+		"g.m|gm|g.map|gmap: https://www.google.com/maps?q=%s \\",
+		"  blank=https://www.google.com/maps Google Maps",
+		"y|yt: https://www.youtube.com/results?search_query=%s \\",
+		"  blank=https://www.youtube.com/ YouTube",
+		"w|wiki: https://www.wikipedia.org/w/index.php?search=%s Wikipedia",
+		"g.s|gs|gscholar: https://scholar.google.com/scholar?q=$s \\",
+		"  scholar.google.com re=/^(?:\\.[a-z]{2,4})?\\/scholar\\b.*?[#&?]q=([^#&]*)/i\\",
+		"  blank=https://scholar.google.com/ Google Scholar",
+		"",
+		"az|amazon: https://www.amazon.com/s?k=%s \\",
+		"  blank=https://www.amazon.com/ Amazon",
+		"",
+		"\\:i: vimium://sed/s/^//,lower\\ $S re= Lower case",
+		"v.m|math: vimium://math\\ $S re= Calculate",
+		"v.p: vimium://parse\\ $S re= Redo Search",
+		"gh|github: https://github.com/search?q=$s \\",
+		"  blank=https://github.com/ GitHub Repo",
+		"",
+		"aw|AwesomeWM: https://www.google.com/search?q=%s+site:https://awesomewm.org/apidoc \\",
+		"  www.google.com re=/^(?:\\.[a-z]{2,4})?\\/search\\b.*?[#&?]q=([^#&]*)/i\\",
+		"  blank=https://awesomewm.org/apidoc AwesomeWM",
+		"",
+		"nx|NixOS: https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=%s \\",
+		"  blank=https://search.nixos.org/packages NixOS Search",
+		""
+	],
+	"vimSync": true
+}
