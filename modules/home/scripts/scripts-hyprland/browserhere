@@ -5,7 +5,7 @@ active_workspace=$(echo "$monitors" | jq -r '.[] | select(.focused == true) | if
 
 hyprctl keyword windowrulev2 "workspace $active_workspace,class:(brave-browser)"
 
-brave
+brave &
 
 sleep 1
 
