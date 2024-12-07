@@ -16,6 +16,7 @@
   screenshot-wl = pkgs.writeShellScriptBin "screenshot-wl" (builtins.readFile ./scripts-default/screenshot-wl);
   s-img = pkgs.writeShellScriptBin "s-img" (builtins.readFile ./scripts-default/s-img);
   windows = pkgs.writeShellScriptBin "windows" (builtins.readFile ./scripts-default/windows);
+  yazi-dir = pkgs.writeShellScriptBin "yazi-dir" (builtins.readFile ./scripts-default/yazi-dir);
 in {
   home.packages = with pkgs; [
     changevolume
@@ -35,5 +36,6 @@ in {
     screenshot-wl
     s-img
     windows
+    yazi-dir
   ];
 }
