@@ -7,13 +7,18 @@
     manager.prepend_keymap = [
       {
         on = ["<C-s>"];
-        run = "shell --confirm 'rofi-gridview'";
+        run = "shell --confirm 'yazi-dir'";
         desc = "Preview all images in the current directory with rofi";
       }
       {
         on = ["I"];
         run = "shell --confirm 'swayimg --gallery '$(pwd)''";
         desc = "Preview all images in the current directory with swayimg";
+      }
+      {
+        on = ["T"];
+        run = "shell --confirm 'rofi-gridview'";
+        desc = "Preview all images in the current directory with rofi";
       }
       {
         on = ["g" "h"];

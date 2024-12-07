@@ -1,10 +1,11 @@
 {
   pkgs,
-  config,
+  inputs,
   ...
 }: {
   programs.yazi = {
     enable = true;
+    package = inputs.yazi.packages.${pkgs.system}.yazi;
 
     settings = {
       manager = {

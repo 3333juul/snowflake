@@ -16,6 +16,8 @@
 
     nvf.url = "github:notashelf/nvf/v0.7";
 
+    yazi.url = "github:sxyazi/yazi";
+
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/hyprland";
