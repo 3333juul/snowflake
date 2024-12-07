@@ -1,4 +1,3 @@
-
 configuration {
     modi:                        "drun";
     show-icons:                  true;
@@ -19,7 +18,7 @@ configuration {
 window {
     enabled:                     true;
     fullscreen:                  false;
-    width:                       70%;
+    width:                       95%;
     transparency:                "real";
     cursor:                      "default";
     spacing:                     0px;
@@ -78,13 +77,14 @@ entry {
 /** We add an extra child to this is PREVIEW=true */
 listview-split {
   orientation: horizontal;
+  background-color:            transparent;
   children: [listview];
 }
 
 listview {
     enabled:                     true;
-    columns:                     6;
-    lines:                       3;
+    columns:                     8;
+    lines:                       4;
     spacing:                     20px;
     padding:                     30px 30px;
     cycle:                       true;
@@ -117,7 +117,7 @@ element selected.normal {
 
 element-icon {
 	border-radius:				 0px;
-    size:                        200px;
+    size:                        170px;
     cursor:                      inherit;
     background-color:            transparent;
     text-color:                  inherit;
@@ -139,10 +139,6 @@ element-text {
 @media ( enabled: env(PREVIEW, false)) {
   /** preview widget */
 
-   window {
-     width:                      95%;
-   }
-
   icon-current-entry {
     expand:                      true;
     size:                        80%;
@@ -156,7 +152,6 @@ element-text {
 
   listview-split {
     children: [listview, icon-current-entry];
-    background-color:            transparent;
     text-color:                  inherit;
     //spacing:                  -20px;
     margin:                     -2px;
@@ -164,10 +159,6 @@ element-text {
 
   listview {
     columns:                     4;
-    lines:                       4;
-  }
-  element-icon {
-    size:                        170px;
   }
 
 }
