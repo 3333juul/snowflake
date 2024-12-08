@@ -37,8 +37,8 @@
         "$mainMod CTRL, C, exec, pkill tofi || cliphist list | tofi | cliphist decode | wl-copy"
         "$mainMod CTRL, W, exec, pkill tofi || focuswindow tofi"
         "$mainMod CTRL, E, exec, pkill tofi || togglespecial-menu"
-        "$mainMod CTRL, Z, exec, pkill rofi || selectwallpaper"
-        "$mainMod CTRL, R, exec, pkill rofi || cd ~/Documents/Syncthing/Memes && rofi-gridview --show-videos"
+        "$mainMod CTRL, Z, exec, pkill rofi || selectwallpaper --preview"
+        "$mainMod CTRL, R, exec, pkill rofi || cd ~/Documents/Syncthing/Memes && rofi-gridview"
 
         #== Screenshot/Screencapture ======================================================================
         "$mainMod CTRL, S, exec, screenshot-wl sf"
