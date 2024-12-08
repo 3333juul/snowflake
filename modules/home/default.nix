@@ -26,7 +26,7 @@
     ./packages.nix # other packages
     ./rofi/rofi.nix # launcher
     ./scripts # personal scripts
-    ./spicetify.nix # spotify client
+    ./spotify/spicetify.nix # spotify client
     ./starship.nix # shell prompt
     ./swayimg.nix # image viewer
     ./theme # gtk/qt/font/cursor
