@@ -25,7 +25,7 @@ select_monitor() {
 
 	selected_monitor=$(for monitor in $monitors; do
 		echo -en "$monitor\n"
-	done | rofi -dmenu -p "MONITOR" -theme ~/.config/rofi/themes/wallpaper.rasi -no-show-icons -theme-str "window { width: 350px; } listview { lines: $monitor_count; columns: 1;}")
+	done | PREVIEW=false rofi -dmenu -p "MONITOR" -theme ~/.config/rofi/themes/wallpaper.rasi -no-show-icons -theme-str "window { width: 350px; } listview { lines: $monitor_count; columns: 1;}")
 
 	echo "$selected_monitor"
 }
@@ -35,15 +35,12 @@ set_wallpaper() {
 	local monitor=$1
 	local wallpaper_path=$2
 
-	# Check if there is an active wallpaper on the monitor and unload it
-	current_wallpaper_path=$(hyprctl hyprpaper listactive | grep "$monitor" | awk -F ' = ' '{print $2}')
-	if [[ -n $current_wallpaper_path ]]; then
-		hyprctl hyprpaper unload "$current_wallpaper_path"
-	fi
-
 	# Preload and set the new wallpaper
 	hyprctl hyprpaper preload "$wallpaper_path"
 	hyprctl hyprpaper wallpaper "$monitor,$wallpaper_path"
+
+	# Unload previous wallpaper
+	hyprctl hyprpaper unload unused
 
 	# Save the active wallpapers to a file
 	hyprctl hyprpaper listactive >"$last_wallpapers_file"
@@ -70,17 +67,8 @@ load_last_wallpapers() {
 			fi
 		done <"$last_wallpapers_file"
 
-		# Get the list of active wallpapers
-		active_paths=$(hyprctl hyprpaper listactive | awk -F ' = ' '{print $2}')
-		# Get the list of loaded wallpapers
-		loaded_paths=$(hyprctl hyprpaper listloaded | awk -F ' = ' '{print $2}')
-
-		# Unload wallpapers that are loaded but not active
-		for loaded in $loaded_paths; do
-			if ! echo "$active_paths" | grep -q "$loaded"; then
-				hyprctl hyprpaper unload "$loaded"
-			fi
-		done
+		# Unload unused wallpapers
+		hyprctl hyprpaper unload unused
 	else
 		echo "Last wallpapers file not found."
 	fi
