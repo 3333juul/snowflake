@@ -14,8 +14,8 @@
     configuration {
       show-icons:         true;
       icon-theme:         "Zafiro";
-      terminal:           "alacritty";
-      cycle:              false;
+      terminal:           "kitty";
+      cycle:              true;
       hide-scrollbar:     true;
       disable-history:    false;
       kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
