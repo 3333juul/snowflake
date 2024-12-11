@@ -30,7 +30,8 @@
     ./starship.nix # shell prompt
     ./swayimg.nix # image viewer
     ./theme # gtk/qt/font/cursor
-    ./thumbnailers.nix
+    ./thumbnailers.nix # thumbnailers
+    ./thunar.nix # file manager
     ./tofi.nix # launcher
     ./yazi # file manager
     ./vscodium.nix # vscode forck

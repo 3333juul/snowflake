@@ -43,6 +43,9 @@ in {
     socat
     imagemagick
     ripdrag
+    sptlrx
+
+    # Thumbnailers
     ffmpegthumbnailer
     gdk-pixbuf
 
@@ -59,13 +62,9 @@ in {
     winetricks
     wineWowPackages.wayland
     zenity
-    xfce.thunar
-    xfce.xfconf
-    xfce.tumbler
     obsidian
     calibre
     zotero
-    microsoft-edge
     font-manager
     anki-bin
     stremio
