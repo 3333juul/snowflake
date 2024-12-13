@@ -23,6 +23,7 @@
 
     # ui
     ./ui/bufferline.nix
+    ./ui/colorizer.nix
     ./ui/dashboard.nix
     #./ui/icons.nix
     #./ui/illuminate.nix
