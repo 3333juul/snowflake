@@ -6,17 +6,19 @@
     urgent:                rgba(204, 36, 29, 0.9);  /* #cc241d */
     on:                    rgba(152, 151, 26, 0.9); /* #98971a */
     off:                   rgba(204, 36, 29, 0.9);  /* #cc241d */
+
+    /* Gruvbox dark colors */
+    gruvbox-dark-bg0:          #282828;
+    gruvbox-dark-bg0-soft:     #32302f;
+    gruvbox-dark-bg3:          #665c54;
+    gruvbox-dark-fg0:          #fbf1c7;
+    gruvbox-dark-fg1:          #ebdbb2;
+    gruvbox-dark-red-dark:     #cc241d;
+    gruvbox-dark-red-light:    #fb4934;
+    gruvbox-dark-yellow-dark:  #d79921;
+    gruvbox-dark-yellow-light: #fabd2f;
+    gruvbox-dark-gray:         #a89984;
 }
 
-/* 
-* {
-background:			#282828;
-foreground:			#ebdbb2;
-selected:			#458588;
-highlight:			#d79921;
-urgent:				#cc241d;
-on:					#98971a;
-off:				#cc241d;
-}
-*/
+/* #TODO: ADD ALL GRUVBOX COLORS */
 
