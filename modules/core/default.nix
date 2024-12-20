@@ -1,6 +1,13 @@
-{ inputs, nixpkgs, self, username, host, ...}:
 {
+  inputs,
+  nixpkgs,
+  self,
+  username,
+  host,
+  ...
+}: {
   imports = [
+    ./android.nix
     ./bootloader.nix
     ./hardware.nix
     ./xserver.nix
