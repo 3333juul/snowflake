@@ -70,6 +70,8 @@ in {
     stremio
     qbittorrent
     obs-studio
+    signal-desktop
+    pinta
 
     # C / C++
     gcc
@@ -77,7 +79,14 @@ in {
     gnumake
 
     # Python
-    python3
+
+    (python3.withPackages (ps:
+      with ps; [
+        pytesseract
+        pyqt5
+        pynput
+        numpy
+      ]))
 
     inputs.alejandra.defaultPackage.${system}
 
