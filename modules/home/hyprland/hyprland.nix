@@ -13,6 +13,8 @@
     wayland
     direnv
     swappy
+    wl-kbptr
+    wlrctl
     #wl-clip-persist
   ];
 
