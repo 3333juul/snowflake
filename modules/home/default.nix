@@ -24,6 +24,7 @@
     ./swaync/swaync.nix # notification deamon
     ./nvf/nvf.nix # neovim config framework
     ./packages.nix # other packages
+    ./pqiv.nix # image viwer
     ./rofi/rofi.nix # launcher
     ./scripts # personal scripts
     ./spotify/spicetify.nix # spotify client
