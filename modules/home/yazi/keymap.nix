@@ -1,8 +1,4 @@
 {
-  pkgs,
-  config,
-  ...
-}: {
   programs.yazi.keymap = {
     manager.prepend_keymap = [
       {
@@ -12,8 +8,10 @@
       }
       {
         on = ["I"];
-        run = "shell --confirm 'swayimg --gallery '$(pwd)''";
-        desc = "Preview all images in the current directory with swayimg";
+        run = "shell --confirm 'pqiv --auto-montage-mode .'";
+        desc = "Preview all images in the current directory with pqiv";
+        #run = "shell --confirm 'swayimg --gallery '$(pwd)''";
+        #desc = "Preview all images in the current directory with swayimg";
       }
       {
         on = ["T"];
