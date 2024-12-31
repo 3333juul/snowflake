@@ -1,0 +1,13 @@
+#!/bin/sh
+
+clipboard=$( xclip -out -selection clipboard )
+dir="$HOME/Downloads/git-dl"
+
+if [ ! -d "$dir" ]; then
+    mkdir -p "$dir"
+fi
+
+cd "$dir"
+
+# Clone the repository from the clipboard URL in Alacritty
+alacritty --class term -e git clone "$clipboard"
