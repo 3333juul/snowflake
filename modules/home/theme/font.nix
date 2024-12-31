@@ -1,14 +1,12 @@
 {pkgs, ...}: {
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    (nerdfonts.override {
-      fonts = [
-        "JetBrainsMono"
-        "FiraCode"
-        "NerdFontsSymbolsOnly"
-        "Iosevka"
-      ];
-    })
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
+    nerd-fonts.symbols-only
+    nerd-fonts.iosevka
+    nerd-fonts.terminess-ttf
+
     twemoji-color-font
     noto-fonts-emoji
     terminus_font
