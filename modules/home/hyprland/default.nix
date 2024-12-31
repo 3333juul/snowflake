@@ -6,6 +6,5 @@
     ./hyprpaper.nix
     ./pyprland.nix
     ./variables.nix
-    inputs.hyprland.homeManagerModules.default
   ];
 }
