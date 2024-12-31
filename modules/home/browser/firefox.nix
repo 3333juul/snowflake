@@ -5,6 +5,6 @@
 }: {
   home.packages = with pkgs; [
     floorp
-    inputs.zen-browser.packages."${system}".default
+    #inputs.zen-browser.packages."${system}".default
   ];
 }
