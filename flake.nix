@@ -12,17 +12,14 @@
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
-    ags.url = "github:Aylur/ags";
+    #ags.url = "github:Aylur/ags";
 
     nvf.url = "github:notashelf/nvf/v0.7";
 
     yazi.url = "github:sxyazi/yazi";
 
     hyprland = {
-      type = "git";
-      url = "https://github.com/hyprwm/hyprland";
-      ref = "refs/tags/v0.45.2";
-      submodules = true;
+      url = "github:hyprwm/hyprland";
     };
 
     hyprland-easymotion = {
