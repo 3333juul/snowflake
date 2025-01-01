@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  config,
+  ...
+}: let
   gruvbox-material-gtk = pkgs.callPackage ../../../pkgs/gruvbox-material-gtk.nix {};
 in {
   gtk = {
@@ -20,6 +24,9 @@ in {
       package = pkgs.bibata-cursors;
       size = 24;
     };
+
+    # Move gtk-2.0 from home directory to .config
+    gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
   };
 
   dconf.settings = {
