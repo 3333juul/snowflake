@@ -14,6 +14,7 @@
       name = "Neovim";
       type = "Application";
       mimeType = ["text/plain"];
+      icon = "nvim";
       exec = "${pkgs.kitty}/bin/kitty nvim";
     };
   };
