@@ -8,9 +8,9 @@
 }: {
   imports = [
     ./android.nix
+    ./bluetooth.nix
     ./bootloader.nix
     ./hardware.nix
-    ./xserver.nix
     ./network.nix
     ./nh.nix
     ./pipewire.nix
@@ -18,11 +18,12 @@
     ./security.nix
     ./services.nix
     ./steam.nix
+    ./syncthing.nix
     ./system.nix
     ./user.nix
-    ./wayland.nix
     ./virtualization.nix
-    ./bluetooth.nix
-    ./syncthing.nix
+    ./wayland.nix
+    ./xdg.nix
+    ./xserver.nix
   ];
 }
