@@ -27,6 +27,7 @@
     ./pqiv.nix # image viwer
     ./rofi/rofi.nix # launcher
     ./scripts # personal scripts
+    ./shell # shell
     ./spotify/spicetify.nix # spotify client
     ./starship.nix # shell prompt
     ./swayimg.nix # image viewer
@@ -38,7 +39,6 @@
     ./vscodium.nix # vscode forck
     ./waybar/waybar.nix # status bar
     ./xdg-mimes.nix # xdg config
-    ./zsh.nix # shell
 
     # Unused
     #./aseprite/aseprite.nix           # pixel art editor
