@@ -1,5 +1,5 @@
 {lib, ...}: let
-  settings = {
+  keys = {
     GLOBAL = {
       "<colon>" = "command";
       o = "command --text='open '";
@@ -20,10 +20,10 @@
       m = "mark %%";
       q = "quit";
       "." = "repeat-command";
-      j = "scroll down";
-      h = "scroll left";
-      l = "scroll right";
-      k = "scroll up";
+      "<ctrl>j" = "scroll down";
+      "<ctrl>h" = "scroll left";
+      "<ctrl>l" = "scroll right";
+      "<ctrl>k" = "scroll up";
       "/" = "search";
       "?" = "search --reverse";
       N = "search-next";
@@ -36,6 +36,8 @@
     };
 
     IMAGE = {
+      j = "next";
+      k = "prev";
       M = "center";
       "<button-right>" = "enter library";
       "<button-middle>" = "enter thumbnail";
@@ -45,12 +47,10 @@
       "<home>" = "goto 1";
       "<button-forward>" = "next";
       "<page-down>" = "next";
-      n = "next";
       "<ctrl>n" = "next --keep-zoom";
       "<space>" = "play-or-pause";
       "<button-back>" = "prev";
       "<page-up>" = "prev";
-      p = "prev";
       "<ctrl>p" = "prev --keep-zoom";
       ">" = "rotate";
       "<" = "rotate --counter-clockwise";
@@ -117,5 +117,5 @@
     };
   };
 in {
-  xdg.configFile."vimiv/keys.conf".text = lib.generators.toINI {} settings;
+  xdg.configFile."vimiv/keys.conf".text = lib.generators.toINI {} keys;
 }

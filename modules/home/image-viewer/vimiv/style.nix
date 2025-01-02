@@ -1,5 +1,5 @@
 {lib, ...}: let
-  settings = {
+  gruvbox = {
     STYLE = {
       base00 = "#1d2021";
       base01 = "#3c3836";
@@ -20,5 +20,5 @@
     };
   };
 in {
-  xdg.configFile."vimiv/styles/gruvbox".text = lib.generators.toINI {} settings;
+  xdg.configFile."vimiv/styles/gruvbox".text = lib.generators.toINI {} gruvbox;
 }
