@@ -1,6 +1,6 @@
 {
   programs.nvf.settings.vim.visuals = {
-    indentBlankline = {
+    indent-blankline = {
       enable = true;
     };
   };

@@ -11,7 +11,6 @@
     noto-fonts-emoji
     terminus_font
     terminus_font_ttf
-    terminus-nerdfont
     font-awesome
     noto-fonts
 

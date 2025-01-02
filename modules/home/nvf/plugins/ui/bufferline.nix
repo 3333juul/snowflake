@@ -5,7 +5,7 @@
       mappings = {
         cycleNext = "<S-l>";
         cyclePrevious = "<S-h>";
-        closeCurrent = "<C-w>"; # "<leader>bb";
+        closeCurrent = "<leader>w"; # "<leader>bb";
       };
       setupOpts = {
         options = {

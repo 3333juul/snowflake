@@ -6,7 +6,7 @@
   programs.kitty = {
     enable = true;
 
-    theme = "Gruvbox Dark";
+    themeFile = "gruvbox-dark";
 
     font = {
       name = "Iosevka Nerd Font";

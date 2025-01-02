@@ -25,11 +25,11 @@
       ];
     };
   };
-  nixpkgs = {
-    overlays = [
-      inputs.nur.overlay
-    ];
-  };
+  # nixpkgs = {
+  #   overlays = [
+  #     inputs.nur.overlay
+  #   ];
+  # };
 
   environment.systemPackages = with pkgs; [
     wget

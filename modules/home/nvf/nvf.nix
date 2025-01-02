@@ -28,7 +28,7 @@
     enable = true;
     settings.vim = {
       viAlias = true;
-      leaderKey = " ";
+      globals.mapleader = " ";
       useSystemClipboard = true;
     };
   };
