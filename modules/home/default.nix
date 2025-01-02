@@ -22,15 +22,14 @@
     ./kitty.nix # terminal
     ./foot.nix # terminal
     ./swaync/swaync.nix # notification deamon
+    ./image-viewer # image viewers
     ./nvf/nvf.nix # neovim config framework
     ./packages.nix # other packages
-    ./pqiv.nix # image viwer
     ./rofi/rofi.nix # launcher
     ./scripts # personal scripts
     ./shell # shell
     ./spotify/spicetify.nix # spotify client
     ./starship.nix # shell prompt
-    ./swayimg.nix # image viewer
     ./theme # gtk/qt/font/cursor
     ./thumbnailers.nix # thumbnailers
     ./thunar.nix # file manager
