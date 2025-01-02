@@ -25,6 +25,8 @@
     "keys.viewer" = {
       "0" = "first_file";
       "dollar" = "last_file";
+      "Left" = "prev_file";
+      "Right" = "next_file";
       k = "prev_file";
       j = "next_file";
       f = "fullscreen";
