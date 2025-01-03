@@ -225,6 +225,40 @@
 
       submap = reset
 
+      # Cursor submap (similar to the Mouse mode in Sway)
+      submap=cursor
+
+      # Jump cursor to a position
+      bind=,a,exec,hyprctl dispatch submap reset && wl-kbptr && hyprctl dispatch submap cursor
+
+      # Cursor movement
+      binde=,j,exec,wlrctl pointer move 0 10
+      binde=,k,exec,wlrctl pointer move 0 -10
+      binde=,l,exec,wlrctl pointer move 10 0
+      binde=,h,exec,wlrctl pointer move -10 0
+
+      # Left button
+      bind=,s,exec,wlrctl pointer click left
+      # Middle button
+      bind=,d,exec,wlrctl pointer click middle
+      # Right button
+      bind=,f,exec,wlrctl pointer click right
+
+      # Scroll up and down
+      binde=,e,exec,wlrctl pointer scroll 10 0
+      binde=,r,exec,wlrctl pointer scroll -10 0
+
+      # Scroll left and right
+      binde=,t,exec,wlrctl pointer scroll 0 -10
+      binde=,g,exec,wlrctl pointer scroll 0 10
+
+      # Exit cursor submap
+      bind=,escape,exec, hyprctl dispatch submap reset
+
+      submap = reset
+
+      # Entrypoint
+      bind=$mainMod,o,exec,hyprctl dispatch submap cursor
     '';
   };
 }

@@ -10,27 +10,30 @@
       "size 50% 55%,class:(pulsemixer)"
       "size 90% 80%,class:(floatingterm)"
       "size 90% 80%,class:(swayimg)"
+      "size 90% 80%,class:(vimiv)"
       "size 400 900,class:(steam),title:(Friends List)"
 
       # Float
-      "float,class:^(net.davidotek.pupgui2)$"
-      "float,class:^(yad)$"
-      "float,class:^(qt5ct)$"
-      "float,class:^(nwg-look)$"
-      "float,class:^(org.kde.ark)$"
-      "float,class:^(pavucontrol)$"
-      "float,class:^(blueman-manager)$"
-      "float,class:^(nm-applet)$"
-      "float,class:^(nm-connection-editor)$"
-      "float,class:^(org.kde.polkit-kde-authentication-agent-1)$"
-      "float,class:^(com.obsproject.Studio)$,title:^(Controls)$"
-      "float,class:(xdg-desktop-portal-gtk),title:(Open Files)"
-      "float,class:(xdg-desktop-portal-gtk),title:(All Files)"
+      "float,class:(yad)"
+      "float,class:(qt5ct)"
+      "float,class:(qt6ct)"
+      "float,class:(nwg-look)"
+      "float,class:(org.kde.ark)"
+      "float,class:(pavucontrol)"
+      "float,class:(blueman-manager)"
+      "float,class:(nm-applet)"
+      "float,class:(nm-connection-editor)"
+      "float,class:(org.kde.polkit-kde-authentication-agent-1)"
+      "float,class:(com.obsproject.Studio),title:(Controls)"
+      "float,class:(xdg-desktop-portal-gtk)"
+      "float,title:(Open Files)"
       "float,class:(pulsemixer)"
       "float,class:(floatingterm)"
       "float,class:(swayimg)"
+      "float,class:(vimiv)"
       "float,class:^([Ss]team)$, title:^((?![Ss]team).*)$"
       "float,class:(steam),title:(Steam Settings)"
+      "float,class:(steam),title:(Friends List)"
 
       # Move
       "move 1470 100,class:(steam),title:(Friends List)"
@@ -50,8 +53,8 @@
       "tile,class:^([Ss]team)$, title:^([Ss]team)$"
 
       # Groups
-      "group set,title:(chat.openai)"
-      "group set,title:(gemini)"
+      "group set,title:(.*chat.openai.*)"
+      "group set,title:(.*gemini.*)"
       "group set,title:(copilot.microsoft.com)"
       "group set,class:(dictionary)"
       "group set,class:(translate)"
@@ -123,7 +126,7 @@
       "s[false] f[1],gapsin:0,gapsout:0"
     ];
 
-    # Layer rules. Alternative: blurls = launcher
+    # Layer rules.
     layerrule = [
       "blur, waybar"
       "blur, rofi"
