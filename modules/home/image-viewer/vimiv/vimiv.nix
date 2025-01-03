@@ -28,7 +28,7 @@
       autoplay = true;
       autowrite = "ask";
       overzoom = 1.0;
-      zoom_wheel_ctrl = true;
+      zoom_wheel_ctrl = false;
     };
 
     LIBRARY = {
