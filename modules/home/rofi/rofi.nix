@@ -5,7 +5,8 @@
 }: {
   programs.rofi = {
     enable = true;
-    package = pkgs.callPackage ../../../pkgs/rofi.nix {};
+    #package = pkgs.callPackage ../../../pkgs/rofi.nix {};
+    package = pkgs.rofi-wayland;
     extraConfig = {
       show-icons = true;
       icon-theme = "Zafiro";
