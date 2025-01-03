@@ -7,7 +7,7 @@ with lib; let
   defaultApps = {
     browser = ["brave.desktop"];
     text = ["codium.desktop"];
-    image = ["swayimg.desktop"];
+    image = ["vimiv.desktop"];
     audio = ["mpv.desktop"];
     video = ["mpv.desktop"];
     directory = ["thunar.desktop"];
