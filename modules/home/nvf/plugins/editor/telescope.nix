@@ -20,7 +20,7 @@
         findFiles = "<leader> ";
         findProjects = "<leader>sp";
         #gitBranches = "<leader>svb";
-        #gitBufferCommits = "<leader>svcb";
+        gitBufferCommits = "<leader>fc";
         #gitCommits = "<leader>svcw";
         #gitStash = "<leader>svx";
         #gitStatus = "<leader>svs";
@@ -37,5 +37,14 @@
         treesitter = "<leader>ss";
       };
     };
+
+    keymaps = [
+      {
+        key = "<leader>nn";
+        mode = "n";
+        desc = "View notifications in telescope";
+        action = "<cmd>Telescope notify<cr>";
+      }
+    ];
   };
 }
