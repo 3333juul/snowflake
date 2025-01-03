@@ -10,12 +10,12 @@ up)
 	# Set the volume on (if it was muted)
 	pamixer -u
 	pamixer -i 5 #--allow-boost
-	send_notification $1
+	send_notification "$1"
 	;;
 down)
 	pamixer -u
 	pamixer -d 5 #--allow-boost
-	send_notification $1
+	send_notification "$1"
 	;;
 mute)
 	pamixer -t

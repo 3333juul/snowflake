@@ -2,6 +2,8 @@
   changevolume = pkgs.writeShellScriptBin "changevolume" (builtins.readFile ./scripts-default/changevolume);
   confirm = pkgs.writeShellScriptBin "confirm" (builtins.readFile ./scripts-default/confirm);
   fopen = pkgs.writeShellScriptBin "fopen" (builtins.readFile ./scripts-default/fopen);
+  git-dl = pkgs.writeShellScriptBin "git-dl" (builtins.readFile ./scripts-default/git-dl);
+  imgv = pkgs.writeShellScriptBin "imgv" (builtins.readFile ./scripts-default/imgv);
   kitty-scrollback = pkgs.writeShellScriptBin "kitty-scrollback" (builtins.readFile ./scripts-default/kitty-scrollback);
   launcher = pkgs.writeShellScriptBin "launcher" (builtins.readFile ./scripts-default/launcher);
   man-zathura = pkgs.writeShellScriptBin "man-zathura" (builtins.readFile ./scripts-default/man-zathura);
@@ -22,6 +24,8 @@ in {
     changevolume
     confirm
     fopen
+    git-dl
+    imgv
     kitty-scrollback
     launcher
     man-zathura

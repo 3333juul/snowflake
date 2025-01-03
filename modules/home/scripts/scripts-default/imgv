@@ -1,0 +1,11 @@
+#!/bin/sh
+
+directory=$(pwd)
+
+first_image=$(find "$directory" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp" \) | sort | head -n 1)
+
+if [ -n "$first_image" ]; then
+	vimiv -s startup_library false --command "open '$first_image'" --command 'enter thumbnail'
+else
+	echo "No images found in directory: $directory"
+fi
