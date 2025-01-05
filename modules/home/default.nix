@@ -1,9 +1,4 @@
-{
-  inputs,
-  username,
-  host,
-  ...
-}: {
+{...}: {
   imports = [
     #./ags.nix # widgets
     ./aichat.nix # ai
@@ -24,6 +19,7 @@
     ./swaync/swaync.nix # notification deamon
     ./image-viewer # image viewers
     ./nvf/nvf.nix # neovim config framework
+    ./mpv.nix # video player
     ./packages.nix # other packages
     ./rofi/rofi.nix # launcher
     ./scripts # personal scripts
@@ -38,13 +34,5 @@
     ./vscodium.nix # vscode forck
     ./waybar/waybar.nix # status bar
     ./xdg-mimes.nix # xdg config
-
-    # Unused
-    #./aseprite/aseprite.nix           # pixel art editor
-    #./audacious.nix                   # music player
-    #./swaylock.nix                    # lock screen
-    #./micro.nix                       # nano replacement
-    #./retroarch.nix
-    #./lazyvim/nvim.nix                # neovim editor
   ];
 }

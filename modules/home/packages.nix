@@ -22,7 +22,6 @@ in {
     killall
     libnotify
     man-pages # extra man pages
-    mpv # video player
     ncdu # disk space
     openssl
     onefetch # fetch utility for git repo
@@ -71,6 +70,7 @@ in {
     qbittorrent
     obs-studio
     signal-desktop
+    telegram-desktop
     pinta
 
     # C / C++
