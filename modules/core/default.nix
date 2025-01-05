@@ -7,6 +7,7 @@
   ...
 }: {
   imports = [
+    ./options
     ./android.nix
     ./bluetooth.nix
     ./bootloader.nix

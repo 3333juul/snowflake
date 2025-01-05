@@ -1,13 +1,13 @@
 {
   inputs,
+  lib,
+  config,
   pkgs,
   ...
 }: {
-  programs.hyprland = {
+  programs.hyprland = lib.mkIf (config.garden.desktop-environment == "Hyprland") {
     enable = true;
-    # set the flake package
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    # make sure to also set the portal package, so that they are in sync
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
   xdg.portal = {
