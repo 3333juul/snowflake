@@ -38,7 +38,10 @@
     IMAGE = {
       j = "next";
       k = "prev";
+      "<right>" = "next";
+      "<left>" = "prev";
       M = "center";
+      "<return>" = "enter thumbnail";
       "<button-right>" = "enter library";
       "<button-middle>" = "enter thumbnail";
       "|" = "flip";
