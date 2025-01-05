@@ -1,8 +1,12 @@
 {
   inputs,
   pkgs,
+  lib,
+  osConfig,
   ...
-}: {
+}: let
+  cfg = osConfig.garden.desktop-environment;
+in {
   home.packages = with pkgs; [
     inputs.hypr-contrib.packages.${pkgs.system}.grimblast
     hyprpicker

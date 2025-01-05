@@ -6,7 +6,7 @@
 with lib; let
   defaultApps = {
     browser = ["brave.desktop"];
-    text = ["codium.desktop"];
+    text = ["nvim.desktop"];
     image = ["vimiv.desktop"];
     audio = ["mpv.desktop"];
     video = ["mpv.desktop"];

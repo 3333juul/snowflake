@@ -1,9 +1,9 @@
 {
   lib,
-  inputs,
+  osConfig,
   ...
 }: {
-  programs.starship = {
+  programs.starship = lib.mkIf osConfig.garden.cli.starship.enable {
     enable = true;
 
     enableBashIntegration = true;
