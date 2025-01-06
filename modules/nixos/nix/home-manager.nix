@@ -1,5 +1,4 @@
 {
-  pkgs,
   inputs,
   username,
   host,
@@ -11,7 +10,7 @@
     useGlobalPkgs = true;
     extraSpecialArgs = {inherit inputs username host;};
     users.${username} = {
-      imports = [./../home];
+      imports = [./../../home];
       home = {
         username = "${username}";
         homeDirectory = "/home/${username}";
@@ -20,12 +19,4 @@
       programs.home-manager.enable = true;
     };
   };
-
-  users.users.${username} = {
-    isNormalUser = true;
-    description = "${username}";
-    extraGroups = ["networkmanager" "wheel"];
-    shell = pkgs.zsh;
-  };
-  nix.settings.allowed-users = ["${username}"];
 }
