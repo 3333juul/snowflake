@@ -4,7 +4,7 @@
   osConfig,
   ...
 }: {
-  config = lib.mkIf osConfig.garden.cli.bat.enable {
+  config = lib.mkIf osConfig.garden.programs.cli.bat.enable {
     programs.bat = {
       enable = true;
       config = {

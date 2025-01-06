@@ -5,7 +5,7 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden.tui;
+  cfg = osConfig.garden.programs.tui;
 in {
   programs.yazi = lib.mkIf cfg.yazi.enable {
     enable = true;

@@ -4,7 +4,7 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden.tui;
+  cfg = osConfig.garden.programs.tui;
 in {
   programs.btop = lib.mkIf cfg.btop.enable {
     enable = true;

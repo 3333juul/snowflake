@@ -4,7 +4,7 @@
   osConfig,
   ...
 }: {
-  config = lib.mkIf osConfig.garden.gui.enable {
+  config = lib.mkIf osConfig.garden.programs.gui.enable {
     home.packages = with pkgs; [
       bleachbit # cache cleaner
       libreoffice

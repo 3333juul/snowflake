@@ -1,5 +1,5 @@
 {lib, ...}: {
-  options.garden.cli = {
+  options.garden.programs.cli = {
     enable = lib.mkEnableOption "enables cli";
 
     shell = lib.mkOption {

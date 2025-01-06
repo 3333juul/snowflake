@@ -3,7 +3,7 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden.tui;
+  cfg = osConfig.garden.programs.tui;
 in {
   config = lib.mkIf cfg.cava.enable {
     programs.cava = {

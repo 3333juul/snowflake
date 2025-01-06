@@ -3,7 +3,7 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden.gui;
+  cfg = osConfig.garden.programs.gui;
 in {
   programs.tofi = lib.mkIf cfg.tofi.enable {
     enable = true;
@@ -86,4 +86,3 @@ in {
     };
   };
 }
-

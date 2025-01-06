@@ -1,5 +1,5 @@
 {lib, ...}: {
-  options.garden.gui = {
+  options.garden.programs.gui = {
     enable =
       lib.mkEnableOption "enables gui";
 

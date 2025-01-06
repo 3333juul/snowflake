@@ -4,7 +4,7 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden.tui;
+  cfg = osConfig.garden.programs.tui;
 in {
   programs.fzf = lib.mkIf cfg.fzf.enable {
     enable = true;

@@ -4,7 +4,7 @@
   osConfig,
   ...
 }: {
-  config = lib.mkIf osConfig.garden.cli.enable {
+  config = lib.mkIf osConfig.garden.programs.cli.enable {
     home.packages = with pkgs; [
       ## CLI utility
       appimage-run # run appimage

@@ -4,7 +4,7 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden.gui.image;
+  cfg = osConfig.garden.programs.gui.image;
   settings = {
     font = {
       name = "Terminess Nerd Font";

@@ -1,5 +1,5 @@
 {lib, ...}: {
-  options.garden.tui = {
+  options.garden.programs.tui = {
     enable = lib.mkEnableOption "enables tui";
 
     nvim.enable =

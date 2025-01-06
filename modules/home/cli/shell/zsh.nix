@@ -5,7 +5,7 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden.cli.shell;
+  cfg = osConfig.garden.programs.cli.shell;
 in {
   programs.zsh = lib.mkIf (cfg == "zsh") {
     enable = true;

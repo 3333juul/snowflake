@@ -4,7 +4,7 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden;
+  cfg = osConfig.garden.programs;
 in {
   programs = {
     git = lib.mkIf cfg.cli.git.enable {

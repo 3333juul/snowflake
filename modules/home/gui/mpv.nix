@@ -4,7 +4,7 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden.gui;
+  cfg = osConfig.garden.programs.gui;
 in {
   programs.mpv = lib.mkIf cfg.mpv.enable {
     enable = true;

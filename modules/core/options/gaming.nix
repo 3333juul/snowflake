@@ -1,5 +1,5 @@
 {lib, ...}: {
-  options.garden.gaming = {
+  options.garden.programs.gaming = {
     steam.enable =
       lib.mkEnableOption "enables steam";
 

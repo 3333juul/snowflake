@@ -3,7 +3,7 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden.gui.image;
+  cfg = osConfig.garden.programs.gui.image;
 in {
   programs.pqiv = lib.mkIf cfg.pqiv.enable {
     enable = true;

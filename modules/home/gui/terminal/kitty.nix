@@ -4,7 +4,7 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden.gui.terminal;
+  cfg = osConfig.garden.programs.gui.terminal;
 in {
   programs.kitty = lib.mkIf cfg.kitty.enable {
     enable = true;

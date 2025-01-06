@@ -21,7 +21,7 @@
   #   };
   # };
 
-  cfg = osConfig.garden.gui;
+  cfg = osConfig.garden.programs.gui;
 in {
   programs.vscode = lib.mkIf cfg.vscodium.enable {
     enable = true;
