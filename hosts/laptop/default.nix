@@ -1,8 +1,11 @@
-{ pkgs, config, ... }: 
 {
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
-    ./../../modules/core
+    ./../../modules/nixos
   ];
 
   environment.systemPackages = with pkgs; [
@@ -11,12 +14,12 @@
     cpupower-gui
     powertop
   ];
-  
-  services = {    
+
+  services = {
     # thermald.enable = true;
     # cpupower-gui.enable = true;
     power-profiles-daemon.enable = true;
- 
+
     upower = {
       enable = true;
       percentageLow = 20;

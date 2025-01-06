@@ -1,9 +1,12 @@
 {
   pkgs,
-  config,
+  lib,
+  osConfig,
   ...
-}: {
-  services.glance = {
+}: let
+  cfg = osConfig.garden.services;
+in {
+  services.glance = lib.mkIf cfg.glance.enable {
     enable = true;
     settings = {
       theme = {

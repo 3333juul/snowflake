@@ -1,9 +1,13 @@
 {
   pkgs,
+  lib,
+  config,
   username,
   ...
-}: {
-  services.syncthing = {
+}: let
+  cfg = config.garden.services;
+in {
+  services.syncthing = lib.mkIf cfg.syncthing.enable {
     enable = true;
     dataDir = "/home/${username}";
     openDefaultPorts = true;

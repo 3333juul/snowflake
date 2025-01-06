@@ -5,7 +5,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ./../../modules/core
+    ./../../modules/nixos
   ];
 
   powerManagement.cpuFreqGovernor = "performance";
@@ -58,6 +58,11 @@
       gaming = {
         steam.enable = true;
       };
+    };
+
+    services = {
+      syncthing.enable = true;
+      glance.enable = true;
     };
   };
 }
