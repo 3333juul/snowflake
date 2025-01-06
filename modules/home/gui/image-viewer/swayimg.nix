@@ -1,9 +1,10 @@
 {
   pkgs,
   lib,
-  config,
+  osConfig,
   ...
 }: let
+  cfg = osConfig.garden.gui.image;
   settings = {
     font = {
       name = "Terminess Nerd Font";
@@ -67,6 +68,8 @@
     };
   };
 in {
-  home.packages = with pkgs; [swayimg];
-  xdg.configFile."swayimg/config".text = lib.generators.toINI {} settings;
+  config = lib.mkIf cfg.swayimg.enable {
+    home.packages = with pkgs; [swayimg];
+    xdg.configFile."swayimg/config".text = lib.generators.toINI {} settings;
+  };
 }

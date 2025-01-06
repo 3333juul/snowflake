@@ -1,9 +1,12 @@
 {
-  pkgs,
   host,
+  lib,
+  osConfig,
   ...
-}: {
-  programs.kitty = {
+}: let
+  cfg = osConfig.garden.gui.terminal;
+in {
+  programs.kitty = lib.mkIf cfg.kitty.enable {
     enable = true;
 
     themeFile = "gruvbox-dark";

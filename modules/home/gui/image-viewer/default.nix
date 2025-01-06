@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ./pqiv.nix
-    # ./swayimg.nix
+    ./swayimg.nix
     ./vimiv
   ];
 }

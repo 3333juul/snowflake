@@ -1,8 +1,10 @@
 {
   pkgs,
   lib,
+  osConfig,
   ...
 }: let
+  cfg = osConfig.garden.gui.image;
   settings = {
     GENERAL = {
       monitor_filesystem = true;
@@ -95,6 +97,8 @@
     ALIASES = {};
   };
 in {
-  home.packages = with pkgs; [vimiv-qt];
-  xdg.configFile."vimiv/vimiv.conf".text = lib.generators.toINI {} settings;
+  config = lib.mkIf cfg.vimiv.enable {
+    home.packages = with pkgs; [vimiv-qt];
+    xdg.configFile."vimiv/vimiv.conf".text = lib.generators.toINI {} settings;
+  };
 }

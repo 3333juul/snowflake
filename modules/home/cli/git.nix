@@ -1,6 +1,13 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}: let
+  cfg = osConfig.garden;
+in {
   programs = {
-    git = {
+    git = lib.mkIf cfg.cli.git.enable {
       enable = true;
 
       userName = "luravoid";
@@ -22,7 +29,7 @@
         };
       };
     };
-    lazygit = {
+    lazygit = lib.mkIf cfg.tui.lazygit.enable {
       enable = true;
       settings = {
         quitOnTopLevelReturn = true;

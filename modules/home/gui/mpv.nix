@@ -1,5 +1,12 @@
-{pkgs, ...}: {
-  programs.mpv = {
+{
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}: let
+  cfg = osConfig.garden.gui;
+in {
+  programs.mpv = lib.mkIf cfg.mpv.enable {
     enable = true;
     package = pkgs.mpv;
     bindings = {

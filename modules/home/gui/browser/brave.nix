@@ -1,5 +1,11 @@
-{pkgs, ...}: {
-  programs.brave = {
+{
+  lib,
+  osConfig,
+  ...
+}: let
+  cfg = osConfig.garden.gui;
+in {
+  programs.brave = lib.mkIf cfg.brave.enable {
     enable = true;
 
     # https://wiki.archlinux.org/title/Chromium#Native_Wayland_support

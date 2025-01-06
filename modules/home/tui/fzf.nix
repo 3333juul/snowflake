@@ -1,5 +1,12 @@
-{pkgs, ...}: {
-  programs.fzf = {
+{
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}: let
+  cfg = osConfig.garden.tui;
+in {
+  programs.fzf = lib.mkIf cfg.fzf.enable {
     enable = true;
 
     enableZshIntegration = false;

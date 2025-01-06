@@ -1,9 +1,13 @@
 {
   pkgs,
   config,
+  lib,
+  osConfig,
   ...
-}: {
-  programs.zsh = {
+}: let
+  cfg = osConfig.garden.cli.shell;
+in {
+  programs.zsh = lib.mkIf (cfg == "zsh") {
     enable = true;
     dotDir = ".config/zsh";
     history.path = "${config.xdg.dataHome}/zsh/zsh_history";

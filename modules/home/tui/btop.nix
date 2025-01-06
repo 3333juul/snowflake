@@ -1,5 +1,12 @@
-{pkgs, ...}: {
-  programs.btop = {
+{
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}: let
+  cfg = osConfig.garden.tui;
+in {
+  programs.btop = lib.mkIf cfg.btop.enable {
     enable = true;
 
     settings = {

@@ -1,9 +1,13 @@
 {
   pkgs,
   inputs,
+  lib,
+  osConfig,
   ...
-}: {
-  programs.yazi = {
+}: let
+  cfg = osConfig.garden.tui;
+in {
+  programs.yazi = lib.mkIf cfg.yazi.enable {
     enable = true;
     package = inputs.yazi.packages.${pkgs.system}.yazi;
     enableZshIntegration = true;

@@ -1,4 +1,9 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}: let
   jonathanharty.gruvbox-material-icon-theme = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
     mktplcRef = {
       name = "gruvbox-material-icon-theme";
@@ -15,8 +20,10 @@
   #     hash = "sha256-D+SZEQQwjZeuyENOYBJGn8tqS3cJiWbEkmEqhNRY/i4=";
   #   };
   # };
+
+  cfg = osConfig.garden.gui;
 in {
-  programs.vscode = {
+  programs.vscode = lib.mkIf cfg.vscodium.enable {
     enable = true;
     #package = pkgs.vscodium;
     # obecne
