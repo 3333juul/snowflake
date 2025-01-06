@@ -29,7 +29,7 @@
 
   # Symlink all themes - the argument of this function must be a full path, not a Nix path type, otherwise it won't work
   xdg.configFile."rofi/themes" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/modules/home/rofi/themes";
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/modules/home/gui/rofi/themes";
     recursive = true;
   };
 }

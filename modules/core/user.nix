@@ -11,10 +11,7 @@
     useGlobalPkgs = true;
     extraSpecialArgs = {inherit inputs username host;};
     users.${username} = {
-      imports =
-        if (host == "desktop")
-        then [./../home/default.desktop.nix]
-        else [./../home];
+      imports = [./../home];
       home = {
         username = "${username}";
         homeDirectory = "/home/${username}";

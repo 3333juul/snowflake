@@ -51,28 +51,6 @@ in {
     ## CLI
     tty-clock # cli clock
 
-    ## GUI Apps
-    bleachbit # cache cleaner
-    gimp
-    libreoffice
-    nix-prefetch-github
-    pavucontrol # pulseaudio volume controle (GUI)
-    qalculate-gtk # calculator
-    winetricks
-    wineWowPackages.wayland
-    zenity
-    obsidian
-    calibre
-    zotero
-    font-manager
-    anki-bin
-    stremio
-    qbittorrent
-    obs-studio
-    signal-desktop
-    telegram-desktop
-    pinta
-
     # C / C++
     gcc
     gdb

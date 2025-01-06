@@ -10,12 +10,17 @@
     ./swaync/swaync.nix # notification manager
     ./terminal # terminals
     ./waybar/waybar.nix # status bar
+    ./anki.nix
+    ./calibre.nix
     ./gaming.nix # gaming
+    ./gimp.nix
     ./gnome.nix
     ./mpv.nix # media player
+    ./pinta.nix
+    ./shared.nix
     ./thunar.nix # file manager
     ./tofi.nix # app launcher
-    ./vscodium.nix # VSCodium editor
+    ./vscodium.nix # editor
+    ./zotero.nix
   ];
 }
-
