@@ -1,11 +1,12 @@
 {
-  config,
-  lib,
   pkgs,
+  lib,
+  osConfig,
   ...
-}: {
-  home.packages = with pkgs; [hyprpaper];
-  services.hyprpaper = {
+}: let
+  cfg = osConfig.garden.desktop;
+in {
+  services.hyprpaper = lib.mkIf (cfg == "Hyprland") {
     enable = true;
     settings = {
       ipc = "on";

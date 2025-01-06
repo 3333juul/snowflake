@@ -5,7 +5,7 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden.desktop-environment;
+  cfg = osConfig.garden.desktop;
 in {
   home.packages = with pkgs; [
     inputs.hypr-contrib.packages.${pkgs.system}.grimblast
@@ -33,7 +33,7 @@ in {
   ];
 
   systemd.user.targets.hyprland-session.Unit.Wants = ["xdg-desktop-autostart.target"];
-  wayland.windowManager.hyprland = {
+  wayland.windowManager.hyprland = lib.mkIf (cfg == "Hyprland") {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     systemd = {

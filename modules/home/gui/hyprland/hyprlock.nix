@@ -1,5 +1,12 @@
-{pkgs, ...}: {
-  programs.hyprlock = {
+{
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}: let
+  cfg = osConfig.garden.desktop;
+in {
+  programs.hyprlock = lib.mkIf (cfg == "Hyprland") {
     enable = true;
 
     settings = {

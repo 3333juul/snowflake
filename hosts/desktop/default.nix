@@ -11,7 +11,7 @@
   powerManagement.cpuFreqGovernor = "performance";
 
   garden = {
-    desktop-environment = "Hyprland";
+    desktop = "Hyprland";
 
     cli = {
       shell = "zsh";
