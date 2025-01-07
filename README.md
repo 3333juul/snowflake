@@ -18,3 +18,4 @@
 
 - Nix Flakes
   - [Frost-Phoenix/nixos-config](https://github.com/Frost-Phoenix/nixos-config)
+  - [isabelroses/dotfiles](https://github.com/isabelroses/dotfiles)
