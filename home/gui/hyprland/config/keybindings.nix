@@ -42,9 +42,9 @@
 
         #== Screenshot/Screencapture ======================================================================
         "$mainMod CTRL, S, exec, screenshot-wl sf"
-        ", 82, exec, screenshot-wl m"
-        "$mainMod, 82, exec, screenshot-wl p"
-        "$mainMod ALT, 82, exec, grimblast copysave output"
+        ", Print, exec, screenshot-wl m"
+        "$mainMod, Print, exec, screenshot-wl p"
+        "$mainMod ALT, Print, exec, grimblast copysave output"
         "$mainMod, F10, pass, ^(com.obsproject.Studio)$"
 
         #== Focus workspace ===============================================================================

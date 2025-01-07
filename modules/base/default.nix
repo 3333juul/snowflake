@@ -1,0 +1,7 @@
+{...}: {
+  imports = [
+    ./environment
+    ./nix
+    ./options
+  ];
+}

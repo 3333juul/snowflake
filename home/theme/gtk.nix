@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  gruvbox-material-gtk = pkgs.callPackage ../../../pkgs/gruvbox-material-gtk.nix {};
+  gruvbox-material-gtk = pkgs.callPackage ../../pkgs/gruvbox-material-gtk.nix {};
 in {
   gtk = {
     enable = true;

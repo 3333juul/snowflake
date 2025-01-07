@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  vocabsieve = pkgs.callPackage ../../pkgs/vocabsieve.nix {};
+  vocabsieve = pkgs.callPackage ../pkgs/vocabsieve.nix {};
 in {
   home.packages = with pkgs; [
     vocabsieve
