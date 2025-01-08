@@ -10,20 +10,55 @@
   ];
 
   garden = {
-    #device = {
-    # type = "desktop"; # TODO
-    # cpu = "amd"; # TODO
-    # gpu = "amd"; # TODO
-    # hasTPM = "true"; # TODO
-    # hasBluetooth = true; # TODO
-    # hasSound = true; #TODO
-    #};
+    device = {
+      # type = "desktop"; # TODO
+      # cpu = "amd"; # TODO
+      # gpu = "amd"; # TODO
+      # hasTPM = "true"; # TODO
+      hasBluetooth = true;
+      # hasSound = true; #TODO
+    };
 
     environment = {
       desktop = "Hyprland";
     };
 
     system = {
+      # mainUser = "luravoid";
+      #
+      # boot = {
+      #   loader = "systemd-boot";
+      #   secureBoot = true;
+      #   tmpOnTmpfs = true;
+      #   enableKernelTweaks = true;
+      #   loadRecommendedModules = true;
+      #   plymouth.enable = false;
+      #
+      #   initrd = {
+      #     enableTweaks = true;
+      #     optimizeCompressor = true;
+      #   };
+      # };
+      #
+      # fs.support = [
+      #   "ext4"
+      #   "vfat"
+      #   "ntfs"
+      # ];
+      # video.enable = true;
+      # sound.enable = true;
+      bluetooth.enable = true;
+      # printing.enable = false;
+      # yubikeySupport.enable = true;
+      # emulation.enable = true;
+      #
+      # security.auditd.enable = true;
+      #
+      # networking = {
+      #   optimizeTcp = true;
+      #   wirelessBackend = "iwd";
+      # };
+      #
       virtualization.enable = true;
       loginManager = {
         name = "greetd";
