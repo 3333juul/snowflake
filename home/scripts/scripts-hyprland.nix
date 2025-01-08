@@ -24,6 +24,7 @@
   togglefloating = pkgs.writeShellScriptBin "togglefloating" (builtins.readFile ./scripts-hyprland/togglefloating);
   togglespecial-menu = pkgs.writeShellScriptBin "togglespecial-menu" (builtins.readFile ./scripts-hyprland/togglespecial-menu);
   toggleurgent = pkgs.writeShellScriptBin "toggleurgent" (builtins.readFile ./scripts-hyprland/toggleurgent);
+  toggleswallow = pkgs.writeShellScriptBin "toggleswallow" (builtins.readFile ./scripts-hyprland/toggleswallow);
   togglewindow = pkgs.writeShellScriptBin "togglewindow" (builtins.readFile ./scripts-hyprland/togglewindow);
   wininfo = pkgs.writeShellScriptBin "wininfo" (builtins.readFile ./scripts-hyprland/wininfo);
   launch-waybar = pkgs.writeShellScriptBin "launch-waybar" (builtins.readFile ./scripts-hyprland/launch-waybar);
@@ -65,6 +66,7 @@ in {
     togglefloating
     togglespecial-menu
     toggleurgent
+    toggleswallow
     togglewindow
     wininfo
     launch-waybar
