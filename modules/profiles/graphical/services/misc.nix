@@ -14,9 +14,6 @@
       packages = builtins.attrValues {inherit (pkgs) dconf gcr udisks2;};
     };
 
-    # discard blocks that are not in use by the filesystem, good for SSDs health
-    fstrim.enable = true;
-
     # disable chrony in favor if systemd-timesyncd
     #timesyncd.enable = mkDefault true;
     #chrony.enable = mkDefault false;
