@@ -32,7 +32,6 @@
       tldr
       unzip
       wl-clipboard # clipboard utils for wayland (wl-copy, wl-paste)
-      wget
       yt-dlp-light
       xdg-utils
       jq
