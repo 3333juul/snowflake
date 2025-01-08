@@ -10,10 +10,12 @@
   ];
 
   garden = {
-    desktop = "Hyprland";
-
+    environment = {
+      desktop = "Hyprland";
+    };
     system = {
       virtualization.enable = true;
+      autoLogin.enable = true;
     };
 
     programs = {

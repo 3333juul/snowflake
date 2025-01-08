@@ -3,7 +3,7 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden.desktop;
+  cfg = osConfig.garden.environment.desktop;
 in {
   home.sessionVariables = lib.mkIf (cfg == "Hyprland") {
     NIXOS_OZONE_WL = "1";

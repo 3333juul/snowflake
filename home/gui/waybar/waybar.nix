@@ -4,7 +4,7 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden.desktop;
+  cfg = osConfig.garden.environment.desktop;
 in {
   config = lib.mkIf (cfg == "Hyprland") {
     programs.waybar = {

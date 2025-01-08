@@ -5,23 +5,8 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden.desktop;
+  cfg = osConfig.garden.environment.desktop;
 in {
-  home.packages = with pkgs; [
-    inputs.hypr-contrib.packages.${pkgs.system}.grimblast
-    hyprpicker
-    grim
-    slurp
-    wf-recorder
-    glib
-    wayland
-    direnv
-    swappy
-    wl-kbptr
-    wlrctl
-    #wl-clip-persist
-  ];
-
   imports = [
     ./config/autostart.nix
     ./config/decorations.nix
@@ -32,13 +17,30 @@ in {
     ./config/rules.nix
   ];
 
-  systemd.user.targets.hyprland-session.Unit.Wants = ["xdg-desktop-autostart.target"];
-  wayland.windowManager.hyprland = lib.mkIf (cfg == "Hyprland") {
-    enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    systemd = {
+  config = lib.mkIf (cfg == "Hyprland") {
+    home.packages = with pkgs; [
+      inputs.hypr-contrib.packages.${pkgs.system}.grimblast
+      hyprpicker
+      grim
+      slurp
+      wf-recorder
+      glib
+      wayland
+      direnv
+      swappy
+      wl-kbptr
+      wlrctl
+      #wl-clip-persist
+    ];
+
+    #systemd.user.targets.hyprland-session.Unit.Wants = ["xdg-desktop-autostart.target"];
+    wayland.windowManager.hyprland = {
       enable = true;
-      variables = ["--all"];
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      systemd = {
+        enable = true;
+        variables = ["--all"];
+      };
     };
   };
 }

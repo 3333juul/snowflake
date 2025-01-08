@@ -4,9 +4,9 @@
   lib,
   ...
 }: let
-  cfg = config.garden;
+  cfg = config.garden.system;
 in {
-  services.displayManager.autoLogin = lib.mkIf cfg.autostart.enable {
+  services.displayManager.autoLogin = lib.mkIf cfg.autoLogin.enable {
     enable = true;
     user = "${username}";
   };
@@ -15,7 +15,4 @@ in {
     # don’t shutdown when power button is short-pressed
     HandlePowerKey=ignore
   '';
-
-  # To prevent getting stuck at shutdown
-  systemd.extraConfig = "DefaultTimeoutStopSec=10s";
 }

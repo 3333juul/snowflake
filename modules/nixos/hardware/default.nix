@@ -4,5 +4,6 @@
     # ./gpu
     ./bluetooth.nix
     ./hardware.nix
+    ./sound.nix
   ];
 }
