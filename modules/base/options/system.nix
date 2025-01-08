@@ -12,6 +12,12 @@
     #   '';
     # };
 
+    loginManager = lib.mkOption {
+      type = lib.types.enum ["none" "greetd"];
+      default = "none";
+      description = "The login manager to be used.";
+    };
+
     autoLogin.enable =
       lib.mkEnableOption "enables autologin";
   };

@@ -15,6 +15,7 @@
     };
     system = {
       virtualization.enable = true;
+      loginManager = "greetd";
       autoLogin.enable = true;
     };
 

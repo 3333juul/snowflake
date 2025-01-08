@@ -2,13 +2,26 @@
   username,
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.garden.system;
 in {
-  services.displayManager.autoLogin = lib.mkIf cfg.autoLogin.enable {
+  services.greetd = lib.mkIf (cfg.loginManager == "greetd") {
     enable = true;
-    user = "${username}";
+    restart = !cfg.autoLogin.enable;
+    settings = {
+      default_session = {
+        user = "greeter";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland --time-format '%F %R'";
+      };
+
+      initial_session = lib.mkIf cfg.autoLogin.enable {
+        enable = true;
+        user = "${username}";
+        command = "Hyprland";
+      };
+    };
   };
 
   services.logind.extraConfig = ''

@@ -7,7 +7,7 @@
     xserver = {
       enable = true;
       xkb.layout = "pl,us";
-      displayManager.startx.enable = true;
+      displayManager.startx.enable = false;
     };
 
     libinput = {
