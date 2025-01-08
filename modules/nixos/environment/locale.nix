@@ -1,6 +1,6 @@
 {
   time = {
-    timeZone = "Europe/Paris";
+    timeZone = "Europe/Warsaw";
   };
   i18n = {
     defaultLocale = "en_US.UTF-8";
