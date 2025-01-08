@@ -4,5 +4,7 @@
     ./login
     ./programs
     ./security
+    ./services
+    ./xserver.nix
   ];
 }

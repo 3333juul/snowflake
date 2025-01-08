@@ -11,7 +11,5 @@
     ./services.nix
     ./syncthing.nix
     ./virtualization.nix
-    ./wayland.nix
-    ./xserver.nix
   ];
 }

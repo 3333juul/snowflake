@@ -1,18 +1,20 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{...}: {
   imports = [
     ./hardware-configuration.nix
+
     ./../../modules/base
     ./../../modules/nixos
-  ];
 
-  powerManagement.cpuFreqGovernor = "performance";
+    ./../../modules/profiles/desktop
+    ./../../modules/profiles/graphical
+  ];
 
   garden = {
     desktop = "Hyprland";
+
+    system = {
+      virtualization.enable = true;
+    };
 
     programs = {
       cli = {

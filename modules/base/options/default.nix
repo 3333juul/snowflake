@@ -5,6 +5,7 @@
     ./gaming.nix
     ./gui.nix
     ./services.nix
+    ./system.nix
     ./tui.nix
   ];
 }

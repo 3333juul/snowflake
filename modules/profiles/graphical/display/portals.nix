@@ -9,13 +9,13 @@ in {
   config = lib.mkIf (cfg == "Hyprland") {
     xdg.portal = {
       enable = true;
-      # xdgOpenUsePortal = true;
+      xdgOpenUsePortal = true;
 
-      config.common = {
-        default = ["gtk"];
-
-        "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
-      };
+      # config.common = {
+      #   default = ["gtk"];
+      #
+      #   "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
+      # };
 
       extraPortals = [pkgs.xdg-desktop-portal-gtk];
 
