@@ -4,9 +4,11 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.programs.gui;
 in {
-  programs.mpv = lib.mkIf cfg.mpv.enable {
+  programs.mpv = mkIf cfg.mpv.enable {
     enable = true;
     package = pkgs.mpv;
     bindings = {

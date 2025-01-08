@@ -3,8 +3,12 @@
   pkgs,
   osConfig,
   ...
-}: {
-  config = lib.mkIf osConfig.garden.programs.gui.enable {
+}: let
+  inherit (lib.modules) mkIf;
+
+  cfg = osConfig.garden.programs.gui;
+in {
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
       bleachbit # cache cleaner
       libreoffice

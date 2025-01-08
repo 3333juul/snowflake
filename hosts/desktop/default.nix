@@ -73,6 +73,9 @@
         git.enable = true;
         bat.enable = true;
         starship.enable = true;
+        fastfetch.enable = true;
+        atuin.enable = true;
+        zoxide.enable = true;
       };
 
       tui = {

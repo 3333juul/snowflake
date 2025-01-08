@@ -2,8 +2,12 @@
   lib,
   osConfig,
   ...
-}: {
-  programs.starship = lib.mkIf osConfig.garden.programs.cli.starship.enable {
+}: let
+  inherit (lib.modules) mkIf;
+
+  cfg = osConfig.garden.programs.cli;
+in {
+  programs.starship = mkIf cfg.starship.enable {
     enable = true;
 
     enableBashIntegration = true;

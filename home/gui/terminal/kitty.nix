@@ -4,9 +4,11 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.programs.gui.terminal;
 in {
-  programs.kitty = lib.mkIf cfg.kitty.enable {
+  programs.kitty = mkIf cfg.kitty.enable {
     enable = true;
 
     themeFile = "gruvbox-dark";

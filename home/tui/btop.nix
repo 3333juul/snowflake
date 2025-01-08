@@ -5,8 +5,10 @@
   ...
 }: let
   cfg = osConfig.garden.programs.tui;
+
+  inherit (lib.modules) mkIf;
 in {
-  programs.btop = lib.mkIf cfg.btop.enable {
+  programs.btop = mkIf cfg.btop.enable {
     enable = true;
 
     settings = {

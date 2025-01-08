@@ -3,9 +3,11 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.programs.gui;
 in {
-  programs.brave = lib.mkIf cfg.brave.enable {
+  programs.brave = mkIf cfg.brave.enable {
     enable = true;
 
     # https://wiki.archlinux.org/title/Chromium#Native_Wayland_support

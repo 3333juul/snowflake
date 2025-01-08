@@ -3,9 +3,11 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.environment.desktop;
 in {
-  home.sessionVariables = lib.mkIf (cfg == "Hyprland") {
+  home.sessionVariables = mkIf (cfg == "Hyprland") {
     NIXOS_OZONE_WL = "1";
     __GL_GSYNC_ALLOWED = "0";
     __GL_VRR_ALLOWED = "0";

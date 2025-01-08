@@ -5,9 +5,11 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden.programs.cli.shell;
+  inherit (lib.modules) mkIf;
+
+  cfg = osConfig.garden.programs.cli;
 in {
-  programs.zsh = lib.mkIf (cfg == "zsh") {
+  programs.zsh = mkIf (cfg.shell == "zsh") {
     enable = true;
     dotDir = ".config/zsh";
     history.path = "${config.xdg.dataHome}/zsh/zsh_history";
@@ -69,12 +71,12 @@ in {
     '';
   };
 
-  programs.zoxide = {
+  programs.zoxide = mkIf cfg.zoxide.enable {
     enable = true;
     enableZshIntegration = true;
   };
 
-  programs.atuin = {
+  programs.atuin = mkIf cfg.atuin.enable {
     enable = true;
     enableZshIntegration = true;
   };

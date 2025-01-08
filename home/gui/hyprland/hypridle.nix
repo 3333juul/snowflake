@@ -4,9 +4,11 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.environment.desktop;
 in {
-  services.hypridle = lib.mkIf (cfg == "Hyprland") {
+  services.hypridle = mkIf (cfg == "Hyprland") {
     enable = true;
     settings = {
       general = {

@@ -4,9 +4,11 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.environment.desktop;
 in {
-  programs.hyprlock = lib.mkIf (cfg == "Hyprland") {
+  programs.hyprlock = mkIf (cfg == "Hyprland") {
     enable = true;
 
     settings = {

@@ -6,8 +6,10 @@
   ...
 }: let
   cfg = osConfig.garden.programs.tui;
+
+  inherit (lib.modules) mkIf;
 in {
-  programs.yazi = lib.mkIf cfg.yazi.enable {
+  programs.yazi = mkIf cfg.yazi.enable {
     enable = true;
     package = inputs.yazi.packages.${pkgs.system}.yazi;
     enableZshIntegration = true;

@@ -4,9 +4,11 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.programs.gui;
 in {
-  config = lib.mkIf cfg.gimp.enable {
+  config = mkIf cfg.gimp.enable {
     home.packages = with pkgs; [
       gimp
     ];

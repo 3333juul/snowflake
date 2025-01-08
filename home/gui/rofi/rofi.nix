@@ -5,9 +5,11 @@
   lib,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.programs.gui;
 in {
-  config = lib.mkIf cfg.rofi.enable {
+  config = mkIf cfg.rofi.enable {
     programs.rofi = {
       enable = true;
       #package = pkgs.callPackage ../../../pkgs/rofi.nix {};

@@ -3,9 +3,11 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.programs.gui;
 in {
-  programs.tofi = lib.mkIf cfg.tofi.enable {
+  programs.tofi = mkIf cfg.tofi.enable {
     enable = true;
     settings = {
       # Fonts

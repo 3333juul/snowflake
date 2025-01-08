@@ -5,6 +5,8 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.programs.tui;
 in {
   imports = [
@@ -13,7 +15,7 @@ in {
     ./mappings.nix
   ];
 
-  config = lib.mkIf cfg.nvim.enable {
+  config = mkIf cfg.nvim.enable {
     xdg.desktopEntries = {
       nvim = {
         name = "Neovim";

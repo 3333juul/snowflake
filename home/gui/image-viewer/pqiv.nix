@@ -3,9 +3,11 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.programs.gui.image;
 in {
-  programs.pqiv = lib.mkIf cfg.pqiv.enable {
+  programs.pqiv = mkIf cfg.pqiv.enable {
     enable = true;
 
     settings = {

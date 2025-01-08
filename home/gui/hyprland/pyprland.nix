@@ -5,9 +5,11 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.environment.desktop;
 in {
-  config = lib.mkIf (cfg == "Hyprland") {
+  config = mkIf (cfg == "Hyprland") {
     home.packages = with pkgs; [
       inputs.pyprland.packages.${pkgs.system}.pyprland
     ];

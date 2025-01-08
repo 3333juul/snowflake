@@ -3,8 +3,12 @@
   lib,
   osConfig,
   ...
-}: {
-  config = lib.mkIf osConfig.garden.programs.cli.bat.enable {
+}: let
+  inherit (lib.modules) mkIf;
+
+  cfg = osConfig.garden.programs.cli;
+in {
+  config = mkIf cfg.bat.enable {
     programs.bat = {
       enable = true;
       config = {

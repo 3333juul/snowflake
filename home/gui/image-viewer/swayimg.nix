@@ -4,7 +4,9 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
   cfg = osConfig.garden.programs.gui.image;
+
   settings = {
     font = {
       name = "Terminess Nerd Font";
@@ -68,7 +70,7 @@
     };
   };
 in {
-  config = lib.mkIf cfg.swayimg.enable {
+  config = mkIf cfg.swayimg.enable {
     home.packages = with pkgs; [swayimg];
     xdg.configFile."swayimg/config".text = lib.generators.toINI {} settings;
   };

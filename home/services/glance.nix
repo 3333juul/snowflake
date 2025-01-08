@@ -1,12 +1,13 @@
 {
-  pkgs,
   lib,
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.services;
 in {
-  services.glance = lib.mkIf cfg.glance.enable {
+  services.glance = mkIf cfg.glance.enable {
     enable = true;
     settings = {
       theme = {

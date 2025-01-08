@@ -4,9 +4,11 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.environment.desktop;
 in {
-  config = lib.mkIf (cfg == "Hyprland") {
+  config = mkIf (cfg == "Hyprland") {
     programs.waybar = {
       enable = true;
       package = pkgs.waybar.overrideAttrs (oa: {

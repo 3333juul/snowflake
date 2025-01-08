@@ -21,9 +21,11 @@
   #   };
   # };
 
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.programs.gui;
 in {
-  programs.vscode = lib.mkIf cfg.vscodium.enable {
+  programs.vscode = mkIf cfg.vscodium.enable {
     enable = true;
     #package = pkgs.vscodium;
     # obecne

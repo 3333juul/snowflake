@@ -4,9 +4,11 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.programs.tui;
 in {
-  programs.fzf = lib.mkIf cfg.fzf.enable {
+  programs.fzf = mkIf cfg.fzf.enable {
     enable = true;
 
     enableZshIntegration = false;

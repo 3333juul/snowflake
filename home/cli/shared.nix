@@ -3,8 +3,12 @@
   pkgs,
   osConfig,
   ...
-}: {
-  config = lib.mkIf osConfig.garden.programs.cli.enable {
+}: let
+  inherit (lib.modules) mkIf;
+
+  cfg = osConfig.garden.programs;
+in {
+  config = mkIf cfg.cli.enable {
     home.packages = with pkgs; [
       ## CLI utility
       appimage-run # run appimage

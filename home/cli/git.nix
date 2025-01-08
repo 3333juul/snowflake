@@ -4,10 +4,12 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.programs;
 in {
   programs = {
-    git = lib.mkIf cfg.cli.git.enable {
+    git = mkIf cfg.cli.git.enable {
       enable = true;
 
       userName = "luravoid";

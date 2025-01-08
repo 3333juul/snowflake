@@ -4,6 +4,8 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.programs.gui.image;
   settings = {
     GENERAL = {
@@ -97,7 +99,7 @@
     ALIASES = {};
   };
 in {
-  config = lib.mkIf cfg.vimiv.enable {
+  config = mkIf cfg.vimiv.enable {
     home.packages = with pkgs; [vimiv-qt];
     xdg.configFile."vimiv/vimiv.conf".text = lib.generators.toINI {} settings;
   };

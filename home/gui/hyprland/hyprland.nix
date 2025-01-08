@@ -5,6 +5,8 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = osConfig.garden.environment.desktop;
 in {
   imports = [
@@ -17,7 +19,7 @@ in {
     ./config/rules.nix
   ];
 
-  config = lib.mkIf (cfg == "Hyprland") {
+  config = mkIf (cfg == "Hyprland") {
     home.packages = with pkgs; [
       inputs.hypr-contrib.packages.${pkgs.system}.grimblast
       hyprpicker
