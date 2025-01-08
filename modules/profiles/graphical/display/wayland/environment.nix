@@ -1,19 +1,19 @@
 {
   lib,
-  osConfig,
+  config,
   ...
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.environment.desktop;
+  cfg = config.garden.environment.desktop;
 in {
-  home.sessionVariables = mkIf (cfg == "Hyprland") {
+  # TODO: Change to isWayland, remove variables not associated with wayland
+  environment.variables = mkIf (cfg == "Hyprland") {
     NIXOS_OZONE_WL = "1";
     __GL_GSYNC_ALLOWED = "0";
     __GL_VRR_ALLOWED = "0";
     _JAVA_AWT_WM_NONEREPARENTING = "1";
     SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
-    DISABLE_QT5_COMPAT = "0";
     GDK_BACKEND = "wayland";
     ANKI_WAYLAND = "1";
     DIRENV_LOG_FORMAT = "";

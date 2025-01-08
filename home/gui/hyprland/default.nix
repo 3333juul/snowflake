@@ -5,6 +5,5 @@
     ./hyprlock.nix
     ./hyprpaper.nix
     ./pyprland.nix
-    ./variables.nix
   ];
 }
