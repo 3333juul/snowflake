@@ -10,13 +10,25 @@
   ];
 
   garden = {
+    #device = {
+    # type = "desktop"; # TODO
+    # cpu = "amd"; # TODO
+    # gpu = "amd"; # TODO
+    # hasTPM = "true"; # TODO
+    # hasBluetooth = true; # TODO
+    # hasSound = true; #TODO
+    #};
+
     environment = {
       desktop = "Hyprland";
     };
+
     system = {
       virtualization.enable = true;
-      loginManager = "greetd";
-      autoLogin.enable = true;
+      loginManager = {
+        name = "greetd";
+        autoLogin.enable = true;
+      };
     };
 
     programs = {
