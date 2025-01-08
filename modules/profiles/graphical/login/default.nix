@@ -5,9 +5,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.garden.system;
+  cfg = config.garden.system.loginManager;
 in {
-  services.greetd = lib.mkIf (cfg.loginManager == "greetd") {
+  services.greetd = lib.mkIf (cfg.name == "greetd") {
     enable = true;
     restart = !cfg.autoLogin.enable;
     settings = {

@@ -11,14 +11,15 @@
     #     FDE (Full Disk Encryption) enabled. It is a security risk for systems without FDE.
     #   '';
     # };
+    loginManager = {
+      name = lib.mkOption {
+        type = lib.types.enum ["none" "greetd"];
+        default = "none";
+        description = "The login manager to be used.";
+      };
 
-    loginManager = lib.mkOption {
-      type = lib.types.enum ["none" "greetd"];
-      default = "none";
-      description = "The login manager to be used.";
+      autoLogin.enable =
+        lib.mkEnableOption "enables autologin";
     };
-
-    autoLogin.enable =
-      lib.mkEnableOption "enables autologin";
   };
 }
