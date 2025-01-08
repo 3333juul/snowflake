@@ -2,11 +2,11 @@
   imports = [
     ./hardware-configuration.nix
 
-    ./../../modules/base
-    ./../../modules/nixos
+    ../../modules/base
+    ../../modules/nixos
 
-    ./../../modules/profiles/desktop
-    ./../../modules/profiles/graphical
+    ../../modules/profiles/desktop
+    ../../modules/profiles/graphical
   ];
 
   garden = {
