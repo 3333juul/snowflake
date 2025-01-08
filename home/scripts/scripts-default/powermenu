@@ -3,7 +3,7 @@
 DIR="$HOME/.config"
 ROFI_DIR="$DIR/rofi"
 ROFI_THEME_DIR="$ROFI_DIR/themes"
-ROFI_BIN_DIR="$HOME/nixos-config/modules/home/scripts/scripts-default"
+ROFI_BIN_DIR="$HOME/nixos-config/home/scripts/scripts-default"
 
 rofi="rofi -theme $ROFI_THEME_DIR/powermenu.rasi -p "PowerMenu" -dmenu -selected-row 2"
 tofi="tofi --width 250 --height 150"
