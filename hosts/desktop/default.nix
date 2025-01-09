@@ -24,7 +24,7 @@
     };
 
     system = {
-      # mainUser = "luravoid";
+      mainUser = "scay";
       #
       # boot = {
       #   loader = "systemd-boot";
