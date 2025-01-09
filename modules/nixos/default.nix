@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./environment
     ./gaming
     ./hardware
     ./programs
