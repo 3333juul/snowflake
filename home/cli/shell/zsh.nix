@@ -41,6 +41,7 @@ in {
         zvm_bindkey viins '^@' autosuggest-accept
         zvm_bindkey viins '^r' atuin-search
         zvm_bindkey vicmd '^r' atuin-search
+        zvm_bindkey vicmd '^G' _navi_widget
       }
 
       # Use fd (https://github.com/sharkdp/fd) for listing path candidates.
@@ -71,12 +72,17 @@ in {
     '';
   };
 
-  programs.zoxide = mkIf cfg.zoxide.enable {
+  programs.zoxide = mkIf (cfg.shell == "zsh") {
     enable = true;
     enableZshIntegration = true;
   };
 
-  programs.atuin = mkIf cfg.atuin.enable {
+  programs.atuin = mkIf (cfg.shell == "zsh") {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.navi = mkIf (cfg.shell == "zsh") {
     enable = true;
     enableZshIntegration = true;
   };

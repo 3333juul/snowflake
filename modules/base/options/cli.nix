@@ -20,12 +20,6 @@
     fastfetch.enable =
       lib.mkEnableOption "enables fastfetch";
 
-    atuin.enable =
-      lib.mkEnableOption "enables atuin";
-
-    zoxide.enable =
-      lib.mkEnableOption "enables zoxide";
-
     aichat.enable =
       lib.mkEnableOption "enables aichat";
   };
