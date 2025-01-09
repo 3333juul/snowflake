@@ -14,7 +14,7 @@
     ./calibre.nix
     ./gaming.nix # gaming
     ./gimp.nix
-    ./gnome.nix
+    ./libreoffice.nix
     ./mpv.nix # media player
     ./pinta.nix
     ./shared.nix

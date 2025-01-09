@@ -1,39 +1,18 @@
 {
   pkgs,
-  config,
-  inputs,
+  osConfig,
+  lib,
   ...
-}: {
+}: let
+  inherit (lib.modules) mkIf;
+
+  cfg = osConfig.garden.programs.gaming;
+in {
   home.packages = with pkgs; [
-    ## Utils
-    # gamemode
-    # gamescope
-    # winetricks
-    # inputs.nix-gaming.packages.${pkgs.system}.wine-ge
-
-    # Lutris
-    lutris
-
-    ## Minecraft
-    # prismlauncher
-
-    ## Cli games
-    #_2048-in-terminal
-    #vitetris
-    #nethack
-
-    ## Celeste
-    #celeste-classic
-    #celeste-classic-pm
-
-    ## Doom
-    # gzdoom
-    #crispy-doom
-
-    ## Emulation
-    #sameboy
-    #snes9x
-    # cemu
-    # dolphin-emu
+    (mkIf cfg.lutris.enable lutris)
+    (mkIf cfg.minecraft.enable prismlauncher)
+    mangohud
+    winetricks
+    wineWowPackages.wayland
   ];
 }

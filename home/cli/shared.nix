@@ -45,6 +45,7 @@ in {
       ripdrag
       sptlrx
       tty-clock # cli clock
+      nix-prefetch-github
     ];
   };
 }
