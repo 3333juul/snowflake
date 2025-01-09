@@ -11,12 +11,12 @@
 
   garden = {
     device = {
-      # type = "desktop"; # TODO
-      # cpu = "amd"; # TODO
-      # gpu = "amd"; # TODO
+      type = "desktop";
+      cpu = "amd"; # TODO
+      gpu = "amd"; # TODO
       # hasTPM = "true"; # TODO
       hasBluetooth = true;
-      # hasSound = true; #TODO
+      hasSound = true;
     };
 
     environment = {
@@ -46,9 +46,8 @@
       #   "ntfs"
       # ];
       # video.enable = true;
-      # sound.enable = true;
-      bluetooth.enable = true;
-      # printing.enable = false;
+      sound.enable = true;
+      bluetooth.enable = true; # printing.enable = false;
       # yubikeySupport.enable = true;
       # emulation.enable = true;
       #

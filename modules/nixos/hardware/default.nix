@@ -1,9 +1,9 @@
 {...}: {
   imports = [
-    # ./cpu
-    # ./gpu
+    ./cpu
+    ./gpu
     ./bluetooth.nix
     ./hardware.nix
-    ./sound.nix
+    ./pipewire.nix
   ];
 }
