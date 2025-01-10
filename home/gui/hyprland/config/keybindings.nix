@@ -41,10 +41,9 @@
         "$mainMod CTRL, R, exec, pkill rofi || cd ~/Documents/Syncthing/Memes && rofi-gridview"
 
         #== Screenshot/Screencapture ======================================================================
-        "$mainMod CTRL, S, exec, screenshot-wl sf"
-        ", Print, exec, screenshot-wl m"
-        "$mainMod, Print, exec, screenshot-wl p"
-        "$mainMod ALT, Print, exec, grimblast copysave output"
+        "$mainMod CTRL, S, exec, screenshot sf"
+        ", Print, exec, screenshot m"
+        "$mainMod, Print, exec, screenshot p"
         "$mainMod, F10, pass, ^(com.obsproject.Studio)$"
 
         #== Focus workspace ===============================================================================
