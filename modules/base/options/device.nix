@@ -1,6 +1,6 @@
 {lib, ...}: let
-  inherit (lib) mkOption types;
-  inherit (lib.types) bool enum;
+  inherit (lib) mkOption;
+  inherit (lib.types) nullOr enum bool;
 in {
   options.garden.device = {
     type = mkOption {
@@ -17,8 +17,8 @@ in {
     };
 
     gpu = mkOption {
-      type = types.nullOr (
-        types.enum [
+      type = nullOr (
+        enum [
           "amd"
           "intel"
           "nvidia"
@@ -30,8 +30,8 @@ in {
     };
 
     cpu = mkOption {
-      type = types.nullOr (
-        types.enum [
+      type = nullOr (
+        enum [
           "intel"
           "vm-intel"
           "amd"
