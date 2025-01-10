@@ -15,11 +15,11 @@
 - [pkgs](flake/pkgs) Packages Build from source
 - [wallpapers](wallpapers/) Default wallpapers
 
-### Gallery
+## Gallery
 
 <p align="center">
    <img src="./.github/assets/screenshots/desktop1.png" style="margin-bottom: 15px;"/> <br>
-   Screenshots last updated <b>10-01-2025</b>
+   Screenshots last updated: <b>10-01-2025</b>
 </p>
 
 # Credits
