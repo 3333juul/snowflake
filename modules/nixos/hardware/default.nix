@@ -3,7 +3,7 @@
     ./cpu
     ./gpu
     ./bluetooth.nix
-    ./hardware.nix
+    ./firmware.nix
     ./pipewire.nix
   ];
 }
