@@ -11,8 +11,8 @@
   - [laptop](hosts/laptop/) TODO
   - [vm](hosts/vm/) TODO
 - [modules](modules) Modular system configuration
-  - [base](modules/profiles/) Base modules, which are common between all systems
-  - [nixos](modules/profiles/) NixOS specific modules
+  - [base](modules/base/) Base modules, which are common between all systems
+  - [nixos](modules/nixos/) NixOS specific modules
   - [profiles](modules/profiles/) Profiles for different system types
 - [pkgs](flake/pkgs) Packages Build from source
 - [wallpapers](wallpapers/) Default wallpapers
