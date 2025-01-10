@@ -5,9 +5,11 @@
   pkgs,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   cfg = config.garden.system.loginManager;
 in {
-  services.greetd = lib.mkIf (cfg.name == "greetd") {
+  services.greetd = mkIf (cfg.name == "greetd") {
     enable = true;
     restart = !cfg.autoLogin.enable;
     settings = {
@@ -16,7 +18,7 @@ in {
         command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland --time-format '%F %R'";
       };
 
-      initial_session = lib.mkIf cfg.autoLogin.enable {
+      initial_session = mkIf cfg.autoLogin.enable {
         enable = true;
         user = "${username}";
         command = "Hyprland";
