@@ -2,17 +2,18 @@
 
 ## Layout
 
-- [flake.nix](flake.nix) base of the configuration
-- [home](modules/home/) my
-  [Home-Manager](https://github.com/nix-community/home-manager) config
-- [hosts](hosts) per-host configurations that contain machine specific
+- [flake.nix](flake.nix) Base of the configuration
+- [home](home) My [Home-Manager](https://github.com/nix-community/home-manager)
+  config
+- [hosts](hosts) Per-host configurations that contain machine specific
   configurations
   - [desktop](hosts/desktop/) Desktop specific configuration
-  - [laptop](hosts/laptop/) Laptop specific configuration
-  - [vm](hosts/vm/) VM specific configuration
-- [modules](modules) modularized NixOS configurations
+  - [laptop](hosts/laptop/) TODO
+  - [vm](hosts/vm/) TODO
+- [modules](modules) Modularized NixOS configurations
+  - [profiles](modules/profiles/) Profiles for different system types
 - [pkgs](flake/pkgs) Packages Build from source
-- [wallpapers](wallpapers/) wallpapers collection
+- [wallpapers](wallpapers/) Default wallpapers
 
 # Credits
 
