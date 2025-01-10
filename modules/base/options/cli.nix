@@ -4,6 +4,8 @@
   inherit (lib.types) enum;
 in {
   options.garden.programs.cli = {
+    enable = mkEnableOption "enables cli";
+
     shell = mkOption {
       type = enum ["bash" "fish" "zsh"];
       default = "zsh";
@@ -11,7 +13,6 @@ in {
     };
 
     aichat.enable = mkEnableOption "enables aichat";
-    enable = mkEnableOption "enables cli";
     git.enable = mkEnableOption "enables git";
     starship.enable = mkEnableOption "enables starship";
   };

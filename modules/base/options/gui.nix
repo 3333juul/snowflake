@@ -2,11 +2,12 @@
   inherit (lib.options) mkEnableOption;
 in {
   options.garden.programs.gui = {
+    enable = mkEnableOption "enables gui";
+
     anki.enable = mkEnableOption "enables anki";
     brave.enable = mkEnableOption "enables brave";
     calibre.enable = mkEnableOption "enables calibre";
     discord.enable = mkEnableOption "enables discord";
-    enable = mkEnableOption "enables gui";
     gimp.enable = mkEnableOption "enables GIMP";
     libreoffice.enable = mkEnableOption "enables libreoffice";
     mpv.enable = mkEnableOption "enables MPV";
