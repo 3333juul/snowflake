@@ -1,10 +1,13 @@
 {
-  pkgs,
   lib,
   config,
   ...
-}: {
-  programs.steam = lib.mkIf config.garden.programs.gaming.steam.enable {
+}: let
+  inherit (lib.modules) mkIf;
+
+  cfg = config.garden.programs.gaming;
+in {
+  programs.steam = mkIf cfg.steam.enable {
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = false;
