@@ -37,8 +37,8 @@ options=(
 	"NIXOS-REBUILD:             kitty --hold --class floatingterm -e nh os switch"
 	"NIXOS-UPDATE:              kitty --hold --class floatingterm -e nh os switch --update"
 	"NIXOS-CLEAN:               kitty --hold --class floatingterm -e nh clean all --keep 5"
-	"HYPRLAND:                  cd ~/nixos-config && $NVIM ~/nixos-config/modules/home/hyprland"
-	"HYPRKEYS:                  cd ~/nixos-config && $NVIM ~/nixos-config/modules/home/hyprland/config/keybindings.nix"
+	"HYPRLAND:                  cd ~/nixos-config && $NVIM ~/nixos-config/home/gui/hyprland"
+	"HYPRKEYS:                  cd ~/nixos-config && $NVIM ~/nixos-config/home/gui/hyprland/config/keybindings.nix"
 	".CONFIG:                   $FM ~/.config"
 	"DOWNLOADS:                 $FM ~/Downloads"
 	"PICTURES:                  $FM ~/Pictures"
@@ -57,12 +57,12 @@ options=(
 	"AGS-KILL:                  pkill ags"
 	"BLUETOOTH:                 rofi-bluetooth"
 	"GIT-REPO:                  xdg-open https://github.com/luravoid/nixos-config"
-	"SCRIPTS:                   cd ~/nixos-config && $NVIM ~/nixos-config/modules/home/scripts/scripts-default.nix"
-	"SCRIPTS-HYPRLAND:          cd ~/nixos-config && $NVIM ~/nixos-config/modules/home/scripts/scripts-hyprland.nix"
+	"SCRIPTS:                   cd ~/nixos-config && $NVIM ~/nixos-config/home/scripts/scripts-default.nix"
+	"SCRIPTS-HYPRLAND:          cd ~/nixos-config && $NVIM ~/nixos-config/home/scripts/scripts-hyprland.nix"
 	"SYNCTHING:                 xdg-open http://localhost:8384"
 	"CAMBRIDGE-DICT:            brave --app=https://dictionary.cambridge.org/"
-	"QUICK-LINKS:               cd ~/nixos-config && $NVIM ~/nixos-config/modules/home/scripts/scripts-default/quicklinks"
-	#"MEMES:                     $FM ~/Documents/Phone\ Media/Pictures/Memes"
+	"QUICK-LINKS:               cd ~/nixos-config && $NVIM ~/nixos-config/home/scripts/scripts-default/quicklinks"
+	"MEMES:                     $FM ~/Documents/Syncthing/Memes"
 )
 
 # Create a newline-separated string of labels for rofi
