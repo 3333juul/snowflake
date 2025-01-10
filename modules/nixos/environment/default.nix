@@ -1,6 +1,6 @@
 {...}: {
   imports = [
     ./locale.nix
-    ./env.nix
+    ./variables.nix
   ];
 }
