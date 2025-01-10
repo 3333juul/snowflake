@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  inherit (lib.modules) mkDefault;
+  inherit (lib.modules) mkIf;
   inherit (lib.options) mkOption;
   inherit (lib.types) bool;
 
@@ -18,7 +18,7 @@ in {
 
     isWayland = mkOption {
       type = bool;
-      default = mkDefault (env.desktop == "Hyprland" || env.desktop == "sway");
+      default = mkIf (env.desktop == "Hyprland" || env.desktop == "sway");
       defaultText = "This will default to true if a Wayland compositor has been enabled";
       description = ''
         Whether to enable Wayland exclusive modules, this contains a wariety
