@@ -1,23 +1,13 @@
-{lib, ...}: {
+{lib, ...}: let
+  inherit (lib.options) mkEnableOption;
+in {
   options.garden.programs.tui = {
-    enable = lib.mkEnableOption "enables tui";
-
-    nvim.enable =
-      lib.mkEnableOption "enables nvim";
-
-    yazi.enable =
-      lib.mkEnableOption "enables yazi";
-
-    btop.enable =
-      lib.mkEnableOption "enables btop";
-
-    fzf.enable =
-      lib.mkEnableOption "enables fzf";
-
-    cava.enable =
-      lib.mkEnableOption "enables cava";
-
-    lazygit.enable =
-      lib.mkEnableOption "enables lazygit";
+    enable = mkEnableOption "enables tui";
+    btop.enable = mkEnableOption "enables btop";
+    cava.enable = mkEnableOption "enables cava";
+    fzf.enable = mkEnableOption "enables fzf";
+    lazygit.enable = mkEnableOption "enables lazygit";
+    nvim.enable = mkEnableOption "enables nvim";
+    yazi.enable = mkEnableOption "enables yazi";
   };
 }

@@ -70,9 +70,7 @@
         enable = true;
         shell = "zsh";
         git.enable = true;
-        bat.enable = true;
         starship.enable = true;
-        fastfetch.enable = true;
       };
 
       tui = {
@@ -94,12 +92,12 @@
         mpv.enable = true;
         thunar.enable = true;
         zotero.enable = true;
-        obs.enable = true;
         brave.enable = true;
         rofi.enable = true;
         tofi.enable = true;
         vscodium.enable = true;
         discord.enable = true;
+        libreoffice.enable = true;
         image = {
           vimiv.enable = true;
         };
@@ -110,6 +108,7 @@
 
       gaming = {
         steam.enable = true;
+        lutris.enable = true;
       };
     };
 

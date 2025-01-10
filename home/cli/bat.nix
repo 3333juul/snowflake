@@ -8,7 +8,7 @@
 
   cfg = osConfig.garden.programs.cli;
 in {
-  config = mkIf cfg.bat.enable {
+  config = mkIf cfg.enable {
     programs.bat = {
       enable = true;
       config = {

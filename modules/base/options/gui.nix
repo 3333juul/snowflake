@@ -1,63 +1,31 @@
-{lib, ...}: {
+{lib, ...}: let
+  inherit (lib.options) mkEnableOption;
+in {
   options.garden.programs.gui = {
-    enable =
-      lib.mkEnableOption "enables gui";
-
-    anki.enable =
-      lib.mkEnableOption "enables anki";
-
-    gimp.enable =
-      lib.mkEnableOption "enables GIMP";
-
-    pinta.enable =
-      lib.mkEnableOption "enables Pinta";
-
-    mpv.enable =
-      lib.mkEnableOption "enables MPV";
-
-    thunar.enable =
-      lib.mkEnableOption "enables Thunar";
-
-    zotero.enable =
-      lib.mkEnableOption "enables Zotero";
-
-    calibre.enable =
-      lib.mkEnableOption "enables Calibre";
-
-    obs.enable =
-      lib.mkEnableOption "enables OBS";
-
-    discord.enable =
-      lib.mkEnableOption "enables discord";
-
-    brave.enable =
-      lib.mkEnableOption "enables brave";
-
-    rofi.enable =
-      lib.mkEnableOption "enables rofi";
-
-    tofi.enable =
-      lib.mkEnableOption "enables tofi";
-
-    vscodium.enable =
-      lib.mkEnableOption "enables vscodium";
-
-    terminal = {
-      kitty.enable =
-        lib.mkEnableOption "enables kitty";
-      foot.enable =
-        lib.mkEnableOption "enables foot";
-    };
+    anki.enable = mkEnableOption "enables anki";
+    brave.enable = mkEnableOption "enables brave";
+    calibre.enable = mkEnableOption "enables calibre";
+    discord.enable = mkEnableOption "enables discord";
+    enable = mkEnableOption "enables gui";
+    gimp.enable = mkEnableOption "enables GIMP";
+    libreoffice.enable = mkEnableOption "enables libreoffice";
+    mpv.enable = mkEnableOption "enables MPV";
+    pinta.enable = mkEnableOption "enables pinta";
+    rofi.enable = mkEnableOption "enables rofi";
+    thunar.enable = mkEnableOption "enables thunar";
+    tofi.enable = mkEnableOption "enables tofi";
+    vscodium.enable = mkEnableOption "enables vscodium";
+    zotero.enable = mkEnableOption "enables zotero";
 
     image = {
-      vimiv.enable =
-        lib.mkEnableOption "enables vimiv";
+      pqiv.enable = mkEnableOption "enables pqiv";
+      swayimg.enable = mkEnableOption "enables swayimg";
+      vimiv.enable = mkEnableOption "enables vimiv";
+    };
 
-      pqiv.enable =
-        lib.mkEnableOption "enables pqiv";
-
-      swayimg.enable =
-        lib.mkEnableOption "enables swayimg";
+    terminal = {
+      foot.enable = mkEnableOption "enables foot";
+      kitty.enable = mkEnableOption "enables kitty";
     };
   };
 }
