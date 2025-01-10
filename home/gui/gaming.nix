@@ -13,6 +13,5 @@ in {
     (mkIf cfg.minecraft.enable prismlauncher)
     mangohud
     winetricks
-    wineWowPackages.wayland
   ];
 }

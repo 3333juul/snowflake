@@ -18,7 +18,10 @@ in {
 
     isWayland = mkOption {
       type = bool;
-      default = mkIf (env.desktop == "Hyprland" || env.desktop == "sway");
+      default =
+        if env.desktop == "Hyprland" || env.desktop == "sway"
+        then true
+        else false;
       defaultText = "This will default to true if a Wayland compositor has been enabled";
       description = ''
         Whether to enable Wayland exclusive modules, this contains a wariety

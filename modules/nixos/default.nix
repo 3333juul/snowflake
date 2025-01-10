@@ -1,7 +1,6 @@
 {...}: {
   imports = [
     ./environment
-    ./gaming
     ./hardware
     ./programs
     ./android.nix
