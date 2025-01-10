@@ -5,5 +5,6 @@
     ./bluetooth.nix
     ./firmware.nix
     ./pipewire.nix
+    ./video.nix
   ];
 }

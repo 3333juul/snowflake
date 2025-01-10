@@ -1,8 +1,11 @@
 {lib, ...}: let
   inherit (lib.options) mkEnableOption mkOption;
+  inherit (lib.types) enum;
 in {
   options.garden.system = {
     virtualization.enable = mkEnableOption "enables virtualization";
+    bluetooth.enable = mkEnableOption "Should the device load bluetooth drivers and enable blueman";
+    sound.enable = mkEnableOption "Does the device have sound and its related programs be enabled";
 
     loginManager = {
       name = mkOption {
@@ -17,8 +20,19 @@ in {
         ";
     };
 
-    bluetooth.enable = mkEnableOption "Should the device load bluetooth drivers and enable blueman";
+    boot.loader = mkOption {
+      type = enum [
+        "none"
+        "grub"
+        "systemd-boot"
+      ];
+      default = "none";
+      description = "The bootloader that should be used for the device.";
+    };
 
-    sound.enable = mkEnableOption "Does the device have sound and its related programs be enabled";
+    video = {
+      enable = mkEnableOption "Does the device allow for graphical programs";
+      benchmarking.enable = mkEnableOption "Enable benchmarking tools";
+    };
   };
 }

@@ -25,27 +25,17 @@
 
     system = {
       mainUser = "scay";
-      #
-      # boot = {
-      #   loader = "systemd-boot";
-      #   secureBoot = true;
-      #   tmpOnTmpfs = true;
-      #   enableKernelTweaks = true;
-      #   loadRecommendedModules = true;
-      #   plymouth.enable = false;
-      #
-      #   initrd = {
-      #     enableTweaks = true;
-      #     optimizeCompressor = true;
-      #   };
-      # };
+
+      boot = {
+        loader = "systemd-boot";
+      };
       #
       # fs.support = [
       #   "ext4"
       #   "vfat"
       #   "ntfs"
       # ];
-      # video.enable = true;
+      video.enable = true;
       sound.enable = true;
       bluetooth.enable = true; # printing.enable = false;
       # yubikeySupport.enable = true;
