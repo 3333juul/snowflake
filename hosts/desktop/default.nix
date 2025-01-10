@@ -107,6 +107,7 @@
       };
 
       gaming = {
+        enable = true;
         steam.enable = true;
         lutris.enable = true;
       };
