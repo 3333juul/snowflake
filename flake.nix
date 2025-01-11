@@ -10,10 +10,6 @@
 
     alejandra.url = "github:kamadorueda/alejandra/3.0.0";
 
-    nix-gaming.url = "github:fufexan/nix-gaming";
-
-    #ags.url = "github:Aylur/ags";
-
     nvf.url = "github:notashelf/nvf/v0.7";
 
     yazi.url = "github:sxyazi/yazi";
@@ -22,19 +18,21 @@
       url = "github:hyprwm/hyprland";
     };
 
-    hyprland-easymotion = {
-      url = "github:zakk4223/hyprland-easymotion/3388351d2af672f89b907404668c6076336270e9";
-      inputs.hyprland.follows = "hyprland";
-    };
-
-    hycov = {
-      url = "github:bighu630/hycov";
-      inputs.hyprland.follows = "hyprland";
-    };
-
     pyprland.url = "github:hyprland-community/pyprland";
 
-    hyprpolkitagent.url = "github:hyprwm/hyprpolkitagent";
+    # hyprland-easymotion = {
+    #   url = "github:zakk4223/hyprland-easymotion/3388351d2af672f89b907404668c6076336270e9";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
+    #
+    # hycov = {
+    #   url = "github:bighu630/hycov";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
+
+    #hyprpolkitagent.url = "github:hyprwm/hyprpolkitagent";
+    #nix-gaming.url = "github:fufexan/nix-gaming";
+    #ags.url = "github:Aylur/ags";
 
     home-manager = {
       url = "github:nix-community/home-manager";
