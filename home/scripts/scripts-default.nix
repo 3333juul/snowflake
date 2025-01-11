@@ -18,6 +18,12 @@
   s-img = pkgs.writeShellScriptBin "s-img" (builtins.readFile ./scripts-default/s-img);
   windows = pkgs.writeShellScriptBin "windows" (builtins.readFile ./scripts-default/windows);
   yazi-dir = pkgs.writeShellScriptBin "yazi-dir" (builtins.readFile ./scripts-default/yazi-dir);
+
+  # python
+  ocr-lookup = pkgs.writers.writePython3Bin "ocr-lookup" {
+    libraries = with pkgs.python3Packages; [pytesseract pillow pyqt5 pynput];
+    doCheck = false;
+  } (builtins.readFile ./scripts-default/ocr-lookup.py);
 in {
   home.packages = with pkgs; [
     changevolume
@@ -39,5 +45,7 @@ in {
     s-img
     windows
     yazi-dir
+
+    ocr-lookup
   ];
 }
