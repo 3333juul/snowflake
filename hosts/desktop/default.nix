@@ -12,11 +12,13 @@
   garden = {
     device = {
       type = "desktop";
-      cpu = "amd"; # TODO
-      gpu = "amd"; # TODO
+      cpu = "amd";
+      gpu = "amd";
+      monitors = ["DVI-D-1" "HDMI-A-1"];
       # hasTPM = "true"; # TODO
       hasBluetooth = true;
       hasSound = true;
+      keyboard = "pl";
     };
 
     environment = {
@@ -29,26 +31,12 @@
       boot = {
         loader = "systemd-boot";
       };
-      #
-      # fs.support = [
-      #   "ext4"
-      #   "vfat"
-      #   "ntfs"
-      # ];
+
       video.enable = true;
       sound.enable = true;
-      bluetooth.enable = true; # printing.enable = false;
-      # yubikeySupport.enable = true;
-      # emulation.enable = true;
-      #
-      # security.auditd.enable = true;
-      #
-      # networking = {
-      #   optimizeTcp = true;
-      #   wirelessBackend = "iwd";
-      # };
-      #
+      bluetooth.enable = true;
       virtualization.enable = true;
+
       loginManager = {
         name = "greetd";
         autoLogin.enable = true;

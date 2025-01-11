@@ -1,9 +1,18 @@
 {
+  osConfig,
+  host,
+  ...
+}: let
+  dev = osConfig.garden.device;
+in {
   wayland.windowManager.hyprland.settings = {
-    monitor = [
-      "HDMI-A-1,1920x1080@60,0x0,1"
-      "DVI-D-1,1920x1080@60,1920x0,1"
-    ];
+    monitor =
+      if (host == "desktop")
+      then [
+        "HDMI-A-1,1920x1080@60,0x0,1"
+        "DVI-D-1,1920x1080@60,1920x0,1"
+      ]
+      else [];
 
     general = {
       "$mainMod" = "SUPER";
@@ -18,7 +27,7 @@
     };
 
     input = {
-      kb_layout = "pl";
+      kb_layout = dev.keyboard;
       kb_options = "caps:swapescape";
       numlock_by_default = false;
       follow_mouse = 1;

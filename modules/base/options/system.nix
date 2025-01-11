@@ -14,10 +14,10 @@ in {
         description = "The login manager to be used.";
       };
 
-      autoLogin.enable = mkEnableOption "
-          Whether to enable passwordless login. This is generally useful on systems with
-          FDE (Full Disk Encryption) enabled. It is a security risk for systems without FDE.
-        ";
+      autoLogin.enable = mkEnableOption ''
+        Whether to enable passwordless login. This is generally useful on systems with
+        FDE (Full Disk Encryption) enabled. It is a security risk for systems without FDE.
+      '';
     };
 
     boot.loader = mkOption {

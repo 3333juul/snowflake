@@ -1,6 +1,6 @@
 {lib, ...}: let
   inherit (lib) mkOption;
-  inherit (lib.types) nullOr enum bool;
+  inherit (lib.types) listOf str nullOr enum bool;
 in {
   options.garden.device = {
     type = mkOption {
@@ -52,6 +52,21 @@ in {
       type = bool;
       default = true;
       description = "Whether the system has sound support (usually true except for servers)";
+    };
+
+    monitors = mkOption {
+      type = listOf str;
+      default = [];
+      description = "Declare host's monitors";
+    };
+
+    keyboard = mkOption {
+      type = enum [
+        "us"
+        "gb"
+        "pl"
+      ];
+      default = "pl";
     };
   };
 }
