@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./style
     ./cli.nix
     ./device.nix
     ./environment.nix
