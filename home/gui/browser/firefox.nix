@@ -1,10 +1,18 @@
 {
   pkgs,
+  osConfig,
+  lib,
   inputs,
   ...
-}: {
-  home.packages = with pkgs; [
-    floorp
-    inputs.zen-browser.packages."${system}".default
-  ];
+}: let
+  inherit (lib.modules) mkIf;
+
+  cfg = osConfig.garden.programs.gui;
+in {
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      #floorp
+      inputs.zen-browser.packages."${system}".default
+    ];
+  };
 }
