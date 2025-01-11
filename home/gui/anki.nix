@@ -6,11 +6,13 @@
 }: let
   inherit (lib.modules) mkIf;
 
+  vocabsieve = pkgs.callPackage ../../pkgs/vocabsieve.nix {};
   cfg = osConfig.garden.programs.gui;
 in {
   config = mkIf cfg.anki.enable {
-    home.packages = [
-      pkgs.anki
+    home.packages = with pkgs; [
+      anki
+      vocabsieve
     ];
   };
 }

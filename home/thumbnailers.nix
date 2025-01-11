@@ -9,7 +9,7 @@
   # Test if default thumnailer has better quality of thumbnails in rofi
   xdg.dataFile."thumbnailers/gdk-pixbuf-thumbnailer.thumbnailer".text = ''
     [Thumbnailer Entry]
-    TryExec=gdk-pixbuf-thumbnailer
+    TryExec=${pkgs.gdk-pixbuf}/bin/gdk-pixbuf-thumbnailer
     Exec=gdk-pixbuf-thumbnailer -s %s %u %o
     MimeType=x-webp;image/webp;
   '';
