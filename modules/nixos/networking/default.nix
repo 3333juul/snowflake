@@ -1,6 +1,8 @@
 {
   imports = [
     ./blocker.nix
-    ./network.nix
+    ./dns.nix
+    ./firewall.nix
+    ./networkmanager.nix
   ];
 }
