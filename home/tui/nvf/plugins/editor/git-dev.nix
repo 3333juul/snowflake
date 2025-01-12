@@ -7,8 +7,8 @@ in {
         package = git-dev;
         setup = "require('git-dev').setup{
 
-        ephemeral = false,
-        read_only = true,
+          ephemeral = false,
+          read_only = true,
 
        }";
       };

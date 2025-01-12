@@ -36,6 +36,7 @@
       sound.enable = true;
       bluetooth.enable = true;
       virtualization.enable = true;
+      printing.enable = false;
 
       loginManager = {
         name = "greetd";
