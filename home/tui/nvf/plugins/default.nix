@@ -8,6 +8,7 @@
 
     # editor
     ./editor/cheatsheet.nix
+    ./editor/git-dev.nix
     ./editor/neo-tree.nix
     ./editor/session-manager.nix
     ./editor/telescope.nix
