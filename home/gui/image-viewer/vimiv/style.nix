@@ -1,22 +1,28 @@
-{lib, ...}: let
+{
+  lib,
+  osConfig,
+  ...
+}: let
+  inherit (osConfig.garden.style) colors;
+
   gruvbox = {
     STYLE = {
-      base00 = "#1d2021";
-      base01 = "#3c3836";
-      base02 = "#504945";
-      base03 = "#665c54";
-      base04 = "#bdae93";
-      base05 = "#d5c4a1";
-      base06 = "#ebdbb2";
-      base07 = "#fbf1c7";
-      base08 = "#fb4934";
-      base09 = "#fe8019";
-      base0a = "#fabd2f";
-      base0b = "#b8bb26";
-      base0c = "#8ec07c";
-      base0d = "#83a598";
-      base0e = "#d3869b";
-      base0f = "#d65d0e";
+      base00 = "#${colors.base00}";
+      base01 = "#${colors.base01}";
+      base02 = "#${colors.base02}";
+      base03 = "#${colors.base03}";
+      base04 = "#${colors.base04}";
+      base05 = "#${colors.base05}";
+      base06 = "#${colors.base06}";
+      base07 = "#${colors.base07}";
+      base08 = "#${colors.base08}";
+      base09 = "#${colors.base09}";
+      base0a = "#${colors.base0A}";
+      base0b = "#${colors.base0B}";
+      base0c = "#${colors.base0C}";
+      base0d = "#${colors.base0D}";
+      base0e = "#${colors.base0E}";
+      base0f = "#${colors.base0F}";
     };
   };
 in {
