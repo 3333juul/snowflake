@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "11/27/2024, 1:59:24 AM",
-	"time": 1732669164168,
+	"@time": "1/12/2025, 10:15:18 PM",
+	"time": 1736716518288,
 	"environment": {
 		"extension": "2.11.3",
 		"platform": "linux",
-		"chromium": 130
+		"chromium": 131
 	},
 	"exclusionRules": [
 		{
@@ -47,18 +47,23 @@
 		"g|go|gg|google|Google: https://www.google.com/search?q=%s \\",
 		"  www.google.com re=/^(?:\\.[a-z]{2,4})?\\/search\\b.*?[#&?]q=([^#&]*)/i\\",
 		"  blank=https://www.google.com/ Google",
+		"",
 		"qw|qwant: https://www.qwant.com/?q=%s Qwant",
+		"",
 		"ya|yd|yandex: https://yandex.com/search/?text=%s Yandex",
+		"",
 		"yh|yahoo: https://search.yahoo.com/search?p=%s Yahoo",
-		"maru|mailru|mail.ru: https://go.mail.ru/search?q=%s Mail.ru",
 		"",
 		"g.m|gm|g.map|gmap: https://www.google.com/maps?q=%s \\",
 		"  blank=https://www.google.com/maps Google Maps",
+		"",
 		"y|yt: https://www.youtube.com/results?search_query=%s \\",
 		"  blank=https://www.youtube.com/ YouTube",
+		"",
 		"w|wiki: https://www.wikipedia.org/w/index.php?search=%s Wikipedia",
 		"g.s|gs|gscholar: https://scholar.google.com/scholar?q=$s \\",
-		"  scholar.google.com re=/^(?:\\.[a-z]{2,4})?\\/scholar\\b.*?[#&?]q=([^#&]*)/i\\",
+		"",
+		"scholar.google.com re=/^(?:\\.[a-z]{2,4})?\\/scholar\\b.*?[#&?]q=([^#&]*)/i\\",
 		"  blank=https://scholar.google.com/ Google Scholar",
 		"",
 		"az|amazon: https://www.amazon.com/s?k=%s \\",
@@ -67,6 +72,7 @@
 		"\\:i: vimium://sed/s/^//,lower\\ $S re= Lower case",
 		"v.m|math: vimium://math\\ $S re= Calculate",
 		"v.p: vimium://parse\\ $S re= Redo Search",
+		"",
 		"gh|github: https://github.com/search?q=$s \\",
 		"  blank=https://github.com/ GitHub Repo",
 		"",
@@ -76,6 +82,12 @@
 		"",
 		"nx|NixOS: https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=%s \\",
 		"  blank=https://search.nixos.org/packages NixOS Search",
+		"",
+		"nxo|NixOS: https://search.nixos.org/options?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=%s \\",
+		"  blank=https://search.nixos.org/options NixOS Options",
+		"",
+		"hm|HomeManager: https://home-manager-options.extranix.com/?query=%s&release=master \\",
+		"  blank=https://home-manager-options.extranix.com/?query=&release=master Home Manager Options",
 		""
 	],
 	"vimSync": true
