@@ -1,6 +1,6 @@
 {lib, ...}: let
   inherit (lib.options) mkEnableOption mkOption;
-  inherit (lib.types) enum;
+  inherit (lib.types) enum listOf str;
 in {
   options.garden.system = {
     virtualization.enable = mkEnableOption "enables virtualization";
@@ -33,6 +33,16 @@ in {
     video = {
       enable = mkEnableOption "Does the device allow for graphical programs";
       benchmarking.enable = mkEnableOption "Enable benchmarking tools";
+    };
+
+    printing = {
+      enable = mkEnableOption "printing";
+
+      extraDrivers = mkOption {
+        type = listOf str;
+        default = [];
+        description = "A list of additional drivers to install for printing";
+      };
     };
   };
 }
