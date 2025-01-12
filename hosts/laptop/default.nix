@@ -5,6 +5,8 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+
+    ../../modules/base
     ../../modules/nixos
 
     ../../modules/profiles/laptop
