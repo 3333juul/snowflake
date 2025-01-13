@@ -11,7 +11,7 @@
 in {
   programs.yazi = mkIf cfg.yazi.enable {
     enable = true;
-    package = inputs.yazi.packages.${pkgs.system}.yazi;
+    #package = inputs.yazi.packages.${pkgs.system}.yazi;
     enableZshIntegration = true;
 
     settings = {

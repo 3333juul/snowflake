@@ -7,7 +7,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.environment.desktop;
+  cfg = osConfig.garden.environment.desktop.type;
 in {
   config = mkIf (cfg == "Hyprland") {
     home.packages = with pkgs; [

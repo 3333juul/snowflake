@@ -10,9 +10,7 @@
 
     alejandra.url = "github:kamadorueda/alejandra/3.0.0";
 
-    nvf.url = "github:notashelf/nvf/v0.7";
-
-    yazi.url = "github:sxyazi/yazi";
+    nvf.url = "github:notashelf/nvf";
 
     hyprland = {
       url = "github:hyprwm/hyprland";
@@ -33,6 +31,7 @@
     #hyprpolkitagent.url = "github:hyprwm/hyprpolkitagent";
     #nix-gaming.url = "github:fufexan/nix-gaming";
     #ags.url = "github:Aylur/ags";
+    #yazi.url = "github:sxyazi/yazi";
 
     home-manager = {
       url = "github:nix-community/home-manager";

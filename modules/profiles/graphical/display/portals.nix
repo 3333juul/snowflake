@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  cfg = config.garden.environment.desktop;
+  cfg = config.garden.environment.desktop.type;
 in {
   config = lib.mkIf (cfg == "Hyprland") {
     xdg.portal = {

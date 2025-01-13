@@ -5,7 +5,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = config.garden.environment.desktop;
+  cfg = config.garden.environment.desktop.type;
 in {
   # TODO: Change to isWayland, remove variables not associated with wayland
   environment.variables = mkIf (cfg == "Hyprland") {

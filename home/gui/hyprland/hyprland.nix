@@ -8,6 +8,7 @@
   inherit (lib.modules) mkIf;
 
   cfg = osConfig.garden.environment.desktop;
+  flake = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
 in {
   imports = [
     ./config/autostart.nix
@@ -19,7 +20,7 @@ in {
     ./config/rules.nix
   ];
 
-  config = mkIf (cfg == "Hyprland") {
+  config = mkIf (cfg.type == "Hyprland") {
     home.packages = with pkgs; [
       inputs.hypr-contrib.packages.${pkgs.system}.grimblast
       hyprpicker
@@ -35,10 +36,9 @@ in {
       #wl-clip-persist
     ];
 
-    #systemd.user.targets.hyprland-session.Unit.Wants = ["xdg-desktop-autostart.target"];
     wayland.windowManager.hyprland = {
       enable = true;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      package = mkIf cfg.hyprland.useFlake flake;
       systemd = {
         enable = true;
         variables = ["--all"];

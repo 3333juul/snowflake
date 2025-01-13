@@ -13,6 +13,7 @@ in {
     mpv.enable = mkEnableOption "enables MPV";
     pinta.enable = mkEnableOption "enables pinta";
     rofi.enable = mkEnableOption "enables rofi";
+    spotify.enable = mkEnableOption "enables spotify";
     thunar.enable = mkEnableOption "enables thunar";
     tofi.enable = mkEnableOption "enables tofi";
     vscodium.enable = mkEnableOption "enables vscodium";

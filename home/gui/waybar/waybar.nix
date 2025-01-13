@@ -5,21 +5,23 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
+  inherit (osConfig.garden.device) monitors;
 
-  cfg = osConfig.garden.environment.desktop;
+  cfg = osConfig.garden.environment.desktop.type;
 in {
   config = mkIf (cfg == "Hyprland") {
     programs.waybar = {
       enable = true;
-      package = pkgs.waybar.overrideAttrs (oa: {
-        mesonFlags = (oa.mesonFlags or []) ++ ["-Dexperimental=true"];
-      });
+      package = pkgs.waybar;
       settings = {
         mainBar = {
           position = "top";
           layer = "top";
           height = 23;
-          output = ["HDMI-A-1"];
+          output =
+            if builtins.length monitors > 0
+            then builtins.elemAt monitors 0
+            else null;
           modules-left = [
             "hyprland/workspaces"
             "hyprland/mode"
@@ -31,7 +33,6 @@ in {
             #"custom/windowstate_0"
           ];
           modules-right = [
-            #"custom/spotify"
             "mpris"
             "custom/colorpicker"
             #"custom/todoist"
@@ -47,11 +48,11 @@ in {
           ];
         };
 
-        topBar = {
+        secondBar = mkIf (builtins.length monitors > 1) {
           position = "top";
           layer = "top";
           height = 23;
-          output = ["DVI-D-1"];
+          output = builtins.elemAt monitors 1;
           modules-left = [
             "hyprland/workspaces"
             "hyprland/mode"
@@ -63,7 +64,6 @@ in {
             #"custom/windowstate_1"
           ];
           modules-right = [
-            #"custom/spotify"
             "mpris"
             "custom/colorpicker"
             #"custom/todoist"

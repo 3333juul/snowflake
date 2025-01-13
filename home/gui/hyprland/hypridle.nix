@@ -6,7 +6,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.environment.desktop;
+  cfg = osConfig.garden.environment.desktop.type;
 in {
   services.hypridle = mkIf (cfg == "Hyprland") {
     enable = true;

@@ -22,7 +22,12 @@
     };
 
     environment = {
-      desktop = "Hyprland";
+      desktop = {
+        type = "Hyprland";
+        hyprland = {
+          useFlake = true;
+        };
+      };
     };
 
     system = {
@@ -73,6 +78,7 @@
         zotero.enable = true;
         brave.enable = true;
         rofi.enable = true;
+        spotify.enable = true;
         tofi.enable = true;
         vscodium.enable = true;
         discord.enable = true;
