@@ -10,7 +10,7 @@
   cfg = config.garden.programs;
 in {
   networking = {
-    #hostName = "${host}";
+    hostName = "${host}";
     networkmanager.enable = true;
   };
 
