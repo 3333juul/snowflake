@@ -14,7 +14,7 @@
       type = "desktop";
       cpu = "amd";
       gpu = "amd";
-      monitors = ["DVI-D-1" "HDMI-A-1"];
+      monitors = ["HDMI-A-1" "DVI-D-1"];
       # hasTPM = "true"; # TODO
       hasBluetooth = true;
       hasSound = true;

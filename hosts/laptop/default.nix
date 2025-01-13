@@ -63,8 +63,8 @@
   garden = {
     device = {
       type = "desktop";
-      cpu = "amd";
-      gpu = "amd";
+      cpu = "intel";
+      gpu = "intel";
       # hasTPM = "true"; # TODO
       hasBluetooth = true;
       hasSound = true;
@@ -72,7 +72,12 @@
     };
 
     environment = {
-      desktop = "Hyprland";
+      desktop = {
+        type = "Hyprland";
+        hyprland = {
+          useFlake = false;
+        };
+      };
     };
 
     system = {
