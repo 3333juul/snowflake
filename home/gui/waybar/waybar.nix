@@ -18,6 +18,9 @@ in {
           position = "top";
           layer = "top";
           height = 23;
+          # Checks if the number of monitors declared in the host configuration is greater than 0.
+          # If true, the first monitor from the list of monitors is assigned as the output for the main bar.
+          # If false (i.e., there are no monitors declared), it assigns `null`, meaning no monitor is assigned.
           output =
             if builtins.length monitors > 0
             then builtins.elemAt monitors 0
@@ -48,11 +51,12 @@ in {
           ];
         };
 
+        # Enables the second bar if more than 1 monitor is defined in the host configuration
         secondBar = mkIf (builtins.length monitors > 1) {
           position = "top";
           layer = "top";
           height = 23;
-          output = builtins.elemAt monitors 1;
+          output = builtins.elemAt monitors 1; # Assigns the second monitor as the output
           modules-left = [
             "hyprland/workspaces"
             "hyprland/mode"
