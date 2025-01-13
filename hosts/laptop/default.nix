@@ -62,7 +62,7 @@
 
   garden = {
     device = {
-      type = "desktop";
+      type = "laptop";
       cpu = "intel";
       gpu = "intel";
       # hasTPM = "true"; # TODO
