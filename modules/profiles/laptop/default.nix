@@ -1,1 +1,6 @@
-{}
+{
+  imports = [
+    ./power
+    ./touchpad.nix
+  ];
+}
