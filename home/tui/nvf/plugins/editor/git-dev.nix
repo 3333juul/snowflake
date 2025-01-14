@@ -1,8 +1,18 @@
 {pkgs, ...}: let
-  git-dev = pkgs.callPackage ../../../../../pkgs/git-dev-nvim.nix {};
+  git-dev = pkgs.vimUtils.buildVimPlugin {
+    pname = "git-dev-nvim";
+    version = "1.0.0";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "moyiz";
+      repo = "git-dev-nvim";
+      rev = "730e700bbe94083ce8ea2676934b5db43d32609f";
+      sha256 = "sha256-CMqEb+pBuDbCRquoA8GhBoJk5J74VPLoQXloT6a4L/E=";
+    };
+  };
 in {
   programs.nvf.settings.vim = {
-    extraPlugins = with pkgs.vimPlugins; {
+    extraPlugins = {
       git-dev = {
         package = git-dev;
         setup = "require('git-dev').setup{
