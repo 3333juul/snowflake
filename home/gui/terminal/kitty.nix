@@ -15,10 +15,10 @@ in {
 
     font = {
       name = "Iosevka Nerd Font";
-      size =
-        if (host == "laptop")
-        then 11
-        else 13.5;
+      size = 13.5;
+      # if (host == "laptop")
+      # then 11
+      # else 13.5;
     };
 
     settings = {
