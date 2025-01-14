@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   fetchFromGitHub,
   buildNpmPackage,
   ...
@@ -17,15 +18,10 @@ buildNpmPackage {
 
   npmDepsHash = "sha256-wAyxW+TsSk1OBXX4f0XiYOzssHqztiz9LQZ8iCps2oQ=";
 
-  buildPhase = ''
-    npm run build
-  '';
+  # buildInputs = with pkgs; [
+  # ];
 
-  installPhase = ''
-    runHook preInstall
-    cp -r . $out
-    runHook postInstall
-  '';
+  doCheck = false;
 
   meta = {
     description = "Stremio addon for Letterboxd integration";
