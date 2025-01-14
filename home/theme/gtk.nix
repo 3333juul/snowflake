@@ -5,6 +5,7 @@
 }: let
   gruvbox-material-gtk = pkgs.callPackage ../../pkgs/gruvbox-material-gtk.nix {};
 in {
+  # TODO: ADD MODULES
   gtk = {
     enable = true;
     font = {
