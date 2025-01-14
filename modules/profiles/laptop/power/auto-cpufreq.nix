@@ -3,8 +3,8 @@
 
   MHz = x: x * 1000;
 in {
-  # superior power management, littrally saves this crummy laptop
-  # you have no clue how annoying it is when I have to update this on nixpkgs
+  # superior power management
+
   # if you cannot figgure out what is happening here its worth reading the example
   # <https://github.com/AdnanHodzic/auto-cpufreq/#example-config-file-contents>
   services.auto-cpufreq = {
