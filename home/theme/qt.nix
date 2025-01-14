@@ -5,6 +5,7 @@
 }: let
   inherit (builtins) concatStringsSep;
 in {
+  # TODO: ADD MODULES FOR QT AND GTK
   qt = {
     enable = true;
     platformTheme.name = "qtct";
@@ -12,30 +13,6 @@ in {
       name = "kvantum";
     };
   };
-
-  xdg.configFile = {
-    # Write kvantum configuration, and the theme files required by the Gruvbox theme.
-    "Kvantum/kvantum.kvconfig".source = let
-      themeName = "Gruvbox-Dark-Brown";
-      themedApps = ["qt5ct" "org.kde.dolphin" "org.kde.kalendar" "org.qbittorrent.qBittorrent" "hyprland-share-picker" "dolphin-emu" "Nextcloud" "nextcloud" "cantata" "org.kde.kid3-qt"];
-    in
-      (pkgs.formats.ini {}).generate "kvantum.kvconfig" {
-        General.theme = themeName;
-        Applications."${themeName}" = concatStringsSep ", " themedApps;
-      };
-
-    "Kvantum/Gruvbox-Dark-Blue".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox-Dark-Blue";
-    "Kvantum/Gruvbox-Dark-Brown".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox-Dark-Brown";
-    "Kvantum/Gruvbox-Dark-Green".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox-Dark-Green";
-    "Kvantum/Gruvbox_Light_Blue".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox_Light_Blue";
-    "Kvantum/Gruvbox_Light_Brown".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox_Light_Brown";
-    "Kvantum/Gruvbox_Light_Green".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox_Light_Green";
-  };
-
-  # xdg.configFile = {
-  #   "Kvantum/gruvbox-kvantum/".source = "${inputs.gruvbox-kvantum}/gruvbox-kvantum/";
-  #   "Kvantum/kvantum.kvconfig".text = "[General]\ntheme=gruvbox-kvantum";
-  # };
 
   home = {
     packages = with pkgs; [
@@ -91,6 +68,30 @@ in {
       #QT_STYLE_OVERRIDE = "kvantum";
     };
   };
+
+  xdg.configFile = {
+    # Write kvantum configuration, and the theme files required by the Gruvbox theme.
+    "Kvantum/kvantum.kvconfig".source = let
+      themeName = "Gruvbox-Dark-Brown";
+      themedApps = ["qt5ct" "org.kde.dolphin" "org.kde.kalendar" "org.qbittorrent.qBittorrent" "hyprland-share-picker" "dolphin-emu" "Nextcloud" "nextcloud" "cantata" "org.kde.kid3-qt"];
+    in
+      (pkgs.formats.ini {}).generate "kvantum.kvconfig" {
+        General.theme = themeName;
+        Applications."${themeName}" = concatStringsSep ", " themedApps;
+      };
+
+    "Kvantum/Gruvbox-Dark-Blue".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox-Dark-Blue";
+    "Kvantum/Gruvbox-Dark-Brown".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox-Dark-Brown";
+    "Kvantum/Gruvbox-Dark-Green".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox-Dark-Green";
+    "Kvantum/Gruvbox_Light_Blue".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox_Light_Blue";
+    "Kvantum/Gruvbox_Light_Brown".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox_Light_Brown";
+    "Kvantum/Gruvbox_Light_Green".source = "${inputs.gruvbox-kvantum-themes}/Gruvbox_Light_Green";
+  };
+
+  # xdg.configFile = {
+  #   "Kvantum/gruvbox-kvantum/".source = "${inputs.gruvbox-kvantum}/gruvbox-kvantum/";
+  #   "Kvantum/kvantum.kvconfig".text = "[General]\ntheme=gruvbox-kvantum";
+  # };
 }
 # inspo - https://github.com/NotAShelf/nyx/blob/main/homes%2Fnotashelf%2Fthemes%2Fqt.nix
 
