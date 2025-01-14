@@ -53,6 +53,7 @@
       cli = {
         enable = true;
         shell = "zsh";
+        androidTools.enable = true;
         git.enable = true;
         starship.enable = true;
       };
