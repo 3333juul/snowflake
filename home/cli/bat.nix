@@ -16,9 +16,9 @@ in {
         theme = "gruvbox-dark";
       };
       extraPackages = with pkgs.bat-extras; [
-        batman
-        batpipe
-        batgrep
+        #batman # broken
+        #batpipe # broken
+        # batgrep # broken
         # batdiff
       ];
     };
