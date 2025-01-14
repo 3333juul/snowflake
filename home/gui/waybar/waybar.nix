@@ -6,6 +6,7 @@
 }: let
   inherit (lib.modules) mkIf;
   inherit (osConfig.garden.device) monitors;
+  inherit (osConfig.garden.device) type;
 
   cfg = osConfig.garden.environment.desktop.type;
 in {
@@ -37,6 +38,7 @@ in {
           ];
           modules-right = [
             "mpris"
+            (mkIf (type == "laptop") "battery")
             "custom/colorpicker"
             #"custom/todoist"
             "cpu"
