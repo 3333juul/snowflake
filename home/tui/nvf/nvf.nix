@@ -37,6 +37,7 @@ in {
         viAlias = true;
         globals.mapleader = " ";
         useSystemClipboard = true;
+        preventJunkFiles = true;
       };
     };
   };
