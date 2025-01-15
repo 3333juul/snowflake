@@ -1,8 +1,4 @@
 {
-  pkgs,
-  config,
-  ...
-}: {
   imports = [
     ./hardware-configuration.nix
 
@@ -12,21 +8,6 @@
     ../../modules/profiles/laptop
     ../../modules/profiles/graphical
   ];
-
-  environment.systemPackages = with pkgs; [
-    acpi
-    brightnessctl
-    cpupower-gui
-    powertop
-  ];
-
-  #services = {
-  # thermald.enable = true;
-  # cpupower-gui.enable = true;
-  #power-profiles-daemon.enable = true;
-  #};
-
-  #powerManagement.cpuFreqGovernor = "performance";
 
   garden = {
     device = {

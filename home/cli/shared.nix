@@ -12,6 +12,7 @@ in {
     home.packages = with pkgs; [
       ## CLI utility
       appimage-run # run appimage
+      brightnessctl # brightness managed via cli
       cliphist # clipboard manager
       eza # ls replacement
       entr # perform action when file change
