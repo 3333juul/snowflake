@@ -24,12 +24,6 @@ in {
     home.packages = with pkgs; [
       inputs.hypr-contrib.packages.${pkgs.system}.grimblast
       hyprpicker
-      grim
-      slurp
-      wf-recorder
-      glib
-      wayland
-      direnv
       swappy
       wl-kbptr
       wlrctl

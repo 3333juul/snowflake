@@ -21,6 +21,7 @@ in {
       file # Show file information
       translate-shell # translate
       gtrash # rm replacement, put deleted files in system trash
+      grim
       hexdump
       killall
       libnotify
@@ -36,12 +37,14 @@ in {
       ripgrep # grep replacement
       tldr
       unzip
+      wf-recorder
       wl-clipboard # clipboard utils for wayland (wl-copy, wl-paste)
       yt-dlp-light
       xdg-utils
       jq
       jless
       socat
+      slurp
       imagemagick
       ripdrag
       sptlrx
