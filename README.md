@@ -8,7 +8,8 @@
 - [hosts](hosts) Per-host configurations that contain machine specific
   configurations
   - [desktop](hosts/desktop/) Desktop specific configuration
-  - [laptop](hosts/laptop/) TODO
+  - [laptop](hosts/laptop/) Laptop specific configuration
+  - [server](hosts/server/) TODO
   - [vm](hosts/vm/) TODO
 - [modules](modules) Modular system configuration
   - [base](modules/base/) Base modules, which are common between all systems
