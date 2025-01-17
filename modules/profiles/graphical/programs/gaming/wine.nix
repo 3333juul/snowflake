@@ -12,11 +12,11 @@ in {
   config = mkIf cfg.enable {
     # determine which version of wine to be used
     # then add it to systemPackages
-    environment.systemPackages = with pkgs; let
+    environment.systemPackages = let
       winePackage =
         if env.isWayland
-        then wineWowPackages.waylandFull
-        else wineWowPackages.stableFull;
+        then pkgs.wineWowPackages.waylandFull
+        else pkgs.wineWowPackages.stableFull;
     in [winePackage];
   };
 }

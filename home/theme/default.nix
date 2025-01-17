@@ -1,4 +1,4 @@
-{...}: {
+{
   imports = [
     ./font.nix
     ./gtk.nix

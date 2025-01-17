@@ -1,18 +1,18 @@
 {
-  pkgs,
-  config,
-  ...
-}: {
   programs.yazi.theme = {
     manager = {
-      cwd = {fg = "cyan";};
+      cwd = {
+        fg = "cyan";
+      };
 
       hovered = {
         fg = "black";
         bg = "green";
         bold = true;
       };
-      preview_hovered = {underline = true;};
+      preview_hovered = {
+        underline = true;
+      };
 
       find_keyword = {
         fg = "yellow";
@@ -65,7 +65,9 @@
       };
 
       border_symbol = "│";
-      border_style = {fg = "gray";};
+      border_style = {
+        fg = "gray";
+      };
 
       syntect_theme = "";
     };
@@ -94,7 +96,9 @@
         bold = true;
       };
 
-      progress_label = {bold = true;};
+      progress_label = {
+        bold = true;
+      };
       progress_normal = {
         fg = "blue";
         bg = "black";
@@ -104,29 +108,51 @@
         bg = "black";
       };
 
-      permissions_t = {fg = "green";};
-      permissions_r = {fg = "lightyellow";};
-      permissions_w = {fg = "lightred";};
-      permissions_x = {fg = "lightcyan";};
-      permissions_s = {fg = "darkgray";};
+      permissions_t = {
+        fg = "green";
+      };
+      permissions_r = {
+        fg = "lightyellow";
+      };
+      permissions_w = {
+        fg = "lightred";
+      };
+      permissions_x = {
+        fg = "lightcyan";
+      };
+      permissions_s = {
+        fg = "darkgray";
+      };
     };
 
     select = {
-      border = {fg = "blue";};
-      active = {fg = "magenta";};
+      border = {
+        fg = "blue";
+      };
+      active = {
+        fg = "magenta";
+      };
       inactive = {};
     };
 
     input = {
-      border = {fg = "blue";};
+      border = {
+        fg = "blue";
+      };
       title = {};
       value = {};
-      selected = {reversed = true;};
+      selected = {
+        reversed = true;
+      };
     };
 
     completion = {
-      border = {fg = "blue";};
-      active = {bg = "darkgray";};
+      border = {
+        fg = "blue";
+      };
+      active = {
+        bg = "darkgray";
+      };
       inactive = {};
 
       icon_file = "";
@@ -135,25 +161,45 @@
     };
 
     tasks = {
-      border = {fg = "blue";};
+      border = {
+        fg = "blue";
+      };
       title = {};
-      hovered = {underline = true;};
+      hovered = {
+        underline = true;
+      };
     };
 
     which = {
       cols = 3;
-      mask = {bg = "black";};
-      cand = {fg = "lightcyan";};
-      rest = {fg = "darkgray";};
-      desc = {fg = "magenta";};
+      mask = {
+        bg = "black";
+      };
+      cand = {
+        fg = "lightcyan";
+      };
+      rest = {
+        fg = "darkgray";
+      };
+      desc = {
+        fg = "magenta";
+      };
       separator = "  ";
-      separator_style = {fg = "darkgray";};
+      separator_style = {
+        fg = "darkgray";
+      };
     };
 
     help = {
-      on = {fg = "magenta";};
-      run = {fg = "cyan";};
-      desc = {fg = "white";};
+      on = {
+        fg = "magenta";
+      };
+      run = {
+        fg = "cyan";
+      };
+      desc = {
+        fg = "white";
+      };
       hovered = {
         reversed = true;
         bold = true;

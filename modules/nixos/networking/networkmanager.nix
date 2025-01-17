@@ -1,6 +1,5 @@
 {
   pkgs,
-  host,
   config,
   lib,
   ...
@@ -10,7 +9,6 @@
   cfg = config.garden.programs;
 in {
   networking = {
-    hostName = "${host}";
     networkmanager.enable = true;
   };
 

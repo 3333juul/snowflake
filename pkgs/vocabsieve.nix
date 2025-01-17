@@ -1,13 +1,12 @@
 {
   lib,
   pkgs,
-  stdenv,
   python3,
   fetchFromGitHub,
   python3Packages,
   gst_all_1,
 }: let
-  pyqtdarktheme-fork = python3Packages.pyqtdarktheme.overridePythonAttrs (oldAttrs: {
+  pyqtdarktheme-fork = python3Packages.pyqtdarktheme.overridePythonAttrs (_: {
     pname = "pyqtdarktheme";
     version = "2.3.2";
     src = fetchFromGitHub {
@@ -22,6 +21,7 @@ in
     pname = "vocabsieve";
     version = "0.12.4";
     format = "pyproject";
+
     src = fetchFromGitHub {
       owner = "FreeLanguageTools";
       repo = pname;
@@ -43,7 +43,11 @@ in
       makeWrapperArgs+=(--prefix GST_PLUGIN_SYSTEM_PATH_1_0 : "$GST_PLUGIN_SYSTEM_PATH_1_0")
     '';
 
-    buildInputs = [pkgs.qt5.qtbase pkgs.qt5.qtmultimedia python3Packages.setuptools];
+    buildInputs = [
+      pkgs.qt5.qtbase
+      pkgs.qt5.qtmultimedia
+      python3Packages.setuptools
+    ];
 
     propagatedBuildInputs = with python3Packages; [
       bidict

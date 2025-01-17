@@ -1,4 +1,4 @@
-{...}: {
+{
   imports = [
     ./nvf/nvf.nix # nvim
     ./yazi # terminal file manager

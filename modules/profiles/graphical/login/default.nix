@@ -20,7 +20,7 @@ in {
 
       initial_session = mkIf cfg.autoLogin.enable {
         enable = true;
-        user = "${mainUser}";
+        user = mainUser;
         command = "Hyprland";
       };
     };

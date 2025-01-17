@@ -1,87 +1,55 @@
 {pkgs, ...}: let
-  betterpin = pkgs.writeShellScriptBin "betterpin" (builtins.readFile ./scripts-hyprland/betterpin);
-  browserhere = pkgs.writeShellScriptBin "browserhere" (builtins.readFile ./scripts-hyprland/browserhere);
-  changelayout = pkgs.writeShellScriptBin "changelayout" (builtins.readFile ./scripts-hyprland/changelayout);
-  closespecial = pkgs.writeShellScriptBin "closespecial" (builtins.readFile ./scripts-hyprland/closespecial);
-  colorpicker = pkgs.writeShellScriptBin "colorpicker" (builtins.readFile ./scripts-hyprland/colorpicker);
-  dynamicwindow = pkgs.writeShellScriptBin "dynamicwindow" (builtins.readFile ./scripts-hyprland/dynamicwindow);
-  easymotion = pkgs.writeShellScriptBin "easymotion" (builtins.readFile ./scripts-hyprland/easymotion);
-  floatinggrid = pkgs.writers.writePython3Bin "floatinggrid" {} (builtins.readFile ./scripts-hyprland/floatinggrid.py);
-  focuswindow = pkgs.writeShellScriptBin "focuswindow" (builtins.readFile ./scripts-hyprland/focuswindow);
-  groupbind-run = pkgs.writeShellScriptBin "groupbind-run" (builtins.readFile ./scripts-hyprland/groupbind-run);
-  hycov-easymotion = pkgs.writeShellScriptBin "hycov-easymotion" (builtins.readFile ./scripts-hyprland/hycov-easymotion);
-  hyprtabs = pkgs.writeShellScriptBin "hyprtabs" (builtins.readFile ./scripts-hyprland/hyprtabs);
-  movetospecial = pkgs.writeShellScriptBin "movetospecial" (builtins.readFile ./scripts-hyprland/movetospecial);
-  obsidianspecial = pkgs.writeShellScriptBin "obsidianspecial" (builtins.readFile ./scripts-hyprland/obsidianspecial);
-  prevclosespecial = pkgs.writeShellScriptBin "prevclosespecial" (builtins.readFile ./scripts-hyprland/prevclosespecial);
-  resetxdgportal = pkgs.writeShellScriptBin "resetxdgportal" (builtins.readFile ./scripts-hyprland/resetxdgportal);
-  riodraw = pkgs.writeShellScriptBin "riodraw" (builtins.readFile ./scripts-hyprland/riodraw);
-  screenrecord = pkgs.writeShellScriptBin "screenrecord" (builtins.readFile ./scripts-hyprland/screenrecord);
-  screenshot = pkgs.writeShellScriptBin "screenshot" (builtins.readFile ./scripts-hyprland/screenshot);
-  selectwallpaper = pkgs.writeShellScriptBin "selectwallpaper" (builtins.readFile ./scripts-hyprland/selectwallpaper);
-  special_per_workspace = pkgs.writeShellScriptBin "special_per_workspace" (builtins.readFile ./scripts-hyprland/special_per_workspace);
-  testscript = pkgs.writeShellScriptBin "testscript" (builtins.readFile ./scripts-hyprland/testscript);
-  toggleanimations = pkgs.writeShellScriptBin "toggleanimations" (builtins.readFile ./scripts-hyprland/toggleanimations);
-  togglefloating = pkgs.writeShellScriptBin "togglefloating" (builtins.readFile ./scripts-hyprland/togglefloating);
-  togglespecial-menu = pkgs.writeShellScriptBin "togglespecial-menu" (builtins.readFile ./scripts-hyprland/togglespecial-menu);
-  toggleurgent = pkgs.writeShellScriptBin "toggleurgent" (builtins.readFile ./scripts-hyprland/toggleurgent);
-  toggleswallow = pkgs.writeShellScriptBin "toggleswallow" (builtins.readFile ./scripts-hyprland/toggleswallow);
-  togglewindow = pkgs.writeShellScriptBin "togglewindow" (builtins.readFile ./scripts-hyprland/togglewindow);
-  wininfo = pkgs.writeShellScriptBin "wininfo" (builtins.readFile ./scripts-hyprland/wininfo);
-  launch-waybar = pkgs.writeShellScriptBin "launch-waybar" (builtins.readFile ./scripts-hyprland/launch-waybar);
-  windowstate = pkgs.writeShellScriptBin "windowstate" (builtins.readFile ./scripts-hyprland/windowstate);
+  mkScript = name: script: pkgs.writeShellScriptBin name (builtins.readFile script);
 
-  # wallshift
-  wallshift = pkgs.writeShellScriptBin "wallshift" (builtins.readFile ./scripts-hyprland/wallshift/wallshift);
-  killwallshift = pkgs.writeShellScriptBin "killwallshift" (builtins.readFile ./scripts-hyprland/wallshift/killwallshift);
-  wallselect = pkgs.writeShellScriptBin "wallselect" (builtins.readFile ./scripts-hyprland/wallshift/wallselect);
+  scripts =
+    (builtins.mapAttrs mkScript {
+      betterpin = ./scripts-hyprland/betterpin;
+      browserhere = ./scripts-hyprland/browserhere;
+      changelayout = ./scripts-hyprland/changelayout;
+      closespecial = ./scripts-hyprland/closespecial;
+      colorpicker = ./scripts-hyprland/colorpicker;
+      dynamicwindow = ./scripts-hyprland/dynamicwindow;
+      easymotion = ./scripts-hyprland/easymotion;
+      focuswindow = ./scripts-hyprland/focuswindow;
+      groupbind-run = ./scripts-hyprland/groupbind-run;
+      hycov-easymotion = ./scripts-hyprland/hycov-easymotion;
+      hyprtabs = ./scripts-hyprland/hyprtabs;
+      movetospecial = ./scripts-hyprland/movetospecial;
+      obsidianspecial = ./scripts-hyprland/obsidianspecial;
+      prevclosespecial = ./scripts-hyprland/prevclosespecial;
+      resetxdgportal = ./scripts-hyprland/resetxdgportal;
+      riodraw = ./scripts-hyprland/riodraw;
+      screenrecord = ./scripts-hyprland/screenrecord;
+      screenshot = ./scripts-hyprland/screenshot;
+      selectwallpaper = ./scripts-hyprland/selectwallpaper;
+      special_per_workspace = ./scripts-hyprland/special_per_workspace;
+      testscript = ./scripts-hyprland/testscript;
+      toggleanimations = ./scripts-hyprland/toggleanimations;
+      togglefloating = ./scripts-hyprland/togglefloating;
+      togglespecial-menu = ./scripts-hyprland/togglespecial-menu;
+      toggleurgent = ./scripts-hyprland/toggleurgent;
+      toggleswallow = ./scripts-hyprland/toggleswallow;
+      togglewindow = ./scripts-hyprland/togglewindow;
+      wininfo = ./scripts-hyprland/wininfo;
+      launch-waybar = ./scripts-hyprland/launch-waybar;
+      windowstate = ./scripts-hyprland/windowstate;
 
-  # autostart
-  autostart-ai = pkgs.writeShellScriptBin "autostart-ai" (builtins.readFile ./scripts-hyprland/autostart/autostart-ai);
-  autostart-dict = pkgs.writeShellScriptBin "autostart-dict" (builtins.readFile ./scripts-hyprland/autostart/autostart-dict);
-  autostart-music = pkgs.writeShellScriptBin "autostart-music" (builtins.readFile ./scripts-hyprland/autostart/autostart-music);
+      # wallshift
+      wallshift = ./scripts-hyprland/wallshift/wallshift;
+      killwallshift = ./scripts-hyprland/wallshift/killwallshift;
+      wallselect = ./scripts-hyprland/wallshift/wallselect;
+
+      # autostart
+      autostart-ai = ./scripts-hyprland/autostart/autostart-ai;
+      autostart-dict = ./scripts-hyprland/autostart/autostart-dict;
+      autostart-music = ./scripts-hyprland/autostart/autostart-music;
+    })
+    // {
+      # additional scripts that don't use `mkScript`
+      floatinggrid = pkgs.writers.writePython3Bin "floatinggrid" {} (
+        builtins.readFile ./scripts-hyprland/floatinggrid.py
+      );
+    };
 in {
-  home.packages = with pkgs; [
-    betterpin
-    browserhere
-    changelayout
-    closespecial
-    colorpicker
-    dynamicwindow
-    easymotion
-    floatinggrid
-    focuswindow
-    groupbind-run
-    hycov-easymotion
-    hyprtabs
-    movetospecial
-    obsidianspecial
-    prevclosespecial
-    resetxdgportal
-    riodraw
-    screenrecord
-    screenshot
-    selectwallpaper
-    special_per_workspace
-    testscript
-    toggleanimations
-    togglefloating
-    togglespecial-menu
-    toggleurgent
-    toggleswallow
-    togglewindow
-    wininfo
-    launch-waybar
-    windowstate
-
-    # wallshift
-    wallshift
-    killwallshift
-    wallselect
-
-    # autostart
-    autostart-ai
-    autostart-dict
-    autostart-music
-  ];
+  home.packages = builtins.attrValues scripts;
 }

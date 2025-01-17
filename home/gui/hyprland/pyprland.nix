@@ -10,7 +10,7 @@
   cfg = osConfig.garden.environment.desktop.type;
 in {
   config = mkIf (cfg == "Hyprland") {
-    home.packages = with pkgs; [
+    home.packages = [
       inputs.pyprland.packages.${pkgs.system}.pyprland
     ];
     home.file.".config/hypr/pyprland.toml".text = ''
