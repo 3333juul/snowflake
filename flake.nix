@@ -51,43 +51,55 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
-  outputs = {
-    nixpkgs,
-    self,
-    ...
-  } @ inputs: let
-    username = "scay";
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
-    lib = nixpkgs.lib;
+  outputs = {nixpkgs, ...} @ inputs: let
+    commonModules = [
+      ./modules/base
+      ./modules/nixos
+    ];
+
+    profilesPath = ./modules/profiles;
+
+    desktop = profilesPath + /desktop;
+    laptop = profilesPath + /laptop;
+    server = profilesPath + /server;
+    graphical = profilesPath + /graphical;
+    headless = profilesPath + /headless;
+
+    mkHostConfig = {
+      host,
+      profiles ? [],
+    }:
+      nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs host;
+        };
+        modules =
+          [./hosts/${host}]
+          ++ commonModules
+          ++ profiles;
+      };
   in {
     nixosConfigurations = {
-      desktop = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [./hosts/desktop];
-        specialArgs = {
-          host = "desktop";
-          inherit self inputs username;
-        };
+      desktop = mkHostConfig {
+        host = "desktop";
+        profiles = [
+          desktop
+          graphical
+        ];
       };
-      laptop = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [./hosts/laptop];
-        specialArgs = {
-          host = "laptop";
-          inherit self inputs username;
-        };
+      laptop = mkHostConfig {
+        host = "laptop";
+        profiles = [
+          laptop
+          graphical
+        ];
       };
-      vm = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [./hosts/vm];
-        specialArgs = {
-          host = "vm";
-          inherit self inputs username;
-        };
+      server = mkHostConfig {
+        host = "server";
+        profiles = [
+          server
+          headless
+        ];
       };
     };
   };

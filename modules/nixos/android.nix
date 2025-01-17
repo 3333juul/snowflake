@@ -1,11 +1,11 @@
 {
   pkgs,
-  username,
   config,
   lib,
   ...
 }: let
   inherit (lib.modules) mkIf;
+  inherit (config.garden.system) mainUser;
 
   cfg = config.garden.programs.cli.androidTools;
 in {
@@ -26,6 +26,6 @@ in {
     ];
 
     programs.adb.enable = true;
-    users.users.${username}.extraGroups = ["adbusers"];
+    users.users.${mainUser}.extraGroups = ["adbusers"];
   };
 }

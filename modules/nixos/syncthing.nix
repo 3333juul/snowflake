@@ -1,18 +1,18 @@
 {
-  pkgs,
   lib,
   config,
-  username,
   ...
 }: let
+  inherit (config.garden.system) mainUser;
+
   cfg = config.garden.services;
 in {
   services.syncthing = lib.mkIf cfg.syncthing.enable {
     enable = true;
-    dataDir = "/home/${username}";
+    dataDir = "/home/${mainUser}";
     openDefaultPorts = true;
-    configDir = "/home/${username}/.config/syncthing";
-    user = "${username}";
+    configDir = "/home/${mainUser}/.config/syncthing";
+    user = "${mainUser}";
     group = "users";
     guiAddress = "0.0.0.0:8384";
     overrideDevices = true;
@@ -25,7 +25,7 @@ in {
       };
       folders = {
         "NoteAir3 - Books" = {
-          path = "/home/${username}/Documents/Syncthing/NoteAir3/Books";
+          path = "/home/${mainUser}/Documents/Syncthing/NoteAir3/Books";
           devices = ["NoteAir3"];
           id = "ttzrq-xytfk";
           versioning = {
@@ -36,7 +36,7 @@ in {
           };
         };
         "NoteAir3 - Koreader" = {
-          path = "/home/${username}/Documents/Syncthing/NoteAir3/Koreader";
+          path = "/home/${mainUser}/Documents/Syncthing/NoteAir3/Koreader";
           devices = ["NoteAir3"];
           id = "09010-icymx";
           versioning = {

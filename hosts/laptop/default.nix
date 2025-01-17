@@ -1,13 +1,5 @@
 {
-  imports = [
-    ./hardware-configuration.nix
-
-    ../../modules/base
-    ../../modules/nixos
-
-    ../../modules/profiles/laptop
-    ../../modules/profiles/graphical
-  ];
+  imports = [./hardware-configuration.nix];
 
   garden = {
     device = {

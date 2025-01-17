@@ -2,14 +2,15 @@
   config,
   pkgs,
   lib,
-  username,
   ...
 }: let
+  inherit (config.garden.system) mainUser;
+
   cfg = config.garden.system;
 in {
   config = lib.mkIf cfg.virtualization.enable {
     # Add user to libvirtd group
-    users.users.${username}.extraGroups = ["libvirtd"];
+    users.users.${mainUser}.extraGroups = ["libvirtd"];
 
     # Install necessary packages
     environment.systemPackages = with pkgs; [

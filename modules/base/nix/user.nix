@@ -1,16 +1,17 @@
 {
   pkgs,
-  username,
   config,
   ...
 }: let
+  inherit (config.garden.system) mainUser;
+
   cfg = config.garden.programs.cli.shell;
 in {
-  users.users.${username} = {
+  users.users.${mainUser} = {
     isNormalUser = true;
-    description = "${username}";
+    description = "${mainUser}";
     extraGroups = ["networkmanager" "wheel"];
     shell = pkgs.${cfg};
   };
-  nix.settings.allowed-users = ["${username}"];
+  nix.settings.allowed-users = ["${mainUser}"];
 }

@@ -1,19 +1,21 @@
 {
   inputs,
-  username,
   host,
+  config,
   ...
-}: {
+}: let
+  inherit (config.garden.system) mainUser;
+in {
   imports = [inputs.home-manager.nixosModules.home-manager];
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
-    extraSpecialArgs = {inherit inputs username host;};
-    users.${username} = {
+    extraSpecialArgs = {inherit inputs host;};
+    users.${mainUser} = {
       imports = [./../../../home];
       home = {
-        username = "${username}";
-        homeDirectory = "/home/${username}";
+        username = "${mainUser}";
+        homeDirectory = "/home/${mainUser}";
         stateVersion = "24.05";
       };
       programs.home-manager.enable = true;

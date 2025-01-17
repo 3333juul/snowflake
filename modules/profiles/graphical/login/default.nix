@@ -1,11 +1,11 @@
 {
-  username,
   config,
   lib,
   pkgs,
   ...
 }: let
   inherit (lib.modules) mkIf;
+  inherit (config.garden.system) mainUser;
 
   cfg = config.garden.system.loginManager;
 in {
@@ -20,7 +20,7 @@ in {
 
       initial_session = mkIf cfg.autoLogin.enable {
         enable = true;
-        user = "${username}";
+        user = "${mainUser}";
         command = "Hyprland";
       };
     };

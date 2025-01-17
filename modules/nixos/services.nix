@@ -1,12 +1,14 @@
 {
   pkgs,
-  username,
+  config,
   ...
-}: {
+}: let
+  inherit (config.garden.system) mainUser;
+in {
   systemd.services.glance = {
     serviceConfig = {
       Restart = "always";
-      ExecStart = "${pkgs.glance}/bin/glance --config=/home/${username}/.config/glance/glance.yml";
+      ExecStart = "${pkgs.glance}/bin/glance --config=/home/${mainUser}/.config/glance/glance.yml";
     };
   };
 
