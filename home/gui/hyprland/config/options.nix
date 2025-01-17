@@ -1,18 +1,16 @@
-{
-  osConfig,
-  host,
-  ...
-}: let
+{osConfig, ...}: let
+  inherit (osConfig.networking) hostName;
+
   dev = osConfig.garden.device;
 in {
   wayland.windowManager.hyprland.settings = {
     monitor =
-      if (host == "desktop")
+      if (hostName == "desktop")
       then [
         "HDMI-A-1,1920x1080@60,0x0,1"
         "DVI-D-1,1920x1080@60,1920x0,1"
       ]
-      else if (host == "laptop")
+      else if (hostName == "laptop")
       then [
         "edP-1,1920x1080@60,1920x0,1.2"
       ]
