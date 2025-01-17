@@ -1,4 +1,4 @@
-{...}: {
+{
   imports = [
     #./ags # widgets
     ./browser # browsers

@@ -1,4 +1,4 @@
-{...}: {
+{
   imports = [
     ./yazi.nix
     ./keymap.nix

@@ -1,4 +1,4 @@
-{...}: {
+{
   imports = [
     ./keys.nix
     ./style.nix

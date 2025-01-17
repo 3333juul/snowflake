@@ -1,11 +1,4 @@
 {
-  pkgs,
-  lib,
-  config,
-  ...
-}: let
-  cfg = config.garden.programs;
-in {
   programs = {
     gnupg.agent = {
       enable = true;
@@ -14,7 +7,6 @@ in {
     };
     nix-ld = {
       enable = true;
-      libraries = with pkgs; [];
     };
   };
 }

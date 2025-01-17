@@ -1,4 +1,4 @@
-{...}: {
+{
   imports = [
     ./shell
     ./aichat.nix

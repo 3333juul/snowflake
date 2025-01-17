@@ -2,17 +2,18 @@
   inputs,
   pkgs,
   ...
-}: let
-in {
+}: {
   home.packages = with pkgs; [
     # Python
-    (python3.withPackages (ps:
-      with ps; [
-        pytesseract
-        pyqt5
-        pynput
-        numpy
-      ]))
+    (python3.withPackages (
+      ps:
+        with ps; [
+          pytesseract
+          pyqt5
+          pynput
+          numpy
+        ]
+    ))
 
     inputs.alejandra.defaultPackage.${system}
   ];

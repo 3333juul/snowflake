@@ -1,21 +1,23 @@
-{ stdenv
-, requireFile
-, nerd-font-patcher
-, python3Packages
-, monolisa
-, lib
+{
+  stdenv,
+  nerd-font-patcher,
+  python3Packages,
+  monolisa,
+  lib,
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   name = "monolisa-nerd";
   version = "${monolisa.version}-${nerd-font-patcher.version}";
 
   # src = import ./monolisa.nix;
   src = monolisa;
 
-  nativeBuildInputs = [ nerd-font-patcher ] ++ (with python3Packages; [
-    python
-    fontforge
-  ]);
+  nativeBuildInputs =
+    [nerd-font-patcher]
+    ++ (with python3Packages; [
+      python
+      fontforge
+    ]);
 
   buildPhase = ''
     runHook preBuild
@@ -62,4 +64,3 @@ stdenv.mkDerivation rec {
     platforms = platforms.all;
   };
 }
-

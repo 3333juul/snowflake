@@ -1,7 +1,10 @@
-{ inputs, pkgs, ... }:
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   # add the home manager module - TODO - sprawdz czy ta linijka jest potrzebna
-  imports = [ inputs.ags.homeManagerModules.default ];
+  imports = [inputs.ags.homeManagerModules.default];
 
   programs.ags = {
     enable = true;

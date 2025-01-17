@@ -1,4 +1,4 @@
-{...}: {
+{
   imports = [
     ./programs
     ./style

@@ -52,11 +52,6 @@
   };
 
   outputs = {nixpkgs, ...} @ inputs: let
-    commonModules = [
-      ./modules/base
-      ./modules/nixos
-    ];
-
     profilesPath = ./modules/profiles;
 
     desktop = profilesPath + /desktop;
@@ -71,11 +66,19 @@
     }:
       nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs host;
+          inherit inputs;
         };
+
         modules =
-          [./hosts/${host}]
-          ++ commonModules
+          [
+            # common modules
+            ./modules/base
+            ./modules/nixos
+
+            # modules per host
+            ./hosts/${host}
+            {networking.hostName = host;}
+          ]
           ++ profiles;
       };
   in {
@@ -87,6 +90,7 @@
           graphical
         ];
       };
+
       laptop = mkHostConfig {
         host = "laptop";
         profiles = [
@@ -94,6 +98,7 @@
           graphical
         ];
       };
+
       server = mkHostConfig {
         host = "server";
         profiles = [

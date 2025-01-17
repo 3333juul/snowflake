@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{
   imports = [
     ./hypridle.nix
     ./hyprland.nix
