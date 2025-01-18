@@ -1,4 +1,13 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  osConfig,
+  lib,
+  ...
+}: let
+  inherit (lib.modules) mkIf;
+
+  cfg = osConfig.garden.environment.desktop.type;
+
   mkScript = name: script: pkgs.writeShellScriptBin name (builtins.readFile script);
 
   scripts =
@@ -51,5 +60,7 @@
       );
     };
 in {
-  home.packages = builtins.attrValues scripts;
+  config = mkIf (cfg == "Hyprland") {
+    home.packages = builtins.attrValues scripts;
+  };
 }
