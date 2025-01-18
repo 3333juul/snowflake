@@ -1,6 +1,5 @@
 {
   inputs,
-  host,
   config,
   ...
 }: let
@@ -10,7 +9,7 @@ in {
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
-    extraSpecialArgs = {inherit inputs host;};
+    extraSpecialArgs = {inherit inputs;};
     users.${mainUser} = {
       imports = [./../../../home];
       home = {
