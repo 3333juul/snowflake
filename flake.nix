@@ -62,6 +62,7 @@
 
     mkHostConfig = {
       host,
+      class ? "nixos", # default class: nixos
       profiles ? [],
     }:
       nixpkgs.lib.nixosSystem {
@@ -71,12 +72,15 @@
 
         modules =
           [
-            # common modules
+            # common modules between all systems
             ./modules/base
-            ./modules/nixos
+
+            # modules per class: nixos, darwin
+            ./modules/${class}
 
             # modules per host
             ./hosts/${host}
+            # set hostname
             {networking.hostName = host;}
           ]
           ++ profiles;
