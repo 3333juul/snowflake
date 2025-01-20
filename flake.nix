@@ -49,6 +49,8 @@
     };
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
+
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 
   outputs = {nixpkgs, ...} @ inputs: let
@@ -60,11 +62,19 @@
     graphical = profilesPath + /graphical;
     headless = profilesPath + /headless;
 
+    classToOS = class:
+      if class == "nixos"
+      then "linux"
+      else "darwin";
+
     mkHostConfig = {
       host,
       class ? "nixos", # default class: nixos
+      system ? "x86_64", # default system: x86_64-linux
       profiles ? [],
-    }:
+    }: let
+      fullSystem = "${system}-${classToOS class}";
+    in
       nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
@@ -74,14 +84,15 @@
           [
             # common modules between all systems
             ./modules/base
-
             # modules per class: nixos, darwin
             ./modules/${class}
-
             # modules per host
             ./hosts/${host}
+
             # set hostname
             {networking.hostName = host;}
+            # set system
+            {nixpkgs.hostPlatform = fullSystem;}
           ]
           ++ profiles;
       };
