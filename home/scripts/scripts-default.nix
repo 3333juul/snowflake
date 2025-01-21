@@ -1,4 +1,13 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  osConfig,
+  lib,
+  ...
+}: let
+  inherit (lib.modules) mkIf;
+
+  cfg = osConfig.garden.programs.gui;
+
   mkScript = name: script: pkgs.writeShellScriptBin name (builtins.readFile script);
 
   scripts =
@@ -28,5 +37,7 @@
       } (builtins.readFile ./scripts-default/ocr-lookup.py);
     };
 in {
-  home.packages = builtins.attrValues scripts;
+  config = mkIf cfg.enable {
+    home.packages = builtins.attrValues scripts;
+  };
 }
