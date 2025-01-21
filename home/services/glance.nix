@@ -97,10 +97,6 @@ in {
                   hide-location = true;
                   location = "Biała Podlaska, Poland";
                 }
-                {
-                  type = "reddit";
-                  subreddit = "TrueAnon";
-                }
               ];
             }
           ];
@@ -175,17 +171,6 @@ in {
             {
               size = "full";
               widgets = [
-                /*
-                   {
-                  type = "rss";
-                  style = "detailed-list";
-                  limit = 15;
-                  collapseAfter = 5;
-                  cache = "3h";
-                  feeds = [
-                  ];
-                }
-                */
                 {
                   type = "videos";
                   style = "grid-cards";
