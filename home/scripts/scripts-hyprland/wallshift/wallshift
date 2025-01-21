@@ -6,76 +6,72 @@ source "$HOME/nixos-config/modules/home/scripts/scripts-hyprland/wallshift/confi
 declare -A last_set_wallpaper
 
 if [ "$1" == "--swww" ]; then
-  tool="swww"
+	tool="swww"
 fi
 
 check_tool_running() {
-  if [ "$tool" == "hyprpaper" ]; then
-    if ! pgrep -x "hyprpaper" > /dev/null
-    then
-      hyprpaper &
-      sleep 0.1
-    fi
-  elif [ "$tool" == "swww" ]; then
-    if ! pgrep -x "swww-daemon" > /dev/null
-    then
-      swww-daemon &
-    fi
-  fi
+	if [ "$tool" == "hyprpaper" ]; then
+		if ! pgrep -x "hyprpaper" >/dev/null; then
+			hyprpaper &
+			sleep 0.1
+		fi
+	elif [ "$tool" == "swww" ]; then
+		if ! pgrep -x "swww-daemon" >/dev/null; then
+			swww-daemon &
+		fi
+	fi
 }
 
 preload_wallpapers() {
-  if [ "$tool" == "hyprpaper" ]; then
-    for wallpaper in "${wallpaper_map[@]}"; do
-      if [ -n "$wallpaper" ]; then
-        hyprctl hyprpaper preload "$wallpaper_dir/$wallpaper"
-      fi
-    done
-  fi
+	if [ "$tool" == "hyprpaper" ]; then
+		for wallpaper in "${wallpaper_map[@]}"; do
+			if [ -n "$wallpaper" ]; then
+				hyprctl hyprpaper preload "$wallpaper_dir/$wallpaper"
+			fi
+		done
+	fi
 }
 
 set_wallpapers() {
-  monitor_info=$(hyprctl -j monitors)
-  monitors=$(echo $monitor_info | jq -r '.[].name')
-  overview_wallpaper=""
-  for monitor in $monitors
-  do
-    active_ws=$(echo $monitor_info | jq -r --arg monitor "$monitor" '.[] | select(.name==$monitor) | .activeWorkspace.name')
-    if [ "$active_ws" == "OVERVIEW" ]; then
-      overview_wallpaper=${wallpaper_map[$active_ws]}
-      break
-    fi
-  done
-  for monitor in $monitors
-  do
-    if [ -n "$overview_wallpaper" ]; then
-      wallpaper=$overview_wallpaper
-    else
-      active_ws=$(echo $monitor_info | jq -r --arg monitor "$monitor" '.[] | select(.name==$monitor) | .activeWorkspace.name')
-      wallpaper=${wallpaper_map[$active_ws]}
-      if [ -z "$wallpaper" ]; then
-        wallpaper=$default_wallpaper
-      fi
-    fi
-    if [ "$wallpaper" != "${last_set_wallpaper[$monitor]}" ]; then
-      if [ -n "$wallpaper" ]; then
-        if [ "$tool" == "swww" ]; then
-          swww img -o "$monitor" $wallpaper_dir/$wallpaper
-        else
-          hyprctl hyprpaper wallpaper "$monitor,$wallpaper_dir/$wallpaper"
-        fi
-      fi
-      last_set_wallpaper[$monitor]=$wallpaper
-    fi
-  done
+	monitor_info=$(hyprctl -j monitors)
+	monitors=$(echo $monitor_info | jq -r '.[].name')
+	overview_wallpaper=""
+	for monitor in $monitors; do
+		active_ws=$(echo $monitor_info | jq -r --arg monitor "$monitor" '.[] | select(.name==$monitor) | .activeWorkspace.name')
+		if [ "$active_ws" == "OVERVIEW" ]; then
+			overview_wallpaper=${wallpaper_map[$active_ws]}
+			break
+		fi
+	done
+	for monitor in $monitors; do
+		if [ -n "$overview_wallpaper" ]; then
+			wallpaper=$overview_wallpaper
+		else
+			active_ws=$(echo $monitor_info | jq -r --arg monitor "$monitor" '.[] | select(.name==$monitor) | .activeWorkspace.name')
+			wallpaper=${wallpaper_map[$active_ws]}
+			if [ -z "$wallpaper" ]; then
+				wallpaper=$default_wallpaper
+			fi
+		fi
+		if [ "$wallpaper" != "${last_set_wallpaper[$monitor]}" ]; then
+			if [ -n "$wallpaper" ]; then
+				if [ "$tool" == "swww" ]; then
+					swww img -o "$monitor" $wallpaper_dir/$wallpaper
+				else
+					hyprctl hyprpaper wallpaper "$monitor,$wallpaper_dir/$wallpaper"
+				fi
+			fi
+			last_set_wallpaper[$monitor]=$wallpaper
+		fi
+	done
 }
 
 handle() {
-  case $1 in
-    renameworkspace* | workspace*)
-      set_wallpapers
-      ;;
-  esac
+	case $1 in
+	renameworkspace* | workspace*)
+		set_wallpapers
+		;;
+	esac
 }
 
 check_tool_running

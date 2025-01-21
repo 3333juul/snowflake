@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 workspace_info=$(hyprctl -j activeworkspace)
 
@@ -7,25 +7,25 @@ workspace_id=$(echo "$workspace_info" | jq -r '.id')
 image_path=""
 
 case $workspace_id in
-    1)
-        image_path="~/Pictures/collage/collage2.jpg"
-        ;;
-    2)
-        image_path="~/Pictures/collage/ws3/2.jpeg"
-        ;;
-    3)
-        image_path="~/Pictures/collage/ws3/3.jpeg"
-        ;;
-    4)
-        image_path="~/Pictures/collage/collage37.jpg"
-        ;;
-    5)
-        image_path="~/Pictures/collage/green/11.jpg"
-        ;;
-    *)
-        image_path="~/Pictures/collage/ws3/2.jpeg"
-        ;;
+1)
+	image_path="$HOME/Pictures/collage/collage2.jpg"
+	;;
+2)
+	image_path="$HOME/Pictures/collage/ws3/2.jpeg"
+	;;
+3)
+	image_path="$HOME/Pictures/collage/ws3/3.jpeg"
+	;;
+4)
+	image_path="$HOME/Pictures/collage/collage37.jpg"
+	;;
+5)
+	image_path="$HOME/Pictures/collage/green/11.jpg"
+	;;
+*)
+	image_path="$HOME/Pictures/collage/ws3/2.jpeg"
+	;;
 esac
 
-rofi -show drun -theme '~/.config/rofi/themes/launcher2.rasi' -theme-str "imagebox {
- background-image: url('$image_path', width);}" 
+rofi -show drun -theme "$HOME/.config/rofi/themes/launcher2.rasi" -theme-str "imagebox {
+ background-image: url('$image_path', width);}"

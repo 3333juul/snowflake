@@ -10,8 +10,8 @@ workspace_name=$(grep -oP '(?<=wallpaper_map\[")[^"]*' $config_path | rofi -dmen
 
 # If no workspace is selected, exit the script
 if [ -z "$workspace_name" ]; then
-  echo "Workspace not selected. Exiting."
-  exit 1
+	echo "Workspace not selected. Exiting."
+	exit 1
 fi
 
 # Find all wallpapers
@@ -19,13 +19,13 @@ wallpapers=$(find "$wallpaper_dir" -type f)
 
 # Show menu (with icon) for wallpaper selection
 selected_wallpaper=$(for a in $wallpapers; do
-    echo -en "${a##*/}\0icon\x1f$a\n"
+	echo -en "${a##*/}\0icon\x1f$a\n"
 done | rofi -dmenu -i -p "WALLPAPER" -theme ~/.config/rofi/themes/wallpaper.rasi)
 
 # If no wallpaper is selected, exit the script
 if [ -z "$selected_wallpaper" ]; then
-  echo "Wallpaper not selected. Exiting."
-  exit 1
+	echo "Wallpaper not selected. Exiting."
+	exit 1
 fi
 
 # Get the old wallpaper for the workspace
@@ -37,16 +37,13 @@ echo "Updated wallpaper for workspace: $workspace_name"
 
 # Unload the old wallpaper if it's not used anywhere else
 if [[ ! "$(grep -oP "$old_wallpaper" $config_path)" || "$old_wallpaper" == "$default_wallpaper" ]]; then
-  # Unload the old wallpaper only if it exists
-  if [ -n "$old_wallpaper" ]; then
-    hyprctl hyprpaper unload "$wallpaper_dir/$old_wallpaper"
-    echo "Unloaded wallpaper: $old_wallpaper"
-  fi
+	# Unload the old wallpaper only if it exists
+	if [ -n "$old_wallpaper" ]; then
+		hyprctl hyprpaper unload "$wallpaper_dir/$old_wallpaper"
+		echo "Unloaded wallpaper: $old_wallpaper"
+	fi
 fi
 
 # Restart the script
 pkill -f wallshift
 wallshift &
-
-
-

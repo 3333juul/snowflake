@@ -8,119 +8,114 @@ is_floating=$(echo $window_info | jq -r '.floating')
 active_window_address=$(hyprctl -j activewindow | jq -r '.address')
 
 tiling_pin() {
-  case $1 in
-    workspace*)
-        tiling_pin_workspace
-        ;;
-    changefloatingmode*)
-        tiling_pin_changefloatingmode
-        ;;
-    closewindow*)
-        closewindow "$active_window_address"
-        ;;
-  esac
+	case $1 in
+	workspace*)
+		tiling_pin_workspace
+		;;
+	changefloatingmode*)
+		tiling_pin_changefloatingmode
+		;;
+	closewindow*)
+		closewindow "$active_window_address"
+		;;
+	esac
 }
 
 floating_pin() {
-  case $1 in
-    workspace*)
-        floating_pin_workspace
-        ;;
-    changefloatingmode*)
-        floating_pin_changefloatingmode
-        ;;
-    closewindow*)
-        closewindow "$active_window_address"
-        ;;
-  esac
+	case $1 in
+	workspace*)
+		floating_pin_workspace
+		;;
+	changefloatingmode*)
+		floating_pin_changefloatingmode
+		;;
+	closewindow*)
+		closewindow "$active_window_address"
+		;;
+	esac
 }
 
 closewindow() {
-    window_list=$(hyprctl -j clients | jq -r '.[] | .address')
-    if ! echo "$window_list" | grep -q "$1"; then
-        sed -i "/$1/d" window_socat_info.txt
-        exit 0
-    fi
+	window_list=$(hyprctl -j clients | jq -r '.[] | .address')
+	if ! echo "$window_list" | grep -q "$1"; then
+		sed -i "/$1/d" window_socat_info.txt
+		exit 0
+	fi
 }
 
 tiling_pin_workspace() {
-    active_workspace=$(hyprctl -j activeworkspace | jq -r '.id')
-    workspace_name=$(hyprctl -j activeworkspace | jq -r '.name')
-    active_windows_in_workspace=$(hyprctl -j clients | jq -r --argjson active_workspace "$active_workspace" '.[] | select(.workspace.id == $active_workspace) | .address')
+	active_workspace=$(hyprctl -j activeworkspace | jq -r '.id')
+	workspace_name=$(hyprctl -j activeworkspace | jq -r '.name')
+	active_windows_in_workspace=$(hyprctl -j clients | jq -r --argjson active_workspace "$active_workspace" '.[] | select(.workspace.id == $active_workspace) | .address')
 
-    if [[ -z "$active_windows_in_workspace" || $script_arg == "focus" ]]; then
-        hyprctl dispatch movetoworkspace "$workspace_name",address:"$active_window_address"
-    else
-        hyprctl dispatch movetoworkspacesilent "$workspace_name",address:"$active_window_address"
-    fi
+	if [[ -z "$active_windows_in_workspace" || $script_arg == "focus" ]]; then
+		hyprctl dispatch movetoworkspace "$workspace_name",address:"$active_window_address"
+	else
+		hyprctl dispatch movetoworkspacesilent "$workspace_name",address:"$active_window_address"
+	fi
 }
 
 tiling_pin_changefloatingmode() {
-    is_floating=$(hyprctl -j activewindow | jq -r '.floating')
-    active_floating_window=$(hyprctl -j activewindow | jq -r '.address')
+	is_floating=$(hyprctl -j activewindow | jq -r '.floating')
+	active_floating_window=$(hyprctl -j activewindow | jq -r '.address')
 
-    if [[ "$is_floating" == "true" ]]; then
-        grep -Fq "$active_floating_window" window_socat_info.txt
-        if [[ $? -eq 0 ]]; then
-            sed -i "/$active_floating_window/d" window_socat_info.txt  
-            hyprctl notify -1 1500 "rgb(98971a)" Unpinned  
-            exit 0
-        fi
-    fi
+	if [[ "$is_floating" == "true" ]]; then
+		grep -Fq "$active_floating_window" window_socat_info.txt
+		if [[ $? -eq 0 ]]; then
+			sed -i "/$active_floating_window/d" window_socat_info.txt
+			hyprctl notify -1 1500 "rgb(98971a)" Unpinned
+			exit 0
+		fi
+	fi
 }
 
 floating_pin_workspace() {
-    windows_info=$(hyprctl -j clients)
-    pinned_window_address=$(echo $windows_info | jq -r '.[] | select(.pinned == true) | .address')
+	windows_info=$(hyprctl -j clients)
+	pinned_window_address=$(echo $windows_info | jq -r '.[] | select(.pinned == true) | .address')
 
-    if [[ $script_arg == "focus" ]]; then
-        hyprctl dispatch focuswindow address:"$pinned_window_address"
-    fi
+	if [[ $script_arg == "focus" ]]; then
+		hyprctl dispatch focuswindow address:"$pinned_window_address"
+	fi
 }
 
 floating_pin_changefloatingmode() {
-    is_floating=$(hyprctl -j activewindow | jq -r '.floating')
-    active_floating_window=$(hyprctl -j activewindow | jq -r '.address')
+	is_floating=$(hyprctl -j activewindow | jq -r '.floating')
+	active_floating_window=$(hyprctl -j activewindow | jq -r '.address')
 
-    if [[ "$is_floating" == "false" ]]; then
-        grep -Fq "$active_floating_window" window_socat_info.txt
-        if [[ $? -eq 0 ]]; then
-            sed -i "/$active_floating_window/d" window_socat_info.txt  
-            hyprctl notify -1 1500 "rgb(98971a)" Unpinned  
-            exit 0
-        fi
-    fi
+	if [[ "$is_floating" == "false" ]]; then
+		grep -Fq "$active_floating_window" window_socat_info.txt
+		if [[ $? -eq 0 ]]; then
+			sed -i "/$active_floating_window/d" window_socat_info.txt
+			hyprctl notify -1 1500 "rgb(98971a)" Unpinned
+			exit 0
+		fi
+	fi
 }
 
 if grep -Fq "$active_window_address" window_socat_info.txt; then
-    socat_pid=$(grep "$active_window_address" window_socat_info.txt | cut -d ',' -f 2)
-    hyprctl notify -1 1500 "rgb(98971a)" Unpinned
+	socat_pid=$(grep "$active_window_address" window_socat_info.txt | cut -d ',' -f 2)
+	hyprctl notify -1 1500 "rgb(98971a)" Unpinned
 
-    if [[ "$is_pinned" == "true" ]]; then
-        hyprctl dispatch pin
-    fi
+	if [[ "$is_pinned" == "true" ]]; then
+		hyprctl dispatch pin
+	fi
 
-    kill $socat_pid
-    sed -i "/$active_window_address/d" window_socat_info.txt
-    exit 0
+	kill $socat_pid
+	sed -i "/$active_window_address/d" window_socat_info.txt
+	exit 0
 fi
 
 if [[ "$is_pinned" == "false" && "$is_floating" == "false" ]]; then
-    window_address=$(echo $window_info | jq -r '.address')
-    socat -U - UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock | while read -r line; do tiling_pin "$line"; done &
-    echo "$window_address,$!" >> window_socat_info.txt
-    hyprctl notify -1 1500 "rgb(98971a)" Pinned
+	window_address=$(echo $window_info | jq -r '.address')
+	socat -U - UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock | while read -r line; do tiling_pin "$line"; done &
+	echo "$window_address,$!" >>window_socat_info.txt
+	hyprctl notify -1 1500 "rgb(98971a)" Pinned
 fi
 
 if [[ "$is_floating" == "true" && "$is_pinned" == "false" ]]; then
-    window_address=$(echo $window_info | jq -r '.address')
-    hyprctl notify -1 1500 "rgb(98971a)" Pinned
-    socat -U - UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock | while read -r line; do floating_pin "$line"; done &
-    echo "$window_address,$!" >> window_socat_info.txt
-    hyprctl dispatch pin
+	window_address=$(echo $window_info | jq -r '.address')
+	hyprctl notify -1 1500 "rgb(98971a)" Pinned
+	socat -U - UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock | while read -r line; do floating_pin "$line"; done &
+	echo "$window_address,$!" >>window_socat_info.txt
+	hyprctl dispatch pin
 fi
-
-
-
-
-

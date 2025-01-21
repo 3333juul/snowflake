@@ -9,10 +9,10 @@ updated_window_list=""
 index=1
 
 while IFS= read -r line; do
-    window_address=${line##* | }
-    window_map[$index]=$window_address
-    updated_window_list+="$index | ${line% | *}"$'\n'
-    let index=index+1
+	window_address=${line##* | }
+	window_map[$index]=$window_address
+	updated_window_list+="$index | ${line% | *}"$'\n'
+	let index=index+1
 done <<<"$window_list"
 
 selected_window=$(echo -e "$updated_window_list" | $1)
@@ -21,8 +21,8 @@ window_id=${selected_window%% | *}
 window_address=${window_map[$window_id]}
 
 if [ -z "$window_address" ]; then
-    echo "No window selected."
-    exit 1
+	echo "No window selected."
+	exit 1
 fi
 
 hyprctl dispatch focuswindow "address:$window_address"

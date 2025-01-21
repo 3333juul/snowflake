@@ -4,77 +4,77 @@ urgent_file="/tmp/.urgent_address"
 store_file="/tmp/.win_store"
 
 if [ ! -f "$urgent_file" ]; then
-    touch "$urgent_file"
+	touch "$urgent_file"
 fi
 
 if [ ! -f "$store_file" ]; then
-    touch "$store_file"
+	touch "$store_file"
 fi
 
 toggle_urgent() {
-    if [ -s "$urgent_file" ]; then
-        address=$(awk '{print $1}' "$urgent_file")
-        original_workspace=$(awk '{print $2}' "$urgent_file")
-        active_workspace=$(hyprctl -j activeworkspace | jq -r '.id')
+	if [ -s "$urgent_file" ]; then
+		address=$(awk '{print $1}' "$urgent_file")
+		original_workspace=$(awk '{print $2}' "$urgent_file")
+		active_workspace=$(hyprctl -j activeworkspace | jq -r '.id')
 
-        # Check if the window is on the active workspace
-        is_on_active_workspace=$(hyprctl -j clients | jq -r --arg ADDRESS "$address" --arg WORKSPACE "$active_workspace" \
-            '.[] | select(.address == $ADDRESS and .workspace.id == ($WORKSPACE | tonumber))')
+		# Check if the window is on the active workspace
+		is_on_active_workspace=$(hyprctl -j clients | jq -r --arg ADDRESS "$address" --arg WORKSPACE "$active_workspace" \
+			'.[] | select(.address == $ADDRESS and .workspace.id == ($WORKSPACE | tonumber))')
 
-        if [ -n "$is_on_active_workspace" ]; then
-            send_back "$address" "$original_workspace"
-        else
-            hyprctl dispatch movetoworkspace "$active_workspace,address:$address"
-            echo "$address $original_workspace" >>"$store_file"
-        fi
-    fi
-    exit
+		if [ -n "$is_on_active_workspace" ]; then
+			send_back "$address" "$original_workspace"
+		else
+			hyprctl dispatch movetoworkspace "$active_workspace,address:$address"
+			echo "$address $original_workspace" >>"$store_file"
+		fi
+	fi
+	exit
 }
 
 send_back() {
-    local address="$1"
-    local original_workspace="$2"
+	local address="$1"
+	local original_workspace="$2"
 
-    # Check if the window is in the store_file
-    found_in_store=$(grep "$address" "$store_file")
+	# Check if the window is in the store_file
+	found_in_store=$(grep "$address" "$store_file")
 
-    if [ ! -z "$found_in_store" ]; then
-        hyprctl dispatch movetoworkspacesilent "$original_workspace,address:$address"
-        sed -i "/$address/d" "$store_file"
-    else
-        hyprctl notify -1 1500 "rgb(98971a)" "Urgent window not avaliable."
-    fi
+	if [ ! -z "$found_in_store" ]; then
+		hyprctl dispatch movetoworkspacesilent "$original_workspace,address:$address"
+		sed -i "/$address/d" "$store_file"
+	else
+		hyprctl notify -1 1500 "rgb(98971a)" "Urgent window not avaliable."
+	fi
 }
 
 case $1 in
-  -t|--toggle)
-    toggle_urgent
-    ;;
-  -h|--help)
-    echo "Usage: $(basename $0) [OPTIONS]"
-    echo "    -t, --toggle                 Toggle urgent window"
-    echo "    -h, --help                   Show this help message"
-    exit
-    ;;
-  *)
-    echo "$(basename $0) started"
-    ;;
+-t | --toggle)
+	toggle_urgent
+	;;
+-h | --help)
+	echo "Usage: $(basename $0) [OPTIONS]"
+	echo "    -t, --toggle                 Toggle urgent window"
+	echo "    -h, --help                   Show this help message"
+	exit
+	;;
+*)
+	echo "$(basename $0) started"
+	;;
 esac
 
 handle() {
-    case $1 in
-        urgent*)
-            address=0x$(echo "$1" | cut -d',' -f1 | cut -d'>' -f3)
-            original_workspace=$(hyprctl -j clients | jq -r --arg ADDRESS "$address" '.[] | select(.address == $ADDRESS) | .workspace.name')
+	case $1 in
+	urgent*)
+		address=0x$(echo "$1" | cut -d',' -f1 | cut -d'>' -f3)
+		original_workspace=$(hyprctl -j clients | jq -r --arg ADDRESS "$address" '.[] | select(.address == $ADDRESS) | .workspace.name')
 
-            # Clear the urgent_file
-            > "$urgent_file"
+		# Clear the urgent_file
+		>"$urgent_file"
 
-            echo "$address $original_workspace" >>"$urgent_file"
-            ;;
-    esac
+		echo "$address $original_workspace" >>"$urgent_file"
+		;;
+	esac
 }
 
 socat -U - UNIX-CONNECT:"$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" | while read -r line; do
-    handle "$line"
+	handle "$line"
 done

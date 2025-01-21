@@ -2,7 +2,7 @@
 
 # Reset files
 for monitor in $(hyprctl -j monitors | jq -r '.[].id'); do
-    echo "" > "/tmp/windowstate_$monitor"
+	echo "" >"/tmp/windowstate_$monitor"
 done
 
 handle() {
@@ -43,7 +43,7 @@ handle() {
 			fi
 
 			# Save the result to a monitor-specific file
-			echo "$output" > "/tmp/windowstate_$monitor"
+			echo "$output" >"/tmp/windowstate_$monitor"
 		done
 
 		# Send a signal to waybar

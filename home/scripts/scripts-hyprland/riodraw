@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 read -r pos size <<<"$(slurp)"
 
@@ -7,11 +7,11 @@ pos_y=${pos#*,}
 width=${size%x*}
 height=${size#*x}
 
-echo $pos_x
-echo $pos_y
-echo $width
-echo $height
-
 hyprctl dispatch exec "[float; move ${pos_x} ${pos_y}; size ${width} ${height}] kitty"
+
+# echo $pos_x
+# echo $pos_y
+# echo $width
+# echo $height
 
 # TODO - report bug that appears when using on second monitor

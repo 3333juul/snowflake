@@ -1,19 +1,39 @@
 #!/bin/bash
-# Dependencies: grimblast-git, tesseract-ocr, wl-clipboard
+# Dependencies: grimblast-git, tesseract-ocr, wl-clipboard, sdcv (optional)
 
 TEMP_SCREENSHOT=$(mktemp /tmp/screenshot-XXXXXX.png) # Temporary file for screenshot
 
-grimblast --freeze copysave area "$TEMP_SCREENSHOT" > /dev/null 2>&1 || { echo "No screenshot taken."; rm "$TEMP_SCREENSHOT"; exit 1; }
+# Capture screenshot
+grimblast --freeze copysave area "$TEMP_SCREENSHOT" >/dev/null 2>&1 || {
+	echo "No screenshot taken."
+	rm "$TEMP_SCREENSHOT"
+	exit 1
+}
 
-OCR_RESULT=$(tesseract -l pol "$TEMP_SCREENSHOT" stdout 2>/dev/null) # OCR
+# Perform OCR
+OCR_RESULT=$(tesseract -l pol "$TEMP_SCREENSHOT" stdout 2>/dev/null)
 rm "$TEMP_SCREENSHOT" # Clean up screenshot file
 
+# Check if OCR returned any result
 if [ -n "$OCR_RESULT" ]; then
-    echo "$OCR_RESULT" | tr -d "\n" | wl-copy # Copy to clipboard
-    echo "$OCR_RESULT" # Output OCR result to terminal
-    notify-send "Text copied to clipboard" 
-else
-    echo "No text found."
-    notify-send "No text found" 
-fi
+	# Remove lines that contain only a single character
+	OCR_RESULT=$(echo "$OCR_RESULT" | grep -v '^.$')
 
+	echo "$OCR_RESULT" | wl-copy # Copy to clipboard
+	echo "$OCR_RESULT"           # Output OCR result to terminal
+	notify-send "Text copied to clipboard"
+
+	# Check if the script was called with the argument "sdcv"
+	if [ "$1" == "--sdcv" ]; then
+		TERM_CLASS="sdcv"
+
+		# Close existing window with the unique class if it exists
+		hyprctl dispatch closewindow "$TERM_CLASS"
+
+		# Open a terminal with a unique class and run sdcv with the OCR result
+		kitty --class "$TERM_CLASS" -e sdcv -c -n "$OCR_RESULT"
+	fi
+else
+	echo "No text found."
+	notify-send "No text found"
+fi

@@ -1,38 +1,38 @@
 #!/bin/bash
 
 handle() {
-  case $1 in
-    easymotionselect*)
-      address=$(echo $1 | cut -d',' -f1 | cut -d'>' -f3)
-      clients=$(hyprctl -j clients)  
-      selected_window=$(echo "$clients" | jq -r ".[] | select(.address == \"$address\") | .workspace.name")
+	case $1 in
+	easymotionselect*)
+		address=$(echo $1 | cut -d',' -f1 | cut -d'>' -f3)
+		clients=$(hyprctl -j clients)
+		selected_window=$(echo "$clients" | jq -r ".[] | select(.address == \"$address\") | .workspace.name")
 
-      if [ "$selected_window" = "$active_workspace" ]; then
-        hyprctl dispatch focuswindow address:$address
-        if [ "$fullscreen" = "1" ] || [ "$fullscreen" = "2" ]; then
-            hyprctl dispatch fullscreen $fullscreen
-        fi
-      else
-        if [ "$fullscreen" = "1" ] || [ "$fullscreen" = "2" ]; then
-            hyprctl dispatch fullscreen $fullscreen
-        fi
-        hyprctl dispatch focuswindow address:$address
-      fi
-      exit
-      ;;
-    easymotionexit*)
-      if [ "$fullscreen" = "1" ] || [ "$fullscreen" = "2" ]; then
-          hyprctl dispatch fullscreen $fullscreen
-      fi
-      exit
-      ;;
-  esac
+		if [ "$selected_window" = "$active_workspace" ]; then
+			hyprctl dispatch focuswindow address:$address
+			if [ "$fullscreen" = "1" ] || [ "$fullscreen" = "2" ]; then
+				hyprctl dispatch fullscreen $fullscreen
+			fi
+		else
+			if [ "$fullscreen" = "1" ] || [ "$fullscreen" = "2" ]; then
+				hyprctl dispatch fullscreen $fullscreen
+			fi
+			hyprctl dispatch focuswindow address:$address
+		fi
+		exit
+		;;
+	easymotionexit*)
+		if [ "$fullscreen" = "1" ] || [ "$fullscreen" = "2" ]; then
+			hyprctl dispatch fullscreen $fullscreen
+		fi
+		exit
+		;;
+	esac
 }
 
 active_workspace=$(hyprctl -j activeworkspace | jq -r '.name')
 fullscreen=$(hyprctl -j activewindow | jq -r '.fullscreen')
 if [ "$fullscreen" = "1" ] || [ "$fullscreen" = "2" ]; then
-    hyprctl dispatch fullscreen $fullscreen
+	hyprctl dispatch fullscreen $fullscreen
 fi
 
 hyprctl dispatch easymotion

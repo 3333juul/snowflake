@@ -2,7 +2,7 @@
 
 pkill -f wallshift
 
-pkill -f hyprpaper 
+pkill -f hyprpaper
 
 sleep 0.1
 

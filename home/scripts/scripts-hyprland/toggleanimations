@@ -3,9 +3,9 @@
 status=$(hyprctl -j getoption animations:enabled | jq -r '.int')
 
 if [ $status -eq 0 ]; then
-    hyprctl keyword animations:enabled 1
-    hyprctl notify -1 1500 "rgb(98971a)" "Animations: Enabled"
+	hyprctl keyword animations:enabled 1
+	hyprctl notify -1 1500 "rgb(98971a)" "Animations: Enabled"
 else
-    hyprctl keyword animations:enabled 0
-    hyprctl notify -1 1500 "rgb(98971a)" "Animations: Disabled"
+	hyprctl keyword animations:enabled 0
+	hyprctl notify -1 1500 "rgb(98971a)" "Animations: Disabled"
 fi

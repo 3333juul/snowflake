@@ -65,54 +65,51 @@ LANG=C
 
 # Check whether to group or ungroup windows
 # -----------------------------------------
-if hyprctl -j activewindow | jq -cr '.grouped' | grep -vFq '['
-then
-    # --------------------------------------------------------------------------
-    # Ungroup current window group
-    # --------------------------------------------------------------------------
-    hyprctl dispatch togglegroup
+if hyprctl -j activewindow | jq -cr '.grouped' | grep -vFq '['; then
+	# --------------------------------------------------------------------------
+	# Ungroup current window group
+	# --------------------------------------------------------------------------
+	hyprctl dispatch togglegroup
 else
-    # --------------------------------------------------------------------------
-    # Group all windows on focused workspace
-    # --------------------------------------------------------------------------
+	# --------------------------------------------------------------------------
+	# Group all windows on focused workspace
+	# --------------------------------------------------------------------------
 
-    # Save original window's address
-    # ------------------------------
-    ORIGWINDOW="$(hyprctl -j activewindow | jq -cr '.address')"
+	# Save original window's address
+	# ------------------------------
+	ORIGWINDOW="$(hyprctl -j activewindow | jq -cr '.address')"
 
-    # Get current workspace's windows' addresses
-    # ------------------------------------------
-    WINDOWS="$(hyprctl -j clients | jq -cr ".[] | select(.workspace.id == $(hyprctl activeworkspace -j | jq -cr '.id')) | .address")"
+	# Get current workspace's windows' addresses
+	# ------------------------------------------
+	WINDOWS="$(hyprctl -j clients | jq -cr ".[] | select(.workspace.id == $(hyprctl activeworkspace -j | jq -cr '.id')) | .address")"
 
-    # If there's just one window, just group it normally for better UX
-    # ----------------------------------------------------------------
-    if [ "$(echo "$WINDOWS" | wc -l)" -eq 1 ]
-    then
-        hyprctl dispatch togglegroup
-    else
-        # Move to each window and try to group it every which way
-        # -------------------------------------------------------
-        window_args=""
-        for window in $WINDOWS
-        do
-            window_args="$window_args dispatch focuswindow address:$window; dispatch moveintogroup l; dispatch moveintogroup r; dispatch moveintogroup u; dispatch moveintogroup d;"
-        done
-        # Group the first window
-        # ----------------------
-        batch_args="dispatch togglegroup;"
+	# If there's just one window, just group it normally for better UX
+	# ----------------------------------------------------------------
+	if [ "$(echo "$WINDOWS" | wc -l)" -eq 1 ]; then
+		hyprctl dispatch togglegroup
+	else
+		# Move to each window and try to group it every which way
+		# -------------------------------------------------------
+		window_args=""
+		for window in $WINDOWS; do
+			window_args="$window_args dispatch focuswindow address:$window; dispatch moveintogroup l; dispatch moveintogroup r; dispatch moveintogroup u; dispatch moveintogroup d;"
+		done
+		# Group the first window
+		# ----------------------
+		batch_args="dispatch togglegroup;"
 
-        # Group all other windows twice (once isn't enough in case of very
-        # "deep" layouts". This ugly workaround could be fixed if hyprland
-        # allowed moving into groups based on addresses and not positions
-        # ----------------------------------------------------------------
-        batch_args="$batch_args $window_args $window_args"
+		# Group all other windows twice (once isn't enough in case of very
+		# "deep" layouts". This ugly workaround could be fixed if hyprland
+		# allowed moving into groups based on addresses and not positions
+		# ----------------------------------------------------------------
+		batch_args="$batch_args $window_args $window_args"
 
-        # Also focus the original window at the very end
-        # ----------------------------------------------
-        batch_args="$batch_args dispatch focuswindow address:$ORIGWINDOW"
+		# Also focus the original window at the very end
+		# ----------------------------------------------
+		batch_args="$batch_args dispatch focuswindow address:$ORIGWINDOW"
 
-        # Execute the grouping using hyprctl --batch for performance
-        # ----------------------------------------------------------
-        hyprctl --batch "$batch_args"
-    fi
+		# Execute the grouping using hyprctl --batch for performance
+		# ----------------------------------------------------------
+		hyprctl --batch "$batch_args"
+	fi
 fi

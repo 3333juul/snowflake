@@ -12,99 +12,99 @@ if [ ! -f "$store_file" ]; then
 fi
 
 handle() {
-  case $1 in
-    custom*)
-      event_data=$(echo $1 | cut -d'>' -f3)
-      if [[ "$event_data" == "changemode" ]]; then
-        if [[ "$mode" == "focus" ]]; then
-          mode="move"
-          hyprctl dispatch easymotion "bgcolor:rgb($color)"
-        else
-          mode="focus"
-          hyprctl dispatch easymotion
-        fi
-        echo "Changed mode to: $mode"
-      fi
-    ;;
-    renameworkspace*)
-      workspace_name=$(hyprctl -j monitors | jq -r '.[] | select(.activeWorkspace.name == "OVERVIEW") | .activeWorkspace.name')
-      if [ "$workspace_name" = "OVERVIEW" ]; then
-        if [ "$mode" = "focus" ]; then
-          hyprctl dispatch easymotion
-        elif [ "$mode" = "move" ]; then
-          hyprctl dispatch easymotion "bgcolor:rgb($color)"
-        fi
-      else
-        hyprctl dispatch easymotionexit
-        mode="focus"
-        if [[ "$oneshot" == true ]]; then
-          exit
-        fi
-      fi
-      ;;
-    easymotionselect*)
-      address=$(echo $1 | cut -d',' -f1 | cut -d'>' -f3)
-      workspace_name=$(hyprctl -j monitors | jq -r '.[] | select(.activeWorkspace.name == "OVERVIEW") | .activeWorkspace.name')
-      active_workspace=$(hyprctl -j activeworkspace | jq -r '.id')
-      
-      if [ "$workspace_name" = "OVERVIEW" ]; then
-        if [ "$mode" = "focus" ]; then
-          hyprctl dispatch focuswindow address:$address
-          hyprctl dispatch hycov:leaveoverview
-        elif [ "$mode" = "move" ]; then
-          hyprctl dispatch hycov:leaveoverview
-          original_workspace=$(hyprctl -j clients | jq -r --arg ADDRESS "$address" '.[] | select(.address == $ADDRESS) | .workspace.name')
-          if grep -q "^$address" "$store_file"; then
-            sed -i "/^$address/d" "$store_file"
-          fi
-          hyprctl dispatch movetoworkspace $active_workspace,address:$address
-          echo "$address $original_workspace" >>"$store_file"
-          mode="focus"
-        fi
-        if [[ "$oneshot" == true ]]; then
-          exit
-        fi
-      fi
-      ;;
-    easymotionexit*)
-      workspace_name=$(hyprctl -j monitors | jq -r '.[] | select(.activeWorkspace.name == "OVERVIEW") | .activeWorkspace.name')
-      if [ "$workspace_name" = "OVERVIEW" ]; then
-        hyprctl dispatch hycov:leaveoverview
-        mode="focus"
-      fi
-      if [[ "$oneshot" == true ]]; then
-        exit
-      fi
-      ;;
-  esac
+	case $1 in
+	custom*)
+		event_data=$(echo $1 | cut -d'>' -f3)
+		if [[ "$event_data" == "changemode" ]]; then
+			if [[ "$mode" == "focus" ]]; then
+				mode="move"
+				hyprctl dispatch easymotion "bgcolor:rgb($color)"
+			else
+				mode="focus"
+				hyprctl dispatch easymotion
+			fi
+			echo "Changed mode to: $mode"
+		fi
+		;;
+	renameworkspace*)
+		workspace_name=$(hyprctl -j monitors | jq -r '.[] | select(.activeWorkspace.name == "OVERVIEW") | .activeWorkspace.name')
+		if [ "$workspace_name" = "OVERVIEW" ]; then
+			if [ "$mode" = "focus" ]; then
+				hyprctl dispatch easymotion
+			elif [ "$mode" = "move" ]; then
+				hyprctl dispatch easymotion "bgcolor:rgb($color)"
+			fi
+		else
+			hyprctl dispatch easymotionexit
+			mode="focus"
+			if [[ "$oneshot" == true ]]; then
+				exit
+			fi
+		fi
+		;;
+	easymotionselect*)
+		address=$(echo $1 | cut -d',' -f1 | cut -d'>' -f3)
+		workspace_name=$(hyprctl -j monitors | jq -r '.[] | select(.activeWorkspace.name == "OVERVIEW") | .activeWorkspace.name')
+		active_workspace=$(hyprctl -j activeworkspace | jq -r '.id')
+
+		if [ "$workspace_name" = "OVERVIEW" ]; then
+			if [ "$mode" = "focus" ]; then
+				hyprctl dispatch focuswindow address:$address
+				hyprctl dispatch hycov:leaveoverview
+			elif [ "$mode" = "move" ]; then
+				hyprctl dispatch hycov:leaveoverview
+				original_workspace=$(hyprctl -j clients | jq -r --arg ADDRESS "$address" '.[] | select(.address == $ADDRESS) | .workspace.name')
+				if grep -q "^$address" "$store_file"; then
+					sed -i "/^$address/d" "$store_file"
+				fi
+				hyprctl dispatch movetoworkspace $active_workspace,address:$address
+				echo "$address $original_workspace" >>"$store_file"
+				mode="focus"
+			fi
+			if [[ "$oneshot" == true ]]; then
+				exit
+			fi
+		fi
+		;;
+	easymotionexit*)
+		workspace_name=$(hyprctl -j monitors | jq -r '.[] | select(.activeWorkspace.name == "OVERVIEW") | .activeWorkspace.name')
+		if [ "$workspace_name" = "OVERVIEW" ]; then
+			hyprctl dispatch hycov:leaveoverview
+			mode="focus"
+		fi
+		if [[ "$oneshot" == true ]]; then
+			exit
+		fi
+		;;
+	esac
 }
 
 case $1 in
-  -o|--oneshot)
-    oneshot=true
-    hyprctl dispatch hycov:enteroverview 
-    case $2 in
-      move)
-        mode="move"
-        hyprctl dispatch easymotion "bgcolor:rgb($color)"
-        ;;
-      focus)
-        hyprctl dispatch easymotion 
-        ;;
-      *)
-        hyprctl dispatch easymotion
-        ;;
-    esac
-    ;;
-  -h|--help)
-    echo "Usage: $(basename $0) [OPTIONS]"
-    echo "    -o, --oneshot [move|focus]   Run once with 'move' or 'focus' mode"
-    echo "    -h, --help                   Show this help message"
-    exit
-    ;;
-  *)
-    echo "$(basename $0) started"
-    ;;
+-o | --oneshot)
+	oneshot=true
+	hyprctl dispatch hycov:enteroverview
+	case $2 in
+	move)
+		mode="move"
+		hyprctl dispatch easymotion "bgcolor:rgb($color)"
+		;;
+	focus)
+		hyprctl dispatch easymotion
+		;;
+	*)
+		hyprctl dispatch easymotion
+		;;
+	esac
+	;;
+-h | --help)
+	echo "Usage: $(basename $0) [OPTIONS]"
+	echo "    -o, --oneshot [move|focus]   Run once with 'move' or 'focus' mode"
+	echo "    -h, --help                   Show this help message"
+	exit
+	;;
+*)
+	echo "$(basename $0) started"
+	;;
 esac
 
 socat -U - UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock | while read -r line; do handle "$line"; done

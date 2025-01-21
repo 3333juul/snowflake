@@ -4,6 +4,6 @@ workspaces=$(hyprctl -j workspacerules | jq -r '.[] | select(.workspaceString | 
 selected=$(echo "$workspaces" | tofi --height 280 --width 300 --prompt-text='Select:')
 
 if [ -n "$selected" ]; then
-    selected=$(echo "$selected" | sed 's/^[0-9]* | //')
-    hyprctl dispatch togglespecialworkspace "$selected"
+	selected=$(echo "$selected" | sed 's/^[0-9]* | //')
+	hyprctl dispatch togglespecialworkspace "$selected"
 fi

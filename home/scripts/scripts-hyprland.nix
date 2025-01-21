@@ -26,7 +26,6 @@
       movetospecial = ./scripts-hyprland/movetospecial;
       obsidianspecial = ./scripts-hyprland/obsidianspecial;
       prevclosespecial = ./scripts-hyprland/prevclosespecial;
-      resetxdgportal = ./scripts-hyprland/resetxdgportal;
       riodraw = ./scripts-hyprland/riodraw;
       screenrecord = ./scripts-hyprland/screenrecord;
       screenshot = ./scripts-hyprland/screenshot;
@@ -40,7 +39,6 @@
       toggleswallow = ./scripts-hyprland/toggleswallow;
       togglewindow = ./scripts-hyprland/togglewindow;
       wininfo = ./scripts-hyprland/wininfo;
-      launch-waybar = ./scripts-hyprland/launch-waybar;
       windowstate = ./scripts-hyprland/windowstate;
 
       # wallshift

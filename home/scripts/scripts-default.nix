@@ -12,7 +12,6 @@
       launcher = ./scripts-default/launcher;
       man-zathura = ./scripts-default/man-zathura;
       ocr = ./scripts-default/ocr;
-      ocr-sdcv-wl = ./scripts-default/ocr-sdcv-wl;
       powermenu = ./scripts-default/powermenu;
       quicklinks = ./scripts-default/quicklinks;
       rofi-bluetooth = ./scripts-default/rofi-bluetooth;

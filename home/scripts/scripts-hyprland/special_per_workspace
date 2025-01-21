@@ -1,29 +1,27 @@
 #!/bin/bash
 
 toggleSpecialWorkspace() {
-    active_workspace=$(hyprctl -j activeworkspace | jq -r '.name')
-    hyprctl dispatch togglespecialworkspace $active_workspace
+	active_workspace=$(hyprctl -j activeworkspace | jq -r '.name')
+	hyprctl dispatch togglespecialworkspace $active_workspace
 }
 
 moveToWorkspace() {
-    active_workspace=$(hyprctl -j activeworkspace | jq -r '.name')
-    active_window=$(hyprctl -j activewindow | jq -r '.workspace.name')
+	active_workspace=$(hyprctl -j activeworkspace | jq -r '.name')
+	active_window=$(hyprctl -j activewindow | jq -r '.workspace.name')
 
-    if [[ "$active_window" == *"special"* ]]; then
-        hyprctl dispatch movetoworkspacesilent $active_workspace
-    else
-        hyprctl dispatch movetoworkspacesilent special:$active_workspace
-    fi
+	if [[ "$active_window" == *"special"* ]]; then
+		hyprctl dispatch movetoworkspacesilent $active_workspace
+	else
+		hyprctl dispatch movetoworkspacesilent special:$active_workspace
+	fi
 }
 
 if [[ $1 == "--toggle" ]]; then
-    toggleSpecialWorkspace
+	toggleSpecialWorkspace
 elif [[ $1 == "--move" ]]; then
-    moveToWorkspace
+	moveToWorkspace
 else
-    echo "Options:"
-    echo "--toggle | Toggle a special workspace with the same name as the active workspace"
-    echo "--move   | Move the active window to or out of this special workspace."
+	echo "Options:"
+	echo "--toggle | Toggle a special workspace with the same name as the active workspace"
+	echo "--move   | Move the active window to or out of this special workspace."
 fi
-
-
