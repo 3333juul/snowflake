@@ -88,6 +88,7 @@
         enable = true;
         steam.enable = true;
         lutris.enable = true;
+        minecraft.enable = true;
       };
     };
 
