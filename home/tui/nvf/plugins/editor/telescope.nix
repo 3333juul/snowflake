@@ -71,35 +71,35 @@
       {
         key = "<leader> ";
         mode = "n";
-        desc = "telescope";
+        desc = "telescope: find_files";
         action = "<cmd>Telescope find_files<cr>";
       }
 
       {
         key = "<leader>.";
         mode = "n";
-        desc = "telescope";
+        desc = "telescope: buffers";
         action = "<cmd>Telescope buffers<cr>";
       }
 
       {
         key = "<leader>sg";
         mode = "n";
-        desc = "telescope";
+        desc = "telescope: live_grep";
         action = "<cmd>Telescope live_grep<cr>";
       }
 
       {
-        key = "<leader>fc";
+        key = "<leader>gc";
         mode = "n";
-        desc = "telescope";
+        desc = "telescope: git_bcommits";
         action = "<cmd>Telescope git_bcommits<cr>";
       }
 
       {
         key = "<leader>nn";
         mode = "n";
-        desc = "View notifications in telescope";
+        desc = "telescope - notifications";
         action = "<cmd>Telescope notify<cr>";
       }
     ];
