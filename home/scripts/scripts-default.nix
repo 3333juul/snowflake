@@ -16,10 +16,8 @@
       quicklinks = ./scripts-default/quicklinks;
       rofi-bluetooth = ./scripts-default/rofi-bluetooth;
       rofi-gridview = ./scripts-default/rofi-gridview;
-      rofi-prompts = ./scripts-default/rofi-prompts;
       rofi-translate = ./scripts-default/rofi-translate;
       s-img = ./scripts-default/s-img;
-      windows = ./scripts-default/windows;
       yazi-dir = ./scripts-default/yazi-dir;
     })
     // {
