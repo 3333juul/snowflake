@@ -11,12 +11,12 @@
     eula = true;
 
     servers = {
-      cool-server1 = {
-        enable = false;
+      server1 = {
+        enable = true;
         package = pkgs.fabricServers.fabric-1_20_1;
 
         serverProperties = {
-          gamemode = "creative";
+          gamemode = "survival";
           difficulty = "easy";
           online-mode = "false";
           allow-cheats = "true";
@@ -33,10 +33,15 @@
               hash = "sha256-avxiVnCUbB72x3YYv2htiTrqbTm6GQ1M3Ess2HhCG04=";
             };
 
-            Paladin = pkgs.fetchurl {
-              url = "https://cdn.modrinth.com/data/SISz7Qd3/versions/E0I9zNUV/paladin-furniture-mod-1.3-fabric-mc1.20.1.jar";
-              hash = "sha256-+y+GJt0cOr3p6jPL41voh1sWRI7TE+hY9NsPkLWisQQ=";
-            };
+            # Xaero = pkgs.fetchurl {
+            #   url = "https://cdn.modrinth.com/data/1bokaNcj/versions/UsAehJcE/Xaeros_Minimap_24.7.1_Fabric_1.20.jar";
+            #   hash = "sha256-3U0+B3aB4fW9nAuu8jNNfIjGT3A9BOfakFSXPwltYko=";
+            # };
+
+            # Swords = pkgs.fetchurl {
+            #   url = "https://cdn.modrinth.com/data/bK3Ubu9p/versions/xe5E39uw/simplyswords-fabric-1.56.0-1.20.1.jar";
+            #   hash = "sha256-3br4q4WmsAOoF9DA6Bfcvfn8/muInHKf9yxLajsfPpo=";
+            # };
           });
         };
       };
