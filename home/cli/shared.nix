@@ -35,6 +35,7 @@ in {
       poweralertd
       programmer-calculator
       ripgrep # grep replacement
+      tesseract
       tldr
       unzip
       wf-recorder
