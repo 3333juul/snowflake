@@ -1,0 +1,74 @@
+#!/bin/bash
+
+REPO_DIR="$HOME/github_repos"
+FZF_CMD=(fzf --prompt='Select a repository: ')
+
+mkdir -p "$REPO_DIR"
+
+clone_repo() {
+	read -r -p "Enter GitHub repository URL (e.g. https://github.com/user/repo.git): " repo_url
+	repo_user=$(basename "$(dirname "$repo_url")")
+	repo_name=$(basename "$repo_url" .git)
+	repo_folder_name="${repo_user}-${repo_name}"
+
+	repo_path="$REPO_DIR/$repo_folder_name"
+
+	if [ -d "$repo_path" ]; then
+		echo "Repository already exists: $repo_path"
+	else
+		git clone "$repo_url" "$repo_path"
+		echo "Repository cloned into $repo_path"
+		nvim "$repo_path"
+	fi
+}
+
+search_and_open_repo() {
+	if [ "$(find "$REPO_DIR" -mindepth 1 -maxdepth 1 -type d | wc -l)" -eq 0 ]; then
+		echo "No repositories found to open."
+		return 1
+	fi
+
+	repo=$(find "$REPO_DIR" -mindepth 1 -maxdepth 1 -type d | "${FZF_CMD[@]}")
+	if [ -n "$repo" ]; then
+		nvim "$repo"
+	else
+		echo "No repository selected."
+	fi
+}
+
+delete_all_repos() {
+	read -r -p "Are you sure you want to delete all repositories in $REPO_DIR? (y/N): " confirm
+	if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
+		echo "Deleting all repositories in $REPO_DIR..."
+		echo "This will remove the following directories:"
+		ls "$REPO_DIR"
+
+		read -r -p "Do you want to proceed? (y/N): " final_confirm
+		if [[ "$final_confirm" == "y" || "$final_confirm" == "Y" ]]; then
+			rm -rf "${REPO_DIR:?}/"*
+			echo "All repositories have been deleted from $REPO_DIR"
+		else
+			echo "Operation cancelled."
+		fi
+	else
+		echo "Operation cancelled."
+	fi
+}
+
+case "$1" in
+clone)
+	clone_repo
+	;;
+open)
+	search_and_open_repo
+	;;
+clean)
+	delete_all_repos
+	;;
+-h | --help)
+	echo "Usage: $0 {clone|open|clean}"
+	;;
+*)
+	search_and_open_repo
+	;;
+esac

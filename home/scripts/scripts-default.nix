@@ -23,6 +23,7 @@
       ocr = ./scripts-default/ocr;
       powermenu = ./scripts-default/powermenu;
       quicklinks = ./scripts-default/quicklinks;
+      repoctl = ./scripts-default/repoctl;
       rofi-bluetooth = ./scripts-default/rofi-bluetooth;
       rofi-gridview = ./scripts-default/rofi-gridview;
       rofi-translate = ./scripts-default/rofi-translate;
