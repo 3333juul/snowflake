@@ -13,6 +13,7 @@
     servers = {
       server1 = {
         enable = true;
+        autoStart = false;
         package = pkgs.fabricServers.fabric-1_20_1;
 
         serverProperties = {
