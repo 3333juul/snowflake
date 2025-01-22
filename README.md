@@ -16,7 +16,6 @@
   - [nixos](modules/nixos/) NixOS specific modules
   - [profiles](modules/profiles/) Profiles for different system types
 - [pkgs](flake/pkgs) Packages Build from source
-- [wallpapers](wallpapers/) Default wallpapers
 
 ## Gallery
 

@@ -14,7 +14,7 @@ in {
       background = [
         {
           monitor = "";
-          path = "${../../../wallpapers/nixos/nixos.png}";
+          path = "${../../../.github/assets/wallpapers/nixos/nixos.png}";
           blur_passes = 1;
           contrast = 0.8916;
           brightness = 0.8172;
