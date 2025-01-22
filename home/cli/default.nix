@@ -5,7 +5,7 @@
     ./bat.nix
     ./fastfetch.nix
     ./git.nix
+    ./graphical.nix
     ./shared.nix
-    ./starship.nix
   ];
 }
