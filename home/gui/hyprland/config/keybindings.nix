@@ -30,6 +30,7 @@
 
         #== Scripts =======================================================================================
         "$mainMod CTRL, slash, exec, ocr"
+        "$mainMod SHIFT, slash, exec, ocr-lookup"
 
         #== Rofi scripts ==================================================================================
         "$mainMod CTRL, D, exec, pkill tofi || quicklinks --kitty"
@@ -170,10 +171,6 @@
         "$mainMod, down, movefocus, d"
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
-
-        #== Plugins =======================================================================================
-        "$mainMod, Z, exec, easymotion"
-        "ALT, Tab, hycov:toggleoverview"
       ];
 
       bindl = [
@@ -203,18 +200,27 @@
         "$mainMod, mouse:273, resizewindow"
       ];
     };
+
     extraConfig = ''
+      # hyprlang noerror true
+
+      #== Plugins =======================================================================================
+      "$mainMod, Z, exec, easymotion"
+      "ALT, Tab, hycov:toggleoverview"
+
+      #== Submaps =======================================================================================
+      # hycov-easymotion submap
       submap = __easymotionsubmap__
 
-      #bind = ALT, right, hycov:movefocus, rightcross
-      #bind = ALT, left, hycov:movefocus, leftcross
-      #bind = ALT, up, hycov:movefocus, upcross
-      #bind = ALT, down, hycov:movefocus, downcross
+      bind = ALT, right, hycov:movefocus, rightcross
+      bind = ALT, left, hycov:movefocus, leftcross
+      bind = ALT, up, hycov:movefocus, upcross
+      bind = ALT, down, hycov:movefocus, downcross
 
-      #bind = ALT, H, hycov:movefocus, leftcross
-      #bind = ALT, J, hycov:movefocus, downcross
-      #bind = ALT, K, hycov:movefocus, upcross
-      #bind = ALT, L, hycov:movefocus, rightcross
+      bind = ALT, H, hycov:movefocus, leftcross
+      bind = ALT, J, hycov:movefocus, downcross
+      bind = ALT, K, hycov:movefocus, upcross
+      bind = ALT, L, hycov:movefocus, rightcross
 
       bind = ,Tab, event, changemode
 
@@ -258,6 +264,8 @@
 
       # Entrypoint
       bind=$mainMod,o,exec,hyprctl dispatch submap cursor
+
+      # hyprlang noerror false
     '';
   };
 }
