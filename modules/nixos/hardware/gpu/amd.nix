@@ -18,9 +18,10 @@ in {
     };
 
     # enables AMDVLK & OpenCL support
-    hardware.graphics.extraPackages = [
-      pkgs.rocmPackages.clr
-      pkgs.rocmPackages.clr.icd
-    ];
+    # broken
+    # hardware.graphics.extraPackages = [
+    #   pkgs.rocmPackages.clr
+    #   pkgs.rocmPackages.clr.icd
+    # ];
   };
 }
