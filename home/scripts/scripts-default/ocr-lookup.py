@@ -15,7 +15,7 @@ def get_cursor_position():
 
 # take a screenshot
 def take_screenshot_around_cursor(
-    cursor_x, cursor_y, region_size=200, output_path="screenshot.png"
+    cursor_x, cursor_y, region_size=200, output_path="/tmp/screenshot.png"
 ):
     half_size = region_size // 2
     x1, y1 = cursor_x - half_size, cursor_y - half_size
