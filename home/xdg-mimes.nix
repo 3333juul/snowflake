@@ -21,7 +21,6 @@ with lib; let
 
   mimeMap = {
     text = [
-      "application/x-zerosize" # empty files
       "application/json"
       "text/english"
       "text/plain"
@@ -38,6 +37,8 @@ with lib; let
       "application/x-shellscript"
       "text/x-c"
       "text/x-c++"
+      # empty files: https://askubuntu.com/questions/1526501/why-are-my-empty-files-not-being-assigned-the-correct-mimetype
+      "application/x-zerosize"
     ];
     image = [
       "image/bmp"
