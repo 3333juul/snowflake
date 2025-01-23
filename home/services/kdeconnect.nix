@@ -7,8 +7,16 @@
 
   cfg = osConfig.garden.services.kdeconnect;
 in {
-  services.kdeconnect = mkIf cfg.enable {
-    enable = true;
-    indicator = cfg.indicator.enable;
+  config = mkIf cfg.enable {
+    services.kdeconnect = {
+      enable = true;
+      indicator = cfg.indicator.enable;
+    };
+
+    home.file.".config/kwalletrc".text = ''
+      [Wallet]
+      First Use=false
+      Enabled=false
+    '';
   };
 }
