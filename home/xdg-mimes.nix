@@ -16,6 +16,7 @@ with lib; let
   mimeMap = {
     text = [
       "application/json"
+      "application/x-zerosize" # empty files
       "text/english"
       "text/plain"
       "text/x-makefile"
