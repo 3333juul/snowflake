@@ -7,6 +7,6 @@
     # python
     python3
     # nix code formatter
-    inputs.alejandra.defaultPackage.${system}
+    alejandra
   ];
 }

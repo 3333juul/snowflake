@@ -8,8 +8,6 @@
     hypr-contrib.url = "github:hyprwm/contrib";
     hyprpicker.url = "github:hyprwm/hyprpicker";
 
-    alejandra.url = "github:kamadorueda/alejandra/3.0.0";
-
     nvf.url = "github:notashelf/nvf";
 
     hyprland = {
