@@ -1,5 +1,11 @@
-{lib, ...}:
+{
+  lib,
+  pkgs,
+  ...
+}:
 with lib; let
+  inherit (pkgs.stdenv) isLinux;
+
   defaultApps = {
     browser = ["brave.desktop"];
     text = ["nvim.desktop"];
@@ -15,8 +21,8 @@ with lib; let
 
   mimeMap = {
     text = [
-      "application/json"
       "application/x-zerosize" # empty files
+      "application/json"
       "text/english"
       "text/plain"
       "text/x-makefile"
@@ -98,10 +104,15 @@ with lib; let
       flatten (mapAttrsToList (key: map (type: attrsets.nameValuePair type defaultApps."${key}")) mimeMap)
     );
 in {
-  xdg.configFile."mimeapps.list".force = true;
-  xdg.mimeApps.enable = true;
-  xdg.mimeApps.associations.added = associations;
-  xdg.mimeApps.defaultApplications = associations;
+  xdg = {
+    mimeApps = {
+      enable = isLinux;
+      associations.added = associations;
+      defaultApplications = associations;
+    };
+
+    configFile."mimeapps.list".force = true;
+  };
 
   home.sessionVariables = {
     # prevent wine from creating file associations
