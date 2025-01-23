@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}:
+{lib, ...}:
 with lib; let
   defaultApps = {
     browser = ["brave.desktop"];
@@ -18,7 +14,24 @@ with lib; let
   };
 
   mimeMap = {
-    text = ["text/plain"];
+    text = [
+      "application/json"
+      "text/english"
+      "text/plain"
+      "text/x-makefile"
+      "text/x-c++hdr"
+      "text/x-c++src"
+      "text/x-chdr"
+      "text/x-csrc"
+      "text/x-java"
+      "text/x-moc"
+      "text/x-pascal"
+      "text/x-tcl"
+      "text/x-tex"
+      "application/x-shellscript"
+      "text/x-c"
+      "text/x-c++"
+    ];
     image = [
       "image/bmp"
       "image/gif"
@@ -88,8 +101,6 @@ in {
   xdg.mimeApps.enable = true;
   xdg.mimeApps.associations.added = associations;
   xdg.mimeApps.defaultApplications = associations;
-
-  home.packages = with pkgs; [junction];
 
   home.sessionVariables = {
     # prevent wine from creating file associations
