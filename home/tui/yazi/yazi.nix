@@ -180,6 +180,7 @@ in {
           {
             name = "*";
             use = [
+              "edit"
               "open"
               "reveal"
             ];
