@@ -3,8 +3,6 @@
   config,
   ...
 }: let
-  inherit (lib.options) mkOption;
-  inherit (lib.types) bool;
   inherit (lib.modules) mkIf mkDefault;
 
   inherit (config.garden) device;
