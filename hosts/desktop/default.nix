@@ -20,6 +20,7 @@
           useFlake = true;
         };
       };
+      useHomeManager = true;
     };
 
     system = {

@@ -19,6 +19,7 @@
           useFlake = false;
         };
       };
+      useHomeManager = true;
     };
 
     system = {

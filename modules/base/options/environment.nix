@@ -27,6 +27,12 @@ in {
       };
     };
 
+    useHomeManager = mkOption {
+      type = bool;
+      default = true;
+      description = "Whether to use home-manager";
+    };
+
     isWayland = mkOption {
       type = bool;
       default = desktop == "Hyprland" || desktop == "sway" || desktop == "cosmic";

@@ -1,12 +1,17 @@
 {
   inputs,
   config,
+  lib,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
+  inherit (config.garden.environment) useHomeManager;
   inherit (config.garden.system) mainUser;
 in {
   imports = [inputs.home-manager.nixosModules.home-manager];
-  home-manager = {
+
+  home-manager = mkIf useHomeManager {
     useUserPackages = true;
     useGlobalPkgs = true;
     extraSpecialArgs = {inherit inputs;};
