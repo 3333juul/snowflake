@@ -38,7 +38,7 @@
 
       loginManager = {
         name = "greetd";
-        autoLogin.enable = true;
+        autoLogin.enable = false;
       };
     };
 
