@@ -60,7 +60,7 @@
       gui = {
         enable = true;
         thunar.enable = true;
-        image = {
+        imageViewer = {
           vimiv.enable = true;
         };
         terminal = {

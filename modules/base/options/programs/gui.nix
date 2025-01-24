@@ -19,7 +19,7 @@ in {
     vscodium.enable = mkEnableOption "enables vscodium";
     zotero.enable = mkEnableOption "enables zotero";
 
-    image = {
+    imageViewer = {
       pqiv.enable = mkEnableOption "enables pqiv";
       swayimg.enable = mkEnableOption "enables swayimg";
       vimiv.enable = mkEnableOption "enables vimiv";

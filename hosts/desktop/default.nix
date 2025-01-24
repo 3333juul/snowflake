@@ -76,7 +76,7 @@
         vscodium.enable = true;
         discord.enable = true;
         libreoffice.enable = true;
-        image = {
+        imageViewer = {
           vimiv.enable = true;
         };
         terminal = {
