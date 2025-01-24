@@ -5,7 +5,7 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-  cfg = osConfig.garden.programs.gui.image;
+  cfg = osConfig.garden.programs.gui.imageViewer;
 
   settings = {
     font = {
