@@ -1,0 +1,6 @@
+{
+  imports = [
+    ./rofi
+    ./tofi.nix
+  ];
+}
