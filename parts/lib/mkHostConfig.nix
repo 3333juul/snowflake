@@ -23,11 +23,11 @@
       modules =
         [
           # common modules between all systems
-          ./modules/base
+          ../modules/base
           # modules per class: nixos, darwin
-          ./modules/${class}
+          ../modules/${class}
           # modules per host
-          ./hosts/${host}
+          ../hosts/${host}
 
           # set hostname
           {networking.hostName = host;}
