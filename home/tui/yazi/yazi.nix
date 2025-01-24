@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   osConfig,
   ...
 }: let
@@ -108,6 +109,13 @@ in {
             for = "linux";
           }
         ];
+        ripdrag = [
+          {
+            run = "${pkgs.ripdrag}/bin/ripdrag -s 100 -H 100 \"$1\"";
+            desc = "Drag and drop";
+            for = "linux";
+          }
+        ];
       };
 
       open = {
@@ -118,6 +126,7 @@ in {
               "edit"
               "open"
               "reveal"
+              "ripdrag"
             ];
           }
           {
@@ -125,6 +134,7 @@ in {
             use = [
               "edit"
               "reveal"
+              "ripdrag"
             ];
           }
           {
@@ -133,6 +143,7 @@ in {
               "open"
               "set_wallpaper"
               "reveal"
+              "ripdrag"
             ];
           }
           {
@@ -140,6 +151,7 @@ in {
             use = [
               "play"
               "reveal"
+              "ripdrag"
             ];
           }
           {
@@ -147,6 +159,7 @@ in {
             use = [
               "extract"
               "reveal"
+              "ripdrag"
             ];
           }
           {
@@ -154,6 +167,7 @@ in {
             use = [
               "extract"
               "reveal"
+              "ripdrag"
             ];
           }
           {
@@ -161,6 +175,7 @@ in {
             use = [
               "edit"
               "reveal"
+              "ripdrag"
             ];
           }
           {
@@ -168,6 +183,7 @@ in {
             use = [
               "edit"
               "reveal"
+              "ripdrag"
             ];
           }
           {
@@ -175,14 +191,16 @@ in {
             use = [
               "edit"
               "reveal"
+              "ripdrag"
             ];
           }
           {
             name = "*";
             use = [
-              "edit"
               "open"
+              "edit"
               "reveal"
+              "ripdrag"
             ];
           }
         ];
