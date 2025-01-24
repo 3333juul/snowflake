@@ -5,10 +5,6 @@ current_location=$(pwd)
 # Default settings
 maxdepth=1
 sort_command="sort -r -n -k1,1"
-cache_dir="$HOME/.cache/rofi-gridview/${current_location#/}"
-
-# Ensure cache directory exists
-mkdir -p "$cache_dir"
 
 # Sorting menu
 choose_sorting_method() {
@@ -50,7 +46,7 @@ display_files() {
 	selected_file=$(echo "$files" | while IFS= read -r file; do
 		relative_path="${file#$current_location/}"
 		echo -en "$relative_path\0icon\x1fthumbnail://$file\n"
-	done | rofi -dmenu -i -p "$current_location" -kb-custom-1 "Ctrl+s" -theme ~/.config/rofi/themes/rofi-gridview.rasi)
+	done | rofi -dmenu -i -p "$current_location" -kb-custom-1 "Ctrl+s" -theme rofi-gridview)
 
 	# Check if custom keybinding was pressed
 	if [[ $? -eq 10 ]]; then
@@ -74,7 +70,7 @@ display_files() {
 				ripdrag -s 100 -H 100 "$full_path"
 				;;
 			"Rename")
-				new_name=$(rofi -dmenu -i -p "New name" -theme ~/.config/rofi/themes/launcher3.rasi -theme-str "listview { enabled: false;}")
+				new_name=$(rofi -dmenu -i -p "New name" -theme launcher3 -theme-str "listview { enabled: false;}")
 				if [[ -n $new_name ]]; then
 					extension="${full_path##*.}"
 					mv "$full_path" "$(dirname "$full_path")/$new_name.$extension"
