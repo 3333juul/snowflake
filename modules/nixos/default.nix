@@ -5,10 +5,9 @@
     ./hardware
     ./networking
     ./programs
+    ./services
     ./android.nix
-    ./minecraft-server.nix
     ./security.nix
-    ./services.nix
     ./syncthing.nix
     ./virtualization.nix
   ];
