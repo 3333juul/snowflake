@@ -11,7 +11,7 @@
     mkMerge
     mkDefault
     ;
-  inherit (lib.validators) isWayland;
+  inherit (config.garden.environment) isWayland;
 
   isHybrid = device.gpu == "hybrid-nv";
 in {
@@ -23,7 +23,7 @@ in {
       {videoDrivers = ["nvidia"];}
 
       # xorg settings
-      (mkIf (!isWayland config) {
+      (mkIf (!isWayland) {
         # disable DPMS
         monitorSection = ''
           Option "DPMS" "false"
@@ -52,7 +52,7 @@ in {
       sessionVariables = mkMerge [
         {LIBVA_DRIVER_NAME = "nvidia";}
 
-        (mkIf (isWayland config) {
+        (mkIf isWayland {
           # GBM_BACKEND = "nvidia-drm"; # breaks firefox apparently
 
           WLR_DRM_DEVICES = mkDefault "/dev/dri/card1";
