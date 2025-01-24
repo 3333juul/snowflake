@@ -9,7 +9,7 @@ in {
 
     loginManager = {
       name = mkOption {
-        type = lib.types.enum ["none" "greetd"];
+        type = enum ["none" "greetd"];
         default = "none";
         description = "The login manager to be used.";
       };
