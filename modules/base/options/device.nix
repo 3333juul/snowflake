@@ -54,6 +54,12 @@ in {
       description = "Whether the system has sound support (usually true except for servers)";
     };
 
+    hasTPM = mkOption {
+      type = bool;
+      default = false;
+      description = "Whether the system has tpm support";
+    };
+
     monitors = mkOption {
       type = listOf str;
       default = [];

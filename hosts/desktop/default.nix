@@ -7,7 +7,7 @@
       cpu = "amd";
       gpu = "amd";
       monitors = ["HDMI-A-1" "DVI-D-1"];
-      # hasTPM = "true"; # TODO
+      hasTPM = true;
       hasBluetooth = true;
       hasSound = true;
       keyboard = "pl";
