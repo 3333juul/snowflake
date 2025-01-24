@@ -3,6 +3,7 @@
     #./ags # widgets
     ./browser # browsers
     ./discord/discord.nix # discord
+    ./gaming # gaming
     ./hyprland # wm
     ./image-viewer # image viewer applications
     ./rofi/rofi.nix # app launcher
@@ -12,7 +13,6 @@
     ./waybar/waybar.nix # status bar
     ./anki.nix
     ./calibre.nix
-    ./gaming.nix # gaming
     ./gimp.nix
     ./libreoffice.nix
     ./mpv.nix # media player
