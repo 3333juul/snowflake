@@ -5,7 +5,7 @@
     self: let
       lib = self;
     in {
-      builders = import ./mkHostConfig.nix {inherit lib;};
+      builders = import ./builders.nix {inherit lib inputs;};
 
       inherit (self.builders) mkHostConfig;
     }

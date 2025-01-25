@@ -2,18 +2,16 @@
   inputs,
   lib,
 }: let
-  classToOS = class:
-    if class == "nixos"
-    then "linux"
-    else "darwin";
-
   mkHostConfig = {
     host,
     class ? "nixos", # default class: nixos
-    system ? "x86_64", # default system: x86_64-linux
+    arch ? "x86_64", # default system: x86_64-linux
     profiles ? [],
   }: let
-    fullSystem = "${system}-${classToOS class}";
+    system =
+      if (class == "nixos" || class == "iso")
+      then "${arch}-linux"
+      else "${arch}-${class}";
   in
     lib.nixosSystem {
       specialArgs = {
@@ -32,7 +30,7 @@
           # set hostname
           {networking.hostName = host;}
           # set system
-          {nixpkgs.hostPlatform = fullSystem;}
+          {nixpkgs.hostPlatform = system;}
         ]
         ++ profiles;
     };
