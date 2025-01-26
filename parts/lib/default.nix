@@ -5,7 +5,7 @@
     self: let
       lib = self;
     in {
-      builders = import ./builders.nix {inherit lib inputs;};
+      builders = import ./builders.nix {inherit inputs lib;};
 
       inherit (self.builders) mkHostConfig;
     }
@@ -15,5 +15,7 @@
   finalLib = extLib.extend (_: _: originLib);
 in {
   flake.lib = finalLib;
+  systems = ["x86_64-linux"];
+
   perSystem._module.args.lib = finalLib;
 }

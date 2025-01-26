@@ -1,4 +1,5 @@
-{lib, ...}: let
+{inputs, ...}: let
+  inherit (inputs.self) lib;
   inherit (lib.builders) mkHostConfig;
 
   profilesPath = ../modules/profiles;
@@ -9,29 +10,37 @@
   graphical = profilesPath + /graphical;
   headless = profilesPath + /headless;
 in {
-  nixosConfigurations = {
-    desktop = mkHostConfig {
-      host = "desktop";
-      profiles = [
-        desktop
-        graphical
-      ];
-    };
+  flake = {
+    nixosConfigurations = {
+      desktop = mkHostConfig {
+        host = "desktop";
+        class = "nixos";
+        arch = "x86_64";
+        profiles = [
+          desktop
+          graphical
+        ];
+      };
 
-    laptop = mkHostConfig {
-      host = "laptop";
-      profiles = [
-        laptop
-        graphical
-      ];
-    };
+      laptop = mkHostConfig {
+        host = "laptop";
+        class = "nixos";
+        arch = "x86_64";
+        profiles = [
+          laptop
+          graphical
+        ];
+      };
 
-    server = mkHostConfig {
-      host = "server";
-      profiles = [
-        server
-        headless
-      ];
+      server = mkHostConfig {
+        host = "server";
+        class = "nixos";
+        arch = "x86_64";
+        profiles = [
+          server
+          headless
+        ];
+      };
     };
   };
 }
