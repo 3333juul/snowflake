@@ -86,12 +86,13 @@ in {
       };
     };
 
-    xdg.configFile."waybar/scripts" = {
-      source = ./scripts;
-      recursive = true;
+    xdg.configFile = {
+      "waybar/scripts" = {
+        source = ./scripts;
+        recursive = true;
+      };
+      "waybar/modules.json".source = ./modules.json;
+      "waybar/style.css".source = ./style.css;
     };
-
-    xdg.configFile."waybar/style.css".source = ./style.css;
-    xdg.configFile."waybar/modules.json".source = ./modules.json;
   };
 }

@@ -7,7 +7,11 @@ in {
     enable = mkEnableOption "enables cli";
 
     shell = mkOption {
-      type = enum ["bash" "fish" "zsh"];
+      type = enum [
+        "bash"
+        "fish"
+        "zsh"
+      ];
       default = "zsh";
       description = "shell to be used";
     };
