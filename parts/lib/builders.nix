@@ -3,6 +3,8 @@
   lib,
   ...
 }: let
+  inherit (inputs) self;
+
   mkHostConfig = {
     host,
     class ? "nixos", # default class: nixos
@@ -22,11 +24,11 @@
       modules =
         [
           # common modules between all systems
-          ../../modules/base
+          "${self}/modules/base"
           # modules per class: nixos, darwin
-          ../../modules/${class}
+          "${self}/modules/${class}"
           # modules per host
-          ../../hosts/${host}
+          "${self}/hosts/${host}"
 
           # set hostname
           {networking.hostName = host;}
