@@ -15,7 +15,6 @@
   finalLib = extLib.extend (_: _: originLib);
 in {
   flake.lib = finalLib;
-  systems = ["x86_64-linux"];
 
   perSystem._module.args.lib = finalLib;
 }

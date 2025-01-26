@@ -7,8 +7,17 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
 
-    hypr-contrib.url = "github:hyprwm/contrib";
-    hyprpicker.url = "github:hyprwm/hyprpicker";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # we can use this to provide overridable systems
+    systems = {
+      type = "github";
+      owner = "nix-systems";
+      repo = "default";
+    };
 
     nvf.url = "github:notashelf/nvf";
 
@@ -16,6 +25,8 @@
       url = "github:hyprwm/hyprland";
     };
 
+    hypr-contrib.url = "github:hyprwm/contrib";
+    hyprpicker.url = "github:hyprwm/hyprpicker";
     pyprland.url = "github:hyprland-community/pyprland";
 
     # hyprland-easymotion = {
@@ -32,11 +43,6 @@
     #nix-gaming.url = "github:fufexan/nix-gaming";
     #ags.url = "github:Aylur/ags";
     #yazi.url = "github:sxyazi/yazi";
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     spicetify-nix = {
       url = "github:gerg-l/spicetify-nix";
