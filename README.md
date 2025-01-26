@@ -15,8 +15,8 @@
   - [base](modules/base/) Base modules, which are common between all systems
   - [nixos](modules/nixos/) NixOS specific modules
   - [profiles](modules/profiles/) Profiles for different system types
-- [parts](modules/parts/) Flake-parts
-- [pkgs](flake/pkgs) Packages Build from source
+- [parts](parts) Flake-parts
+- [pkgs](pkgs) Packages Build from source
 
 ## Gallery
 
