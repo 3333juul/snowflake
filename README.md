@@ -2,27 +2,29 @@
 
 ## Layout
 
-- [flake.nix](flake.nix) Base of the configuration
-- [home](home) My [Home-Manager](https://github.com/nix-community/home-manager)
+- [flake.nix](flake.nix) base of the configuration
+- [home](home) my [home-manager](https://github.com/nix-community/home-manager)
   config
-- [hosts](hosts) Per-host configurations that contain machine specific
+- [hosts](hosts) per-host configurations that contain machine specific
   configurations
-  - [desktop](hosts/desktop/) Desktop specific configuration
-  - [laptop](hosts/laptop/) Laptop specific configuration
+  - [desktop](hosts/desktop/) main machine
+  - [laptop](hosts/laptop/) low/mid spec thinkpad
   - [server](hosts/server/) TODO
   - [vm](hosts/vm/) TODO
-- [modules](modules) Modular system configuration
-  - [base](modules/base/) Base modules, which are common between all systems
-  - [nixos](modules/nixos/) NixOS specific modules
-  - [profiles](modules/profiles/) Profiles for different system types
-- [parts](parts) Flake-parts
-- [pkgs](pkgs) Packages Build from source
+- [modules](modules) modular system configuration
+  - [base](modules/base/) base modules, common between all systems
+  - [nixos](modules/nixos/) nixOS specific modules
+  - [darwin](modules/nixos/) TODO
+  - [profiles](modules/profiles/) profiles for different system types
+- [parts](parts) flake-parts
+  - [lib](parts/lib/) personal functions
+- [pkgs](pkgs) packages built from source
 
 ## Gallery
 
 <p align="center">
    <img src="./.github/assets/screenshots/desktop1.png" style="margin-bottom: 15px;"/> <br>
-   Screenshots last updated: <b>10-01-2025</b>
+   screenshots last updated: <b>10-01-2025</b>
 </p>
 
 # Credits
