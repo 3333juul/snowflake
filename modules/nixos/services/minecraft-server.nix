@@ -50,4 +50,9 @@
       # ...
     };
   };
+
+  # allow minecraft server port
+  networking.firewall.allowedTCPPorts = [
+    25565
+  ];
 }
