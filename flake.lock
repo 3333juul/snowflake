@@ -33,6 +33,26 @@
         "type": "github"
       }
     },
+    "darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1737926801,
+        "narHash": "sha256-un7IETRNjUm83jM5Gd/7BO4rCzzkom46O0FDMo5toaI=",
+        "owner": "lnl7",
+        "repo": "nix-darwin",
+        "rev": "62ba0a22426721c94e08f0779ed8235d5672869b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lnl7",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -3792,6 +3812,7 @@
     },
     "root": {
       "inputs": {
+        "darwin": "darwin",
         "flake-parts": "flake-parts",
         "gruvbox-kvantum-themes": "gruvbox-kvantum-themes",
         "home-manager": "home-manager",

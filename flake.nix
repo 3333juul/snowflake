@@ -19,6 +19,14 @@
       repo = "default";
     };
 
+    # improved support for darwin
+    darwin = {
+      type = "github";
+      owner = "lnl7";
+      repo = "nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nvf.url = "github:notashelf/nvf";
 
     hyprland = {

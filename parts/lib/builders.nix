@@ -4,6 +4,8 @@
   ...
 }: let
   inherit (inputs) self;
+  inherit (lib) nixosSystem;
+  inherit (inputs.nix-darwin.lib) darwinSystem;
 
   mkHost = {
     host,
@@ -15,8 +17,14 @@
       if (class == "nixos" || class == "iso")
       then "${arch}-linux"
       else "${arch}-${class}";
+
+    systemEval =
+      if (class == "nixos" || class == "iso")
+      then nixosSystem
+      else darwinSystem;
   in
-    lib.nixosSystem {
+    systemEval
+    {
       specialArgs = {
         inherit inputs;
       };
