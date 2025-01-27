@@ -1,9 +1,9 @@
 # Module Options
 
 This folder contains **module options** that define customizable settings for
-system configurations. These options are designed to make the config
+system configurations. These options are designed to make the configuration
 **modular**, meaning they can be enabled, disabled, or customized in
-[host configurations](hosts) to create flexible and reusable setups.
+[host configurations](../../hosts) to create flexible and reusable setups.
 
 ---
 
@@ -34,4 +34,46 @@ Example:
 
 ```nix
 options.garden.programs.cli.enable = mkEnableOption "enable CLI tools";
+```
+
+### Using module options in the config
+
+The mkIf function is used to conditionally include or exclude configurations
+based on the value of a module option.
+
+Example:
+
+```nix
+{ config, lib, ... }: {
+  options.garden.programs.cli.enable = lib.mkEnableOption "enable CLI tools";
+
+  config = lib.mkIf config.garden.programs.cli.enable {
+    # Enable CLI tools only if the option is set to true
+    programs.bash.enable = true;
+    programs.zsh.enable = true;
+  };
+}
+```
+
+### Host configuration
+
+Here’s how you might use these options in a host configuration:
+
+```nix
+{
+  garden = {
+    device = {
+      type = "laptop";
+      gpu = "nvidia";
+      hasBluetooth = true;
+    };
+
+    programs = {
+      cli = {
+        enable = true;
+        shell = "zsh";
+      };
+    };
+  };
+}
 ```
