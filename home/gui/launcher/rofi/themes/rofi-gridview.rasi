@@ -7,7 +7,7 @@ configuration {
 	//me-accept-entry:			 "MousePrimary";
 }
 
-@import "colors.rasi"
+@import "../colors.rasi"
 
 * {
     background-color:       @background;
