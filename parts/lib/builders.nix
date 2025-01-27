@@ -5,7 +5,7 @@
 }: let
   inherit (inputs) self;
 
-  mkHostConfig = {
+  mkHost = {
     host,
     class ? "nixos", # default class: nixos
     arch ? "x86_64", # default system: x86_64-linux
@@ -38,5 +38,5 @@
         ++ profiles;
     };
 in {
-  inherit mkHostConfig;
+  inherit mkHost;
 }

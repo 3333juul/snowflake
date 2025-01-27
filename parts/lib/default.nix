@@ -7,7 +7,7 @@
     in {
       builders = import ./builders.nix {inherit inputs lib;};
 
-      inherit (self.builders) mkHostConfig;
+      inherit (self.builders) mkHost;
     }
   );
 

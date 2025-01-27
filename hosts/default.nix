@@ -1,28 +1,39 @@
 {inputs, ...}: let
+  # Import lib from `self` instead of `nixpkgs` to get the access to mkHost
   inherit (inputs.self) lib;
-  inherit (lib.builders) mkHostConfig;
+  # Import mkHost from my custom flake-parts lib
+  inherit (lib.builders) mkHost;
 
+  # Define path to profile modules
   profilesPath = ../modules/profiles;
 
-  desktop = profilesPath + /desktop;
-  laptop = profilesPath + /laptop;
-  server = profilesPath + /server;
-  graphical = profilesPath + /graphical;
-  headless = profilesPath + /headless;
+  # Define individual profiles for different system types
+  desktop = profilesPath + /desktop; # Desktop-specific configurations
+  laptop = profilesPath + /laptop; # Laptop-specific configurations
+  server = profilesPath + /server; # Server-specific configurations
+  graphical = profilesPath + /graphical; # Graphical environment configurations
+  headless = profilesPath + /headless; # Headless (no GUI) configurations
 in {
   flake = {
+    # mkHost imports the following modules:
+    # - base modules: Shared configurations for all systems.
+    # - class modules: Configurations specific to the system class (e.g., nixos, darwin).
+    # - host modules: Configurations specific to the host.
+    # Profiles are modules for different system types, explicitly set below.
+    # See parts/lib/builders.nix for the function implementation.
+
     nixosConfigurations = {
-      desktop = mkHostConfig {
-        host = "desktop";
-        class = "nixos";
-        arch = "x86_64";
+      desktop = mkHost {
+        host = "desktop"; # Hostname for the system
+        class = "nixos"; # System class
+        arch = "x86_64"; # System architecture
         profiles = [
           desktop
           graphical
         ];
       };
 
-      laptop = mkHostConfig {
+      laptop = mkHost {
         host = "laptop";
         class = "nixos";
         arch = "x86_64";
@@ -32,7 +43,7 @@ in {
         ];
       };
 
-      server = mkHostConfig {
+      server = mkHost {
         host = "server";
         class = "nixos";
         arch = "x86_64";
