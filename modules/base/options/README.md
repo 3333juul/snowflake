@@ -8,7 +8,9 @@ modular, allowing parts of the config to be enabled or disabled based on the
 
 ## Key Concepts
 
-### `mkOption`
+### Option types
+
+#### `mkOption`
 
 Defines a customizable option. It requires a `type` (e.g., `bool`, `str`,
 `enum`) and can include a `default` value and a `description`.
@@ -31,7 +33,7 @@ options.garden.environment = {
   };
 ```
 
-### `mkEnableOption`
+#### `mkEnableOption`
 
 A shorthand for creating a boolean option that is typically used to enable or
 disable a module. It automatically sets the `type` to `bool` and provides a
@@ -43,7 +45,7 @@ Example:
 options.garden.programs.cli.enable = mkEnableOption "enable CLI tools";
 ```
 
-### Using module options in the config
+### Creating conditions based on the module options
 
 The `mkIf` function is used to conditionally include or exclude configurations
 based on the value of a module option.
@@ -52,8 +54,6 @@ Example:
 
 ```nix
 { config, lib, ... }: {
-  # Define the module option - in my case, the option is defined in the modules folder rather than in the file where the condition is applied
-  options.garden.programs.cli.enable = lib.mkEnableOption "enable CLI tools";
 
   config = lib.mkIf config.garden.programs.cli.enable {
     # Enable CLI tools only if the option is set to true
