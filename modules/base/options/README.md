@@ -1,9 +1,8 @@
 # Module Options
 
-This folder contains **module options** that define customizable settings for
-system configurations. These options are designed to make the configuration
-**modular**, meaning they can be enabled, disabled, or customized in
-[host configurations](../../hosts) to create flexible and reusable setups.
+This folder contains **module options** designed to make the configuration
+modular, allowing parts of the config to be enabled or disabled based on the
+[host configuration](../../../hosts)
 
 ---
 
@@ -12,16 +11,24 @@ system configurations. These options are designed to make the configuration
 ### `mkOption`
 
 Defines a customizable option. It requires a `type` (e.g., `bool`, `str`,
-`listOf`) and can include a `default` value and a `description`.
+`enum`) and can include a `default` value and a `description`.
 
 Example:
 
 ```nix
-options.garden.device.type = mkOption {
-  type = types.enum ["laptop" "desktop" "server"];
-  default = "laptop";
-  description = "The type of device.";
-};
+options.garden.environment = {
+  desktop = {
+    type = mkOption {
+      type = nullOr (enum [
+        "Hyprland"
+        "yabai"
+        "sway"
+        "cosmic"
+      ]);
+      default = "Hyprland";
+      description = "The desktop environment to be used.";
+    };
+  };
 ```
 
 ### `mkEnableOption`
