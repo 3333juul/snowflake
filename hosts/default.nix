@@ -52,13 +52,14 @@ in {
           headless
         ];
       };
-
-      # TODO:
-      # macos = mkHost {
-      #   host = "macos";
-      #   class = "darwin";
-      #   arch = "x86_64";
-      # };
     };
+
+    # darwinConfigurations = {
+    #   macos = mkHost {
+    #     host = "macos";
+    #     class = "darwin";
+    #     arch = "x86_64";
+    #   };
+    # };
   };
 }
