@@ -19,7 +19,7 @@ in {
     # - base modules: Shared configurations for all systems.
     # - class modules: Configurations specific to the system class (e.g., nixos, darwin).
     # - host modules: Configurations specific to the host.
-    # Profiles are modules for different system types, explicitly set below.
+    # - profiles: Modules for different system types, explicitly set below.
     # See parts/lib/builders.nix for the function implementation.
 
     nixosConfigurations = {
