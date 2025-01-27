@@ -45,13 +45,14 @@ options.garden.programs.cli.enable = mkEnableOption "enable CLI tools";
 
 ### Using module options in the config
 
-The mkIf function is used to conditionally include or exclude configurations
+The `mkIf` function is used to conditionally include or exclude configurations
 based on the value of a module option.
 
 Example:
 
 ```nix
 { config, lib, ... }: {
+  # Define the module option - in my case, the option is defined in the modules folder rather than in the file where the condition is applied
   options.garden.programs.cli.enable = lib.mkEnableOption "enable CLI tools";
 
   config = lib.mkIf config.garden.programs.cli.enable {
