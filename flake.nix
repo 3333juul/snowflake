@@ -37,21 +37,6 @@
     hyprpicker.url = "github:hyprwm/hyprpicker";
     pyprland.url = "github:hyprland-community/pyprland";
 
-    # hyprland-easymotion = {
-    #   url = "github:zakk4223/hyprland-easymotion/3388351d2af672f89b907404668c6076336270e9";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
-    #
-    # hycov = {
-    #   url = "github:bighu630/hycov";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
-
-    #hyprpolkitagent.url = "github:hyprwm/hyprpolkitagent";
-    #nix-gaming.url = "github:fufexan/nix-gaming";
-    #ags.url = "github:Aylur/ags";
-    #yazi.url = "github:sxyazi/yazi";
-
     spicetify-nix = {
       url = "github:gerg-l/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -67,5 +52,20 @@
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
+
+    # hyprland-easymotion = {
+    #   url = "github:zakk4223/hyprland-easymotion/3388351d2af672f89b907404668c6076336270e9";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
+    #
+    # hycov = {
+    #   url = "github:bighu630/hycov";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
+
+    #hyprpolkitagent.url = "github:hyprwm/hyprpolkitagent";
+    #nix-gaming.url = "github:fufexan/nix-gaming";
+    #ags.url = "github:Aylur/ags";
+    #yazi.url = "github:sxyazi/yazi";
   };
 }
