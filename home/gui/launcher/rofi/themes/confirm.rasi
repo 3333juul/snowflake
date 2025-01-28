@@ -6,22 +6,22 @@
 * {
     background-color:       @background;
     text-color:             @foreground;
-	font:				 	"Iosevka 10";
+    font:		    "Iosevka 10";
 }
 
 window {
-    width:      			200px;
-    padding:    			20px;
-    border:					1px;
+    width:                  200px;
+    padding:                20px;
+    border:                 1px;
     border-radius:          0px;
-    border-color:           @selected;
+    border-color:           @foreground;
     location:               center;
     x-offset:               0;
     y-offset:               -4%;
 }
 
 entry {
-    expand: 				false;
-    width: 					150px;
-    text-color:				@selected;
+    expand:                 false;
+    width:                  150px;
+    text-color:	            @foreground;
 }
