@@ -12,8 +12,8 @@ select_wallpaper() {
 
 	#selected_wallpaper=$(for a in $wallpapers; do
 	selected_wallpaper=$(echo "$wallpapers" | while IFS= read -r a; do
-		echo -en "${a##*/}\0icon\x1f$a\n" # change to xf1thumbnail:// after rofi 1.7.6
-	done | rofi -dmenu -i -p "WALLPAPER" -theme ~/.config/rofi/themes/wallpaper.rasi)
+		echo -en "${a##*/}\0icon\x1fthumbnail://$a\n" # x1f$a
+	done | rofi -dmenu -i -p "WALLPAPER" -theme wallpaper)
 
 	echo "$selected_wallpaper"
 }
@@ -25,7 +25,7 @@ select_monitor() {
 
 	selected_monitor=$(for monitor in $monitors; do
 		echo -en "$monitor\n"
-	done | PREVIEW=false rofi -dmenu -p "MONITOR" -theme ~/.config/rofi/themes/wallpaper.rasi -no-show-icons -theme-str "window { width: 350px; } listview { lines: $monitor_count; columns: 1;}")
+	done | PREVIEW=false rofi -dmenu -p "MONITOR" -theme wallpaper -no-show-icons -theme-str "window { width: 350px; } listview { lines: $monitor_count; columns: 1;}")
 
 	echo "$selected_monitor"
 }

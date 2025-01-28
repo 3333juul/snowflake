@@ -27,5 +27,5 @@ case $workspace_id in
 	;;
 esac
 
-rofi -show drun -theme "$HOME/.config/rofi/themes/launcher2.rasi" -theme-str "imagebox {
+rofi -show drun -theme "launcher-image" -theme-str "imagebox {
  background-image: url('$image_path', width);}"

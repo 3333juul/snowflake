@@ -1,11 +1,11 @@
 #!/bin/bash
 
-TEXT=$(rofi -dmenu -p "Translate PL -> EN:" -theme ~/.config/rofi/themes/translate.rasi)
+TEXT=$(rofi -dmenu -p "Translate PL -> EN:" -theme translate)
 
 if [ -n "$TEXT" ]; then
-    TRANSLATION=$(trans -b :en "$TEXT")
+	TRANSLATION=$(trans -b :en "$TEXT")
 
-    echo -n "$TRANSLATION" | wl-copy
+	echo -n "$TRANSLATION" | wl-copy
 
-    notify-send "Translation" "$TRANSLATION"
+	notify-send "Translation" "$TRANSLATION"
 fi

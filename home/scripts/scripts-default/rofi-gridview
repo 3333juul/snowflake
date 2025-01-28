@@ -8,7 +8,7 @@ sort_command="sort -r -n -k1,1"
 
 # Sorting menu
 choose_sorting_method() {
-	sorting_method=$(echo -e "Newest to Oldest\nOldest to Newest\nAlphabetical (A-Z)\nAlphabetical (Z-A)" | rofi -dmenu -i -p "Sorting" -theme ~/.config/rofi/themes/launcher3.rasi)
+	sorting_method=$(echo -e "Newest to Oldest\nOldest to Newest\nAlphabetical (A-Z)\nAlphabetical (Z-A)" | rofi -dmenu -i -p "Sorting" -theme launcher3)
 	case $sorting_method in
 	"Newest to Oldest")
 		sort_command="sort -r -n -k1,1"

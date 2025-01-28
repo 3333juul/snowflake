@@ -7,7 +7,7 @@ images=$(find "$current_location" -maxdepth 1 -type f \( -iname "*.jpg" -o -inam
 selected_image=$(for img in $images; do
 	relative_path="${img#$current_location/}"
 	echo -en "$relative_path\0icon\x1f$img\n"
-done | rofi -dmenu -i -p "$current_location" -theme ~/.config/rofi/themes/rofi-gridview.rasi)
+done | rofi -dmenu -i -p "$current_location" -theme rofi-gridview)
 
 if [[ -n $selected_image ]]; then
 	full_path="$current_location/$selected_image"
@@ -23,7 +23,7 @@ if [[ -n $selected_image ]]; then
 		wl-copy -t "$mime_type" <"$full_path"
 		;;
 	"Change name")
-		new_name=$(rofi -dmenu -i -p "New name" -theme ~/.config/rofi/themes/launcher3.rasi -theme-str "listview { enabled: false;}")
+		new_name=$(rofi -dmenu -i -p "New name" -theme launcher3 -theme-str "listview { enabled: false;}")
 		if [[ -n $new_name ]]; then
 			extension="${full_path##*.}"
 			mv "$full_path" "$(dirname "$full_path")/$new_name.$extension"
