@@ -8,10 +8,12 @@
       }
       {
         on = ["I"];
-        run = "shell --confirm 'pqiv --auto-montage-mode .'";
-        desc = "Preview all images in the current directory with pqiv";
-        #run = "shell --confirm 'swayimg --gallery '$(pwd)''";
-        #desc = "Preview all images in the current directory with swayimg";
+        run = "shell --confirm 'imgv'";
+        desc = "Preview all images in the current directory with vimiv";
+        # run = "shell --confirm 'pqiv --auto-montage-mode .'";
+        # desc = "Preview all images in the current directory with pqiv";
+        # run = "shell --confirm 'swayimg --gallery '$(pwd)''";
+        # desc = "Preview all images in the current directory with swayimg";
       }
       {
         on = ["T"];
