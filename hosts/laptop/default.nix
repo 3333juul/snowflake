@@ -1,5 +1,9 @@
 {
-  imports = [./hardware-configuration.nix];
+  imports = [
+    ./hardware.nix
+    ./programs.nix
+    ./services.nix
+  ];
 
   garden = {
     device = {
@@ -46,43 +50,6 @@
         podman.enable = false;
         distrobox.enable = false;
       };
-    };
-
-    programs = {
-      cli = {
-        enable = true;
-        shell = "zsh";
-        git.enable = true;
-        starship.enable = true;
-      };
-
-      tui = {
-        enable = true;
-        nvim.enable = true;
-        yazi.enable = true;
-        fzf.enable = true;
-        btop.enable = true;
-        lazygit.enable = true;
-      };
-
-      gui = {
-        enable = true;
-        thunar.enable = true;
-        imageViewer = {
-          vimiv.enable = true;
-        };
-        terminal = {
-          kitty.enable = true;
-        };
-      };
-
-      gaming = {
-        enable = false;
-      };
-    };
-
-    services = {
-      syncthing.enable = false;
     };
   };
 }
