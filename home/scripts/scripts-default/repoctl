@@ -18,8 +18,10 @@ clone_repo() {
 	else
 		git clone "$repo_url" "$repo_path"
 		echo "Repository cloned into $repo_path"
-		nvim "$repo_path"
 	fi
+
+	cd "$repo_path" || return
+	nvim .
 }
 
 search_and_open_repo() {
@@ -30,7 +32,8 @@ search_and_open_repo() {
 
 	repo=$(find "$REPO_DIR" -mindepth 1 -maxdepth 1 -type d | "${FZF_CMD[@]}")
 	if [ -n "$repo" ]; then
-		nvim "$repo"
+		cd "$repo" || return
+		nvim .
 	else
 		echo "No repository selected."
 	fi
