@@ -32,6 +32,7 @@
 
       # Sprawn programs
       "[workspace 5 silent] obsidian"
+      "[workspace special:music silent] spotify"
 
       # Scripts
       "hycov-easymotion &"

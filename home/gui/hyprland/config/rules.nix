@@ -34,6 +34,7 @@
       "float,class:^([Ss]team)$, title:^((?![Ss]team).*)$"
       "float,class:(steam),title:(Steam Settings)"
       "float,class:(steam),title:(Friends List)"
+      "float,class:(quickgui)"
 
       # Move
       "move 1470 100,class:(steam),title:(Friends List)"
@@ -43,18 +44,13 @@
       "fullscreen,class:(com.stremio.stremio)"
 
       # Tile
-      "tile,title:(inoreader)"
-      "tile,title:(chat.openai)"
-      "tile,title:(gemini)"
-      "tile,title:(copilot.microsoft.com)"
-      "tile,title:(todoist)"
-      "tile,title:(monkeytype)"
       "tile,class:(scrcpy)"
       "tile,class:^([Ss]team)$, title:^([Ss]team)$"
 
       # Groups
       "group set,title:(.*chat.openai.*)"
       "group set,title:(.*gemini.*)"
+      "group set,title:(.*deepseek.*)"
       "group set,title:(copilot.microsoft.com)"
       "group set,class:(dictionary)"
       "group set,class:(translate)"
@@ -79,7 +75,7 @@
       "workspace 8 silent, class:(steam)"
 
       # Special workspaces
-      "workspace special:music silent, class:(Spotify)"
+      "workspace special:music silent, class:([Ss]potify)"
       "workspace special:music silent, class:(spotify_tui)"
       "workspace special:mail, class:(thunderbird)"
       "workspace special:anki, class:(Anki)"
