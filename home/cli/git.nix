@@ -31,7 +31,8 @@ in {
         };
       };
     };
-    lazygit = lib.mkIf cfg.tui.enable {
+
+    lazygit = mkIf (cfg.tui.enable && cfg.git.enable) {
       enable = true;
       settings = {
         quitOnTopLevelReturn = true;
@@ -41,7 +42,7 @@ in {
 
   home.packages = [pkgs.gh]; # pkgs.git-lfs
 
-  programs.zsh.shellAliases = {
+  home.shellAliases = {
     g = "lazygit";
     gf = "onefetch --number-of-file-churns 0 --no-color-palette";
     ga = "git add";

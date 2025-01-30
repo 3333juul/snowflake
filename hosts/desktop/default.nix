@@ -19,6 +19,7 @@
 
     environment = {
       shell = "zsh";
+      useHomeManager = true;
 
       desktop = {
         type = "Hyprland";
@@ -26,21 +27,19 @@
           useFlake = true;
         };
       };
-
-      useHomeManager = true;
     };
 
     system = {
       mainUser = "scay";
 
-      boot = {
-        loader = "systemd-boot";
-      };
-
       video.enable = true;
       sound.enable = true;
       bluetooth.enable = true;
       printing.enable = false;
+
+      boot = {
+        loader = "systemd-boot";
+      };
 
       loginManager = {
         name = "greetd";

@@ -6,7 +6,7 @@
 
     git.enable = true;
     starship.enable = true;
-    aichat.enable = true;
+    aichat.enable = false;
     androidTools.enable = true;
 
     anki.enable = true;
@@ -18,7 +18,7 @@
 
     imageEditor = {
       gimp.enable = true;
-      pinta.enable = true;
+      pinta.enable = false;
     };
 
     fileManager = {
