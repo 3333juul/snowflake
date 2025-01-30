@@ -42,10 +42,6 @@ in {
                           url = "http://localhost:8384/";
                         }
                         {
-                          title = "Letterboxd Watchlist";
-                          url = "https://letterboxd.com/scay/watchlist/";
-                        }
-                        {
                           title = "Nix Packages Search";
                           url = "https://search.nixos.org/packages";
                         }
@@ -89,16 +85,15 @@ in {
                 }
               ];
             }
-            {
-              size = "small";
-              widgets = [
-                {
-                  type = "weather";
-                  hide-location = true;
-                  location = "Biała Podlaska, Poland";
-                }
-              ];
-            }
+            # {
+            #   size = "small";
+            #   widgets = [
+            #     {
+            #       type = "weather";
+            #       hide-location = true;
+            #     }
+            #   ];
+            # }
           ];
         }
         {

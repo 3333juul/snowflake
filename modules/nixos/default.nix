@@ -8,6 +8,7 @@
     ./services
     ./android.nix
     ./security.nix
+    ./fs.nix
     ./syncthing.nix
     ./virtualization.nix
   ];
