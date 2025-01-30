@@ -7,7 +7,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs.tui;
+  cfg = osConfig.garden.programs.editor;
 in {
   imports = [
     inputs.nvf.homeManagerModules.default

@@ -9,6 +9,16 @@
   desktop = config.garden.environment.desktop.type;
 in {
   options.garden.environment = {
+    shell = mkOption {
+      type = enum [
+        "bash"
+        "fish"
+        "zsh"
+      ];
+      default = "zsh";
+      description = "shell to be used";
+    };
+
     desktop = {
       type = mkOption {
         type = nullOr (enum [
@@ -20,6 +30,7 @@ in {
         default = "Hyprland";
         description = "The desktop environment to be used.";
       };
+
       hyprland.useFlake = mkOption {
         type = bool;
         default = true;

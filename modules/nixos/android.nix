@@ -7,7 +7,7 @@
   inherit (lib.modules) mkIf;
   inherit (config.garden.system) mainUser;
 
-  cfg = config.garden.programs.cli.androidTools;
+  cfg = config.garden.programs.androidTools;
 in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [

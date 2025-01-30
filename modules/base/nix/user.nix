@@ -5,7 +5,7 @@
 }: let
   inherit (config.garden.system) mainUser;
 
-  cfg = config.garden.programs.cli.shell;
+  cfg = config.garden.environment.shell;
 in {
   users.users.${mainUser} = {
     isNormalUser = true;

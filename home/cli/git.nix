@@ -9,7 +9,7 @@
   cfg = osConfig.garden.programs;
 in {
   programs = {
-    git = mkIf cfg.cli.git.enable {
+    git = mkIf cfg.git.enable {
       enable = true;
 
       userName = "luravoid";
@@ -31,7 +31,7 @@ in {
         };
       };
     };
-    lazygit = lib.mkIf cfg.tui.lazygit.enable {
+    lazygit = lib.mkIf cfg.tui.enable {
       enable = true;
       settings = {
         quitOnTopLevelReturn = true;

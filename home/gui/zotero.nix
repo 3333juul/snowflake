@@ -6,7 +6,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs.gui;
+  cfg = osConfig.garden.programs.reading;
 in {
   config = mkIf cfg.zotero.enable {
     home.packages = with pkgs; [

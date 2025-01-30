@@ -5,7 +5,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs.cli;
+  cfg = osConfig.garden.programs;
 in {
   programs.starship = mkIf cfg.starship.enable {
     enable = true;

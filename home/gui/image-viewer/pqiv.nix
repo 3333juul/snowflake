@@ -5,7 +5,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs.gui.imageViewer;
+  cfg = osConfig.garden.programs.imageViewer;
 in {
   programs.pqiv = mkIf cfg.pqiv.enable {
     enable = true;

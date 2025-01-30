@@ -6,7 +6,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs.gui.imageViewer;
+  cfg = osConfig.garden.programs.imageViewer;
   settings = {
     GENERAL = {
       monitor_filesystem = true;

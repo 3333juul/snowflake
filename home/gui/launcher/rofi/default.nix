@@ -8,7 +8,7 @@
   inherit (lib.modules) mkIf;
   inherit (osConfig.garden.style) colors;
 
-  cfg = osConfig.garden.programs.gui;
+  cfg = osConfig.garden.programs.launcher;
 in {
   config = mkIf cfg.rofi.enable {
     programs.rofi = {

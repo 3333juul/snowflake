@@ -5,7 +5,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs.gui;
+  cfg = osConfig.garden.programs.launcher;
 in {
   programs.tofi = mkIf cfg.tofi.enable {
     enable = true;

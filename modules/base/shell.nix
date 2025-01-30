@@ -1,5 +1,5 @@
 {config, ...}: let
-  inherit (config.garden.programs.cli) shell;
+  inherit (config.garden.environment) shell;
 in {
   programs = {
     # home-manager needs it declared also here

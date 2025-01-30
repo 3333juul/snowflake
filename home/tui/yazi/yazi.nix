@@ -4,9 +4,9 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden.programs.tui;
-
   inherit (lib.modules) mkIf;
+
+  cfg = osConfig.garden.programs.fileManager;
 in {
   programs.yazi = mkIf cfg.yazi.enable {
     enable = true;

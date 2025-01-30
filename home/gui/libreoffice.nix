@@ -6,7 +6,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs.gui;
+  cfg = osConfig.garden.programs;
 in {
   config = mkIf cfg.libreoffice.enable {
     home.packages = with pkgs; [

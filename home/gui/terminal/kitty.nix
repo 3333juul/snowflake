@@ -5,7 +5,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs.gui.terminal;
+  cfg = osConfig.garden.programs.terminal;
 in {
   programs.kitty = mkIf cfg.kitty.enable {
     enable = true;

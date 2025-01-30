@@ -4,7 +4,7 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.garden.programs.gui;
+  cfg = osConfig.garden.programs.fileManager;
 in {
   config = lib.mkIf cfg.thunar.enable {
     home.packages = with pkgs; [

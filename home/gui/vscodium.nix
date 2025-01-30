@@ -23,7 +23,7 @@
 
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs.gui;
+  cfg = osConfig.garden.programs.editor;
 in {
   programs.vscode = mkIf cfg.vscodium.enable {
     enable = true;

@@ -7,7 +7,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs.cli;
+  cfg = osConfig.garden.environment;
 in {
   programs.zsh = mkIf (cfg.shell == "zsh") {
     enable = true;

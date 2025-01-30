@@ -9,7 +9,7 @@
 
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
 
-  cfg = osConfig.garden.programs.gui;
+  cfg = osConfig.garden.programs;
 in {
   imports = [inputs.spicetify-nix.homeManagerModules.default];
 
