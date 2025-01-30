@@ -1,7 +1,7 @@
 {
   imports = [
     ./device.nix
-    ./env.nix
+    ./hub.nix
     ./system.nix
   ];
 }
