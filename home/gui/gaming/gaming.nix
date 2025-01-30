@@ -8,9 +8,11 @@
 
   cfg = osConfig.garden.programs.gaming;
 in {
-  home.packages = with pkgs; [
-    (mkIf cfg.lutris.enable lutris)
-    mangohud
-    winetricks
-  ];
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      (mkIf cfg.lutris.enable lutris)
+      mangohud
+      winetricks
+    ];
+  };
 }
