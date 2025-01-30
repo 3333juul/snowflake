@@ -3,7 +3,6 @@
   inherit (lib.types) enum listOf str;
 in {
   options.garden.system = {
-    virtualization.enable = mkEnableOption "enables virtualization";
     bluetooth.enable = mkEnableOption "Should the device load bluetooth drivers and enable blueman";
     sound.enable = mkEnableOption "Does the device have sound and its related programs be enabled";
 
@@ -33,6 +32,15 @@ in {
     video = {
       enable = mkEnableOption "Does the device allow for graphical programs";
       benchmarking.enable = mkEnableOption "Enable benchmarking tools";
+    };
+
+    virtualization = {
+      enable = mkEnableOption "Should the device be allowed to virtualizle processes";
+      docker.enable = mkEnableOption "docker";
+      podman.enable = mkEnableOption "podman";
+      qemu.enable = mkEnableOption "qemu";
+      distrobox.enable = mkEnableOption "distrobox";
+      waydroid.enable = mkEnableOption "waydroid";
     };
 
     printing = {
