@@ -13,17 +13,11 @@
     };
 
     # we can use this to provide overridable systems
-    systems = {
-      type = "github";
-      owner = "nix-systems";
-      repo = "default";
-    };
+    systems.url = "github:nix-systems/default";
 
     # improved support for darwin
     darwin = {
-      type = "github";
-      owner = "lnl7";
-      repo = "nix-darwin";
+      url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
