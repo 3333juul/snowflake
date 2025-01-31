@@ -24,5 +24,7 @@ in {
       };
 
     gui.enable = mkEnableOption "Enable GUI programs";
+
+    gaming.enable = mkEnableOption "Enable gaming programs";
   };
 }

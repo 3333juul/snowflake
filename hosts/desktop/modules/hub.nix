@@ -16,6 +16,7 @@
       cli.enable = true;
       tui.enable = true;
       gui.enable = true;
+      gaming.enable = true;
 
       git.enable = true;
       starship.enable = true;
@@ -66,7 +67,6 @@
       };
 
       gaming = {
-        enable = true;
         steam.enable = true;
         lutris.enable = true;
         minecraft.enable = true;
