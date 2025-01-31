@@ -1,6 +1,7 @@
 {
   garden = {
     environment = {
+      shell = "zsh";
       desktop = {
         type = "Hyprland";
         hyprland = {
