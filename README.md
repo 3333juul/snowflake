@@ -10,7 +10,7 @@
   - [desktop](hosts/desktop/) Main machine
   - [laptop](hosts/laptop/) Low/mid spec thinkpad
   - [server](hosts/server/) TODO
-  - [vm](hosts/vm/) TODO
+  - [darwin](hosts/darwin/) TODO
 - [modules](modules) Modular system configuration
   - [base](modules/base/) Base modules, common between all systems
   - [nixos](modules/nixos/) NixOS specific modules

@@ -55,8 +55,8 @@ in {
     };
 
     # darwinConfigurations = {
-    #   macos = mkHost {
-    #     host = "macos";
+    #   darwin = mkHost {
+    #     host = "darwin";
     #     class = "darwin";
     #     arch = "x86_64";
     #   };
