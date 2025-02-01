@@ -4,7 +4,7 @@
   ...
 }: let
   inherit (inputs) self;
-  inherit (lib.attrsets) mapAttrs;
+  inherit (lib.attrsets) mapAttrs filterAttrs;
   inherit (lib) nixosSystem;
   inherit (inputs.nix-darwin.lib) darwinSystem;
 
@@ -48,8 +48,11 @@
         ++ map (module: "${self}/modules/${module}") extraModules;
     };
 
-  # Generate host configurations from an attrset using `mapAttrs`
-  mkHosts = mapAttrs mkHost;
+  # Generate host configurations and assign them to darwin or nixos based on their class
+  mkHosts = hosts: {
+    darwin = mapAttrs mkHost (filterAttrs (_: cfg: cfg.class == "darwin") hosts);
+    nixos = mapAttrs mkHost (filterAttrs (_: cfg: cfg.class == "nixos" || cfg.class == "iso") hosts);
+  };
 in {
   inherit mkHosts;
 }

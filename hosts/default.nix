@@ -1,6 +1,5 @@
 {inputs, ...}: let
   inherit (inputs.self) lib;
-  inherit (lib.attrsets) filterAttrs;
   inherit (lib.builders) mkHosts;
 
   # mkHost imports the following modules:
@@ -45,7 +44,7 @@
   };
 in {
   flake = {
-    darwinConfigurations = mkHosts (filterAttrs (_: cfg: cfg.class == "darwin") hosts);
-    nixosConfigurations = mkHosts (filterAttrs (_: cfg: cfg.class == "nixos" || cfg.class == "iso") hosts);
+    nixosConfigurations = (mkHosts hosts).nixos;
+    darwinConfigurations = (mkHosts hosts).darwin;
   };
 }
