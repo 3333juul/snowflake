@@ -4,14 +4,15 @@
   ...
 }: let
   inherit (inputs) self;
+  inherit (lib.attrsets) mapAttrs;
   inherit (lib) nixosSystem;
   inherit (inputs.nix-darwin.lib) darwinSystem;
 
-  mkHost = {
-    host,
+  mkHost = host: {
     class ? "nixos", # default class: nixos
     arch ? "x86_64", # default system: x86_64-linux
     profiles ? [],
+    extraModules ? [],
   }: let
     system =
       if (class == "nixos" || class == "iso")
@@ -43,8 +44,12 @@
           # set system
           {nixpkgs.hostPlatform = system;}
         ]
-        ++ profiles;
+        ++ map (profile: "${self}/modules/profiles/${profile}") profiles
+        ++ map (module: "${self}/modules/${module}") extraModules;
     };
+
+  # Generate host configurations from an attrset using `mapAttrs`
+  mkHosts = mapAttrs mkHost;
 in {
-  inherit mkHost;
+  inherit mkHosts;
 }

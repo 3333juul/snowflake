@@ -10,7 +10,7 @@
     in {
       builders = import ./builders.nix {inherit inputs lib;};
 
-      inherit (self.builders) mkHost;
+      inherit (self.builders) mkHosts;
     }
   );
 
