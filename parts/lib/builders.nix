@@ -49,9 +49,17 @@
     };
 
   # Generate host configurations and assign them to darwin or nixos based on their class
-  mkHosts = hosts: {
-    darwin = mapAttrs mkHost (filterAttrs (_: cfg: cfg.class == "darwin") hosts);
-    nixos = mapAttrs mkHost (filterAttrs (_: cfg: cfg.class == "nixos" || cfg.class == "iso") hosts);
+  # mkHosts = hosts: {
+  #   darwin = mapAttrs mkHost (filterAttrs (_: cfg: cfg.class == "darwin") hosts);
+  #   nixos = mapAttrs mkHost (filterAttrs (_: cfg: cfg.class == "nixos" || cfg.class == "iso") hosts);
+  # };
+
+  mkHosts = hosts: let
+    isDarwin = _: cfg: cfg.class == "darwin";
+    isNixOS = _: cfg: cfg.class == "nixos" || cfg.class == "iso";
+  in {
+    darwin = mapAttrs mkHost (filterAttrs isDarwin hosts);
+    nixos = mapAttrs mkHost (filterAttrs isNixOS hosts);
   };
 in {
   inherit mkHosts;
