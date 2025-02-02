@@ -1,50 +1,23 @@
-{inputs, ...}: let
-  inherit (inputs.self) lib;
-  inherit (lib.builders) mkHosts;
-
-  # mkHost imports the following modules:
-  # - host modules: Configurations specific to the host.
-  # - base modules: Shared configurations for all systems.
-  # - class modules: Configurations specific to the system class (e.g., nixos, darwin).
-  # - profiles: Modules for different system types, explicitly set below.
-  # See parts/lib/builders.nix for the function implementation.
-
+{
   hosts = {
-    desktop = {
-      class = "nixos";
-      arch = "x86_64";
-      profiles = [
-        "desktop"
-        "graphical"
-      ];
-    };
+    desktop.profiles = [
+      "desktop"
+      "graphical"
+    ];
 
-    laptop = {
-      class = "nixos";
-      arch = "x86_64";
-      profiles = [
-        "laptop"
-        "graphical"
-      ];
-    };
+    laptop.profiles = [
+      "laptop"
+      "graphical"
+    ];
 
-    server = {
-      class = "nixos";
-      arch = "x86_64";
-      profiles = [
-        "server"
-        "headless"
-      ];
-    };
+    server.profiles = [
+      "server"
+      "headless"
+    ];
 
     darwin = {
       class = "darwin";
       arch = "x86_64";
     };
-  };
-in {
-  flake = {
-    nixosConfigurations = (mkHosts hosts).nixos;
-    darwinConfigurations = (mkHosts hosts).darwin;
   };
 }
