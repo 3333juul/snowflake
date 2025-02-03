@@ -44,7 +44,9 @@
           # set system
           {nixpkgs.hostPlatform = system;}
         ]
+        # profile modules for different system types
         ++ map (profile: "${self}/modules/profiles/${profile}") profiles
+        # extra modules
         ++ map (module: "${self}/modules/${module}") extraModules;
     };
 

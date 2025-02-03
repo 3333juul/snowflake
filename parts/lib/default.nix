@@ -9,8 +9,10 @@
       lib = self;
     in {
       builders = import ./builders.nix {inherit inputs lib;};
+      hardware = import ./hardware.nix;
 
       inherit (self.builders) mkHosts;
+      inherit (self.hardware) isx86Linux primaryMonitor ldTernary;
     }
   );
 
