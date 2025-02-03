@@ -2,9 +2,6 @@
   wayland.windowManager.hyprland.settings = {
     exec-once = [
       # System
-      "systemctl --user import-environment &"
-      "hash dbus-update-activation-environment 2>/dev/null &"
-      "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &"
       "poweralertd &"
 
       # Bar
