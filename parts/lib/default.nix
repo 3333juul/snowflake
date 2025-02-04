@@ -12,7 +12,7 @@
       hardware = import ./hardware.nix;
 
       inherit (self.builders) mkHosts;
-      inherit (self.hardware) isx86Linux primaryMonitor ldTernary;
+      inherit (self.hardware) isx86Linux ldTernary primaryMonitor monitor;
     }
   );
 

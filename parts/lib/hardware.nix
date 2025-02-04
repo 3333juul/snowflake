@@ -75,6 +75,37 @@ let
   ```
   */
   primaryMonitor = config: builtins.elemAt config.garden.device.monitors 0;
+
+  /*
+  *
+  Get the monitor at the specified index from the list of monitors.
+  If the index is out of bounds, return `null`.
+
+  # Arguments
+
+  - [index] The index of the monitor to retrieve (0-based).
+  - [config] The configuration that nixosConfigurations provides.
+
+  # Type
+
+  ```
+  monitor :: Int -> AttrSet -> String | Null
+  ```
+
+  # Example
+
+  ```nix
+  monitor 1 osConfig
+  => "DP-1"
+
+  monitor 2 osConfig
+  => null
+  ```
+  */
+  monitor = index: config:
+    if builtins.length config.garden.device.monitors > index
+    then builtins.elemAt config.garden.device.monitors index
+    else null;
 in {
-  inherit isx86Linux primaryMonitor ldTernary;
+  inherit isx86Linux ldTernary primaryMonitor monitor;
 }
