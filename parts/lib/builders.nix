@@ -27,7 +27,7 @@
     systemEval
     {
       specialArgs = {
-        inherit inputs;
+        inherit inputs lib;
       };
 
       modules =
