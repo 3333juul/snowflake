@@ -13,6 +13,7 @@ in {
       indicator = cfg.indicator.enable;
     };
 
+    # TODO: causes long start of brave-browser, find better way to disable kwallet
     home.file.".config/kwalletrc".text = ''
       [Wallet]
       First Use=false

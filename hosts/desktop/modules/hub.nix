@@ -77,8 +77,8 @@
       syncthing.enable = true;
       glance.enable = true;
       kdeconnect = {
-        enable = true;
-        indicator.enable = true;
+        enable = false;
+        indicator.enable = false;
       };
     };
   };
