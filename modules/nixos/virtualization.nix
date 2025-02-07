@@ -18,6 +18,7 @@ in {
         (optionals cfg.qemu.enable [
           pkgs.virt-manager
           pkgs.virt-viewer
+          pkgs.quickemu
           pkgs.quickgui
         ])
 
