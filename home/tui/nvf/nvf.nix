@@ -21,7 +21,7 @@ in {
         name = "Neovim";
         type = "Application";
         icon = "nvim";
-        exec = "${pkgs.kitty}/bin/kitty nvim";
+        exec = "${pkgs.kitty}/bin/kitty nvim %F";
       };
     };
 
