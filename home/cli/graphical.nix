@@ -26,7 +26,6 @@ in {
       pulsemixer
       playerctl # controller for media players
       poweralertd
-      programmer-calculator
       tesseract
       wf-recorder
       wl-clipboard # clipboard utils for wayland (wl-copy, wl-paste)
@@ -38,7 +37,6 @@ in {
       imagemagick
       ripdrag
       sptlrx
-      tty-clock # cli clock
       nix-prefetch-github
     ];
   };
