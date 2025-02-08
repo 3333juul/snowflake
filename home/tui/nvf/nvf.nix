@@ -38,6 +38,12 @@ in {
         globals.mapleader = " ";
         useSystemClipboard = true;
         preventJunkFiles = true;
+        # make indents normal
+        options = {
+          tabstop = 2;
+          shiftwidth = 2;
+          softtabstop = 2;
+        };
       };
     };
   };
