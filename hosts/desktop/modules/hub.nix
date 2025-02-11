@@ -74,8 +74,14 @@
     };
 
     services = {
-      syncthing.enable = true;
       glance.enable = true;
+
+      syncthing = {
+        enable = true;
+        enabledDevices = ["noteAir3"];
+        enabledFolders = ["memes"];
+      };
+
       kdeconnect = {
         enable = false;
         indicator.enable = false;
