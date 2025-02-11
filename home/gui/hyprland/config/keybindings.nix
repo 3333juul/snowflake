@@ -39,7 +39,7 @@
         "$mainMod CTRL, W, exec, pkill tofi || focuswindow tofi"
         "$mainMod CTRL, E, exec, pkill tofi || togglespecial-menu"
         "$mainMod CTRL, Z, exec, pkill rofi || selectwallpaper --preview"
-        "$mainMod CTRL, R, exec, pkill rofi || cd ~/Documents/Syncthing/Memes && rofi-gridview"
+        "$mainMod CTRL, R, exec, pkill rofi || cd ~/documents/syncthing/memes && rofi-gridview"
 
         #== Screenshot/Screencapture ======================================================================
         "$mainMod CTRL, S, exec, screenshot sf"

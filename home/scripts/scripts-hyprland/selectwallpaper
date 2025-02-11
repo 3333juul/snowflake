@@ -9,7 +9,7 @@ fi
 
 # Select a wallpaper using rofi
 select_wallpaper() {
-	wallpapers=$(find "$HOME/Pictures/Backgrounds" -type f)
+	wallpapers=$(find "$HOME/media/pictures/wallpapers" -type f)
 
 	#selected_wallpaper=$(for a in $wallpapers; do
 	selected_wallpaper=$(echo "$wallpapers" | while IFS= read -r a; do

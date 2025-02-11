@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPO_DIR="$HOME/github_repos"
+REPO_DIR="$HOME/.local/state/github_repos"
 FZF_CMD=(fzf --prompt='Select a repository: ')
 
 mkdir -p "$REPO_DIR"

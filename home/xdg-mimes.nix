@@ -1,10 +1,17 @@
 {
   lib,
   pkgs,
+  config,
+  osConfig,
   ...
-}:
-with lib; let
+}: let
   inherit (pkgs.stdenv) isLinux;
+  inherit (lib.modules) mkIf;
+  inherit (lib.attrsets) mapAttrsToList nameValuePair;
+  inherit (lib.lists) flatten;
+  inherit (builtins) listToAttrs;
+  inherit (config.home) homeDirectory;
+  inherit (config.xdg.userDirs) pictures;
 
   defaultApps = {
     browser = ["brave.desktop"];
@@ -100,19 +107,56 @@ with lib; let
     ];
   };
 
-  associations = with lists;
-    listToAttrs (
-      flatten (mapAttrsToList (key: map (type: attrsets.nameValuePair type defaultApps."${key}")) mimeMap)
-    );
+  associations = listToAttrs (
+    flatten (mapAttrsToList (key: map (type: nameValuePair type defaultApps."${key}")) mimeMap)
+  );
 in {
   xdg = {
     mimeApps = {
       enable = isLinux;
+
       associations.added = associations;
       defaultApplications = associations;
     };
 
+    cacheHome = "${homeDirectory}/.cache";
+    configHome = "${homeDirectory}/.config";
+    dataHome = "${homeDirectory}/.local/share";
+    stateHome = "${homeDirectory}/.local/state";
+
+    userDirs = mkIf isLinux {
+      enable = true;
+      createDirectories = true;
+
+      documents = "${homeDirectory}/documents";
+      download = "${homeDirectory}/downloads";
+      desktop = "${homeDirectory}/desktop";
+      videos = "${homeDirectory}/media/videos";
+      music = "${homeDirectory}/media/music";
+      pictures = "${homeDirectory}/media/pictures";
+      publicShare = "${homeDirectory}/public/share";
+      templates = "${homeDirectory}/public/templates";
+
+      extraConfig =
+        {
+          XDG_SCREENSHOTS_DIR = "${pictures}/screenshots";
+          XDG_WALLPAPERS_DIR = "${pictures}/wallpapers";
+          XDG_PROJECTS_DIR = "${homeDirectory}/projects";
+        }
+        // (mkIf osConfig.garden.programs.gaming.enable {
+          XDG_GAMES_DIR = "${homeDirectory}/games";
+        });
+    };
+
+    ## because https://github.com/nix-community/home-manager/issues/1213
     configFile."mimeapps.list".force = true;
+
+    # needed to disable creating .npm in home directory
+    configFile."npm/npmrc".text = ''
+      prefix=''${XDG_DATA_HOME}/npm
+      cache=''${XDG_CACHE_HOME}/npm
+      init-module=''${XDG_CONFIG_HOME}/npm/config/npm-init.js
+    '';
   };
 
   home.sessionVariables = {
