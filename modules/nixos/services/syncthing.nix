@@ -4,13 +4,13 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-  inherit (builtins) elem;
+  inherit (builtins) elem filter;
   inherit (config.garden.system) mainUser;
   inherit (config.garden.services) syncthing;
   inherit (syncthing) enabledDevices;
   inherit (syncthing) enabledFolders;
 
-  ifEnabled = builtins.filter (device: elem device enabledDevices);
+  ifEnabled = filter (device: elem device enabledDevices);
 in {
   services.syncthing = mkIf syncthing.enable {
     enable = true;
