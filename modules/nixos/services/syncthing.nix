@@ -4,13 +4,13 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-  inherit (builtins) elem filter;
+  inherit (lib.attrsets) mapAttrs;
   inherit (config.garden.system) mainUser;
   inherit (config.garden.services) syncthing;
-  inherit (syncthing) enabledDevices;
-  inherit (syncthing) enabledFolders;
+  inherit (builtins) elem;
 
-  ifEnabled = filter (device: elem device enabledDevices);
+  # only enable these folders that are defined in garden.services.syncthing.folders
+  enabledFolders = mapAttrs (name: value: mkIf (elem name syncthing.folders) value);
 in {
   services.syncthing = mkIf syncthing.enable {
     enable = true;
@@ -24,25 +24,25 @@ in {
     overrideFolders = true;
     settings = {
       devices = {
-        "desktop" = mkIf (elem "desktop" enabledDevices) {
+        "desktop" = {
           id = "DQKQIC3-HGHTTVZ-5HTLAYD-XVI36WW-RD7W3NK-PWVZ2AR-LRV5AAV-2DJBQQR";
         };
 
-        "laptop" = mkIf (elem "laptop" enabledDevices) {
+        "laptop" = {
           id = "";
         };
 
-        "s21" = mkIf (elem "s21" enabledDevices) {
+        "s21" = {
           id = "AH33REO-A7DKTJ2-WOW2PMV-RBMYWOY-7APMQ7H-F6OHHVW-QNPUAUB-KJTQLAK";
         };
 
-        "noteAir3" = mkIf (elem "noteAir3" enabledDevices) {
+        "noteAir3" = {
           id = "VUMQXRR-NBDKLJA-5F2EM56-ZWTQASA-VN5MLHZ-XJUNAFX-ZR5TRDM-LSNOEQV";
         };
       };
 
-      folders = {
-        "noteAir3/books" = mkIf (elem "noteAir3" enabledDevices) {
+      folders = enabledFolders {
+        "noteAir3/books" = {
           path = "/home/${mainUser}/documents/syncthing/noteAir3/books";
           devices = ["noteAir3"];
           id = "ttzrq-xytfk";
@@ -54,7 +54,7 @@ in {
           };
         };
 
-        "noteAir3/koreader" = mkIf (elem "noteAir3" enabledDevices) {
+        "noteAir3/koreader" = {
           path = "/home/${mainUser}/documents/syncthing/noteAir3/koreader";
           devices = ["noteAir3"];
           id = "09010-icymx";
@@ -66,9 +66,9 @@ in {
           };
         };
 
-        "memes" = mkIf (elem "memes" enabledFolders) {
+        "memes" = {
           path = "/home/${mainUser}/documents/syncthing/memes";
-          devices = ifEnabled ["s21" "laptop" "desktop"];
+          devices = ["laptop" "desktop"];
           id = "memes-folder";
           versioning = {
             type = "simple";

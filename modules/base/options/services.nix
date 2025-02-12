@@ -9,13 +9,7 @@ in {
     syncthing = {
       enable = mkEnableOption "enable syncthing";
 
-      enabledDevices = lib.mkOption {
-        type = listOf str;
-        default = [];
-        description = "list of enabled syncthing devices";
-      };
-
-      enabledFolders = lib.mkOption {
+      folders = lib.mkOption {
         type = listOf str;
         default = [];
         description = "list of enabled syncthing devices";

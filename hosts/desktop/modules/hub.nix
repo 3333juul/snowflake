@@ -78,8 +78,11 @@
 
       syncthing = {
         enable = true;
-        enabledDevices = ["noteAir3"];
-        enabledFolders = ["memes"];
+        folders = [
+          "memes"
+          "noteAir3/books"
+          "noteAir3/koreader"
+        ];
       };
 
       kdeconnect = {
