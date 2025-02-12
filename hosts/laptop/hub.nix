@@ -2,13 +2,14 @@
   garden = {
     environment = {
       shell = "zsh";
+      useHomeManager = true;
+
       desktop = {
         type = "Hyprland";
         hyprland = {
           useFlake = false;
         };
       };
-      useHomeManager = true;
     };
 
     programs = {
@@ -20,12 +21,12 @@
       git.enable = true;
       starship.enable = true;
       aichat.enable = false;
-      androidTools.enable = true;
+      androidTools.enable = false;
 
       anki.enable = false;
       discord.enable = false;
       libreoffice.enable = false;
-      brave.enable = true;
+      brave.enable = false;
       spotify.enable = false;
       mpv.enable = true;
 
@@ -61,7 +62,7 @@
       };
 
       terminal = {
-        foot.enable = true;
+        foot.enable = false;
         kitty.enable = true;
       };
 
@@ -73,7 +74,13 @@
     };
 
     services = {
-      syncthing.enable = false;
+      syncthing = {
+        enable = false;
+        folders = [
+          "memes"
+        ];
+      };
+
       glance.enable = false;
       kdeconnect = {
         enable = false;
