@@ -34,6 +34,8 @@
         [
           # common modules between all systems
           "${self}/modules/base"
+          # module options
+          "${self}/modules/options"
           # modules per class: nixos, darwin
           "${self}/modules/${class}"
           # modules per host
