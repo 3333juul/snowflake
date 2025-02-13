@@ -89,15 +89,39 @@
     #= Move Lines =================================================================================
     {
       key = "<A-j>";
-      mode = ["n" "i" "v"];
+      mode = "n";
       desc = "Move Down";
       action = "<cmd>m .+1<cr>==";
     }
     {
       key = "<A-k>";
-      mode = ["n" "i" "v"];
+      mode = "n";
       desc = "Move Up";
       action = "<cmd>m .-2<cr>==";
+    }
+    {
+      key = "<A-j>";
+      mode = "i";
+      desc = "Move Down";
+      action = "<esc><cmd>m .+1<cr>==gi";
+    }
+    {
+      key = "<A-k>";
+      mode = "i";
+      desc = "Move Up";
+      action = "<esc><cmd>m .-2<cr>==gi";
+    }
+    {
+      key = "<A-j>";
+      mode = "v";
+      desc = "Move Down";
+      action = ":m '>+1<cr>gv=gv";
+    }
+    {
+      key = "<A-k>";
+      mode = "v";
+      desc = "Move Up";
+      action = ":m '<-2<cr>gv=gv";
     }
 
     #= Buffers ====================================================================================
