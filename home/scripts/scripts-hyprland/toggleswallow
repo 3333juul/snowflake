@@ -2,8 +2,6 @@
 
 status=$(hyprctl -j getoption misc:enable_swallow | jq -r '.int')
 
-hyprctl keyword misc:swallow_regex kitty
-
 if [ "$status" -eq 0 ]; then
 	hyprctl keyword misc:enable_swallow true
 	hyprctl notify -1 1500 "rgb(98971a)" "Swallow: Enabled"
