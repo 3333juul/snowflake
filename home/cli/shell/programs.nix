@@ -32,11 +32,11 @@ in {
       enableFishIntegration = shell == "fish";
     };
 
-    nix-your-shell = mkIf cfg.enable {
-      enable = true;
-      enableZshIntegration = shell == "zsh";
-      enableFishIntegration = shell == "fish";
-      enableNushellIntegration = shell == "nushell";
-    };
+    # nix-your-shell = mkIf cfg.enable {
+    #   enable = true;
+    #   enableZshIntegration = shell == "zsh";
+    #   enableFishIntegration = shell == "fish";
+    #   enableNushellIntegration = shell == "nushell";
+    # };
   };
 }
