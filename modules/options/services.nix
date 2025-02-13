@@ -5,6 +5,7 @@ in {
   options.garden.services = {
     enable = mkEnableOption "enable services";
     glance.enable = mkEnableOption "enable glance";
+    restic.enable = mkEnableOption "enable restic";
 
     syncthing = {
       enable = mkEnableOption "enable syncthing";

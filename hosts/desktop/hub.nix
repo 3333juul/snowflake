@@ -79,6 +79,7 @@
 
     services = {
       glance.enable = true;
+      restic.enable = false;
 
       syncthing = {
         enable = true;

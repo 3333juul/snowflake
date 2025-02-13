@@ -77,6 +77,9 @@
     };
 
     services = {
+      glance.enable = false;
+      restic.enable = false;
+
       syncthing = {
         enable = false;
         folders = [
@@ -84,7 +87,6 @@
         ];
       };
 
-      glance.enable = false;
       kdeconnect = {
         enable = false;
         indicator.enable = false;
