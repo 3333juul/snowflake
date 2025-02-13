@@ -1,13 +1,15 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   inherit (lib.modules) mkIf;
+  inherit (config.garden.system) mainUser;
 
   cfg = config.garden.services;
 in {
-  conifg = mkIf cfg.restic.enable {
+  config = mkIf cfg.restic.enable {
     # agenix
     # TODO:
 
@@ -17,7 +19,7 @@ in {
 
     # TODO:
     services.restic.backups = {
-      remotebackup = {
+      daily = {
         initialize = true;
         paths = [
           # what to backup
@@ -34,6 +36,28 @@ in {
           RandomizedDelaySec = "5h";
         };
       };
+    };
+
+    systemd.services.restic-backups-daily.unitConfig.OnFailure = "notify-backup-failed.service";
+
+    systemd.services."notify-backup-failed" = {
+      enable = true;
+      description = "Notify on failed backup";
+      serviceConfig = {
+        Type = "oneshot";
+        User = config.users.users.${mainUser}.name;
+      };
+
+      # required for notify-send
+      environment.DBUS_SESSION_BUS_ADDRESS = "unix:path=/run/user/${
+        toString config.users.users.${mainUser}.uid
+      }/bus";
+
+      script = ''
+        ${pkgs.libnotify}/bin/notify-send --urgency=critical \
+          "Backup failed" \
+          "$(journalctl -u restic-backups-daily -n 5 -o cat)"
+      '';
     };
   };
 }
