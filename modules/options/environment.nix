@@ -14,6 +14,7 @@ in {
         "bash"
         "fish"
         "zsh"
+        "nushell"
       ];
       default = "zsh";
       description = "shell to be used";
@@ -27,7 +28,7 @@ in {
           "sway"
           "cosmic"
         ]);
-        default = "Hyprland";
+        default = null;
         description = "The desktop environment to be used.";
       };
 

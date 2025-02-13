@@ -4,16 +4,18 @@
 in {
   options.garden.device = {
     type = mkOption {
-      type = enum [
-        "laptop"
-        "desktop"
-        "server"
-        "hybrid"
-        "wsl"
-        "lite"
-        "vm"
-      ];
-      default = "";
+      type = nullOr (
+        enum [
+          "laptop"
+          "desktop"
+          "server"
+          "hybrid"
+          "wsl"
+          "lite"
+          "vm"
+        ]
+      );
+      default = null;
     };
 
     gpu = mkOption {

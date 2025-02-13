@@ -90,16 +90,5 @@ in {
       ];
       default = "vimiv";
     };
-
-    # noiseSuppressor = mkOption {
-    #   type = nullOr (enum [
-    #     "rnnoise"
-    #     "noisetorch"
-    #   ]);
-    #   default = "rnnoise";
-    #   description = ''
-    #     The noise suppressor to be used for desktop systems with sound enabled.
-    #   '';
-    # };
   };
 }
