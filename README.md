@@ -15,6 +15,7 @@
   - [base](modules/base/) Base modules, common between all systems
   - [nixos](modules/nixos/) NixOS specific modules
   - [darwin](modules/nixos/) TODO
+  - [options](modules/options/) Options that make the config modular
   - [profiles](modules/profiles/) Profiles for different system types
 - [parts](parts) Flake parts
   - [lib](parts/lib/) My personal functions
