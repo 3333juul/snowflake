@@ -79,7 +79,6 @@
 
     services = {
       glance.enable = true;
-      restic.enable = false;
       minecraftServer.enable = true;
 
       syncthing = {
@@ -88,6 +87,13 @@
           "memes"
           "noteAir3/books"
           "noteAir3/koreader"
+        ];
+      };
+
+      restic = {
+        enable = false;
+        backups = [
+          "daily"
         ];
       };
 

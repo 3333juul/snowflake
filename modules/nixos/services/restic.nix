@@ -5,11 +5,17 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
+  inherit (lib.attrsets) mapAttrs;
   inherit (config.garden.system) mainUser;
+  inherit (config.garden.services) restic;
+  inherit (builtins) elem;
 
-  cfg = config.garden.services;
+  user = config.users.users.${mainUser};
+
+  # only enable these backups that are defined in garden.services.restic.backups
+  enabledBackups = mapAttrs (name: value: mkIf (elem name restic.backups) value);
 in {
-  config = mkIf cfg.restic.enable {
+  config = mkIf restic.enable {
     # agenix
     # TODO:
 
@@ -18,23 +24,25 @@ in {
     };
 
     # TODO:
-    services.restic.backups = {
+    services.restic.backups = enabledBackups {
+      # enabledBackups {
       daily = {
         initialize = true;
         paths = [
           # what to backup
+          #"${user.home}/documents"
+          "${user.home}/media"
         ];
-        passwordFile = ""; # encryption
-        repository = "";
 
-        extraOptions = [
-          # how to connect
+        rcloneConfigFile = "";
+        repositoryFile = "";
+        passwordFile = "";
+
+        pruneopts = [
+          "--keep-daily 7"
+          "--keep-weekly 5"
+          "--keep-monthly 12"
         ];
-        timerConfig = {
-          # when to backup
-          OnCalendar = "00:05";
-          RandomizedDelaySec = "5h";
-        };
       };
     };
 
@@ -45,12 +53,12 @@ in {
       description = "Notify on failed backup";
       serviceConfig = {
         Type = "oneshot";
-        User = config.users.users.${mainUser}.name;
+        User = user.name;
       };
 
       # required for notify-send
       environment.DBUS_SESSION_BUS_ADDRESS = "unix:path=/run/user/${
-        toString config.users.users.${mainUser}.uid
+        toString user.uid
       }/bus";
 
       script = ''
