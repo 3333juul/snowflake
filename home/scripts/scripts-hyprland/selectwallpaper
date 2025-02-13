@@ -1,5 +1,6 @@
 #!/bin/bash
 
+wallpapers_dir="$HOME/media/pictures/wallpapers"
 last_wallpapers_file="$HOME/.config/hypr/lastwallpapers.txt"
 theme="wallpaper"
 
@@ -9,7 +10,7 @@ fi
 
 # Select a wallpaper using rofi
 select_wallpaper() {
-	wallpapers=$(find "$HOME/media/pictures/wallpapers" -type f)
+	wallpapers=$(find "$wallpapers_dir" -type f)
 
 	#selected_wallpaper=$(for a in $wallpapers; do
 	selected_wallpaper=$(echo "$wallpapers" | while IFS= read -r a; do
@@ -97,7 +98,7 @@ case "$1" in
 	if [[ -n $selected_wallpaper ]]; then
 		selected_monitor=$(select_monitor)
 		if [[ -n $selected_monitor ]]; then
-			set_wallpaper "$selected_monitor" "$HOME/Pictures/Backgrounds/$selected_wallpaper"
+			set_wallpaper "$selected_monitor" "$wallpapers_dir/$selected_wallpaper"
 		fi
 	fi
 	;;
