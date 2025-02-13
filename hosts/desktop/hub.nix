@@ -80,6 +80,7 @@
     services = {
       glance.enable = true;
       restic.enable = false;
+      minecraftServer.enable = true;
 
       syncthing = {
         enable = true;

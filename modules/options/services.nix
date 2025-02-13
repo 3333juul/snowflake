@@ -6,6 +6,7 @@ in {
     enable = mkEnableOption "enable services";
     glance.enable = mkEnableOption "enable glance";
     restic.enable = mkEnableOption "enable restic";
+    minecraftServer.enable = mkEnableOption "enable minecraft server";
 
     syncthing = {
       enable = mkEnableOption "enable syncthing";
