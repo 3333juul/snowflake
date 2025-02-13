@@ -4,7 +4,7 @@
   ...
 }: let
   inherit (lib.options) mkOption;
-  inherit (lib.types) nullOr enum bool;
+  inherit (lib.types) nullOr enum bool listOf str;
 
   desktop = config.garden.environment.desktop.type;
 in {
@@ -31,10 +31,18 @@ in {
         description = "The desktop environment to be used.";
       };
 
-      hyprland.useFlake = mkOption {
-        type = bool;
-        default = true;
-        description = "Whether to use Hyprland flake";
+      hyprland = {
+        useFlake = mkOption {
+          type = bool;
+          default = true;
+          description = "Whether to use Hyprland flake";
+        };
+
+        monitors = mkOption {
+          type = listOf str;
+          default = [];
+          description = "List of monitor configurations for Hyprland.";
+        };
       };
     };
 

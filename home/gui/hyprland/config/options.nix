@@ -1,20 +1,9 @@
 {osConfig, ...}: let
-  inherit (osConfig.networking) hostName;
-
   dev = osConfig.garden.device;
+  cfg = osConfig.garden.environment.desktop.hyprland;
 in {
   wayland.windowManager.hyprland.settings = {
-    monitor =
-      if (hostName == "desktop")
-      then [
-        "HDMI-A-1,1920x1080@60,0x0,1"
-        "DVI-D-1,1920x1080@60,1920x0,1"
-      ]
-      else if (hostName == "laptop")
-      then [
-        "edP-1,1920x1080@60,1920x0,1.2"
-      ]
-      else null;
+    monitor = cfg.monitors;
 
     general = {
       "$mainMod" = "SUPER";
@@ -48,8 +37,8 @@ in {
       focus_on_activate = false;
       new_window_takes_over_fullscreen = 1;
       #initial_workspace_tracking = 0;
-      #enable_swallow = true;
-      #swallow_regex = kitty;
+      enable_swallow = false;
+      swallow_regex = "kitty";
     };
 
     gestures = {
