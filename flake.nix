@@ -47,6 +47,8 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
+    agenix.url = "github:ryantm/agenix";
+
     # hyprland-easymotion = {
     #   url = "github:zakk4223/hyprland-easymotion/3388351d2af672f89b907404668c6076336270e9";
     #   inputs.hyprland.follows = "hyprland";
