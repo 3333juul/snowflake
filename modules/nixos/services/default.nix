@@ -1,7 +1,7 @@
 {
   imports = [
-    ./minecraft-server.nix
-    ./restic.nix
-    ./syncthing.nix
+    ./selfhosted
+    ./sync
+    ./system
   ];
 }
