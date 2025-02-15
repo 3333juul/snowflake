@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   lib,
   osConfig,
   ...
@@ -11,7 +10,7 @@
 in {
   config = mkIf (cfg == "Hyprland") {
     home.packages = [
-      inputs.pyprland.packages.${pkgs.system}.pyprland
+      pkgs.pyprland
     ];
     home.file.".config/hypr/pyprland.toml".text = ''
       [pyprland]

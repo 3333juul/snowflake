@@ -5,31 +5,23 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nur.url = "github:nix-community/NUR";
+    systems.url = "github:nix-systems/default";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    agenix.url = "github:ryantm/agenix";
+    hyprland.url = "github:hyprwm/hyprland";
+    nvf.url = "github:notashelf/nvf";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # we can use this to provide overridable systems
-    systems.url = "github:nix-systems/default";
-
-    # improved support for darwin
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nvf.url = "github:notashelf/nvf";
-
-    hyprland = {
-      url = "github:hyprwm/hyprland";
-    };
-
-    hypr-contrib.url = "github:hyprwm/contrib";
-    hyprpicker.url = "github:hyprwm/hyprpicker";
-    pyprland.url = "github:hyprland-community/pyprland";
 
     spicetify-nix = {
       url = "github:gerg-l/spicetify-nix";
@@ -41,14 +33,6 @@
       flake = false;
     };
 
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-
-    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
-
-    flake-parts.url = "github:hercules-ci/flake-parts";
-
-    agenix.url = "github:ryantm/agenix";
-
     # hyprland-easymotion = {
     #   url = "github:zakk4223/hyprland-easymotion/3388351d2af672f89b907404668c6076336270e9";
     #   inputs.hyprland.follows = "hyprland";
@@ -58,10 +42,5 @@
     #   url = "github:bighu630/hycov";
     #   inputs.hyprland.follows = "hyprland";
     # };
-
-    #hyprpolkitagent.url = "github:hyprwm/hyprpolkitagent";
-    #nix-gaming.url = "github:fufexan/nix-gaming";
-    #ags.url = "github:Aylur/ags";
-    #yazi.url = "github:sxyazi/yazi";
   };
 }

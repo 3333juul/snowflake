@@ -22,7 +22,7 @@ in {
 
   config = mkIf (cfg.type == "Hyprland") {
     home.packages = with pkgs; [
-      inputs.hypr-contrib.packages.${pkgs.system}.grimblast
+      grimblast
       hyprpicker
       swappy
       wl-kbptr
