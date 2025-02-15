@@ -2,22 +2,24 @@
 
 active=$(hyprctl -j monitors | jq -r '.[] | select(.focused==true).specialWorkspace.name')
 
-if [[ $active != "" ]]; then
-    if [[ $active == "special:"* ]]; then
-        active=${active#special:}
-    elif [[ $active == "special" ]]; then
-        active=""
-    fi
-    hyprctl dispatch togglespecialworkspace "$active"
+if [[ -n "$active" ]]; then
+	if [[ "$active" == "special:"* ]]; then
+		active=${active#special:}
+	elif [[ "$active" == "special" ]]; then
+		active=""
+	fi
+	hyprctl dispatch togglespecialworkspace "$active"
 fi
 
-while getopts "w:x:" opt; do
-  case ${opt} in
-    w )
-      hyprctl dispatch workspace "${OPTARG}"
-      ;;
-    x )
-      hyprctl dispatch focusworkspaceoncurrentmonitor "${OPTARG}"
-      ;;
-  esac
-done
+case "$1" in
+-w)
+	hyprctl dispatch workspace "$2"
+	;;
+-x)
+	hyprctl dispatch focusworkspaceoncurrentmonitor "$2"
+	;;
+*)
+	echo "Usage: $0 {workspace <name> | focus <name>}"
+	exit 1
+	;;
+esac

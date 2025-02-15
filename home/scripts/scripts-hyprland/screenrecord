@@ -1,93 +1,45 @@
 #!/usr/bin/env bash
 
-# TODO: Make better screenrecord script
-
-rofi_command="rofi -markup -markup-rows -theme $HOME/.config/rofi/themes/launcher.rasi"
+#rofi_command="rofi -theme launcher -p 'screen-rec' -dmenu -selected-row 0"
+tofi_command="tofi --height 280 --width 300 --prompt-text=screen-rec:"
 datetime=$(date +"%Y-%m-%d %I-%M-%S")
-dir="$HOME/Videos/Screen-Recordings"
+dir="$HOME/media/videos/screen-rec"
 
-# Icons
-icon1="$HOME/.config/rofi/images/camera-movie.svg"
-icon2="$HOME/.config/rofi/images/timer.svg"
+# Recording options
+options=(
+	" Record Desktop"
+	" Record Area"
+	" Record Window"
+	" Record Area in 5s"
+	" Record in 5s"
+)
 
-screen="  Record Desktop"
-area="  Record Area"
-window="  Record Window"
-infivearea="  Record Area in 5s"
-infive="  Record in 5s"
+# Ensure directory exists
+mkdir -p "$dir"
 
-# Stop wf-recorder if it's running
+# Stop wf-recorder if running
 stop_wf_recorder() {
-	if pgrep -x wf-recorder >/dev/null; then
-		pkill -x wf-recorder
-		exit 0
-	fi
+	pkill -x wf-recorder && exit 0
 }
 
-# Notify and view recording
+# Notify and copy recording path to clipboard
 notify_view() {
-	notify-send -u low "Copied to clipboard."
-	echo "$dir/Screen Recording from ${datetime}.mkv"
-	#    if [[ -e "$dir/Screen Recording from ${datetime}.mkv" ]]; then
-	#        echo "$dir/Screen Recording from ${datetime}.mkv"
-	#        action=$(notify-send --action="default,openss" -u low "Screen Recording Saved.")
-	#        case "$action" in
-	#        "default")
-	#            xdg-open "$dir/Screen Recording from ${datetime}.mkv"
-	#            ;;
-	#        esac
-	#    else
-	#        notify-send -u low "Screen Recording Deleted."
-	#    fi
+	notify-send -u low "Recording saved" "Copied to clipboard."
+	wl-copy <"$dir/screen_rec_${datetime}.mkv"
 }
 
-# Countdown
+# Countdown function
 countdown() {
-	for sec in $(seq $1 -1 1); do
-		notify-send -t 1000 --replace=699 -i $icon2 "Recording in : $sec"
+	for sec in $(seq "$1" -1 1); do
+		notify-send -t 1000 --replace=699 "Recording in: $sec"
 		sleep 1
 	done
 }
 
-# Recording
-recordnow() {
-	sleep 0.5 && wf-recorder -g "0,0 1920x1080" -f $dir/"Screen Recording from ${datetime}".mkv
-	wl-copy <$dir/"Screen Recording from ${datetime}".mkv
-	notify_view
+# Start recording with given geometry
+start_recording() {
+	wf-recorder -g "$1" -f "$dir/screen_rec_${datetime}.mkv" && notify_view
 }
-
-record5() {
-	countdown '5'
-	sleep 1 && wf-recorder -g "0,0 1920x1080" -f $dir/"Screen Recording from ${datetime}".mkv
-	wl-copy <$dir/"Screen Recording from ${datetime}".mkv
-	notify_view
-}
-
-record5area() {
-	countdown '5'
-	sleep 1 && wf-recorder -g "$(slurp -b#0f0f0f78 -c#cc7765 -w4)" -f $dir/"Screen Recording from ${datetime}".mkv
-	wl-copy <$dir/"Screen Recording from ${datetime}".mkv
-	notify_view
-}
-
-recordwin() {
-	geometry=$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')
-	sleep 1 &
-	wf-recorder -g "${geometry}" -f $dir/"Screen Recording from ${datetime}".mkv
-	wl-copy <$dir/"Screen Recording from ${datetime}".mkv
-	notify_view
-}
-
-recordarea() {
-	wf-recorder -g "$(slurp -b#0f0f0f78 -c#cc7765 -w4)" -f $dir/"Screen Recording from ${datetime}".mkv
-	wl-copy <$dir/"Screen Recording from ${datetime}".mkv
-	notify_view
-}
-
-# Ensure directory exists
-if [[ ! -d "$dir/" ]]; then
-	mkdir -p "$dir/"
-fi
 
 # Argument parsing
 case "$1" in
@@ -95,40 +47,36 @@ case "$1" in
 	stop_wf_recorder
 	;;
 --recordnow)
-	recordnow
+	start_recording "0,0 1920x1080"
 	;;
 --record5)
-	record5
+	countdown 5
+	start_recording "0,0 1920x1080"
 	;;
 --record5area)
-	record5area
+	countdown 5
+	start_recording "$(slurp -b#0f0f0f78 -c#cc7765 -w4)"
 	;;
 --recordwin)
-	recordwin
+	geometry=$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')
+	start_recording "$geometry"
 	;;
 --recordarea)
-	recordarea
+	start_recording "$(slurp -b#0f0f0f78 -c#cc7765 -w4)"
 	;;
 --launcher)
-	# Variable passed to rofi
-	options="$screen\n$area\n$window\n$infivearea\n$infive"
-
-	chosen="$(echo -e "$options" | $rofi_command -p 'Screen Recording' -dmenu -selected-row 0)"
-	case $chosen in
-	$screen)
-		recordnow
+	chosen=$(printf "%s\n" "${options[@]}" | $tofi_command)
+	case "$chosen" in
+	" Record Desktop") start_recording "0,0 1920x1080" ;;
+	" Record Area") start_recording "$(slurp -b#0f0f0f78 -c#cc7765 -w4)" ;;
+	" Record Window") geometry=$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"') && start_recording "$geometry" ;;
+	" Record in 5s")
+		countdown 5
+		start_recording "0,0 1920x1080"
 		;;
-	$area)
-		recordarea
-		;;
-	$window)
-		recordwin
-		;;
-	$infive)
-		record5
-		;;
-	$infivearea)
-		record5area
+	" Record Area in 5s")
+		countdown 5
+		start_recording "$(slurp -b#0f0f0f78 -c#cc7765 -w4)"
 		;;
 	esac
 	;;
