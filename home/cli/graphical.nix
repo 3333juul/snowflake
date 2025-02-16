@@ -13,7 +13,6 @@
 in {
   config = mkIf ((builtins.elem dev.type acceptedTypes) && prg.cli.enable) {
     home.packages = with pkgs; [
-      appimage-run # run appimage
       brightnessctl # brightness managed via cli
       cliphist # clipboard manager
       ffmpeg
