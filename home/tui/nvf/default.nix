@@ -34,7 +34,6 @@ in {
       enable = true;
       settings.vim = {
         viAlias = true;
-        globals.mapleader = " ";
         useSystemClipboard = true;
         preventJunkFiles = true;
         # make indents normal
