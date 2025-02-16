@@ -38,6 +38,7 @@
       groupbar = {
         font_family = "Terminess Nerd Font";
         font_size = 12;
+        gradients = true;
         height = 13;
         "col.active" = "rgba(98971AE6)";
         "col.inactive" = "rgba(282828E6)";
