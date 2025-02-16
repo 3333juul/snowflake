@@ -10,6 +10,7 @@
     in {
       builders = import ./builders.nix {inherit inputs lib;};
       hardware = import ./hardware.nix;
+      secrets = import ./secrets.nix {inherit inputs;};
 
       inherit (self.builders) mkHosts;
       inherit (self.hardware) isx86Linux ldTernary primaryMonitor monitor;
