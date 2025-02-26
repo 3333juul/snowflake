@@ -148,15 +148,22 @@ in {
         });
     };
 
-    ## because https://github.com/nix-community/home-manager/issues/1213
-    configFile."mimeapps.list".force = true;
+    configFile = {
+      ## because https://github.com/nix-community/home-manager/issues/1213
+      "mimeapps.list".force = true;
 
-    # needed to disable creating .npm in home directory
-    configFile."npm/npmrc".text = ''
-      prefix=''${XDG_DATA_HOME}/npm
-      cache=''${XDG_CACHE_HOME}/npm
-      init-module=''${XDG_CONFIG_HOME}/npm/config/npm-init.js
-    '';
+      # needed to disable creating .npm in home directory
+      "npm/npmrc".text = ''
+        prefix=''${XDG_DATA_HOME}/npm
+        cache=''${XDG_CACHE_HOME}/npm
+        init-module=''${XDG_CONFIG_HOME}/npm/config/npm-init.js
+      '';
+
+      # set default terminal for thunar
+      "xfce4/helpers.rc".text = ''
+        TerminalEmulator=kitty
+      '';
+    };
   };
 
   home.sessionVariables = {
