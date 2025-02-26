@@ -11,6 +11,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       (mkIf cfg.lutris.enable lutris)
+      gamescope
       mangohud
       winetricks
     ];
