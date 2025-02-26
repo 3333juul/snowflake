@@ -18,7 +18,6 @@
     ./mpv.nix # media player
     ./pinta.nix
     ./shared.nix
-    ./thunar.nix # file manager
     ./vscodium.nix # editor
     ./zotero.nix
   ];

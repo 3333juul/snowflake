@@ -11,7 +11,6 @@
       "swaync &"
 
       # Systray applets
-      "nm-applet &"
       "blueman-applet &"
 
       # Clipboard manager
@@ -20,9 +19,6 @@
 
       # Pyprland
       "pypr &"
-
-      # Wallpaper
-      "hyprpaper &"
 
       # Cursor
       "hyprctl setcursor Bibata-Modern-Ice 24 &"
