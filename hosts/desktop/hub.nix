@@ -91,9 +91,9 @@
       };
 
       restic = {
-        enable = false;
+        enable = true;
         backups = [
-          "daily"
+          "onedrive"
         ];
       };
 

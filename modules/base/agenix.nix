@@ -34,11 +34,11 @@ in {
     secretsMountPoint = mkIf isDarwin "/private/tmp/agenix.d";
 
     secrets = {
-      secret1 = mkSecret {
-        file = "secret1";
-        owner = mainUser;
-        group = userGroup;
-      };
+      # secret1 = mkSecret {
+      #   file = "secret1";
+      #   owner = mainUser;
+      #   group = userGroup;
+      # };
     };
   };
 }

@@ -1,4 +1,8 @@
-{lib, ...}: let
+{
+  lib,
+  config,
+  ...
+}: let
   inherit (lib.options) mkEnableOption;
 in {
   options.garden.programs = {
@@ -12,6 +16,12 @@ in {
     androidTools.enable = mkEnableOption "enables android tools";
     git.enable = mkEnableOption "enables git";
     starship.enable = mkEnableOption "enables starship";
+
+    waybar.enable =
+      mkEnableOption "enables waybar"
+      // {
+        default = config.garden.environment.desktop.type == "Hyprland";
+      };
 
     imageEditor = {
       gimp.enable = mkEnableOption "enables GIMP";

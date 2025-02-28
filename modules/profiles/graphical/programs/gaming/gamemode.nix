@@ -11,6 +11,7 @@
 
   programs = makeBinPath (builtins.attrValues {inherit (pkgs) hyprland coreutils systemd;});
 
+  # TODO: test if code in optionalString works
   startscript = pkgs.writeShellScript "gamemode-start" ''
     ${optionalString (desktop.type == "Hyprland") ''
       export PATH=$PATH:${programs}
