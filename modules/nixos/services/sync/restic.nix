@@ -5,7 +5,6 @@
 }: let
   inherit (lib.modules) mkIf;
   inherit (lib.attrsets) mapAttrs;
-  inherit (lib.secrets) mkSecret;
   inherit (config.garden.system) mainUser;
   inherit (config.garden.services) restic;
   inherit (builtins) elem;
@@ -16,11 +15,6 @@
   enabledBackups = mapAttrs (name: value: mkIf (elem name restic.backups) value);
 in {
   config = mkIf restic.enable {
-    age.secrets = {
-      restic-password = mkSecret {file = "restic/password";};
-      rclone = mkSecret {file = "rclone";};
-    };
-
     services.restic.backups = enabledBackups {
       onedrive = {
         initialize = true;

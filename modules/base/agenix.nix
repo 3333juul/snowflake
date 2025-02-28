@@ -34,11 +34,17 @@ in {
     secretsMountPoint = mkIf isDarwin "/private/tmp/agenix.d";
 
     secrets = {
-      # secret1 = mkSecret {
-      #   file = "secret1";
-      #   owner = mainUser;
-      #   group = userGroup;
-      # };
+      restic-password = mkSecret {
+        file = "restic/password";
+      };
+
+      rclone = mkSecretWithPath {
+        file = "rclone";
+        owner = mainUser;
+        group = userGroup;
+        path = "/home/${mainUser}/.config/rclone/rclone.conf";
+        symlink = false;
+      };
     };
   };
 }
