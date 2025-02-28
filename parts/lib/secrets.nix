@@ -52,11 +52,12 @@
   - [group] the group of the secret, this defaults to "root"
   - [mode] the permissions of the secret, this defaults to "400"
   - [path] the path to output the secret to
+  - [symlink] if "false", the secret will be copied instead of symlinked. this defaults to "true"
 
   # Type
 
   ```
-  mkSecretWithPath :: (String -> String -> String -> String -> String) -> AttrSet
+  mkSecretWithPath :: (String -> String -> String -> String -> String -> Bool) -> AttrSet
   ```
 
   # Example
@@ -69,6 +70,7 @@
     owner = "root";
     group = "root";
     mode = "400";
+    symlink = true;
   }
   ```
   */
@@ -78,6 +80,7 @@
     owner ? "root",
     group ? "root",
     mode ? "400",
+    symlink ? true,
     ...
   }:
     mkSecret {
@@ -89,7 +92,7 @@
         ;
     }
     // {
-      inherit path;
+      inherit path symlink;
     };
 in {
   inherit mkSecret mkSecretWithPath;
