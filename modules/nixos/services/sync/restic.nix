@@ -14,11 +14,11 @@
 
   user = config.users.users.${mainUser};
 
-  # Create a notification service for a given backup
-  mkNotifyService = backupName:
-    nameValuePair "notify-backup-failed-${backupName}" {
+  # create a notification service for a given backup
+  mkNotifyService = name:
+    nameValuePair "notify-backup-failed-${name}" {
       enable = true;
-      description = "Notify on failed backup for ${backupName}";
+      description = "Notify on failed backup for ${name}";
       serviceConfig = {
         Type = "oneshot";
         User = user.name;
@@ -29,15 +29,15 @@
 
       script = ''
         ${pkgs.libnotify}/bin/notify-send --urgency=critical \
-          "Backup failed for ${backupName}" \
-          "$(journalctl -u restic-backups-${backupName} -n 5 -o cat)"
+          "Backup failed for ${name}" \
+          "$(journalctl -u restic-backups-${name} -n 5 -o cat)"
       '';
     };
 
-  # Link a backup service to its notification service
-  mkOnFailureLink = backupName:
-    nameValuePair "restic-backups-${backupName}" {
-      unitConfig.OnFailure = "notify-backup-failed-${backupName}.service";
+  # link a backup service to its notification service
+  mkOnFailureLink = name:
+    nameValuePair "restic-backups-${name}" {
+      unitConfig.OnFailure = "notify-backup-failed-${name}.service";
     };
 
   # only enable these backups that are defined in garden.services.restic.backups
@@ -68,7 +68,7 @@ in {
       };
     };
 
-    # Generate all systemd services
+    # generate all systemd services
     systemd.services = mkIf (device.type != "server") (mkMerge [
       (mapAttrs' (name: _: mkNotifyService name) config.services.restic.backups)
       (mapAttrs' (name: _: mkOnFailureLink name) config.services.restic.backups)
