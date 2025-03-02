@@ -5,31 +5,14 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-  inherit (lib.strings) optionalString makeBinPath;
-  inherit (config.garden.environment) desktop;
   cfg = config.garden.programs.gaming;
 
-  programs = makeBinPath (builtins.attrValues {inherit (pkgs) hyprland coreutils systemd;});
-
-  # TODO: test if code in optionalString works
   startscript = pkgs.writeShellScript "gamemode-start" ''
-    ${optionalString (desktop.type == "Hyprland") ''
-      export PATH=$PATH:${programs}
-      export HYPRLAND_INSTANCE_SIGNATURE=$(ls -w1 /tmp/hypr | tail -1)
-      hyprctl --batch 'keyword decoration:blur 0 ; keyword animations:enabled 0 ; keyword misc:vfr 0'
-    ''}
-
     ${pkgs.libnotify}/bin/notify-send -a 'Gamemode' 'Optimizations activated'
   '';
 
   endscript = pkgs.writeShellScript "gamemode-end" ''
-    ${optionalString (desktop.type == "Hyprland") ''
-      export PATH=$PATH:${programs}
-      export HYPRLAND_INSTANCE_SIGNATURE=$(ls -w1 /tmp/hypr | tail -1)
-      hyprctl --batch 'keyword decoration:blur 1 ; keyword animations:enabled 1 ; keyword misc:vfr 1'
-    ''}
-
-      ${pkgs.libnotify}/bin/notify-send -a 'Gamemode' 'Optimizations deactivated'
+    ${pkgs.libnotify}/bin/notify-send -a 'Gamemode' 'Optimizations deactivated'
   '';
 in {
   config.programs.gamemode = mkIf cfg.enable {
