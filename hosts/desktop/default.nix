@@ -28,6 +28,14 @@
         loader = "systemd-boot";
       };
 
+      networking = {
+        tailscale = {
+          enable = false;
+          isServer = false;
+          isClient = false;
+        };
+      };
+
       loginManager = {
         name = "greetd";
         autoLogin.enable = false;

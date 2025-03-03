@@ -5,5 +5,6 @@
     ./firewall.nix
     ./networkmanager.nix
     ./ssh.nix
+    ./tailscale.nix
   ];
 }
