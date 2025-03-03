@@ -49,6 +49,7 @@ in {
       rclone = mkSecret {file = "rclone";};
     };
 
+    # for cli, use: sudo restic-<name> <cmd>, e.g., sudo restic-onedrive snapshots
     services.restic.backups = enabledBackups {
       onedrive = {
         initialize = true;
