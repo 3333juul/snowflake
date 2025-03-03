@@ -1,8 +1,4 @@
-{inputs, ...}: let
-  inherit (inputs.self) lib;
-  inherit (lib.builders) mkHosts;
-  inherit (import ../hosts) hosts;
-in {
+{inputs, ...}: {
   systems = import inputs.systems;
 
   perSystem = {system, ...}: {
@@ -14,11 +10,5 @@ in {
       };
       overlays = [];
     };
-  };
-
-  # See parts/lib/builders.nix for the function implementation.
-  flake = {
-    nixosConfigurations = (mkHosts hosts).nixos;
-    darwinConfigurations = (mkHosts hosts).darwin;
   };
 }
