@@ -40,9 +40,9 @@ options=(
 	"HYPRLAND:                  cd ~/nixos-config && $NVIM ~/nixos-config/home/gui/hyprland"
 	"HYPRKEYS:                  cd ~/nixos-config && $NVIM ~/nixos-config/home/gui/hyprland/config/keybindings.nix"
 	".CONFIG:                   $FM ~/.config"
-	"DOWNLOADS:                 $FM ~/Downloads"
-	"PICTURES:                  $FM ~/Pictures"
-	"BACKGROUNDS:               $FM ~/Pictures/Backgrounds"
+	"DOWNLOADS:                 $FM ~/downloads"
+	"PICTURES:                  $FM ~/pictures"
+	"BACKGROUNDS:               $FM ~/pictures/backgrounds"
 	"HYPR-TOGGLEANIMATIONS:     toggleanimations"
 	"HYPR-COLORPICKER:          colorpicker"
 	"HYPR-FOCUSWINDOW:          focuswindow tofi"
@@ -62,7 +62,7 @@ options=(
 	"SYNCTHING:                 xdg-open http://localhost:8384"
 	"CAMBRIDGE-DICT:            brave --app=https://dictionary.cambridge.org/"
 	"QUICK-LINKS:               cd ~/nixos-config && $NVIM ~/nixos-config/home/scripts/scripts-default/quicklinks"
-	"MEMES:                     $FM ~/Documents/Syncthing/Memes"
+	"MEMES:                     $FM ~/documents/syncthing/memes"
 )
 
 # Create a newline-separated string of labels for rofi
