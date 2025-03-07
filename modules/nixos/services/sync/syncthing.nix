@@ -28,9 +28,9 @@ in {
           id = "DQKQIC3-HGHTTVZ-5HTLAYD-XVI36WW-RD7W3NK-PWVZ2AR-LRV5AAV-2DJBQQR";
         };
 
-        "laptop" = {
-          id = "";
-        };
+        # "laptop" = {
+        #   id = "";
+        # };
 
         "s21" = {
           id = "AH33REO-A7DKTJ2-WOW2PMV-RBMYWOY-7APMQ7H-F6OHHVW-QNPUAUB-KJTQLAK";
@@ -68,8 +68,32 @@ in {
 
         "memes" = {
           path = "/home/${mainUser}/documents/syncthing/memes";
-          devices = ["laptop" "desktop"];
+          devices = ["desktop"];
           id = "memes-folder";
+          versioning = {
+            type = "simple";
+            params = {
+              keep = "10";
+            };
+          };
+        };
+
+        "s21/shared" = {
+          path = "/home/${mainUser}/documents/syncthing/s21/shared";
+          devices = ["s21"];
+          id = "phone-shared";
+          versioning = {
+            type = "simple";
+            params = {
+              keep = "10";
+            };
+          };
+        };
+
+        "s21/downloads" = {
+          path = "/home/${mainUser}/documents/syncthing/s21/downloads";
+          devices = ["s21"];
+          id = "phone-downloads";
           versioning = {
             type = "simple";
             params = {

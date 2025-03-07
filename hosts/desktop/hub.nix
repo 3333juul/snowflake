@@ -87,6 +87,8 @@
           "memes"
           "noteAir3/books"
           "noteAir3/koreader"
+          "s21/shared"
+          "s21/downloads"
         ];
       };
 
