@@ -7,7 +7,12 @@
   inherit (lib.attrsets) mapAttrs;
   inherit (config.garden.system) mainUser;
   inherit (config.garden.services) syncthing;
+  inherit (config.networking) hostName;
   inherit (builtins) elem;
+
+  # enable these devices only if they're not the current host
+  desktop = mkIf (hostName != "desktop") "desktop";
+  # laptop = mkIf (hostName != "laptop") "laptop";
 
   # only enable these folders that are defined in garden.services.syncthing.folders
   enabledFolders = mapAttrs (name: value: mkIf (elem name syncthing.folders) value);
@@ -24,11 +29,11 @@ in {
     overrideFolders = true;
     settings = {
       devices = {
-        "desktop" = {
+        "desktop" = mkIf (hostName != "desktop") {
           id = "DQKQIC3-HGHTTVZ-5HTLAYD-XVI36WW-RD7W3NK-PWVZ2AR-LRV5AAV-2DJBQQR";
         };
 
-        # "laptop" = {
+        # "laptop" = mkIf (hostName != "laptop") {
         #   id = "";
         # };
 
@@ -68,7 +73,7 @@ in {
 
         "memes" = {
           path = "/home/${mainUser}/documents/syncthing/memes";
-          devices = ["desktop"];
+          devices = [desktop];
           id = "memes-folder";
           versioning = {
             type = "simple";
