@@ -1,7 +1,7 @@
 #!/bin/bash
 
-rofi_command="rofi -dmenu -theme $HOME/.config/rofi/themes/quicklinks.rasi -i -p "Q-LINKS:" -selected-row 0"
-tofi_command="tofi --width 300 --height 300 --prompt-text="Q-LINKS:""
+rofi_command="rofi -dmenu -theme $HOME/.config/rofi/themes/quicklinks.rasi -i -p Q-LINKS: -selected-row 0"
+tofi_command="tofi --width 300 --height 300 --prompt-text=Q-LINKS:"
 
 if [ "$1" == "--foot" ]; then
 	NVIM="foot -T neovim -a neovim nvim"
@@ -32,7 +32,7 @@ function ags_restart() {
 
 # Define options in a format "label:command"
 options=(
-	"NIXOS-NEOVIM:              cd ~/nixos-config && $NVIM ."
+	"NIXOS-NEOVIM:              cd ~/nixos-config && $NVIM"
 	"NIXOS-VSCODE:              cd ~/nixos-config && codium ~/nixos-config"
 	"NIXOS-REBUILD:             kitty --hold --class floatingterm -e nh os switch"
 	"NIXOS-UPDATE:              kitty --hold --class floatingterm -e nh os switch --update"
