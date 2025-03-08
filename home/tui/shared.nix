@@ -10,8 +10,10 @@
 in {
   config = mkIf cfg.tui.enable {
     home.packages = with pkgs; [
-      tty-clock
-      programmer-calculator
+      tty-clock # clock
+      bluetui # bluetooth
+      impala # wifi
+      programmer-calculator # calculator
     ];
   };
 }
