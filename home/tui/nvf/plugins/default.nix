@@ -15,7 +15,7 @@
     ./editor/terminal.nix
     ./editor/todo-comments.nix
     ./editor/which-key.nix
-    #./editor/yazi.nix
+    ./editor/yazi.nix
 
     # lang
     ./lang/languages.nix
