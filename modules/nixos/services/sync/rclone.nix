@@ -1,9 +1,12 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: let
+  inherit (lib.modules) mkIf;
   inherit (config.garden.system) mainUser;
+  inherit (config.garden.options.services) rclone;
 
   mkMount = {
     mountPoint,
@@ -28,20 +31,22 @@
     };
   };
 in {
-  systemd = {
-    services = {
-      rclone-onedrive-mount = mkMount {
-        mountPoint = "/home/${mainUser}/mounts/rclone/onedrive";
-        configFile = config.age.secrets.rclone.path;
-        remote = "onedrive";
+  config = mkIf rclone.enable {
+    systemd = {
+      services = {
+        rclone-onedrive-mount = mkMount {
+          mountPoint = "/home/${mainUser}/mounts/rclone/onedrive";
+          configFile = config.age.secrets.rclone.path;
+          remote = "onedrive";
+        };
       };
     };
-  };
 
-  environment.systemPackages = [pkgs.rclone];
+    environment.systemPackages = [pkgs.rclone];
 
-  environment.shellAliases = {
-    mount-onedrive = "sudo systemctl start rclone-onedrive-mount";
-    unmount-onedrive = "sudo systemctl stop rclone-onedrive-mount";
+    environment.shellAliases = {
+      mount-onedrive = "sudo systemctl start rclone-onedrive-mount";
+      unmount-onedrive = "sudo systemctl stop rclone-onedrive-mount";
+    };
   };
 }

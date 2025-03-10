@@ -6,6 +6,7 @@ in {
     enable = mkEnableOption "enable services";
     glance.enable = mkEnableOption "enable glance";
     minecraftServer.enable = mkEnableOption "enable minecraft server";
+    rclone.enable = mkEnableOption "enable rclone";
 
     syncthing = {
       enable = mkEnableOption "enable syncthing";
