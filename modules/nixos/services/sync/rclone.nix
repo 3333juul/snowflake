@@ -6,7 +6,7 @@
 }: let
   inherit (lib.modules) mkIf;
   inherit (config.garden.system) mainUser;
-  inherit (config.garden.options.services) rclone;
+  inherit (config.garden.services) rclone;
 
   mkMount = {
     mountPoint,
