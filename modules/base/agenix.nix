@@ -33,7 +33,12 @@ in {
     secretsDir = mkIf isDarwin "/private/tmp/agenix";
     secretsMountPoint = mkIf isDarwin "/private/tmp/agenix.d";
 
-    # secrets = {
-    # };
+    secrets = {
+      rclone = mkSecret {
+        file = "rclone";
+        owner = mainUser;
+        group = "users";
+      };
+    };
   };
 }

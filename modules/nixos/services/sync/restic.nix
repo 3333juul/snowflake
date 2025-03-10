@@ -46,7 +46,6 @@ in {
   config = mkIf restic.enable {
     age.secrets = {
       restic-password = mkSecret {file = "restic/password";};
-      rclone = mkSecret {file = "rclone";};
     };
 
     # for cli, use: sudo restic-<name> <cmd>, e.g., sudo restic-onedrive snapshots
