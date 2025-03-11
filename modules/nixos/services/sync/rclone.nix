@@ -65,7 +65,7 @@ in {
             toggle_mount "rclone-onedrive-mount"
             ;;
           *)
-            echo "Usage: mt <mount-name>"
+            echo "Usage: tm <mount-name>"
             echo "Supported mounts:"
             echo "1. onedrive"
             exit 1
