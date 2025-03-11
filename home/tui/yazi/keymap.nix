@@ -37,27 +37,27 @@
       }
       {
         on = ["g" "d"];
-        run = "cd ~/Downloads";
+        run = "cd ~/downloads";
         desc = "Go to the downloads directory";
       }
       {
         on = ["g" "D"];
-        run = "cd ~/Documents";
+        run = "cd ~/documents";
         desc = "Go to the documents directory";
       }
       {
         on = ["g" "p"];
-        run = "cd ~/Pictures";
+        run = "cd ~/media/pictures";
         desc = "Go to the pictures directory";
       }
       {
         on = ["g" "v"];
-        run = "cd ~/Videos";
+        run = "cd ~/media/videos";
         desc = "Go to the videos directory";
       }
       {
         on = ["g" "w"];
-        run = "cd ~/Pictures/Backgrounds";
+        run = "cd ~/media/pictures/wallpapers";
         desc = "Go to the wallpapers directory";
       }
       {
