@@ -46,7 +46,7 @@ in {
     };
 
     environment.systemPackages = let
-      mount-toggle = pkgs.writeShellScriptBin "mt" ''
+      tm = pkgs.writeShellScriptBin "tm" ''
         #!/bin/bash
 
         toggle_mount() {
@@ -72,6 +72,6 @@ in {
             ;;
         esac
       '';
-    in [pkgs.rclone mount-toggle];
+    in [pkgs.rclone tm];
   };
 }
