@@ -39,7 +39,7 @@ in {
       services = {
         rclone-onedrive-mount = mkMount {
           remotePath = "onedrive:";
-          mountPoint = "/media/${mainUser}/rclone/onedrive";
+          mountPoint = "/run/media/${mainUser}/rclone/onedrive";
           configFile = config.age.secrets.rclone.path;
         };
       };
@@ -52,10 +52,10 @@ in {
         toggle_mount() {
           local service="$1"
           if systemctl is-active --quiet "$service"; then
-            echo "Stopping: $service"
+            echo "Unmouning: $service"
             sudo systemctl stop "$service"
           else
-            echo "Starting: $service"
+            echo "Mounting: $service"
             sudo systemctl start "$service"
           fi
         }
