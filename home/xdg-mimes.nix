@@ -144,7 +144,7 @@ in {
           XDG_PROJECTS_DIR = "${homeDirectory}/projects";
         }
         // (mkIf osConfig.garden.programs.gaming.enable {
-          XDG_GAMES_DIR = "${homeDirectory}/games";
+          XDG_GAMES_DIR = "${homeDirectory}/media/games";
         });
     };
 
