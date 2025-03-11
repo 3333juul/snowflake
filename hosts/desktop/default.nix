@@ -48,6 +48,11 @@
         podman.enable = false;
         distrobox.enable = false;
       };
+
+      android = {
+        enable = true;
+        scrcpy.enable = true;
+      };
     };
   };
 }

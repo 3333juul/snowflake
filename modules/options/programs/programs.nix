@@ -13,7 +13,6 @@ in {
     spotify.enable = mkEnableOption "enables spotify";
     mpv.enable = mkEnableOption "enables MPV";
     aichat.enable = mkEnableOption "enables aichat";
-    androidTools.enable = mkEnableOption "enables android tools";
     git.enable = mkEnableOption "enables git";
     starship.enable = mkEnableOption "enables starship";
 

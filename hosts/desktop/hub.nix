@@ -25,7 +25,6 @@
       git.enable = true;
       starship.enable = true;
       aichat.enable = false;
-      androidTools.enable = true;
 
       anki.enable = true;
       discord.enable = true;

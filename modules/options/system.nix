@@ -1,6 +1,6 @@
 {lib, ...}: let
   inherit (lib.options) mkEnableOption mkOption;
-  inherit (lib.types) enum listOf str;
+  inherit (lib.types) enum listOf str int;
 in {
   options.garden.system = {
     bluetooth.enable = mkEnableOption "Should the device load bluetooth drivers and enable blueman";
@@ -50,6 +50,28 @@ in {
         type = listOf str;
         default = [];
         description = "A list of additional drivers to install for printing";
+      };
+    };
+
+    android = {
+      enable = mkEnableOption "Enable android module";
+      scrcpy.enable = mkEnableOption "Enable scrcpy";
+
+      phone = {
+        ip = mkOption {
+          type = str;
+          description = ''
+            Default device IP. To set a static ip for your android device run as root:
+            `ip address add 192.168.43.1/24 dev wlan0`
+          '';
+          default = "192.168.12.3";
+        };
+
+        port = mkOption {
+          type = int;
+          description = "Default device port";
+          default = 5555;
+        };
       };
     };
   };
