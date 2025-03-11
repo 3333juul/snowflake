@@ -52,7 +52,7 @@ in {
         toggle_mount() {
           local service="$1"
           if systemctl is-active --quiet "$service"; then
-            echo "Unmouning: $service"
+            echo "Unmouting: $service"
             sudo systemctl stop "$service"
           else
             echo "Mounting: $service"
