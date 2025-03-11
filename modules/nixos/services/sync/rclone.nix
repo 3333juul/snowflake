@@ -39,7 +39,7 @@ in {
       services = {
         rclone-onedrive-mount = mkMount {
           remotePath = "onedrive:";
-          mountPoint = "/home/${mainUser}/mounts/rclone/onedrive";
+          mountPoint = "/media/${mainUser}/rclone/onedrive";
           configFile = config.age.secrets.rclone.path;
         };
       };
