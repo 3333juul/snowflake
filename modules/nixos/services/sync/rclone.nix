@@ -5,22 +5,25 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
+  inherit (lib.lists) optionals;
   inherit (config.garden.system) mainUser;
   inherit (config.garden.services) rclone;
 
   mkMount = {
+    remotePath,
     mountPoint,
     configFile,
-    remote,
+    autostart ? false,
   }: {
-    description = "Rclone mount for ${remote}";
-    # wantedBy = ["multi-user.target"];
+    description = "Rclone mount";
+    wantedBy = optionals autostart ["multi-user.target"];
+
     serviceConfig = {
       ExecStop = "${pkgs.fuse}/bin/fusermount -u ${mountPoint}";
       ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p ${mountPoint}";
       ExecStart = ''
         ${pkgs.rclone}/bin/rclone mount \
-          ${remote}: \
+          ${remotePath} \
           ${mountPoint} \
           --config ${configFile} \
           --allow-other \
@@ -35,18 +38,40 @@ in {
     systemd = {
       services = {
         rclone-onedrive-mount = mkMount {
+          remotePath = "onedrive:";
           mountPoint = "/home/${mainUser}/mounts/rclone/onedrive";
           configFile = config.age.secrets.rclone.path;
-          remote = "onedrive";
         };
       };
     };
 
-    environment.systemPackages = [pkgs.rclone];
+    environment.systemPackages = let
+      mount-toggle = pkgs.writeShellScriptBin "mt" ''
+        #!/bin/bash
 
-    environment.shellAliases = {
-      mount-onedrive = "sudo systemctl start rclone-onedrive-mount";
-      unmount-onedrive = "sudo systemctl stop rclone-onedrive-mount";
-    };
+        toggle_mount() {
+          local service="$1"
+          if systemctl is-active --quiet "$service"; then
+            echo "Stopping: $service"
+            sudo systemctl stop "$service"
+          else
+            echo "Starting: $service"
+            sudo systemctl start "$service"
+          fi
+        }
+
+        case "$1" in
+          onedrive)
+            toggle_mount "rclone-onedrive-mount"
+            ;;
+          *)
+            echo "Usage: mt <mount-name>"
+            echo "Supported mounts:"
+            echo "1. onedrive"
+            exit 1
+            ;;
+        esac
+      '';
+    in [pkgs.rclone mount-toggle];
   };
 }
