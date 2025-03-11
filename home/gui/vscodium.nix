@@ -4,6 +4,10 @@
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
+  cfg = osConfig.garden.programs.editor;
+
   jonathanharty.gruvbox-material-icon-theme = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
     mktplcRef = {
       name = "gruvbox-material-icon-theme";
@@ -12,38 +16,17 @@
       hash = "sha256-86UWUuWKT6adx4hw4OJw3cSZxWZKLH4uLTO+Ssg75gY=";
     };
   };
-  # sainnhe.gruvbox-material = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
-  #   mktplcRef = {
-  #     name = "gruvbox-material";
-  #     publisher = "sainnhe";
-  #     version = "6.5.2";
-  #     hash = "sha256-D+SZEQQwjZeuyENOYBJGn8tqS3cJiWbEkmEqhNRY/i4=";
-  #   };
-  # };
-
-  inherit (lib.modules) mkIf;
-
-  cfg = osConfig.garden.programs.editor;
 in {
   programs.vscode = mkIf cfg.vscodium.enable {
     enable = true;
-    #package = pkgs.vscodium;
-    # obecne
-    package =
-      pkgs.vscodium.override
-      {
-        commandLineArgs = [
-          "--ozone-platform-hint=auto"
-          "--ozone-platform=wayland"
-        ];
-      };
+    package = pkgs.vscodium;
     extensions = with pkgs.vscode-extensions; [
       # nix language
       bbenoist.nix
       # nix-shell suport
       arrterian.nix-env-selector
       # python
-      ms-python.python
+      # ms-python.python # broken
       # C/C++
       ms-vscode.cpptools
       # OCaml
