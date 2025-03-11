@@ -7,6 +7,7 @@
     ./programs
     ./services
     ./android.nix
+    ./clean-zsh.nix
     ./security.nix
     ./fs.nix
     ./theme.nix
