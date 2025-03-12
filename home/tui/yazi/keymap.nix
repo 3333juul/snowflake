@@ -37,13 +37,13 @@
       }
       {
         on = ["g" "d"];
-        run = "cd ~/downloads";
-        desc = "Go to the downloads directory";
+        run = "cd ~/documents";
+        desc = "Go to the documents directory";
       }
       {
         on = ["g" "D"];
-        run = "cd ~/documents";
-        desc = "Go to the documents directory";
+        run = "cd ~/downloads";
+        desc = "Go to the downloads directory";
       }
       {
         on = ["g" "p"];
