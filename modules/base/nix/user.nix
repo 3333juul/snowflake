@@ -10,8 +10,7 @@ in {
   users.users.${mainUser} = {
     isNormalUser = true;
     description = "${mainUser}";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["nix" "wheel" "networkmanager"];
     shell = pkgs.${cfg};
   };
-  nix.settings.allowed-users = ["${mainUser}"];
 }
