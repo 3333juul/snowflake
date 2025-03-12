@@ -31,6 +31,11 @@
     )
 
     for file in "$HOME"/downloads/*; do
+     # ignore temporary download files
+      if [[ "$file" == *.part || "$file" == *.crdownload ]]; then
+        continue
+      fi
+
       # skip directories
       # if [[ -d "$file" ]]; then
       #   continue
