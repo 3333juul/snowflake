@@ -100,6 +100,7 @@ in {
             path = "/home/${mainUser}/documents/syncthing/s21/downloads";
             devices = ["s21"];
             id = "phone-downloads";
+            type = "receiveonly";
             versioning = {
               type = "simple";
               params = {
