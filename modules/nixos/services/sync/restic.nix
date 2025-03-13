@@ -24,32 +24,6 @@
     "${user.home}/projects"
   ];
 
-  # create a notification service for a given backup
-  mkNotifyService = name:
-    nameValuePair "notify-backup-failed-${name}" {
-      enable = true;
-      description = "Notify on failed backup for ${name}";
-      serviceConfig = {
-        Type = "oneshot";
-        User = user.name;
-      };
-
-      # required for notify-send to work
-      environment.DBUS_SESSION_BUS_ADDRESS = "unix:path=/run/user/1000/bus";
-
-      script = ''
-        ${pkgs.libnotify}/bin/notify-send --urgency=critical \
-          "Backup failed for ${name}" \
-          "$(journalctl -u restic-backups-${name} -n 5 -o cat)"
-      '';
-    };
-
-  # link a backup service to its notification service
-  mkOnFailureLink = name:
-    nameValuePair "restic-backups-${name}" {
-      unitConfig.OnFailure = "notify-backup-failed-${name}.service";
-    };
-
   # only enable these backups that are defined in garden.services.restic.backups
   enabledBackups = mapAttrs (name: value: mkIf (elem name restic.backups) value);
 in {
@@ -104,10 +78,37 @@ in {
       };
 
       # generate all systemd services
-      systemd.services = mkIf (device.type != "server") (mkMerge [
-        (mapAttrs' (name: _: mkNotifyService name) config.services.restic.backups)
-        (mapAttrs' (name: _: mkOnFailureLink name) config.services.restic.backups)
-      ]);
+      systemd.services = let
+        # create a notification service for a given backup
+        mkNotifyService = name:
+          nameValuePair "notify-backup-failed-${name}" {
+            enable = true;
+            description = "Notify on failed backup for ${name}";
+            serviceConfig = {
+              Type = "oneshot";
+              User = user.name;
+            };
+
+            # required for notify-send to work
+            environment.DBUS_SESSION_BUS_ADDRESS = "unix:path=/run/user/1000/bus";
+
+            script = ''
+              ${pkgs.libnotify}/bin/notify-send --urgency=critical \
+                "Backup failed for ${name}" \
+                "$(journalctl -u restic-backups-${name} -n 5 -o cat)"
+            '';
+          };
+
+        # link a backup service to its notification service
+        mkOnFailureLink = name:
+          nameValuePair "restic-backups-${name}" {
+            unitConfig.OnFailure = "notify-backup-failed-${name}.service";
+          };
+      in
+        mkIf (device.type != "server") (mkMerge [
+          (mapAttrs' (name: _: mkNotifyService name) config.services.restic.backups)
+          (mapAttrs' (name: _: mkOnFailureLink name) config.services.restic.backups)
+        ]);
     };
   };
 }
