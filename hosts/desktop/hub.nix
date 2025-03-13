@@ -84,16 +84,14 @@
       syncthing = {
         enable = true;
         folders = [
-          "memes"
           "noteAir3/books"
           "noteAir3/koreader"
           "s21/shared"
-          "s21/downloads"
         ];
       };
 
       restic = {
-        enable = true;
+        enable = false;
         backups = [
           "onedrive"
         ];

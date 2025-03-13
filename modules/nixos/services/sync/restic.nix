@@ -14,6 +14,16 @@
 
   user = config.users.users.${mainUser};
 
+  baseBackup = [
+    "${user.home}/media/pictures"
+    "${user.home}/media/videos"
+    "${user.home}/media/music"
+    "${user.home}/documents"
+    "${user.home}/snowflake"
+    "${user.home}/syncthing"
+    "${user.home}/projects"
+  ];
+
   # create a notification service for a given backup
   mkNotifyService = name:
     nameValuePair "notify-backup-failed-${name}" {
@@ -56,22 +66,48 @@ in {
         passwordFile = config.age.secrets.restic-password.path;
         rcloneConfigFile = config.age.secrets.rclone.path;
 
-        paths = [
-          "${user.home}/media"
-        ];
+        paths =
+          [
+            "${user.home}/backups/cloud"
+            "${user.home}/backups/hybrid"
+          ]
+          ++ baseBackup;
 
         pruneOpts = [
           "--keep-daily 7"
           "--keep-weekly 5"
           "--keep-monthly 12"
         ];
-      };
-    };
 
-    # generate all systemd services
-    systemd.services = mkIf (device.type != "server") (mkMerge [
-      (mapAttrs' (name: _: mkNotifyService name) config.services.restic.backups)
-      (mapAttrs' (name: _: mkOnFailureLink name) config.services.restic.backups)
-    ]);
+        timerConfig = null;
+      };
+
+      local = {
+        initialize = true;
+        repository = "/mnt/drive/restic/${config.networking.hostName}";
+        passwordFile = config.age.secrets.restic-password.path;
+
+        paths =
+          [
+            "${user.home}/backups/local"
+            "${user.home}/backups/hybrid"
+          ]
+          ++ baseBackup;
+
+        pruneOpts = [
+          "--keep-daily 7"
+          "--keep-weekly 5"
+          "--keep-monthly 12"
+        ];
+
+        timerConfig = null;
+      };
+
+      # generate all systemd services
+      systemd.services = mkIf (device.type != "server") (mkMerge [
+        (mapAttrs' (name: _: mkNotifyService name) config.services.restic.backups)
+        (mapAttrs' (name: _: mkOnFailureLink name) config.services.restic.backups)
+      ]);
+    };
   };
 }
