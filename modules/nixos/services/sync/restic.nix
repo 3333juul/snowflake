@@ -52,7 +52,7 @@ in {
     services.restic.backups = enabledBackups {
       onedrive = {
         initialize = true;
-        repository = "rclone:onedrive:backups/${config.networking.hostName}";
+        repository = "rclone:onedrive:Restic/${config.networking.hostName}";
         passwordFile = config.age.secrets.restic-password.path;
         rcloneConfigFile = config.age.secrets.rclone.path;
 
