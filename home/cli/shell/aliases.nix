@@ -1,7 +1,7 @@
 {
-  # This configuration creates the shell aliases across: bash, zsh and fish
+  # this configuration creates the shell aliases across: bash, zsh and fish
   home.shellAliases = {
-    # Utils
+    # utils
     c = "clear";
     cd = "z";
     tt = "gtrash put";
@@ -20,8 +20,8 @@
     ll = "eza --icons  -a --group-directories-first -1 --no-user --long";
     tree = "eza --icons --tree --group-directories-first";
 
-    # Nixos
-    cdnix = "cd ~/nixos-config && codium ~/nixos-config";
+    # nixos
+    cdnix = "cd ~/snowflake && codium ~/snowflake";
     ns = "nom-shell --run zsh";
     nix-switch = "nh os switch";
     nix-update = "nh os switch --update";
@@ -33,7 +33,7 @@
     piv = "python -m venv .venv";
     psv = "source .venv/bin/activate";
 
-    # Hyprland
+    # hyprland
     hl = "Hyprland";
     clients = "hyprctl -j clients | jless";
     monitors = "hyprctl -j monitors | jless";

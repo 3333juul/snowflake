@@ -11,7 +11,7 @@ in {
       enable = true;
       extraArgs = "--keep-since 7d --keep 5";
     };
-    flake = "/home/${mainUser}/nixos-config";
+    flake = "/home/${mainUser}/snowflake";
   };
 
   environment.systemPackages = with pkgs; [

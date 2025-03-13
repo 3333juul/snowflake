@@ -1,6 +1,6 @@
 #!/bin/bash
 
-config_path="$HOME/nixos-config/modules/home/scripts/scripts-hyprland/wallshift/config"
+config_path="$HOME/snowflake/modules/home/scripts/scripts-hyprland/wallshift/config"
 
 # Load the config
 source $config_path

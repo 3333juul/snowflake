@@ -27,7 +27,7 @@
       }
       {
         on = ["g" "n"];
-        run = "cd ~/nixos-config";
+        run = "cd ~/snowflake";
         desc = "Go to the nixos config directory";
       }
       {
