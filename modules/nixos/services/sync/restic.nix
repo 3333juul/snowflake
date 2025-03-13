@@ -77,7 +77,9 @@ in {
         timerConfig = null;
       };
 
-      # generate all systemd services
+      # generate systemd services for each enabled backup defined in `services.restic.backups`.
+      # if a backup fails, a desktop notification will be sent, displaying the last 5 lines of the backup log from the journal.
+      # inspo: https://www.arthurkoziel.com/restic-backups-b2-nixos/
       systemd.services = let
         # create a notification service for a given backup
         mkNotifyService = name:
