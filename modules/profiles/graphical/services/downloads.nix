@@ -53,8 +53,8 @@
 
         # if folder is not allowed move it to the 'extra' folder
         if [[ $is_allowed -eq 0 ]]; then
-          mkdir -p "$HOME/downloads/extra"
-          move_safe "$file" "$HOME/downloads/extra/"
+          mkdir -p "$HOME/downloads/folders"
+          move_safe "$file" "$HOME/downloads/folders/"
         fi
         continue
       fi
@@ -74,7 +74,7 @@
         move_safe "$file" "$HOME/downloads/pdf/"
       elif [[ $file == *.zip || $file == *.tar* || $file == *.deb ]]; then
         mkdir -p "$HOME/downloads/zips"
-        move_safe "$file" "$HOME/downloads/zips/"
+        move_safe "$file" "$HOME/downloads/folders/"
       elif [[ $file == *.csv || $file == *.ods || $file == *.xlsx || $file == *.txt || $file == *.docx || $file == *.doc ]]; then
         mkdir -p "$HOME/downloads/docs"
         move_safe "$file" "$HOME/downloads/docs/"
