@@ -9,6 +9,6 @@
     ./docs.nix
     ./packages.nix
     ./thumbnailers.nix
-    ./xdg-mimes.nix
+    ./xdg.nix
   ];
 }

@@ -11,7 +11,6 @@
   inherit (lib.lists) flatten;
   inherit (builtins) listToAttrs;
   inherit (config.home) homeDirectory;
-  inherit (config.xdg.userDirs) pictures;
 
   defaultApps = {
     browser = ["brave.desktop"];
@@ -114,7 +113,6 @@ in {
   xdg = {
     mimeApps = {
       enable = isLinux;
-
       associations.added = associations;
       defaultApplications = associations;
     };
@@ -139,9 +137,11 @@ in {
 
       extraConfig =
         {
-          XDG_SCREENSHOTS_DIR = "${pictures}/screenshots";
-          XDG_WALLPAPERS_DIR = "${pictures}/wallpapers";
           XDG_PROJECTS_DIR = "${homeDirectory}/projects";
+          XDG_TORRENTS_DIR = "${homeDirectory}/downloads/torrents";
+          XDG_SCREENSHOTS_DIR = "${homeDirectory}/media/pictures/screenshots";
+          XDG_WALLPAPERS_DIR = "${homeDirectory}/media/pictures/wallpapers";
+          XDG_RECORDINGS_DIR = "${homeDirectory}/media/videos/recordings";
         }
         // (mkIf osConfig.garden.programs.gaming.enable {
           XDG_GAMES_DIR = "${homeDirectory}/media/games";

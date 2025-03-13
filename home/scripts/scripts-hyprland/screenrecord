@@ -3,7 +3,7 @@
 #rofi_command="rofi -theme launcher -p 'screen-rec' -dmenu -selected-row 0"
 tofi_command="tofi --height 280 --width 300 --prompt-text=screen-rec:"
 datetime=$(date +"%Y-%m-%d %I-%M-%S")
-dir="$HOME/media/videos/screen-rec"
+dir="$HOME/media/videos/recordings"
 
 # Recording options
 options=(
