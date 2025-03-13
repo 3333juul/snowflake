@@ -48,46 +48,10 @@ in {
         };
 
         folders = enabledFolders {
-          "noteAir3/books" = {
-            path = "/home/${mainUser}/documents/syncthing/noteAir3/books";
-            devices = ["noteAir3"];
-            id = "ttzrq-xytfk";
-            versioning = {
-              type = "simple";
-              params = {
-                keep = "10";
-              };
-            };
-          };
-
-          "noteAir3/koreader" = {
-            path = "/home/${mainUser}/documents/syncthing/noteAir3/koreader";
-            devices = ["noteAir3"];
-            id = "09010-icymx";
-            versioning = {
-              type = "simple";
-              params = {
-                keep = "10";
-              };
-            };
-          };
-
-          "memes" = {
-            path = "/home/${mainUser}/documents/syncthing/memes";
-            devices = [desktop];
-            id = "memes-folder";
-            versioning = {
-              type = "simple";
-              params = {
-                keep = "10";
-              };
-            };
-          };
-
           "s21/shared" = {
-            path = "/home/${mainUser}/documents/syncthing/s21/shared";
+            path = "/home/${mainUser}/syncthing/s21/shared";
             devices = ["s21"];
-            id = "phone-shared";
+            id = "s21-shared";
             versioning = {
               type = "simple";
               params = {
@@ -97,10 +61,46 @@ in {
           };
 
           "s21/downloads" = {
-            path = "/home/${mainUser}/documents/syncthing/s21/downloads";
+            path = "/home/${mainUser}/syncthing/s21/downloads";
             devices = ["s21"];
-            id = "phone-downloads";
+            id = "s21-downloads";
             type = "receiveonly";
+            versioning = {
+              type = "simple";
+              params = {
+                keep = "10";
+              };
+            };
+          };
+
+          "noteAir3/books" = {
+            path = "/home/${mainUser}/syncthing/note-air3/books";
+            devices = ["noteAir3"];
+            id = "noteair3-books";
+            versioning = {
+              type = "simple";
+              params = {
+                keep = "10";
+              };
+            };
+          };
+
+          "noteAir3/koreader" = {
+            path = "/home/${mainUser}/syncthing/note-air3/koreader";
+            devices = ["noteAir3"];
+            id = "noteair3-koreader";
+            versioning = {
+              type = "simple";
+              params = {
+                keep = "10";
+              };
+            };
+          };
+
+          "memes" = {
+            path = "/home/${mainUser}/syncthing/memes";
+            devices = [desktop];
+            id = "memes-folder";
             versioning = {
               type = "simple";
               params = {
