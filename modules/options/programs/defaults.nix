@@ -81,7 +81,7 @@ in {
       '';
     };
 
-    image-viewer = mkOption {
+    imageViewer = mkOption {
       type = enum [
         "vimiv"
         "pqiv"
