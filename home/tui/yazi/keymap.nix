@@ -1,4 +1,6 @@
-{
+{osConfig, ...}: let
+  inherit (osConfig.garden.environment) flakePath;
+in {
   programs.yazi.keymap = {
     manager.prepend_keymap = [
       {
@@ -27,7 +29,7 @@
       }
       {
         on = ["g" "n"];
-        run = "cd ~/snowflake";
+        run = "cd ${flakePath}";
         desc = "Go to the nixos config directory";
       }
       {

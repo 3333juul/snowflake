@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  inherit (config.garden.system) mainUser;
+  inherit (config.garden.environment) flakePath;
 in {
   programs.nh = {
     enable = true;
@@ -11,7 +11,7 @@ in {
       enable = true;
       extraArgs = "--keep-since 7d --keep 5";
     };
-    flake = "/home/${mainUser}/snowflake";
+    flake = flakePath;
   };
 
   environment.systemPackages = with pkgs; [

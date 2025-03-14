@@ -9,6 +9,7 @@
   inherit (lib.secrets) mkSecret;
   inherit (config.garden.system) mainUser;
   inherit (config.garden.services) restic;
+  inherit (config.garden.environment) flakePath;
   inherit (config.garden) device;
   inherit (builtins) elem;
 
@@ -20,8 +21,8 @@
     "${homeDir}/media/pictures"
     "${homeDir}/media/videos"
     "${homeDir}/projects"
-    "${homeDir}/snowflake"
     "${homeDir}/syncthing"
+    "${flakePath}"
   ];
 
   # only enable these backups that are defined in garden.services.restic.backups

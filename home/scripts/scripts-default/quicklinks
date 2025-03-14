@@ -27,18 +27,18 @@ function ags_restart() {
 	if pgrep "ags" >/dev/null; then
 		pkill ags
 	fi
-	ags -c ~/snowflake/modules/ags/config.js &
+	ags -c "$FLAKE/home/gui/ags/ags-config/config.js" &
 }
 
 # Define options in a format "label:command"
 options=(
-	"NIXOS-NEOVIM:              cd ~/snowflake && $NVIM"
-	"NIXOS-VSCODE:              cd ~/snowflake && codium ~/nixos-config"
+	"NIXOS-NEOVIM:              cd $FLAKE && $NVIM"
+	"NIXOS-VSCODE:              cd $FLAKE && codium $FLAKE"
 	"NIXOS-REBUILD:             kitty --hold --class floatingterm -e nh os switch"
 	"NIXOS-UPDATE:              kitty --hold --class floatingterm -e nh os switch --update"
 	"NIXOS-CLEAN:               kitty --hold --class floatingterm -e nh clean all --keep 5"
-	"HYPRLAND:                  cd ~/snowflake && $NVIM ~/snowflake/home/gui/hyprland"
-	"HYPRKEYS:                  cd ~/snowflake && $NVIM ~/snowflake/home/gui/hyprland/config/keybindings.nix"
+	"HYPRLAND:                  cd $FLAKE && $NVIM $FLAKE/home/gui/hyprland"
+	"HYPRKEYS:                  cd $FLAKE && $NVIM $FLAKE/home/gui/hyprland/config/keybindings.nix"
 	".CONFIG:                   $FM ~/.config"
 	"DOWNLOADS:                 $FM ~/downloads"
 	"PICTURES:                  $FM ~/pictures"
@@ -57,11 +57,11 @@ options=(
 	"AGS-KILL:                  pkill ags"
 	"BLUETOOTH:                 rofi-bluetooth"
 	"GIT-REPO:                  xdg-open https://github.com/luravoid/nixos-config"
-	"SCRIPTS:                   cd ~/snowflake && $NVIM ~/snowflake/home/scripts/scripts-default.nix"
-	"SCRIPTS-HYPRLAND:          cd ~/snowflake && $NVIM ~/snowflake/home/scripts/scripts-hyprland.nix"
+	"SCRIPTS:                   cd $FLAKE && $NVIM $FLAKE/home/scripts/scripts-default.nix"
+	"SCRIPTS-HYPRLAND:          cd $FLAKE && $NVIM $FLAKE/home/scripts/scripts-hyprland.nix"
 	"SYNCTHING:                 xdg-open http://localhost:8384"
 	"CAMBRIDGE-DICT:            brave --app=https://dictionary.cambridge.org/"
-	"QUICK-LINKS:               cd ~/nixos-config && $NVIM ~/nixos-config/home/scripts/scripts-default/quicklinks"
+	"QUICK-LINKS:               cd $FLAKE && $NVIM $FLAKE/home/scripts/scripts-default/quicklinks"
 	"MEMES:                     $FM ~/documents/syncthing/memes"
 )
 

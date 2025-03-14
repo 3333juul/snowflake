@@ -7,6 +7,7 @@
 }: let
   inherit (lib.modules) mkIf;
   inherit (osConfig.garden.style) colors;
+  inherit (osConfig.garden.environment) flakePath;
 
   cfg = osConfig.garden.programs.launcher;
 in {
@@ -61,7 +62,7 @@ in {
 
     # Symlink all themes - the argument of this function must be a full path, not a Nix path type, otherwise it won't work
     xdg.configFile."rofi/themes" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/snowflake/home/gui/launcher/rofi/themes";
+      source = config.lib.file.mkOutOfStoreSymlink "${flakePath}/home/gui/launcher/rofi/themes";
       recursive = true;
     };
   };

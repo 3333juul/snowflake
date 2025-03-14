@@ -1,4 +1,10 @@
 {
+  pkgs,
+  osConfig,
+  ...
+}: let
+  inherit (osConfig.garden.environment) flakePath;
+in {
   # this configuration creates the shell aliases across: bash, zsh and fish
   home.shellAliases = {
     # utils
@@ -21,7 +27,7 @@
     tree = "eza --icons --tree --group-directories-first";
 
     # nixos
-    cdnix = "cd ~/snowflake && codium ~/snowflake";
+    cdnix = "cd ${flakePath} && codium ${flakePath}";
     ns = "nom-shell --run zsh";
     nix-switch = "nh os switch";
     nix-update = "nh os switch --update";
@@ -38,4 +44,16 @@
     clients = "hyprctl -j clients | jless";
     monitors = "hyprctl -j monitors | jless";
   };
+
+  home.packages = let
+    nix-option = pkgs.writeShellScriptBin "nix-option" (
+      if pkgs.stdenv.hostPlatform.isDarwin
+      then ''
+        nix eval ${flakePath}#darwinConfigurations.$(hostname)."$1"
+      ''
+      else ''
+        nix eval ${flakePath}#nixosConfigurations.$(hostname)."$1"
+      ''
+    );
+  in [nix-option];
 }

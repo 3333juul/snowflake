@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Load the config
-source "$HOME/snowflake/modules/home/scripts/scripts-hyprland/wallshift/config"
+source "$FLAKE/modules/home/scripts/scripts-hyprland/wallshift/config"
 
 declare -A last_set_wallpaper
 
