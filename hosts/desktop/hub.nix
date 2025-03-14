@@ -91,9 +91,10 @@
       };
 
       restic = {
-        enable = false;
+        enable = true;
         backups = [
           "onedrive"
+          "local"
         ];
       };
 
