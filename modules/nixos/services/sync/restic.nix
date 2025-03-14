@@ -12,16 +12,16 @@
   inherit (config.garden) device;
   inherit (builtins) elem;
 
-  user = config.users.users.${mainUser};
+  homeDir = config.users.users.${mainUser}.home;
 
   baseBackup = [
-    "${user.home}/media/pictures"
-    "${user.home}/media/videos"
-    "${user.home}/media/music"
-    "${user.home}/documents"
-    "${user.home}/snowflake"
-    "${user.home}/syncthing"
-    "${user.home}/projects"
+    "${homeDir}/documents"
+    "${homeDir}/media/music"
+    "${homeDir}/media/pictures"
+    "${homeDir}/media/videos"
+    "${homeDir}/projects"
+    "${homeDir}/snowflake"
+    "${homeDir}/syncthing"
   ];
 
   # only enable these backups that are defined in garden.services.restic.backups
@@ -42,8 +42,8 @@ in {
 
         paths =
           [
-            "${user.home}/backups/cloud"
-            "${user.home}/backups/hybrid"
+            "${homeDir}/backups/cloud"
+            "${homeDir}/backups/hybrid"
           ]
           ++ baseBackup;
 
@@ -63,8 +63,8 @@ in {
 
         paths =
           [
-            "${user.home}/backups/local"
-            "${user.home}/backups/hybrid"
+            "${homeDir}/backups/local"
+            "${homeDir}/backups/hybrid"
           ]
           ++ baseBackup;
 
@@ -88,7 +88,7 @@ in {
             description = "Notify on failed backup for ${name}";
             serviceConfig = {
               Type = "oneshot";
-              User = user.name;
+              User = mainUser;
             };
 
             # required for notify-send to work
