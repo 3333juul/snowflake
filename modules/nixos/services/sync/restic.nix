@@ -5,15 +5,15 @@
   ...
 }: let
   inherit (lib.modules) mkIf mkMerge;
-  inherit (lib.attrsets) mapAttrs mapAttrs' nameValuePair;
+  inherit (lib.attrsets) mapAttrs' nameValuePair;
   inherit (lib.secrets) mkSecret;
+  inherit (lib.helpers) filterEnabled;
   inherit (config.garden.system) mainUser;
-  inherit (config.garden.services) restic;
   inherit (config.garden.environment) flakePath;
   inherit (config.garden) device;
-  inherit (builtins) elem;
 
   homeDir = config.users.users.${mainUser}.home;
+  cfg = config.garden.services.restic;
 
   baseBackup = [
     "${homeDir}/documents"
@@ -26,15 +26,19 @@
   ];
 
   # only enable these backups that are defined in garden.services.restic.backups
-  enabledBackups = mapAttrs (name: value: mkIf (elem name restic.backups) value);
+  filterBackups = filterEnabled cfg.backups;
 in {
-  config = mkIf restic.enable {
+  config = mkIf cfg.enable {
     age.secrets = {
-      restic-password = mkSecret {file = "restic/password";};
+      restic-password = mkSecret {
+        file = "restic/password";
+        owner = mainUser;
+        group = "users";
+      };
     };
 
-    # for cli, use: sudo restic-<name> <cmd>, e.g., sudo restic-onedrive snapshots
-    services.restic.backups = enabledBackups {
+    # for cli, use: restic-<name> <cmd>, e.g., sudo restic-onedrive snapshots
+    services.restic.backups = filterBackups {
       onedrive = {
         initialize = true;
         repository = "rclone:onedrive:Restic/${config.networking.hostName}";

@@ -7,7 +7,6 @@
   inherit (lib.hardware) ldTernary;
   inherit (lib.options) mkOption;
   inherit (lib.types) nullOr enum bool listOf str;
-  inherit (config.garden.system) mainUser;
 
   sys = config.garden.system;
   env = config.garden.environment;
@@ -79,7 +78,7 @@ in {
 
   config.assertions = [
     {
-      assertion = sys.useHomeManager -> sys.mainUser != null;
+      assertion = env.useHomeManager -> sys.mainUser != null;
       message = "system.mainUser must be set while useHomeManager is enabled";
     }
     {

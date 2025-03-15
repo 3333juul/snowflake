@@ -7,7 +7,8 @@
   inherit (lib.modules) mkIf;
   inherit (lib.lists) optionals;
   inherit (config.garden.system) mainUser;
-  inherit (config.garden.services) rclone;
+
+  cfg = config.garden.services.rclone;
 
   mkMount = {
     remotePath,
@@ -34,7 +35,7 @@
     };
   };
 in {
-  config = mkIf rclone.enable {
+  config = mkIf cfg.enable {
     systemd = {
       services = {
         rclone-onedrive-mount = mkMount {

@@ -4,26 +4,27 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-  inherit (lib.attrsets) mapAttrs;
+  inherit (lib.helpers) filterEnabled;
   inherit (config.garden.system) mainUser;
-  inherit (config.garden.services) syncthing;
   inherit (config.networking) hostName;
-  inherit (builtins) elem;
 
-  # add these devices only if they're not the current host
+  homeDir = config.users.users.${mainUser}.home;
+  cfg = config.garden.services.syncthing;
+
+  # add these devices if they're not the current host
   desktop = mkIf (hostName != "desktop") "desktop";
   # laptop = mkIf (hostName != "laptop") "laptop";
 
   # only enable these folders that are defined in garden.services.syncthing.folders
-  enabledFolders = mapAttrs (name: value: mkIf (elem name syncthing.folders) value);
+  filterFolders = filterEnabled cfg.folders;
 in {
-  config = mkIf syncthing.enable {
+  config = mkIf cfg.enable {
     services.syncthing = {
       enable = true;
-      dataDir = "/home/${mainUser}";
+      dataDir = homeDir;
       openDefaultPorts = true;
-      configDir = "/home/${mainUser}/.config/syncthing";
-      user = "${mainUser}";
+      configDir = "${homeDir}/.config/syncthing";
+      user = mainUser;
       group = "users";
       guiAddress = "0.0.0.0:8384";
       overrideDevices = true;
@@ -47,9 +48,9 @@ in {
           };
         };
 
-        folders = enabledFolders {
+        folders = filterFolders {
           "s21/shared" = {
-            path = "/home/${mainUser}/syncthing/s21/shared";
+            path = "${homeDir}/syncthing/s21/shared";
             devices = ["s21"];
             id = "s21-shared";
             versioning = {
@@ -61,7 +62,7 @@ in {
           };
 
           "s21/downloads" = {
-            path = "/home/${mainUser}/syncthing/s21/downloads";
+            path = "${homeDir}/syncthing/s21/downloads";
             devices = ["s21"];
             id = "s21-downloads";
             type = "receiveonly";
@@ -74,7 +75,7 @@ in {
           };
 
           "noteAir3/books" = {
-            path = "/home/${mainUser}/syncthing/note-air3/books";
+            path = "${homeDir}/syncthing/note-air3/books";
             devices = ["noteAir3"];
             id = "noteair3-books";
             versioning = {
@@ -86,7 +87,7 @@ in {
           };
 
           "noteAir3/koreader" = {
-            path = "/home/${mainUser}/syncthing/note-air3/koreader";
+            path = "${homeDir}/syncthing/note-air3/koreader";
             devices = ["noteAir3"];
             id = "noteair3-koreader";
             versioning = {
@@ -98,7 +99,7 @@ in {
           };
 
           "memes" = {
-            path = "/home/${mainUser}/syncthing/memes";
+            path = "${homeDir}/syncthing/memes";
             devices = [desktop];
             id = "memes-folder";
             versioning = {
