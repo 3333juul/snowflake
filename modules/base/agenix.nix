@@ -7,11 +7,11 @@
 }: let
   inherit (lib.modules) mkIf;
   inherit (lib.hardware) ldTernary;
-  inherit (lib.secrets) mkSecret mkSecretWithPath;
+  inherit (lib.secrets) mkSecret;
   inherit (pkgs.stdenv.hostPlatform) isDarwin;
-
   inherit (config.garden.system) mainUser;
-  homeDir = config.home-manager.users.${mainUser}.home.homeDirectory;
+
+  homeDir = config.users.users.${mainUser}.home;
   sshDir = homeDir + "/.ssh";
 
   userGroup = ldTernary pkgs "users" "admin";
@@ -37,7 +37,7 @@ in {
       rclone = mkSecret {
         file = "rclone";
         owner = mainUser;
-        group = "users";
+        group = userGroup;
       };
     };
   };

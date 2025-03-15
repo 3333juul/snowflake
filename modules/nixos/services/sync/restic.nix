@@ -37,7 +37,7 @@ in {
       };
     };
 
-    # for cli, use: restic-<name> <cmd>, e.g., sudo restic-onedrive snapshots
+    # for cli, use: restic-<name> <cmd>, e.g., restic-onedrive snapshots
     services.restic.backups = filterBackups {
       onedrive = {
         initialize = true;
