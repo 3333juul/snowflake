@@ -26,6 +26,9 @@ in {
       # show more log lines for failed builds
       log-lines = 30;
 
+      # use xdg base directories for all the nix things
+      use-xdg-base-directories = true;
+
       experimental-features = [
         "nix-command"
         "flakes"
