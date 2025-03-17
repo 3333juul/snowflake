@@ -10,7 +10,6 @@
     ./clean-zsh.nix
     ./security.nix
     ./fs.nix
-    ./theme.nix
     ./virtualization.nix
   ];
 }

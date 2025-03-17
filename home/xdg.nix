@@ -7,7 +7,7 @@
 }: let
   inherit (pkgs.stdenv) isLinux;
   inherit (lib.modules) mkIf;
-  inherit (lib.attrsets) mapAttrsToList nameValuePair;
+  inherit (lib.attrsets) mapAttrsToList nameValuePair optionalAttrs;
   inherit (lib.lists) flatten;
   inherit (builtins) listToAttrs;
   inherit (config.home) homeDirectory;
@@ -143,13 +143,13 @@ in {
           XDG_WALLPAPERS_DIR = "${homeDirectory}/media/pictures/wallpapers";
           XDG_RECORDINGS_DIR = "${homeDirectory}/media/videos/recordings";
         }
-        // (mkIf osConfig.garden.programs.gaming.enable {
+        // (optionalAttrs osConfig.garden.programs.gaming.enable {
           XDG_GAMES_DIR = "${homeDirectory}/media/games";
         });
     };
 
     configFile = {
-      ## because https://github.com/nix-community/home-manager/issues/1213
+      # because https://github.com/nix-community/home-manager/issues/1213
       "mimeapps.list".force = true;
 
       # needed to disable creating .npm in home directory

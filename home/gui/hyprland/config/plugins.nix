@@ -4,6 +4,7 @@
   lib,
   ...
 }: let
+  inherit (lib.modules) mkIf;
   inherit (lib.lists) optionals concatLists;
 
   cfg = {
@@ -30,7 +31,7 @@ in {
     ];
 
     settings.plugin = {
-      easymotion = {
+      easymotion = mkIf cfg.hyprland-easymotion.enable {
         textsize = 30;
         textcolor = "rgb(ebdbb2)";
         bgcolor = "rgba(40,40,40,1)";
@@ -42,7 +43,7 @@ in {
         motionkeys = "jkhluiopynmbfdsatgrvcewqzx1234567890";
       };
 
-      hycov = {
+      hycov = mkIf cfg.hycov.enable {
         overview_gappo = 60;
         overview_gappi = 24;
         enable_hotarea = 0;
@@ -64,7 +65,7 @@ in {
         show_special = 0;
       };
 
-      nstack = {
+      nstack = mkIf cfg.hyprNStack.enable {
         layout = {
           orientation = "left";
           new_on_top = 0;

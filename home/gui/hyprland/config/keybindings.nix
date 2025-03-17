@@ -9,7 +9,6 @@
         "$mainMod, M, fullscreen, 1"
         "$mainMod, F, fullscreen"
         "$mainMod ALT CTRL, L, exec, hyprlock"
-        "$mainMod CTRL SHIFT, B, exec, ~/.config/waybar/launch.sh"
         "$mainMod SHIFT, M, exec, pypr zoom"
         "$mainMod SHIFT, P, exec, betterpin"
         "$mainMod ALT, P, exec, changelayout"
