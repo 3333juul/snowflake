@@ -14,9 +14,6 @@
   # add these devices if they're not the current host
   desktop = mkIf (hostName != "desktop") "desktop";
   # laptop = mkIf (hostName != "laptop") "laptop";
-
-  # only enable these folders that are defined in garden.services.syncthing.folders
-  filterFolders = filterEnabled cfg.folders;
 in {
   config = mkIf cfg.enable {
     services.syncthing = {
@@ -48,7 +45,8 @@ in {
           };
         };
 
-        folders = filterFolders {
+        # only enable these folders that are defined in `garden.services.syncthing.folders`
+        folders = filterEnabled cfg.folders {
           "s21/shared" = {
             path = "${homeDir}/syncthing/s21/shared";
             devices = ["s21"];

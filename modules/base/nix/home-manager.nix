@@ -18,7 +18,7 @@ in {
     users.${mainUser} = {
       imports = [./../../../home];
       home = {
-        username = "${mainUser}";
+        username = mainUser;
         homeDirectory = "/home/${mainUser}";
         stateVersion = "24.05";
       };

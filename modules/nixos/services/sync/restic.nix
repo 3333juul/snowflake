@@ -16,17 +16,14 @@
   cfg = config.garden.services.restic;
 
   baseBackup = [
+    flakePath
     "${homeDir}/documents"
     "${homeDir}/media/music"
     "${homeDir}/media/pictures"
     "${homeDir}/media/videos"
     "${homeDir}/projects"
     "${homeDir}/syncthing"
-    "${flakePath}"
   ];
-
-  # only enable these backups that are defined in garden.services.restic.backups
-  filterBackups = filterEnabled cfg.backups;
 in {
   config = mkIf cfg.enable {
     age.secrets = {
@@ -37,8 +34,9 @@ in {
       };
     };
 
-    # for cli, use: restic-<name> <cmd>, e.g., restic-onedrive snapshots
-    services.restic.backups = filterBackups {
+    # for cli, use: restic-<name> <cmd>, e.g., restic-onedrive snapshots.
+    # only enable these backups that are defined in `garden.services.restic.backups`.
+    services.restic.backups = filterEnabled cfg.backups {
       onedrive = {
         initialize = true;
         repository = "rclone:onedrive:Restic/${config.networking.hostName}";
