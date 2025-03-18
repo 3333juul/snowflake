@@ -1,5 +1,5 @@
 {
-  description = "luravoid's nixos configuration";
+  description = "juul's nixos configuration";
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} {imports = [./parts];};
 
