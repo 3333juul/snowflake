@@ -9,5 +9,8 @@
     # networkmanager tray uility, pretty useful actually
     nm-applet.enable = config.programs.waybar.enable;
   };
-}
 
+  # some programs do not apply themes when qt is managed solely through home-manager.
+  # so we need to enable it also here.
+  qt.enable = config.garden.style.qt;
+}
