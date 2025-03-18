@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }: let
   inherit (lib.hardware) ldTernary;
@@ -8,6 +9,9 @@
   sudoers = ldTernary pkgs "@wheel" "@admin";
 in {
   nix = {
+    # set the nix path, needed e.g. for nixd
+    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+
     settings = {
       # automatically optimise symlinks
       auto-optimise-store = true;
