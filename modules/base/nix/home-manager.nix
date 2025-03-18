@@ -16,7 +16,7 @@ in {
     useGlobalPkgs = true;
     extraSpecialArgs = {inherit inputs;};
     users.${mainUser} = {
-      imports = [./../../../home];
+      imports = ["${inputs.self}/home"];
       home = {
         username = mainUser;
         homeDirectory = "/home/${mainUser}";
