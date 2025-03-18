@@ -1,8 +1,8 @@
 {
-  services.freshrss = {
-    enable = true;
-    # baseUrl = "";
-    # virtualHost = "";
-    # authType = "none";
-  };
+  # services.freshrss = {
+  #   enable = true;
+  #   baseUrl = "";
+  #   virtualHost = "";
+  #   authType = "none";
+  # };
 }
