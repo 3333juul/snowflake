@@ -2,12 +2,12 @@
   pkgs,
   config,
   osConfig,
+  inputs,
   lib,
   ...
 }: let
-  gruvbox-material-gtk = pkgs.callPackage ../../pkgs/gruvbox-material-gtk.nix {};
-
   inherit (lib.modules) mkIf;
+  inherit (inputs.self.packages.${pkgs.system}) gruvbox-material-gtk;
 
   cfg = osConfig.garden.style;
 in {

@@ -20,9 +20,7 @@ in {
       ])
 
       (optionals cfg.hyprNStack.enable [
-        pkgs.callPackage
-        ../../../../pkgs/hyprnstack.nix
-        {}
+        inputs.self.packages.${pkgs.system}.hyprNStack
       ])
 
       (optionals cfg.hyprland-easymotion.enable [

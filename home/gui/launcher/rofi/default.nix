@@ -14,7 +14,7 @@ in {
   config = mkIf cfg.rofi.enable {
     programs.rofi = {
       enable = true;
-      #package = pkgs.callPackage ../../../pkgs/rofi.nix {};
+      #package =;
       package = pkgs.rofi-wayland;
       extraConfig = {
         show-icons = true;

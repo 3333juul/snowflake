@@ -19,7 +19,7 @@
   - [profiles](modules/profiles/) Profiles for different system types
 - [parts](parts) Flake parts
   - [lib](parts/lib/) My personal functions
-- [pkgs](pkgs) Packages built from source
+  - [pkgs](parts/pkgs/) Packages built from source
 
 ## Gallery
 
