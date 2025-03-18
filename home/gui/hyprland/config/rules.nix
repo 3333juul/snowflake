@@ -106,8 +106,8 @@
 
       # Special workspaces
       "special:scratchpad,gapsin:7,gapsout:64"
-      "special:obsidian,gapsin:7,gapsout:64,on-created-empty:obsidianspecial"
-      "special:music,gapsout:32,on-created-empty:spotify" # autostart-music
+      "special:obsidian,gapsin:7,gapsout:64,on-created-empty:kitty sh -c 'cd ~/documents/knowledge/obsidian && nvim'"
+      "special:music,gapsout:32,on-created-empty:spotify"
       "special:mail,gapsin:7,gapsout:64,on-created-empty:thunderbird"
       "special:rss,gapsin:7,gapsout:64,on-created-empty:brave --app=https://inoreader.com"
       "special:ai,on-created-empty:autostart-ai"

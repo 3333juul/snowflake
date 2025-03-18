@@ -36,11 +36,14 @@ in {
         viAlias = true;
         useSystemClipboard = true;
         preventJunkFiles = true;
-        # make indents normal
         options = {
+          # make indents normal
           tabstop = 2;
           shiftwidth = 2;
           softtabstop = 2;
+
+          # required for obsidian-nvim
+          conceallevel = 2;
         };
       };
     };
