@@ -84,7 +84,7 @@
       protoc-gen-validate
     ];
     outputPath = "gen";
-    hash = "sha256-Vp7i+bfEAs4dpAqhMDeb3em5Jry57KvY63rPHCZv9lc=";
+    hash = "sha256-LLmf9w4vlcakm/dBm6Zfc94HTwR/Hkc02tFXUXmXQ0g=";
   };
 
   protobufTypes = generateProtobufCode {
@@ -96,7 +96,7 @@
       protoc-gen-validate
     ];
     outputPath = "../web/src/types/proto";
-    hash = "sha256-NIWIvdeP+Xs2MPe7ij0dEiFEGMFyRhm8dwUlmCi/xK0=";
+    hash = "sha256-CCq1vw0OYnIYZZJmCYNwe3tEYkdV0BzHSwz3PQGHHSM=";
   };
 
   frontend = stdenvNoCC.mkDerivation (finalAttrs: {
