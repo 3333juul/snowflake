@@ -7,6 +7,8 @@
 }: let
   inherit (lib.modules) mkIf;
 
+  # inherit (inputs.nvf.lib.nvim.dag) entryAfter entryBefore;
+
   cfg = osConfig.garden.programs.editor;
 in {
   imports = [
@@ -41,10 +43,13 @@ in {
           tabstop = 2;
           shiftwidth = 2;
           softtabstop = 2;
-
-          # required for obsidian-nvim
-          conceallevel = 2;
         };
+
+        # luaConfigRC = {
+        #   markdownDisableFolding = entryBefore ["pluginConfigs"] ''
+        #     vim.g.vim_markdown_folding_disabled = 1
+        #   '';
+        # };
       };
     };
   };

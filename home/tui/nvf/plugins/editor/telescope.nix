@@ -102,6 +102,20 @@
         desc = "telescope - notifications";
         action = "<cmd>Telescope notify<cr>";
       }
+
+      {
+        key = "<leader>tt";
+        mode = "n";
+        desc = "telescope - todo";
+        action = "<cmd>TodoTelescope<cr>";
+      }
+
+      {
+        key = "<leader>cc";
+        mode = "n";
+        desc = "telescope - commands";
+        action = "<cmd>Telescope commands<cr>";
+      }
     ];
   };
 }
