@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: let
   inherit (lib.modules) mkIf;
@@ -113,5 +114,18 @@ in {
 
     # don't create default ~/Sync folder
     systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true";
+
+    # tray service
+    systemd.user.services = mkIf config.garden.programs.gui.enable {
+      syncthingtray = {
+        description = "syncthing tray";
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.syncthingtray}/bin/syncthingtray --wait";
+          Restart = "on-failure";
+        };
+        wantedBy = ["graphical-session.target"];
+      };
+    };
   };
 }
