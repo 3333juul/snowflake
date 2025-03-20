@@ -12,5 +12,8 @@
 
   # some programs do not apply themes when qt is managed solely through home-manager.
   # so we need to enable it also here.
-  qt.enable = config.garden.style.qt.enable;
+  qt = {
+    inherit (config.garden.style.qt) enable;
+    platformTheme = "qt5ct";
+  };
 }
