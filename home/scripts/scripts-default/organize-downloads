@@ -1,0 +1,87 @@
+#!/bin/bash
+
+move_safe() {
+	local src=$1
+	local dest_dir=$2
+	local filename=$(basename -- "$src")
+	local extension="${filename##*.}"
+	local name="${filename%.*}"
+
+	if [[ "$name" == "$extension" || -d "$src" ]]; then
+		extension=""
+	else
+		extension=".$extension"
+	fi
+
+	local dest_file="$dest_dir/$filename"
+
+	# if the file/folder with the same name exists, add suffix to avoid overwriting.
+	if [[ -e "$dest_file" ]]; then
+		local counter=1
+		while [[ -e "$dest_file" ]]; do
+			if [[ -n $extension ]]; then
+				dest_file="$dest_dir/${name}_$counter$extension"
+			else
+				dest_file="$dest_dir/${name}_$counter"
+			fi
+			((counter++))
+		done
+	fi
+
+	mv "$src" "$dest_file"
+}
+
+allowed_dirs=(
+	"$HOME/downloads/images"
+	"$HOME/downloads/videos"
+	"$HOME/downloads/pdf"
+	"$HOME/downloads/zips"
+	"$HOME/downloads/docs"
+	"$HOME/downloads/music"
+	"$HOME/downloads/torrents"
+	"$HOME/downloads/github"
+	"$HOME/downloads/extra"
+	"$HOME/downloads/folders"
+)
+
+for file in "$HOME"/downloads/*; do
+	# skip temporary download files
+	if [[ "$file" == *.part || "$file" == *.crdownload ]]; then
+		continue
+	fi
+
+	# if it's folder, check if it's allowed
+	if [[ -d "$file" ]]; then
+		is_allowed=0
+		for allowed_dir in "${allowed_dirs[@]}"; do
+			if [[ "$file" == "$allowed_dir" ]]; then
+				is_allowed=1
+				break
+			fi
+		done
+
+		# if folder is not allowed move it to the `folders` folder
+		if [[ $is_allowed -eq 0 ]]; then
+			mkdir -p "$HOME/downloads/folders"
+			move_safe "$file" "$HOME/downloads/folders/"
+		fi
+		continue
+	fi
+
+	# sort files
+	case "$file" in
+	*.mp3 | *.wav) dir="music" ;;
+	*.jpg | *.png | *.jpeg | *.gif) dir="images" ;;
+	*.mp4 | *.mov | *.avi) dir="videos" ;;
+	*.pdf) dir="pdf" ;;
+	*.zip | *.tar* | *.deb | *.gz) dir="zips" ;;
+	*.csv | *.ods | *.xlsx | *.txt | *.docx | *.doc) dir="docs" ;;
+	*.torrent) dir="torrents" ;;
+	*.git | *.gitignore | *.gitmodules) dir="github" ;;
+	*) dir="extra" ;;
+	esac
+
+	# move files to their appropriate folders
+	mkdir -p "$HOME/downloads/$dir"
+	move_safe "$file" "$HOME/downloads/$dir/"
+done

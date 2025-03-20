@@ -21,6 +21,7 @@
       launcher = ./scripts-default/launcher;
       man-zathura = ./scripts-default/man-zathura;
       ocr = ./scripts-default/ocr;
+      organize-downloads = ./scripts-default/organize-downloads;
       powermenu = ./scripts-default/powermenu;
       quicklinks = ./scripts-default/quicklinks;
       repoctl = ./scripts-default/repoctl;
