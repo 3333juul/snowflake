@@ -83,6 +83,7 @@
 
       syncthing = {
         enable = true;
+        tray.enable = false;
         folders = [
           "noteAir3/books"
           "noteAir3/koreader"

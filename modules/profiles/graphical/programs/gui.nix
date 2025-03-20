@@ -14,6 +14,6 @@
   # so we need to enable it also here.
   qt = {
     inherit (config.garden.style.qt) enable;
-    platformTheme = "qt5ct";
+    platformTheme = "qt5ct"; # crucial
   };
 }

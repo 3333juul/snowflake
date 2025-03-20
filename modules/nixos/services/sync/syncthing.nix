@@ -116,7 +116,7 @@ in {
     systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true";
 
     # tray service
-    systemd.user.services = mkIf config.garden.programs.gui.enable {
+    systemd.user.services = mkIf cfg.tray.enable {
       syncthingtray = {
         description = "syncthing tray";
         serviceConfig = {

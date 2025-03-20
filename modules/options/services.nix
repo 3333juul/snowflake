@@ -10,6 +10,7 @@ in {
 
     syncthing = {
       enable = mkEnableOption "enable syncthing";
+      tray.enable = mkEnableOption "enable syncthing tray";
 
       folders = mkOption {
         type = listOf str;
