@@ -3,10 +3,8 @@
 ## Layout
 
 - [flake.nix](flake.nix) Base of the configuration
-- [home](home) My [home-manager](https://github.com/nix-community/home-manager)
-  config
-- [hosts](hosts) Per-host configurations that contain machine specific
-  configurations
+- [home](home) My [home-manager](https://github.com/nix-community/home-manager) config
+- [hosts](hosts) Per-host configurations
   - [desktop](hosts/desktop/) Main machine
   - [laptop](hosts/laptop/) Low/mid spec thinkpad
   - [server](hosts/server/) TODO
