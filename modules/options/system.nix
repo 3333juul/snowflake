@@ -43,6 +43,11 @@ in {
       waydroid.enable = mkEnableOption "waydroid";
     };
 
+    specialisations = {
+      enable = mkEnableOption "Enable specialisations";
+      steamOS.enable = mkEnableOption "tv steam big picture specialisation";
+    };
+
     printing = {
       enable = mkEnableOption "printing";
 

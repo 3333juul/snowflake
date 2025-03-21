@@ -6,6 +6,7 @@
     ./networking
     ./programs
     ./services
+    ./specs
     ./android.nix
     ./clean-zsh.nix
     ./security.nix

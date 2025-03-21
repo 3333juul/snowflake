@@ -25,7 +25,7 @@
       printing.enable = false;
 
       boot = {
-        loader = "systemd-boot";
+        loader = "grub";
       };
 
       networking = {
@@ -39,6 +39,10 @@
       loginManager = {
         name = "greetd";
         autoLogin.enable = false;
+      };
+
+      specialisations = {
+        steamOS.enable = true;
       };
 
       virtualization = {
