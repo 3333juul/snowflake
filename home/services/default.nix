@@ -1,6 +1,6 @@
 {
   imports = [
     ./glance.nix
-    ./kdeconnect.nix
+    # ./kdeconnect.nix
   ];
 }

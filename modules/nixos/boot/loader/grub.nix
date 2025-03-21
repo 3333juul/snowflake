@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: let
   inherit (lib.modules) mkIf mkDefault;
@@ -23,7 +24,7 @@ in {
       efiSupport = true;
       enableCryptodisk = mkDefault false;
       inherit (cfg.grub) device;
-      theme = null;
+      theme = pkgs.minimal-grub-theme;
       backgroundColor = null;
       splashImage = null;
     };
