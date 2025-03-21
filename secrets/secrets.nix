@@ -12,7 +12,7 @@ let
     };
 
     laptop = {
-      key = "";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOanka+IERz2PBSi68hBpYKERrfVqHG6y3xzi4C49WNx";
       owner = "scay";
     };
   };
