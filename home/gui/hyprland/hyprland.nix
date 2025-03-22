@@ -6,6 +6,7 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
+  inherit (lib.lists) optionals;
   inherit (osConfig.garden.device) hasTouchscreen;
 
   cfg = osConfig.garden.environment.desktop;
