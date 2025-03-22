@@ -14,9 +14,9 @@
 in {
   imports = [
     ./config/autostart.nix
-    ./config/decorations.nix
     ./config/animations.nix
     ./config/keybindings.nix
+    ./config/look.nix
     ./config/options.nix
     ./config/plugins.nix
     ./config/rules.nix
