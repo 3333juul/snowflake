@@ -51,5 +51,10 @@
     #   url = "github:bighu630/hycov";
     #   inputs.hyprland.follows = "hyprland";
     # };
+
+    hyprgrass = {
+      url = "github:horriblename/hyprgrass";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 }

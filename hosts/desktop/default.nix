@@ -13,11 +13,12 @@
       hasTPM = true;
       hasBluetooth = true;
       hasSound = true;
+      hasTouchscreen = false;
       keyboard = "pl";
     };
 
     system = {
-      mainUser = "scay";
+      mainUser = "scay"; # TODO: change it after reinstalling the system
 
       video.enable = true;
       sound.enable = true;

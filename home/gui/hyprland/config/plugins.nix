@@ -1,16 +1,19 @@
 {
   pkgs,
   inputs,
+  osConfig,
   lib,
   ...
 }: let
   inherit (lib.modules) mkIf;
   inherit (lib.lists) optionals concatLists;
+  inherit (osConfig.garden.device) hasTouchscreen;
 
   cfg = {
     hycov.enable = false;
     hyprNStack.enable = false;
     hyprland-easymotion.enable = false;
+    hyprgrass.enable = false;
   };
 in {
   wayland.windowManager.hyprland = {
@@ -25,6 +28,10 @@ in {
 
       (optionals cfg.hyprland-easymotion.enable [
         inputs.hyprland-easymotion.packages.${pkgs.system}.hyprland-easymotion
+      ])
+
+      (optionals (cfg.hyprgrass.enable && hasTouchscreen) [
+        inputs.hyprgrass.packages.${pkgs.system}.default
       ])
     ];
 

@@ -62,6 +62,12 @@ in {
       description = "Whether the system has tpm support";
     };
 
+    hasTouchscreen = mkOption {
+      type = bool;
+      default = true;
+      description = "Whether the system has touchscreen support";
+    };
+
     monitors = mkOption {
       type = listOf str;
       default = [];
