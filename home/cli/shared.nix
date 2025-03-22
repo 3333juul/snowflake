@@ -16,12 +16,13 @@ in {
       file # Show file information
       killall
       ncdu # disk space
-      openssl
       ripgrep # grep replacement
       tldr
       unzip
       jq
       nix-prefetch-github
+      nix-output-monitor
+      nvd
     ];
   };
 }

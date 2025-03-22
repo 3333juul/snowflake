@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: let
+{config, ...}: let
   inherit (config.garden.environment) flakePath;
 in {
   programs.nh = {
@@ -13,9 +9,4 @@ in {
     };
     flake = flakePath;
   };
-
-  environment.systemPackages = with pkgs; [
-    nix-output-monitor
-    nvd
-  ];
 }
