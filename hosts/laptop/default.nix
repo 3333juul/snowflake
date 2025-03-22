@@ -16,7 +16,7 @@
     };
 
     system = {
-      mainUser = "scay";
+      mainUser = "juul";
 
       boot = {
         loader = "systemd-boot";
