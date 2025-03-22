@@ -339,6 +339,31 @@
         "type": "github"
       }
     },
+    "hyprgrass": {
+      "inputs": {
+        "hyprland": [
+          "hyprland"
+        ],
+        "nixpkgs": [
+          "hyprgrass",
+          "hyprland",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1742051449,
+        "narHash": "sha256-is29ny+x0P1rIEiNUNarqzavFdmvLs+rslxihGycklE=",
+        "owner": "horriblename",
+        "repo": "hyprgrass",
+        "rev": "5453be107e8c7b88f6274122d064bf602852745f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "horriblename",
+        "repo": "hyprgrass",
+        "type": "github"
+      }
+    },
     "hyprland": {
       "inputs": {
         "aquamarine": "aquamarine",
@@ -782,6 +807,7 @@
         "flake-parts": "flake-parts",
         "gruvbox-kvantum-themes": "gruvbox-kvantum-themes",
         "home-manager": "home-manager_2",
+        "hyprgrass": "hyprgrass",
         "hyprland": "hyprland",
         "nix-minecraft": "nix-minecraft",
         "nixpkgs": "nixpkgs_4",
