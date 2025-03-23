@@ -1,4 +1,5 @@
 {
+  # https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
   programs.nvf.settings.vim.keymaps = [
     #= Better up/down =============================================================================
     {
@@ -149,12 +150,6 @@
     #   desc = "Next Buffer";
     #   action = "<cmd>bnext<cr>";
     # }
-    # {
-    #   key = "<leader>bb";
-    #   mode = "n";
-    #   desc = "Switch to Other Buffer";
-    #   action = "<cmd>e #<cr>";
-    # }
     {
       key = "<leader>`";
       mode = "n";
@@ -166,6 +161,12 @@
       mode = "n";
       desc = "Delete Buffer and Window";
       action = "<cmd>:bd<cr>";
+    }
+    {
+      key = "<leader>bo";
+      mode = "n";
+      desc = "Delete all other buffers";
+      action = "<cmd>:%bd|edit#|bd#<cr>";
     }
 
     #= https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n ==============================
