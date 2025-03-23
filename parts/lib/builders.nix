@@ -20,14 +20,14 @@
       else class;
 
     system =
-      if (class == "nixos" || class == "iso")
-      then "${arch}-linux"
-      else "${arch}-${class}";
+      if class == "darwin"
+      then "${arch}-${class}"
+      else "${arch}-linux";
 
     systemEval =
-      if (class == "nixos" || class == "iso")
-      then nixosSystem
-      else darwinSystem;
+      if class == "darwin"
+      then darwinSystem
+      else nixosSystem;
   in
     systemEval
     {
