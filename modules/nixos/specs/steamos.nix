@@ -7,9 +7,9 @@
   inherit (lib.modules) mkIf mkForce;
   inherit (builtins) listToAttrs;
 
-  cfg = config.garden.system.specialisations.steamOS;
+  cfg = config.garden.system.specialisations;
 in {
-  specialisation.steamOS = mkIf cfg.enable {
+  specialisation.steamOS = mkIf (cfg.enable && cfg.steamOS.enable) {
     configuration = {
       garden = {
         system = {
@@ -29,8 +29,6 @@ in {
           value = {mode = "d";};
         })
         config.garden.device.monitors);
-
-      # boot.kernelParams = map (x: "video=${x}-d") config.garden.device.monitors;
 
       programs = {
         gamescope = {

@@ -43,6 +43,7 @@
       };
 
       specialisations = {
+        enable = true;
         steamOS.enable = true;
       };
 
