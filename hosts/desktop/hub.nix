@@ -78,7 +78,6 @@
 
     services = {
       glance.enable = true;
-      minecraftServer.enable = true;
       rclone.enable = true;
 
       syncthing = {
