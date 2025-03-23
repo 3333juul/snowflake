@@ -2,7 +2,6 @@
 
 ## Layout
 
-- [flake.nix](flake.nix) Base of the configuration
 - [home](home) My [home-manager](https://github.com/nix-community/home-manager) config
 - [hosts](hosts) Per-host configurations
   - [desktop](hosts/desktop/) Main machine
@@ -18,6 +17,7 @@
 - [parts](parts) Flake parts
   - [lib](parts/lib/) My personal functions
   - [pkgs](parts/pkgs/) Packages built from source
+- [flake.nix](flake.nix) Base of the configuration
 
 ## Gallery
 
