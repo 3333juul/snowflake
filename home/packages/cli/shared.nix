@@ -20,6 +20,10 @@ in {
       tldr
       unzip
       jq
+
+      python3
+
+      # nix tools
       nix-prefetch-github
       nix-output-monitor
       nvd

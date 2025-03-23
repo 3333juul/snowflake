@@ -1,14 +1,8 @@
 {
   imports = [
-    ./cli
-    ./gui
+    ./packages
     ./scripts
     ./services
     ./theme
-    ./tui
-    ./docs.nix
-    ./packages.nix
-    ./thumbnailers.nix
-    ./xdg.nix
   ];
 }

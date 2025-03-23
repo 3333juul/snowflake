@@ -115,7 +115,6 @@ in {
                         "UC738SsV6BSLUVvMgKnEFFzQ" # Epoch Philosophy
                         "UCvX5pUki31Bs3y28bvPY6Jg" # Pojęcia przy pracy
                         "UCnEuIogVV2Mv6Q1a3nHIRsQ" # Carefree Wandering
-                        "UCK_VrSXB5G4gOVOcGC6INxA" # Death Drive Dialectics
                       ];
                     }
                     {

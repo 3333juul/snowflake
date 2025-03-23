@@ -39,30 +39,30 @@ in {
     # TODO:
     home.file.".config/rofi/colors.rasi".text = ''
       * {
-              background:            #${colors.base00}E6;
-              foreground:            #${colors.base06};
-              regular0:              #${colors.base03};
-              regular1:              #${colors.base08};
-              regular2:              #${colors.base0B};
-              regular3:              #${colors.base0A};
-              regular4:              #${colors.base0D};
-              regular5:              #${colors.base0E};
-              regular6:              #${colors.base0C};
-              regular7:              #${colors.base06};
-              bright0:               #${colors.base04};
-              bright1:               #${colors.base08};
-              bright2:               #${colors.base0B};
-              bright3:               #${colors.base0A};
-              bright4:               #${colors.base0D};
-              bright5:               #${colors.base0F};
-              bright6:               #${colors.base0C};
-              bright7:               #${colors.base07};
+          background:            #${colors.base00}E6;
+          foreground:            #${colors.base06};
+          regular0:              #${colors.base03};
+          regular1:              #${colors.base08};
+          regular2:              #${colors.base0B};
+          regular3:              #${colors.base0A};
+          regular4:              #${colors.base0D};
+          regular5:              #${colors.base0E};
+          regular6:              #${colors.base0C};
+          regular7:              #${colors.base06};
+          bright0:               #${colors.base04};
+          bright1:               #${colors.base08};
+          bright2:               #${colors.base0B};
+          bright3:               #${colors.base0A};
+          bright4:               #${colors.base0D};
+          bright5:               #${colors.base0F};
+          bright6:               #${colors.base0C};
+          bright7:               #${colors.base07};
       }
     '';
 
     # Symlink all themes - the argument of this function must be a full path, not a Nix path type, otherwise it won't work
     xdg.configFile."rofi/themes" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${flakePath}/home/gui/launcher/rofi/themes";
+      source = config.lib.file.mkOutOfStoreSymlink "${flakePath}/home/packages/gui/launcher/rofi/themes";
       recursive = true;
     };
   };
