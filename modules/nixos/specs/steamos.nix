@@ -5,6 +5,7 @@
   ...
 }: let
   inherit (lib.modules) mkIf mkForce;
+  inherit (builtins) listToAttrs;
 
   cfg = config.garden.system.specialisations.steamOS;
 in {
@@ -23,17 +24,23 @@ in {
 
       # disable monitors defined in `garden.device.monitors`.
       # we don't want them because a tv is used as the primary display instead.
-      boot.kernelParams = map (x: "video=${x}-d") (config.garden.device.monitors or []);
+      hardware.display.outputs = listToAttrs (map (monitor: {
+          name = monitor;
+          value = {mode = "d";};
+        })
+        config.garden.device.monitors);
+
+      # boot.kernelParams = map (x: "video=${x}-d") config.garden.device.monitors;
 
       programs = {
         gamescope = {
-          enable = true;
-          capSysNice = true;
+          enable = mkForce true;
+          capSysNice = mkForce true;
         };
 
         steam = {
-          enable = true;
-          gamescopeSession.enable = true;
+          enable = mkForce true;
+          gamescopeSession.enable = mkForce true;
         };
       };
 
