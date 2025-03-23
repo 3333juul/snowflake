@@ -1,5 +1,4 @@
 {
-  imports = [
-    ./minecraft-server.nix
-  ];
+  # imports = [
+  # ];
 }
