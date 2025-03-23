@@ -26,26 +26,26 @@ let
     hybrid = [];
   };
 
-  # Function to generate a list of public keys for given users and hosts
+  # generate a list of public keys for given users and hosts
   getAccess = hostList: allowedUsers: let
-    # Add hybrid type automatically
+    # add hybrid type automatically
     listCombined = hostList ++ types.hybrid;
 
-    # Filter hosts to keep only those owned by the specified users
+    # filter hosts to keep only those owned by the specified users
     relevantHosts = builtins.filter (host: builtins.any (u: host.owner == u) allowedUsers) listCombined;
 
-    # Retrieve public keys of the selected hosts
+    # retrieve public keys of the selected hosts
     hostKeys = builtins.map (host: host.key) relevantHosts;
 
-    # Retrieve public keys of the selected users
+    # retrieve public keys of the selected users
     userKeys = builtins.map (user: users.${user}) allowedUsers;
   in {
-    publicKeys = hostKeys ++ userKeys; # Return the combined list of public keys
+    publicKeys = hostKeys ++ userKeys; # return the combined list of public keys
   };
 
-  # Function to grant access to all users in the system
+  # grant access to all users
   allAccess = hostList: getAccess hostList (builtins.attrNames users);
-  # Function to grant access only to scay
+  # grant access only to `scay`
   #scayAccess = hostList: getAccess hostList ["scay"];
 in {
   "restic/password.age" = allAccess (types.workstations ++ types.servers);
