@@ -9,11 +9,16 @@
   inherit (inputs.nix-darwin.lib) darwinSystem;
 
   mkHost = host: {
-    class ? "nixos", # default class: nixos
-    arch ? "x86_64", # default system: x86_64-linux
+    class ? "nixos",
+    arch ? "x86_64",
     profiles ? [],
     extraModules ? [],
   }: let
+    perClass =
+      if class == "nixos"
+      then "nixos/core"
+      else class;
+
     system =
       if (class == "nixos" || class == "iso")
       then "${arch}-linux"
@@ -32,14 +37,12 @@
 
       modules =
         [
-          # common modules between all systems
-          "${self}/modules/base"
-          # module options
-          "${self}/modules/options"
-          # modules per class: nixos, darwin
-          "${self}/modules/${class}"
           # modules per host
           "${self}/hosts/${host}"
+          # common modules between all systems
+          "${self}/modules/base"
+          # modules per class: nixos, darwin.
+          "${self}/modules/${perClass}"
 
           # set hostname
           {networking.hostName = host;}
@@ -47,20 +50,20 @@
           {nixpkgs.hostPlatform = system;}
         ]
         # profile modules for different system types
-        ++ map (profile: "${self}/modules/profiles/${profile}") profiles
+        ++ map (profile: "${self}/modules/nixos/profiles/${profile}") profiles
         # extra modules
         ++ map (module: "${self}/modules/${module}") extraModules;
     };
 
-  # Generate host configurations and assign them to darwin or nixos based on their class
+  # generate host configurations and assign them to darwin or nixos based on their class
   mkHosts = {
     nixos = hosts: let
-      isNixOS = _: cfg: (cfg.class or "nixos") == "nixos" || cfg.class == "iso";
+      isNixOS = _: x: (x.class or "nixos") == "nixos" || x.class == "iso";
     in
       mapAttrs mkHost (filterAttrs isNixOS hosts);
 
     darwin = hosts: let
-      isDarwin = _: cfg: cfg.class == "darwin";
+      isDarwin = _: x: x.class == "darwin";
     in
       mapAttrs mkHost (filterAttrs isDarwin hosts);
   };
