@@ -10,6 +10,7 @@
 in {
   config = mkIf cfg.cli.enable {
     home.packages = with pkgs; [
+      cocogitto # git helpers
       eza # ls replacement
       entr # perform action when file change
       fd # find replacement
