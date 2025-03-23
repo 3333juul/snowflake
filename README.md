@@ -11,10 +11,10 @@
   - [darwin](hosts/darwin/) TODO
 - [modules](modules) Modular system configuration
   - [base](modules/base/) Base modules, common between all systems
-  - [nixos](modules/nixos/) NixOS specific modules
   - [darwin](modules/nixos/) TODO
-  - [options](modules/options/) Options that make the config modular
-  - [profiles](modules/profiles/) Profiles for different system types
+  - [nixos](modules/nixos/) NixOS specific modules
+    - [core](modules/nixos/core/) Core modules
+    - [profiles](modules/nixos/profiles/) Profiles for different system types
 - [parts](parts) Flake parts
   - [lib](parts/lib/) My personal functions
   - [pkgs](parts/pkgs/) Packages built from source
