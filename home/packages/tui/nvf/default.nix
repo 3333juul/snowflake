@@ -17,7 +17,7 @@ in {
     ./mappings.nix
   ];
 
-  config = mkIf cfg.nvim.enable {
+  config = mkIf cfg.neovim.enable {
     xdg.desktopEntries = {
       nvim = {
         name = "Neovim";

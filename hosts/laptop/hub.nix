@@ -25,12 +25,13 @@
       starship.enable = true;
       aichat.enable = false;
 
+      notes.enable = true;
+      mpv.enable = true;
       anki.enable = false;
       discord.enable = false;
       libreoffice.enable = false;
       brave.enable = false;
       spotify.enable = false;
-      mpv.enable = true;
 
       imageEditor = {
         gimp.enable = false;
@@ -44,7 +45,7 @@
 
       editor = {
         vscodium.enable = false;
-        nvim.enable = true;
+        neovim.enable = true;
       };
 
       reading = {

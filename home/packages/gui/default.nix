@@ -5,20 +5,19 @@
     ./discord # discord
     ./gaming # gaming
     ./hyprland # wm
-    ./image-viewer # image viewer applications
+    ./img-viewer # image viewer applications
     ./launcher # launchers
     ./spotify # music
     ./swaync # notification manager
     ./terminal # terminals
     ./waybar # status bar
     ./anki.nix # flashcards
-    ./calibre.nix # reading
-    ./gimp.nix
+    ./img-editor.nix
     ./libreoffice.nix
     ./mpv.nix # media player
-    ./pinta.nix
+    ./notes.nix
+    ./reading.nix
     ./shared.nix
     ./vscodium.nix # editor
-    ./zotero.nix
   ];
 }

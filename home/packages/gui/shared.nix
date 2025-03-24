@@ -11,17 +11,15 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       bleachbit # cache cleaner
-      pavucontrol # pulseaudio volume controle (GUI)
+      evince # pdf
+      file-roller # archive
+      pavucontrol # gui volume control
       qalculate-gtk # calculator
-      obsidian
-      font-manager
+      qbittorrent # torrent client
       stremio
-      qbittorrent
       obs-studio
       signal-desktop
       telegram-desktop
-      evince # pdf
-      file-roller # archive
     ];
   };
 }

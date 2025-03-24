@@ -37,6 +37,5 @@
 
     # util
     #./util/image.nix
-    ./util/obsidian.nix
   ];
 }

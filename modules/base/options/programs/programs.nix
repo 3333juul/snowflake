@@ -6,15 +6,16 @@
   inherit (lib.options) mkEnableOption;
 in {
   options.garden.programs = {
-    anki.enable = mkEnableOption "enables anki";
-    discord.enable = mkEnableOption "enables discord";
-    libreoffice.enable = mkEnableOption "enables libreoffice";
-    brave.enable = mkEnableOption "enables brave";
-    spotify.enable = mkEnableOption "enables spotify";
-    mpv.enable = mkEnableOption "enables MPV";
-    aichat.enable = mkEnableOption "enables aichat";
-    git.enable = mkEnableOption "enables git";
-    starship.enable = mkEnableOption "enables starship";
+    anki.enable = mkEnableOption "enable anki";
+    discord.enable = mkEnableOption "enable discord";
+    libreoffice.enable = mkEnableOption "enable libreoffice";
+    brave.enable = mkEnableOption "enable brave";
+    spotify.enable = mkEnableOption "enable spotify";
+    mpv.enable = mkEnableOption "enable MPV";
+    aichat.enable = mkEnableOption "enable aichat";
+    git.enable = mkEnableOption "enable git";
+    starship.enable = mkEnableOption "enable starship";
+    notes.enable = mkEnableOption "enable notes";
 
     waybar.enable =
       mkEnableOption "enables waybar"
@@ -23,45 +24,45 @@ in {
       };
 
     imageEditor = {
-      gimp.enable = mkEnableOption "enables GIMP";
-      pinta.enable = mkEnableOption "enables pinta";
+      gimp.enable = mkEnableOption "enable GIMP";
+      pinta.enable = mkEnableOption "enable pinta";
     };
 
     fileManager = {
-      thunar.enable = mkEnableOption "enables thunar";
-      yazi.enable = mkEnableOption "enables yazi";
+      thunar.enable = mkEnableOption "enable thunar";
+      yazi.enable = mkEnableOption "enable yazi";
     };
 
     editor = {
-      vscodium.enable = mkEnableOption "enables vscodium";
-      nvim.enable = mkEnableOption "enables nvim";
+      vscodium.enable = mkEnableOption "enable vscodium";
+      neovim.enable = mkEnableOption "enable neovim";
     };
 
     reading = {
-      calibre.enable = mkEnableOption "enables calibre";
-      zotero.enable = mkEnableOption "enables zotero";
+      calibre.enable = mkEnableOption "enable calibre";
+      zotero.enable = mkEnableOption "enable zotero";
     };
 
     launcher = {
-      rofi.enable = mkEnableOption "enables rofi";
-      tofi.enable = mkEnableOption "enables tofi";
+      rofi.enable = mkEnableOption "enable rofi";
+      tofi.enable = mkEnableOption "enable tofi";
     };
 
     imageViewer = {
-      pqiv.enable = mkEnableOption "enables pqiv";
-      swayimg.enable = mkEnableOption "enables swayimg";
-      vimiv.enable = mkEnableOption "enables vimiv";
+      pqiv.enable = mkEnableOption "enable pqiv";
+      swayimg.enable = mkEnableOption "enable swayimg";
+      vimiv.enable = mkEnableOption "enable vimiv";
     };
 
     terminal = {
-      foot.enable = mkEnableOption "enables foot";
-      kitty.enable = mkEnableOption "enables kitty";
+      foot.enable = mkEnableOption "enable foot";
+      kitty.enable = mkEnableOption "enable kitty";
     };
 
     gaming = {
-      lutris.enable = mkEnableOption "enables lutris";
+      lutris.enable = mkEnableOption "enable lutris";
       minecraft.enable = mkEnableOption "enable minecraft";
-      steam.enable = mkEnableOption "enables steam";
+      steam.enable = mkEnableOption "enable steam";
     };
   };
 }
