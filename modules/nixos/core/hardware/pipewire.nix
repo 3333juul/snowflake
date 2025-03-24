@@ -5,6 +5,7 @@
 }: let
   inherit (lib.modules) mkIf;
   inherit (config.garden) device;
+
   cfg = config.garden.system.sound;
 in {
   services.pipewire = mkIf (cfg.enable && device.hasSound) {
@@ -16,7 +17,7 @@ in {
 
     alsa = {
       enable = true;
-      support32Bit = true;
+      support32Bit = false;
     };
   };
 }

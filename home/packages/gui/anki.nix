@@ -11,8 +11,8 @@
   cfg = osConfig.garden.programs;
 in {
   config = mkIf cfg.anki.enable {
-    home.packages = with pkgs; [
-      anki
+    home.packages = [
+      pkgs.anki
       vocabsieve
     ];
   };

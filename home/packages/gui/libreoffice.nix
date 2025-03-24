@@ -9,8 +9,8 @@
   cfg = osConfig.garden.programs;
 in {
   config = mkIf cfg.libreoffice.enable {
-    home.packages = with pkgs; [
-      libreoffice
+    home.packages = [
+      pkgs.libreoffice
     ];
   };
 }
