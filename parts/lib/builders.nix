@@ -57,16 +57,14 @@
           {nixpkgs.hostPlatform = system;}
         ]
 
-        [
-          # profile modules for different system types
-          map
+        # profile modules for different system types
+        (map
           (profile: "${self}/modules/nixos/profiles/${profile}")
-          profiles
-          # extra modules
-          map
+          profiles)
+        # extra modules
+        (map
           (module: "${self}/modules/${module}")
-          extraModules
-        ]
+          extraModules)
       ];
     };
 
