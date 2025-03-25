@@ -24,6 +24,7 @@ in {
 
       # disable monitors defined in `garden.device.monitors`.
       # we don't want them because a tv is used as the primary display instead.
+      # https://nixos.org/manual/nixos/stable/#module-hardware-display-modes
       hardware.display.outputs = listToAttrs (map (monitor: {
           name = monitor;
           value = {mode = "d";};
