@@ -5,8 +5,10 @@
 }: let
   inherit (inputs) self;
   inherit (lib.attrsets) mapAttrs filterAttrs;
+  inherit (lib.lists) optionals concatLists;
   inherit (lib) nixosSystem;
   inherit (inputs.nix-darwin.lib) darwinSystem;
+  inherit (builtins) elem;
 
   mkHost = host: {
     class ? "nixos",
@@ -14,6 +16,9 @@
     profiles ? [],
     extraModules ? [],
   }: let
+    isIso =
+      elem "iso" profiles;
+
     perClass =
       if class == "nixos"
       then "nixos/core"
@@ -35,30 +40,40 @@
         inherit inputs lib;
       };
 
-      modules =
-        [
+      modules = concatLists [
+        (optionals (!isIso) [
           # modules per host
           "${self}/hosts/${host}"
           # common modules between all systems
           "${self}/modules/base"
-          # modules per class: nixos, darwin.
+          # modules per class: nixos, darwin
           "${self}/modules/${perClass}"
+        ])
 
+        [
           # set hostname
           {networking.hostName = host;}
           # set system
           {nixpkgs.hostPlatform = system;}
         ]
-        # profile modules for different system types
-        ++ map (profile: "${self}/modules/nixos/profiles/${profile}") profiles
-        # extra modules
-        ++ map (module: "${self}/modules/${module}") extraModules;
+
+        [
+          # profile modules for different system types
+          map
+          (profile: "${self}/modules/nixos/profiles/${profile}")
+          profiles
+          # extra modules
+          map
+          (module: "${self}/modules/${module}")
+          extraModules
+        ]
+      ];
     };
 
   # generate host configurations and assign them to darwin or nixos based on their class
   mkHosts = {
     nixos = hosts: let
-      isNixOS = _: x: (x.class or "nixos") == "nixos" || x.class == "iso";
+      isNixOS = _: x: (x.class or "nixos") == "nixos";
     in
       mapAttrs mkHost (filterAttrs isNixOS hosts);
 
