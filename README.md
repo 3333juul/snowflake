@@ -8,8 +8,8 @@ NixOS config, designed with modularity, efficiency, and clarity as its top prior
 - **Various device settings** - Offers configurations for multiple PC components. The existing structure allows easy extension in case your device isn't fully compatible.
 - **An extensive home-manager configuration** - Includes configs for Hyprland, Neovim, and other essential tools for a comfortable workflow.
 - **Flakes made modular** - Thanks to [flake-parts](https://flake.parts/), which comes with many useful utilities.
-- **Syncing and backup tools (Syncthing, Restic, Rclone)** - Ensures your files are always where they need to be.
-- **Secrets management** - Handled by [agenix](https://github.com/ryantm/agenix), ensuring your sensitive data remains secure.
+- **Syncing and backup tools (Syncthing, Restic, Rclone)** - Ensure files are always where they need to be.
+- **Secrets management** - Handled by [agenix](https://github.com/ryantm/agenix), ensuring sensitive data remains secure.
 - **Virtualization tools** - Qemu, Waydroid, Distrobox.
 - **Specializations** - Enables multiple configurations to be available in the boot selection on the same machine. This is useful if you want to switch between different desktop environments without rebuilding the system.
 
