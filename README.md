@@ -11,7 +11,7 @@ NixOS config, designed with modularity, efficiency, and clarity as its top prior
 - **Syncing and backup tools (Syncthing, Restic, Rclone)** - Ensure files are always where they need to be.
 - **Secrets management** - Handled by [agenix](https://github.com/ryantm/agenix), ensuring sensitive data remains secure.
 - **Virtualization tools** - Qemu, Waydroid, Distrobox.
-- **Specializations** - Enables multiple configurations to be available in the boot selection on the same machine. This is useful if you want to switch between different desktop environments without rebuilding the system.
+- **Specializations** - Enables multiple configurations to be available in the boot selection on the same machine.
 
 ## Layout
 
