@@ -32,6 +32,22 @@
         autoLogin.enable = false;
       };
 
+      fs.support = [
+        "ext4"
+        "vfat"
+        "ntfs"
+      ];
+
+      networking = {
+        wirelessBackend = "iwd";
+
+        tailscale = {
+          enable = false;
+          isServer = false;
+          isClient = false;
+        };
+      };
+
       virtualization = {
         enable = false;
         docker.enable = false;

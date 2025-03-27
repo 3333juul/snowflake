@@ -6,5 +6,6 @@
     ./networkmanager.nix
     ./ssh.nix
     ./tailscale.nix
+    ./wireless.nix
   ];
 }

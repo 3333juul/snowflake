@@ -9,8 +9,8 @@
     ./specs
     ./android.nix
     ./clean-zsh.nix
-    ./security.nix
     ./fs.nix
+    ./security.nix
     ./virtualization.nix
   ];
 }
