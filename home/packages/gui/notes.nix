@@ -14,11 +14,12 @@ in {
   config = mkIf cfg.notes.enable {
     home.packages = [
       pkgs.obsidian
+      pkgs.affine
     ];
 
     programs.nvf.settings.vim = mkIf nvf.enable {
       notes.obsidian = {
-        # it also installs `vim-markdown` and `tabular` plugins
+        # this also installs `vim-markdown` and `tabular` plugins:
         # https://github.com/NotAShelf/nvf/blob/main/modules/plugins/notes/obsidian/config.nix
         enable = true;
         setupOpts = {
