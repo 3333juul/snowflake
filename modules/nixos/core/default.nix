@@ -6,7 +6,7 @@
     ./networking
     ./programs
     ./services
-    ./specs
+    ./specialisations
     ./android.nix
     ./clean-zsh.nix
     ./fs.nix
