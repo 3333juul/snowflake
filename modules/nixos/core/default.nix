@@ -7,10 +7,10 @@
     ./programs
     ./services
     ./specialisations
+    ./virtualization
     ./android.nix
     ./clean-zsh.nix
     ./fs.nix
     ./security.nix
-    ./virtualization.nix
   ];
 }
