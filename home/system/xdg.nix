@@ -10,7 +10,8 @@
   inherit (lib.attrsets) mapAttrsToList nameValuePair optionalAttrs;
   inherit (lib.lists) flatten;
   inherit (builtins) listToAttrs;
-  inherit (config.home) homeDirectory;
+
+  homeDir = config.home.homeDirectory;
 
   defaultApps = {
     browser = ["brave.desktop"];
@@ -117,35 +118,35 @@ in {
       defaultApplications = associations;
     };
 
-    cacheHome = "${homeDirectory}/.cache";
-    configHome = "${homeDirectory}/.config";
-    dataHome = "${homeDirectory}/.local/share";
-    stateHome = "${homeDirectory}/.local/state";
+    cacheHome = "${homeDir}/.cache";
+    configHome = "${homeDir}/.config";
+    dataHome = "${homeDir}/.local/share";
+    stateHome = "${homeDir}/.local/state";
 
     userDirs = mkIf isLinux {
       enable = true;
       createDirectories = true;
 
-      documents = "${homeDirectory}/documents";
-      download = "${homeDirectory}/downloads";
-      desktop = "${homeDirectory}/desktop";
-      videos = "${homeDirectory}/media/videos";
-      music = "${homeDirectory}/media/music";
-      pictures = "${homeDirectory}/media/pictures";
-      publicShare = "${homeDirectory}/public/share";
-      templates = "${homeDirectory}/public/templates";
+      documents = "${homeDir}/documents";
+      download = "${homeDir}/downloads";
+      desktop = "${homeDir}/desktop";
+      videos = "${homeDir}/media/videos";
+      music = "${homeDir}/media/music";
+      pictures = "${homeDir}/media/pictures";
+      publicShare = "${homeDir}/public/share";
+      templates = "${homeDir}/public/templates";
 
       extraConfig =
         {
-          XDG_PROJECTS_DIR = "${homeDirectory}/projects";
-          XDG_TORRENTS_DIR = "${homeDirectory}/downloads/torrents";
-          XDG_SCREENSHOTS_DIR = "${homeDirectory}/media/pictures/screenshots";
-          XDG_WALLPAPERS_DIR = "${homeDirectory}/media/pictures/wallpapers";
-          XDG_RECORDINGS_DIR = "${homeDirectory}/media/videos/recordings";
+          XDG_PROJECTS_DIR = "${homeDir}/projects";
+          XDG_TORRENTS_DIR = "${homeDir}/downloads/torrents";
+          XDG_SCREENSHOTS_DIR = "${homeDir}/media/pictures/screenshots";
+          XDG_WALLPAPERS_DIR = "${homeDir}/media/pictures/wallpapers";
+          XDG_RECORDINGS_DIR = "${homeDir}/media/videos/recordings";
         }
-        // (optionalAttrs osConfig.garden.programs.gaming.enable {
-          XDG_GAMES_DIR = "${homeDirectory}/media/games";
-        });
+        // optionalAttrs osConfig.garden.programs.gaming.enable {
+          XDG_GAMES_DIR = "${homeDir}/media/games";
+        };
     };
 
     configFile = {
