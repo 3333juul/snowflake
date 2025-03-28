@@ -5,18 +5,17 @@
   ...
 }: let
   inherit (lib.meta) getExe;
-  inherit (lib.lists) optionals;
   inherit (lib.modules) mkIf;
 
   sys = config.garden.system;
   cfg = sys.virtualization;
 in {
-  config = mkIf cfg.enable {
-    environment.systemPackages = optionals cfg.distrobox.enable [
-      [pkgs.distrobox]
+  config = mkIf (cfg.enable && cfg.distrobox.enable) {
+    environment.systemPackages = [
+      pkgs.distrobox
     ];
 
-    systemd.user = mkIf cfg.distrobox.enable {
+    systemd.user = {
       timers."distrobox-update" = {
         enable = true;
         wantedBy = ["timers.target"];

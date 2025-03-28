@@ -4,15 +4,14 @@
   config,
   ...
 }: let
-  inherit (lib.lists) optionals;
   inherit (lib.modules) mkIf;
   inherit (config.garden.system) mainUser;
 
   sys = config.garden.system;
   cfg = sys.virtualization;
 in {
-  config = mkIf cfg.enable {
-    environment.systemPackages = optionals cfg.qemu.enable [
+  config = mkIf (cfg.enable && cfg.qemu.enable) {
+    environment.systemPackages = [
       pkgs.virt-manager
       pkgs.virt-viewer
       pkgs.quickemu

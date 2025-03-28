@@ -4,14 +4,14 @@
   config,
   ...
 }: let
-  inherit (lib.lists) optionals;
+  inherit (lib.modules) mkIf;
 
   sys = config.garden.system;
   cfg = sys.virtualization;
 in {
-  config = cfg.enable {
-    environment.systemPackages = optionals cfg.waydroid.enable [
-      [pkgs.waydroid]
+  config = mkIf (cfg.enable && cfg.waydroid.enable) {
+    environment.systemPackages = [
+      pkgs.waydroid
     ];
   };
 }

@@ -4,23 +4,21 @@
   config,
   ...
 }: let
-  inherit (lib.lists) optionals concatLists;
+  inherit (lib.lists) optionals;
   inherit (lib.modules) mkIf;
 
   sys = config.garden.system;
   cfg = sys.virtualization;
 in {
-  config = mkIf cfg.enable {
-    environment.systemPackages = concatLists [
-      (optionals cfg.docker.enable [
+  config = mkIf (cfg.enable && (cfg.docker.enable || cfg.podman.enable)) {
+    environment.systemPackages =
+      [
         pkgs.podman
         pkgs.podman-compose
-      ])
+      ]
+      ++ optionals sys.video.enable [pkgs.lxd-lts];
 
-      (optionals (cfg.docker.enable && sys.video.enable) [pkgs.lxd-lts])
-    ];
-
-    virtualisation.podman = mkIf (cfg.docker.enable || cfg.podman.enable) {
+    virtualisation.podman = {
       enable = true;
       dockerCompat = true;
       dockerSocket.enable = true;
