@@ -7,7 +7,7 @@ in {
 
     general = {
       "$mainMod" = "SUPER";
-      layout = "master";
+      inherit (cfg) layout;
       resize_on_border = true;
       no_border_on_floating = false;
       #snap = {

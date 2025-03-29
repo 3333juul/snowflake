@@ -1,5 +1,6 @@
 {
   imports = [
+    ./config
     ./hypridle.nix
     ./hyprland.nix
     ./hyprlock.nix

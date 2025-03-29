@@ -1,4 +1,9 @@
 {
+  imports = [
+    ./dwindle.nix
+    ./master.nix
+  ];
+
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
@@ -147,24 +152,6 @@
         "$mainMod CTRL SHIFT, J, movegroupwindow, f"
         "$mainMod CTRL SHIFT, K, movegroupwindow, b"
 
-        #== Master Layout =================================================================================
-        "$mainMod, J, layoutmsg, cyclenext"
-        "$mainMod, K, layoutmsg, cycleprev"
-        "$mainMod SHIFT, J, layoutmsg, swapnext"
-        "$mainMod SHIFT, K, layoutmsg, swapprev"
-
-        "$mainMod, I, layoutmsg, addmaster"
-        "$mainMod, D, layoutmsg, removemaster"
-
-        "$mainMod CTRL, RETURN, layoutmsg, focusmaster"
-        "$mainMod SHIFT, RETURN, layoutmsg, swapwithmaster"
-
-        "$mainMod ALT, M, layoutmsg, orientationcycle center left"
-        "$mainMod ALT, up, layoutmsg, orientationtop"
-        "$mainMod ALT, down, layoutmsg, orientationbottom"
-        "$mainMod ALT, left, layoutmsg, orientationleft"
-        "$mainMod ALT, right, layoutmsg, orientationright"
-
         #== Focus with arrow keys =========================================================================
         "$mainMod, up, movefocus, u"
         "$mainMod, down, movefocus, d"
@@ -185,12 +172,6 @@
         ",XF86AudioMute,exec, changevolume mute"
         ",XF86AudioRaiseVolume,exec, changevolume up"
         ",XF86AudioLowerVolume,exec, changevolume down"
-
-        #== Master Layout =================================================================================
-        "$mainMod SHIFT, H, resizeactive, 0 80"
-        "$mainMod, H, resizeactive, -100 0"
-        "$mainMod SHIFT, L, resizeactive, 0 -80"
-        "$mainMod, L, resizeactive, 100 0"
       ];
 
       bindm = [

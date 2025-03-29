@@ -1,39 +1,52 @@
 {
+  lib,
+  osConfig,
+  ...
+}: let
+  inherit (lib.lists) optionals;
+  inherit (osConfig.garden.programs) notes spotify;
+  inherit (osConfig.garden.environment.desktop.hyprland) layout;
+in {
   wayland.windowManager.hyprland.settings = {
-    exec-once = [
-      # System
-      "poweralertd &"
+    exec-once =
+      [
+        # System
+        "poweralertd &"
 
-      # Bar
-      "waybar &"
+        # Bar
+        "waybar &"
 
-      # Notifications
-      "swaync &"
+        # Notifications
+        "swaync &"
 
-      # Systray applets
-      "blueman-applet &"
+        # Systray applets
+        "blueman-applet &"
 
-      # Clipboard manager
-      "wl-paste --watch cliphist store &"
-      #"wl-clip-persist --clipboard both"
+        # Clipboard manager
+        "wl-paste --watch cliphist store &"
+        #"wl-clip-persist --clipboard both"
 
-      # Pyprland
-      "pypr &"
+        # Pyprland
+        "pypr &"
 
-      # Cursor
-      "hyprctl setcursor Bibata-Modern-Ice 24 &"
+        # Cursor
+        "hyprctl setcursor Bibata-Modern-Ice 24 &"
 
-      # Sprawn programs
-      "[workspace 5 silent] obsidian"
-      "[workspace special:music silent] spotify"
-
-      # Scripts
-      "hycov-easymotion &"
-      "toggleurgent &"
-      "groupbind-run &"
-      "selectwallpaper --last &"
-      #"windowstate &"
-      #"wallshift &"
-    ];
+        # Scripts
+        "hycov-easymotion &"
+        "toggleurgent &"
+        "selectwallpaper --last &"
+        #"windowstate &"
+        #"wallshift &"
+      ]
+      ++ optionals (layout == "master") [
+        "groupbind-run &"
+      ]
+      ++ optionals notes.enable [
+        "obsidian &"
+      ]
+      ++ optionals spotify.enable [
+        "[workspace special:music silent] spotify &"
+      ];
   };
 }

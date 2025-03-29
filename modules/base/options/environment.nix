@@ -48,6 +48,15 @@ in {
           default = [];
           description = "List of monitor configurations for Hyprland.";
         };
+
+        layout = mkOption {
+          type = enum [
+            "master"
+            "dwindle"
+          ];
+          default = "master";
+          description = "List of available layouts for Hyprland.";
+        };
       };
     };
 

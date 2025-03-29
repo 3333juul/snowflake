@@ -12,16 +12,6 @@
   cfg = osConfig.garden.environment.desktop;
   flake = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
 in {
-  imports = [
-    ./config/autostart.nix
-    ./config/animations.nix
-    ./config/keybindings.nix
-    ./config/look.nix
-    ./config/options.nix
-    ./config/plugins.nix
-    ./config/rules.nix
-  ];
-
   config = mkIf (cfg.type == "Hyprland") {
     home.packages = with pkgs;
       [
