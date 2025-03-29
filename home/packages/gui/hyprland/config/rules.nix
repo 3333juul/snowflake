@@ -5,8 +5,7 @@
       "noblur,class:(xdg-desktop-portal-gtk)"
 
       # Size
-      "size 75% 80%,class:(xdg-desktop-portal-gtk),title:(Open Files)"
-      "size 75% 80%,class:(xdg-desktop-portal-gtk),title:(All Files)"
+      "size 75% 80%,class:(xdg-desktop-portal-gtk)"
       "size 50% 55%,class:(pulsemixer)"
       "size 90% 80%,class:(floatingterm)"
       "size 90% 80%,class:(swayimg)"

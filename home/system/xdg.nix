@@ -31,6 +31,7 @@
       "application/json"
       "text/english"
       "text/plain"
+      "text/markdown"
       "text/x-makefile"
       "text/x-c++hdr"
       "text/x-c++src"

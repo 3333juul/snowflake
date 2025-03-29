@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  inherit (lib.modules) mkIf;
+  inherit (lib.lists) optionals;
   inherit (lib.options) mkOption mkEnableOption;
   inherit (lib.types) bool listOf str enum;
 
@@ -62,15 +62,15 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
-    # server can't be client and client be server
-    assertions = [
-      (mkIf (cfg.isClient == cfg.isServer) {
+  # server can't be client and client be server
+  config.assertions =
+    optionals (cfg.enable && (cfg.isClient == cfg.isServer))
+    [
+      {
         assertion = false;
         message = ''
           You have enabled both client and server features of the Tailscale service. Unless you are providing your own UpFlags, this is probably not what you want.
         '';
-      })
+      }
     ];
-  };
 }

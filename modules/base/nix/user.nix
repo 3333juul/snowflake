@@ -10,7 +10,7 @@ in {
   users.users.${mainUser} = {
     isNormalUser = true;
     description = "${mainUser}";
-    extraGroups = ["nix" "wheel" "networkmanager"];
+    extraGroups = ["nix" "wheel"];
     shell = pkgs.${cfg};
   };
 }

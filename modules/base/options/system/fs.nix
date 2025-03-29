@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  inherit (lib.modules) mkIf;
+  inherit (lib.lists) optionals;
   inherit (lib.options) mkOption;
   inherit (lib.types) listOf str;
 
@@ -25,7 +25,7 @@ in {
     };
   };
 
-  config.warnings = mkIf (cfg == []) [
+  config.warnings = optionals (cfg == []) [
     ''
       You have not set any filesystems in your configuration. This is not recommended
       as it may lead to a unusable system.
