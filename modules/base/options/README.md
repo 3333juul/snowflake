@@ -57,8 +57,10 @@ Example:
 
   config = lib.mkIf config.garden.programs.cli.enable {
     # Enable CLI tools only if the option is set to true
-    programs.bash.enable = true;
-    programs.zsh.enable = true;
+    programs = {
+      git.enable = true;
+      bat.enable = true;
+    };
   };
 }
 ```
@@ -79,7 +81,6 @@ Here’s how you might use these options in a host configuration:
     programs = {
       cli = {
         enable = true;
-        shell = "zsh";
       };
     };
   };

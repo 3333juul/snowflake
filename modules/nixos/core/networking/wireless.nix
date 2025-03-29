@@ -8,19 +8,6 @@
 
   inherit (config.garden.system.networking) wirelessBackend;
 in {
-  options.garden.system.networking.wirelessBackend = mkOption {
-    type = enum [
-      "iwd"
-      "wpa_supplicant"
-    ];
-    default = "wpa_supplicant";
-    description = ''
-      Backend that will be used for wireless connections using either `networking.wireless`
-      or `networking.networkmanager.wifi.backend`
-      Defaults to wpa_supplicant until iwd is stable.
-    '';
-  };
-
   config = {
     # enable wireless database, it helps keeping wifi speedy
     hardware.wirelessRegulatoryDatabase = true;
