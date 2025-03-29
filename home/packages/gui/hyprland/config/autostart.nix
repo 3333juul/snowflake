@@ -43,7 +43,7 @@ in {
         "groupbind-run &"
       ]
       ++ optionals notes.enable [
-        "obsidian &"
+        "[workspace 5 silent] obsidian &"
       ]
       ++ optionals spotify.enable [
         "[workspace special:music silent] spotify &"
