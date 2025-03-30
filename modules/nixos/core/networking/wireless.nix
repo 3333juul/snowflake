@@ -1,11 +1,4 @@
-{
-  lib,
-  config,
-  ...
-}: let
-  inherit (lib.options) mkOption;
-  inherit (lib.types) enum;
-
+{config, ...}: let
   inherit (config.garden.system.networking) wirelessBackend;
 in {
   config = {
