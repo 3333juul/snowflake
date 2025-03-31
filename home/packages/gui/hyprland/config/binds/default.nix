@@ -205,7 +205,6 @@ in {
       ''
       + optionalString (pkgs ? wl-kbptr)
       ''
-
         # Cursor submap (similar to the Mouse mode in Sway)
         submap=cursor
 
@@ -242,7 +241,6 @@ in {
         bind=$mainMod,o,exec,hyprctl dispatch submap cursor
       ''
       + optionalString (cfg.hyprland-easymotion.enable && cfg.hycov.enable) ''
-        #== Submaps ===========================================================================================
         # hycov-easymotion submap
         submap = __easymotionsubmap__
 

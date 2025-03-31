@@ -12,12 +12,13 @@
     ./terminal # terminals
     ./waybar # status bar
     ./anki.nix # flashcards
-    ./img-editor.nix
-    ./libreoffice.nix
+    ./img-editor.nix # image editor
+    ./libreoffice.nix # office apps
     ./mpv.nix # media player
-    ./notes.nix
-    ./reading.nix
-    ./shared.nix
+    ./notes.nix # note-taking apps
+    ./reading.nix # reading apps
+    ./shared.nix # shared gui packages
+    ./thunderbird.nix # mail
     ./vscodium.nix # editor
   ];
 }

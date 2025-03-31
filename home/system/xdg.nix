@@ -24,6 +24,7 @@
     pdf = ["org.gnome.Evince.desktop"];
     terminal = ["kitty.desktop"];
     archive = ["org.gnome.FileRoller.desktop"];
+    mail = ["thunderbird.desktop"];
   };
 
   mimeMap = {
@@ -105,6 +106,11 @@
       "application/rar"
       "application/7z"
       "application/*tar"
+    ];
+    mail = [
+      "x-scheme-handler/mailto"
+      "x-scheme-handler/mid"
+      "message/rfc822"
     ];
   };
 
