@@ -24,6 +24,16 @@
     "${homeDir}/projects"
     "${homeDir}/syncthing"
   ];
+
+  # https://github.com/NixOS/nixpkgs/issues/196547
+  waitForNetwork = ''
+    while ! /run/current-system/sw/bin/ping -c 1 1.0.0.1; do
+      echo "Waiting for internet connection..."
+      sleep 60
+    done
+
+    echo "Internet is up, backup starting."
+  '';
 in {
   config = mkIf cfg.enable {
     age.secrets = {
@@ -34,6 +44,11 @@ in {
       };
     };
 
+    # update the progress once per minute.
+    environment.variables = {
+      RESTIC_PROGRESS_FPS = 0.016666;
+    };
+
     # for cli, use: restic-<name> <cmd>, e.g., restic-onedrive snapshots.
     # only enable these backups that are defined in `garden.services.restic.backups`.
     services.restic.backups = filterEnabled cfg.backups {
@@ -42,6 +57,7 @@ in {
         repository = "rclone:onedrive:Restic/${config.networking.hostName}";
         passwordFile = config.age.secrets.restic-password.path;
         rcloneConfigFile = config.age.secrets.rclone.path;
+        backupPrepareCommand = waitForNetwork;
 
         paths =
           [
@@ -56,7 +72,10 @@ in {
           "--keep-monthly 12"
         ];
 
-        timerConfig = null;
+        timerConfig = {
+          OnCalendar = "daily";
+          Persistent = true;
+        };
       };
 
       local = {
