@@ -1,11 +1,11 @@
 {
   config,
-  pkgs,
   lib,
+  pkgs,
   ...
 }: let
-  inherit (lib.modules) mkIf mkMerge;
-  inherit (lib.attrsets) mapAttrs' nameValuePair;
+  inherit (lib.modules) mkIf;
+  inherit (lib.services) mkResticNotify;
   inherit (lib.secrets) mkSecret;
   inherit (lib.helpers) filterEnabled;
   inherit (config.garden.system) mainUser;
@@ -46,7 +46,7 @@ in {
 
     # update the progress once per minute.
     environment.variables = {
-      RESTIC_PROGRESS_FPS = 0.016666;
+      RESTIC_PROGRESS_FPS = "0.016666";
     };
 
     # for cli, use: restic-<name> <cmd>, e.g., restic-onedrive snapshots.
@@ -103,36 +103,11 @@ in {
     # generate systemd services for each enabled backup defined in `services.restic.backups`.
     # if a backup fails, a desktop notification will be sent, displaying the last 5 lines of the backup log from the journal.
     # inspo: https://www.arthurkoziel.com/restic-backups-b2-nixos/
-    systemd.services = let
-      # create a notification service for a given backup
-      mkNotifyService = name:
-        nameValuePair "notify-backup-failed-${name}" {
-          enable = true;
-          description = "Notify on failed backup for ${name}";
-          serviceConfig = {
-            Type = "oneshot";
-            User = mainUser;
-          };
-
-          # required for notify-send to work
-          environment.DBUS_SESSION_BUS_ADDRESS = "unix:path=/run/user/1000/bus";
-
-          script = ''
-            ${pkgs.libnotify}/bin/notify-send --urgency=critical \
-              "Backup failed for ${name}" \
-              "$(journalctl -u restic-backups-${name} -n 5 -o cat)"
-          '';
-        };
-
-      # link a backup service to its notification service
-      mkOnFailureLink = name:
-        nameValuePair "restic-backups-${name}" {
-          unitConfig.OnFailure = "notify-backup-failed-${name}.service";
-        };
-    in
-      mkIf (device.type != "server") (mkMerge [
-        (mapAttrs' (name: _: mkNotifyService name) config.services.restic.backups)
-        (mapAttrs' (name: _: mkOnFailureLink name) config.services.restic.backups)
-      ]);
+    systemd.services =
+      mkIf (device.type != "server")
+      (mkResticNotify pkgs {
+        inherit (config.services.restic) backups;
+        user = mainUser;
+      });
   };
 }

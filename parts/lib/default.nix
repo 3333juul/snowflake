@@ -12,10 +12,13 @@
       hardware = import ./hardware.nix;
       helpers = import ./helpers.nix {inherit lib;};
       secrets = import ./secrets.nix {inherit inputs;};
+      services = import ./services.nix {inherit lib;};
 
       inherit (self.builders) mkHosts;
       inherit (self.hardware) isx86Linux ldTernary primaryMonitor monitor;
       inherit (self.helpers) filterEnabled;
+      inherit (self.secrets) mkSecret mkSecretWithPath;
+      inherit (self.services) mkResticNotify;
     }
   );
 
