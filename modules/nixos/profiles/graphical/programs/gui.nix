@@ -6,8 +6,9 @@
     # gnome's keyring manager
     #seahorse.enable = true;
 
-    # networkmanager tray uility, pretty useful actually
-    nm-applet.enable = config.programs.waybar.enable;
+    # networkmanager tray uility
+    # doesn't spawn for some reason, so i added it to hyprland autostart
+    # nm-applet.enable = config.programs.waybar.enable;
   };
 
   # some programs do not apply themes when qt is managed solely through home-manager.

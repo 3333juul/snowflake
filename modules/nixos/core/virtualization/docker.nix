@@ -6,6 +6,7 @@
 }: let
   inherit (lib.lists) optionals;
   inherit (lib.modules) mkIf;
+  inherit (config.garden.system) mainUser;
 
   sys = config.garden.system;
   cfg = sys.virtualization;
@@ -30,5 +31,8 @@ in {
         dates = "weekly";
       };
     };
+
+    # Add user to libvirtd groups
+    users.users.${mainUser}.extraGroups = ["docker" "podman"];
   };
 }

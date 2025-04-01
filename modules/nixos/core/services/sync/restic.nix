@@ -49,7 +49,7 @@ in {
       RESTIC_PROGRESS_FPS = "0.016666";
     };
 
-    # for cli, use: restic-<name> <cmd>, e.g., restic-onedrive snapshots.
+    # for cli, use: sudo restic-<name> <cmd>, e.g., sudo restic-onedrive snapshots.
     # only enable these backups that are defined in `garden.services.restic.backups`.
     services.restic.backups = filterEnabled cfg.backups {
       onedrive = {

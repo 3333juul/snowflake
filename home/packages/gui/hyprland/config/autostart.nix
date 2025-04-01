@@ -21,6 +21,7 @@ in {
 
         # Systray applets
         "blueman-applet &"
+        "nm-applet &"
 
         # Clipboard manager
         "wl-paste --watch cliphist store &"
