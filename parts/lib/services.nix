@@ -2,10 +2,14 @@
   inherit (lib.modules) mkMerge;
   inherit (lib.attrsets) mapAttrs' nameValuePair;
 
+  # generate systemd services for each enabled backup defined in `services.restic.backups`.
+  # if a backup fails, a desktop notification will be sent, displaying the last 5 lines of the backup log from the journal.
+  # inspo: https://www.arthurkoziel.com/restic-backups-b2-nixos/
   mkResticNotify = pkgs: {
     backups,
     user,
   }: let
+    # create a notification service for a given backup
     mkNotifyService = name:
       nameValuePair "notify-backup-failed-${name}" {
         enable = true;
@@ -15,6 +19,7 @@
           User = user;
         };
 
+        # required for notify-send to work
         environment.DBUS_SESSION_BUS_ADDRESS = "unix:path=/run/user/1000/bus";
 
         script = ''
@@ -24,6 +29,7 @@
         '';
       };
 
+    # link a backup service to its notification service
     mkOnFailureLink = name:
       nameValuePair "restic-backups-${name}" {
         unitConfig.OnFailure = "notify-backup-failed-${name}.service";
