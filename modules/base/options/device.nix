@@ -1,5 +1,5 @@
 {lib, ...}: let
-  inherit (lib) mkOption;
+  inherit (lib.options) mkOption;
   inherit (lib.types) listOf str nullOr enum bool;
 in {
   options.garden.device = {

@@ -5,6 +5,7 @@
   ...
 }: let
   inherit (lib.lists) optionals concatLists;
+  inherit (lib.validators) hasProfile;
 
   cfg = osConfig.garden.programs;
 in {
@@ -30,7 +31,7 @@ in {
         nvd
       ])
 
-      (optionals (cfg.cli.enable && cfg.gui.enable) [
+      (optionals (cfg.cli.enable && hasProfile osConfig ["graphical"]) [
         brightnessctl # brightness managed via cli
         cliphist # clipboard manager
         ffmpeg
@@ -57,4 +58,3 @@ in {
       ])
     ];
 }
-

@@ -8,9 +8,9 @@
   inherit (lib.services) mkResticNotify;
   inherit (lib.secrets) mkSecret;
   inherit (lib.helpers) filterEnabled;
+  inherit (lib.validators) hasProfile;
   inherit (config.garden.system) mainUser;
   inherit (config.garden.environment) flakePath;
-  inherit (config.garden) device;
 
   homeDir = config.users.users.${mainUser}.home;
   cfg = config.garden.services.restic;
@@ -104,7 +104,7 @@ in {
     # if a backup fails, a desktop notification will be sent, displaying the last 5 lines of the backup log from the journal.
     # inspo: https://www.arthurkoziel.com/restic-backups-b2-nixos/
     systemd.services =
-      mkIf (device.type != "server")
+      mkIf (hasProfile config ["graphical"])
       (mkResticNotify pkgs {
         inherit (config.services.restic) backups;
         user = mainUser;
