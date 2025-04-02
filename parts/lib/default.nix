@@ -5,9 +5,7 @@
   originLib = inputs.nixpkgs.lib;
 
   extLib = originLib.makeExtensible (
-    self: let
-      lib = self;
-    in {
+    lib: {
       builders = import ./builders.nix {inherit inputs lib;};
       hardware = import ./hardware.nix;
       helpers = import ./helpers.nix {inherit lib;};
@@ -15,12 +13,12 @@
       services = import ./services.nix {inherit lib;};
       validators = import ./validators.nix {inherit lib;};
 
-      inherit (self.builders) mkHosts;
-      inherit (self.hardware) isx86Linux ldTernary primaryMonitor monitor;
-      inherit (self.helpers) filterEnabled;
-      inherit (self.secrets) mkSecret mkSecretWithPath;
-      inherit (self.services) mkResticNotify;
-      inherit (self.validators) hasProfile;
+      inherit (lib.builders) mkHosts;
+      inherit (lib.hardware) isx86Linux ldTernary primaryMonitor monitor;
+      inherit (lib.helpers) filterEnabled;
+      inherit (lib.secrets) mkSecret mkSecretWithPath;
+      inherit (lib.services) mkResticNotify;
+      inherit (lib.validators) hasProfile;
     }
   );
 
