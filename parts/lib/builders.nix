@@ -4,10 +4,8 @@
   ...
 }: let
   inherit (inputs) self;
-  inherit (lib.options) mkOption;
   inherit (lib.attrsets) mapAttrs filterAttrs;
   inherit (lib.lists) optionals concatLists;
-  inherit (lib.types) listOf str;
   inherit (lib) nixosSystem;
   inherit (inputs.nix-darwin.lib) darwinSystem;
   inherit (builtins) elem;
@@ -66,14 +64,8 @@
           {networking.hostName = host;}
           # set system
           {nixpkgs.hostPlatform = system;}
-
-          # add profiles as module options
-          {
-            options.garden.device.profiles = mkOption {
-              type = listOf str;
-              default = profiles;
-            };
-          }
+          # set profiles in the module system
+          {garden.device.profiles = profiles;}
         ]
       ];
     };

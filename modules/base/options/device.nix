@@ -18,6 +18,24 @@ in {
       default = null;
     };
 
+    profiles = mkOption {
+      type = listOf (enum [
+        # physical
+        "laptop"
+        "desktop"
+        "server"
+        "wsl"
+        "vm"
+
+        # meta
+        "graphical"
+        "headless"
+        "iso"
+      ]);
+
+      default = [];
+    };
+
     gpu = mkOption {
       type = nullOr (
         enum [
