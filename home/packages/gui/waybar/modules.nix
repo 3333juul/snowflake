@@ -172,7 +172,7 @@
     format-icons = {
       default = "";
     };
-    exec = "$HOME/.config/waybar/scripts/todoist.py";
+    exec = "todoist-waybar";
     return-type = "json";
   };
 

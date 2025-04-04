@@ -50,4 +50,5 @@ let
 in {
   "restic/password.age" = allAccess (types.workstations ++ types.servers);
   "rclone.age" = allAccess (types.workstations ++ types.servers);
+  "todoist.age" = allAccess types.workstations;
 }

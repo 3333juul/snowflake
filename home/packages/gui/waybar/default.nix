@@ -12,6 +12,8 @@
 
   modules = import ./modules.nix;
 in {
+  imports = [./scripts];
+
   config = mkIf (cfg == "Hyprland") {
     programs.waybar = {
       enable = true;
@@ -35,7 +37,7 @@ in {
               "mpris"
               (mkIf (type == "laptop") "battery")
               "custom/colorpicker"
-              #"custom/todoist"
+              "custom/todoist"
               "cpu"
               "memory"
               "temperature"
