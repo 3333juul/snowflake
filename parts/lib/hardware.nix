@@ -102,7 +102,7 @@ let
   => null
   ```
   */
-  monitor = index: config:
+  monitor = config: index:
     if builtins.length config.garden.device.monitors > index
     then builtins.elemAt config.garden.device.monitors index
     else null;
