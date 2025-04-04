@@ -18,6 +18,7 @@
   baseBackup = [
     flakePath
     "${homeDir}/documents"
+    "${homeDir}/media/memes"
     "${homeDir}/media/music"
     "${homeDir}/media/pictures"
     "${homeDir}/media/videos"
