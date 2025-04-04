@@ -32,8 +32,12 @@ in {
         "headless"
         "iso"
       ]);
-
       default = [];
+      description = ''
+        Profiles for different system types.
+        They're declared in `hosts/default.nix`
+        and automatically added to the module system by the `lib.builders.mkHost' function
+      '';
     };
 
     gpu = mkOption {
@@ -82,7 +86,7 @@ in {
 
     hasTouchscreen = mkOption {
       type = bool;
-      default = true;
+      default = false;
       description = "Whether the system has touchscreen support";
     };
 
