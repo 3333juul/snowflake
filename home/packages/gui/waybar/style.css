@@ -268,30 +268,9 @@ label:focus {
     padding: 0 6px;
 }
 
-#custom-windowstate {
-    color: #ebdbb2;
-    background-color: rgba(73, 93, 89, 1);
-    padding: 0 8px;
-    border: 1px solid #a89984;
-}
-
-#custom-spotify {
-    padding: 0 6px;
-}
-
 #window {
     margin: 0 2px;
     padding-right: 230px;
-}
-
-#custom-pacman {
-    margin: 0 0px;
-    padding: 0 6px;
-}
-
-#custom-pacman.pending-updates {
-    margin: 0 0px;
-    padding: 0 6px;
 }
 
 #custom-windowstate_1 {
