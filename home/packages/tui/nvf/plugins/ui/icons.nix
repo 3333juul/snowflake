@@ -1,5 +1,5 @@
 {
   programs.nvf.settings.vim.visuals = {
-    nvimWebDevicons.enable = true;
+    nvim-web-devicons.enable = true;
   };
 }
