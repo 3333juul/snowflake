@@ -35,7 +35,7 @@ in {
       default = [];
       description = ''
         Profiles for different system types.
-        They're declared in `hosts/default.nix`
+        They're declared in the `hosts/default.nix`
         and automatically added to the module system by the `lib.builders.mkHost` function
       '';
     };

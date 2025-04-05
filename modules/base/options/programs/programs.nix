@@ -16,6 +16,7 @@ in {
     git.enable = mkEnableOption "enable git";
     starship.enable = mkEnableOption "enable starship";
     notes.enable = mkEnableOption "enable notes";
+    astal.enable = mkEnableOption "enable astal";
 
     waybar.enable =
       mkEnableOption "enables waybar"
