@@ -52,9 +52,19 @@
     #   inputs.hyprland.follows = "hyprland";
     # };
 
-    hyprgrass = {
-      url = "github:horriblename/hyprgrass";
-      inputs.hyprland.follows = "hyprland";
-    };
+    # hyprgrass = {
+    #   url = "github:horriblename/hyprgrass";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
+    #
+    # astal = {
+    #   url = "github:aylur/astal";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    #
+    # ags = {
+    #   url = "github:aylur/ags";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 }

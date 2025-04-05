@@ -1,6 +1,6 @@
 {
   imports = [
-    #./ags # widgets
+    ./ags # widgets
     ./browser # browsers
     ./discord # discord
     ./gaming # gaming
