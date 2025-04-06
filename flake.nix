@@ -66,5 +66,9 @@
     #   url = "github:aylur/ags";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
+
+    private-repo = {
+      url = "git+ssh://git@github.com/3333juul/website.git";
+    };
   };
 }

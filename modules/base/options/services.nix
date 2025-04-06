@@ -4,6 +4,8 @@
 in {
   options.garden.services = {
     enable = mkEnableOption "enable services";
+    private.enable = mkEnableOption "enable private services";
+
     glance.enable = mkEnableOption "enable glance";
     minecraftServer.enable = mkEnableOption "enable minecraft server";
     rclone.enable = mkEnableOption "enable rclone";
