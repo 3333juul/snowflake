@@ -1,8 +1,13 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
+  cfg = config.garden.services.tt-rss;
+
   # fix theme: https://github.com/levito/tt-rss-feedly-theme/issues/122
   themeFeedly = pkgs.tt-rss-theme-feedly.overrideAttrs {
     src = pkgs.fetchFromGitHub {
@@ -13,27 +18,29 @@
     };
   };
 in {
-  services.tt-rss = {
-    enable = true;
-    selfUrlPath = "http://localhost";
-    virtualHost = "tt-rss";
-    themePackages = [themeFeedly];
+  config = mkIf cfg.enable {
+    services.tt-rss = {
+      enable = true;
+      selfUrlPath = "http://localhost";
+      virtualHost = "tt-rss";
+      themePackages = [themeFeedly];
 
-    database = {
-      type = "pgsql";
+      database = {
+        type = "pgsql";
+      };
     };
-  };
 
-  services.nginx = {
-    enable = true;
+    services.nginx = {
+      enable = true;
 
-    virtualHosts."${config.services.tt-rss.virtualHost}" = {
-      listen = [
-        {
-          port = 4124;
-          addr = "0.0.0.0";
-        }
-      ];
+      virtualHosts."${config.services.tt-rss.virtualHost}" = {
+        listen = [
+          {
+            port = 4124;
+            addr = "0.0.0.0";
+          }
+        ];
+      };
     };
   };
 }

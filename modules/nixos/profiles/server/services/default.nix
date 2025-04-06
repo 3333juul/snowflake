@@ -1,8 +1,8 @@
 {
   imports = [
-    # ./freshrss.nix
-    # ./mc-server
-    # ./memos.nix
+    ./freshrss.nix
+    ./mc-server.nix
+    ./memos.nix
     ./tt-rss.nix
   ];
 }

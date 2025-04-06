@@ -7,6 +7,8 @@ in {
     glance.enable = mkEnableOption "enable glance";
     minecraftServer.enable = mkEnableOption "enable minecraft server";
     rclone.enable = mkEnableOption "enable rclone";
+    memos.enable = mkEnableOption "enable memos";
+    tt-rss.enable = mkEnableOption "enable tt-rss";
 
     syncthing = {
       enable = mkEnableOption "enable syncthing";
