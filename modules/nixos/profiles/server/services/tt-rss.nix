@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  config,
+  ...
+}: let
   # fix theme: https://github.com/levito/tt-rss-feedly-theme/issues/122
   themeFeedly = pkgs.tt-rss-theme-feedly.overrideAttrs {
     src = pkgs.fetchFromGitHub {
@@ -23,7 +27,7 @@ in {
   services.nginx = {
     enable = true;
 
-    virtualHosts."tt-rss" = {
+    virtualHosts."${config.services.tt-rss.virtualHost}" = {
       listen = [
         {
           port = 4124;
