@@ -21,8 +21,8 @@ in
     src = fetchFromGitHub {
       owner = "moverest";
       repo = "wl-kbptr";
-      tag = "v${version}";
-      hash = "sha256-T7vxD5FW6Hjqc6io7Hypr6iJRM32KggQVMOGsy2Lg4Q=";
+      tag = "0c67f640028fe0ded8d0460f69285bc1f34ff86e";
+      hash = "sha256-KhQGcaoAiuSBJmcIajbqtuiECHRQXZ0eYPMna6BV3Pw=";
     };
 
     depsBuildBuild = [pkg-config];
