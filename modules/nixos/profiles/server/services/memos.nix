@@ -52,11 +52,14 @@ in {
       };
     };
 
-    users.users.${user} = {
-      isSystemUser = true;
-      home = dataDir;
-      inherit group;
+    users = {
+      users.${user} = {
+        isSystemUser = true;
+        home = dataDir;
+        inherit group;
+      };
+
+      groups.${group} = {};
     };
-    users.groups.${group} = {};
   };
 }
