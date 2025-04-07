@@ -5,7 +5,7 @@
   ...
 }: let
   inherit (lib.hardware) ldTernary;
-  inherit (lib.options) mkOption;
+  inherit (lib.options) mkOption mkEnableOption;
   inherit (lib.types) nullOr enum bool listOf str;
 
   sys = config.garden.system;
@@ -56,6 +56,13 @@ in {
           ];
           default = "master";
           description = "List of available layouts for Hyprland.";
+        };
+
+        plugins = {
+          hycov.enable = mkEnableOption {} // {default = false;};
+          hyprNStack.enable = mkEnableOption {} // {default = false;};
+          hyprgrass.enable = mkEnableOption {} // {default = false;};
+          hyprland-easymotion.enable = mkEnableOption {} // {default = false;};
         };
       };
     };
