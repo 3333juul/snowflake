@@ -20,5 +20,6 @@
     ./shared.nix # shared gui packages
     ./thunderbird.nix # mail
     ./vscodium.nix # editor
+    ./wl-kbptr.nix # vimium for the entire desktop
   ];
 }
