@@ -18,10 +18,9 @@ in {
         grimblast
         hyprpicker
         swappy
-        wl-kbptr
-        wlrctl
         #wl-clip-persist
       ]
+      # FIXME:
       ++ optionals hasTouchscreen [iio-hyprland];
 
     wayland.windowManager.hyprland = {

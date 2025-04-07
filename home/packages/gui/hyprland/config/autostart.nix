@@ -5,7 +5,7 @@
 }: let
   inherit (lib.lists) optionals;
   inherit (osConfig.garden.programs) notes spotify;
-  inherit (osConfig.garden.environment.desktop.hyprland) layout;
+  inherit (osConfig.garden.environment.desktop.hyprland) layout plugins;
 in {
   wayland.windowManager.hyprland.settings = {
     exec-once =
@@ -34,20 +34,22 @@ in {
         "hyprctl setcursor Bibata-Modern-Ice 24 &"
 
         # Scripts
-        "hycov-easymotion &"
         "toggleurgent &"
         "selectwallpaper --last &"
         #"windowstate &"
         #"wallshift &"
-      ]
-      ++ optionals (layout == "master") [
-        "groupbind-run &"
       ]
       ++ optionals notes.enable [
         "[workspace 5 silent] obsidian &"
       ]
       ++ optionals spotify.enable [
         "[workspace special:music silent] spotify &"
+      ]
+      ++ optionals (layout == "master") [
+        "groupbind-run &"
+      ]
+      ++ optionals (plugins.hycov.enable && plugins.hyprland-easymotion.enable) [
+        "hycov-easymotion &"
       ];
   };
 }
