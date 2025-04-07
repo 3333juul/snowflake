@@ -11,6 +11,7 @@ in {
     rclone.enable = mkEnableOption "enable rclone";
     memos.enable = mkEnableOption "enable memos";
     tt-rss.enable = mkEnableOption "enable tt-rss";
+    rss-bridge.enable = mkEnableOption "enable rss-bridge";
 
     syncthing = {
       enable = mkEnableOption "enable syncthing";
