@@ -6,7 +6,6 @@
       lspsaga.enable = false;
       trouble.enable = false;
       lspSignature.enable = false;
-      lsplines.enable = false;
       lspconfig.enable = true;
     };
 

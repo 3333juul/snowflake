@@ -12,7 +12,7 @@
 
       bash.enable = true;
       lua.enable = true;
-      python.enable = true;
+      python.enable = false;
       css.enable = true;
 
       nix = {
