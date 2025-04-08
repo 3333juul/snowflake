@@ -1,5 +1,4 @@
 {
-  pkgs,
   osConfig,
   lib,
   inputs,
@@ -9,10 +8,11 @@
 
   cfg = osConfig.garden.programs.gui;
 in {
+  imports = [inputs.zen-browser.homeModules.beta];
+
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      #floorp
-      inputs.zen-browser.packages."${system}".default
-    ];
+    programs.zen-browser = {
+      enable = true;
+    };
   };
 }

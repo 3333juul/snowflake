@@ -9,7 +9,6 @@
     agenix.url = "github:ryantm/agenix";
     hyprland.url = "github:hyprwm/hyprland";
     nvf.url = "github:notashelf/nvf";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     flake-parts = {
@@ -40,6 +39,11 @@
     gruvbox-kvantum-themes = {
       url = "github:sachnr/gruvbox-kvantum-themes";
       flake = false;
+    };
+
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # hyprland-easymotion = {
