@@ -35,10 +35,10 @@
   addBackupPaths = config: backups: paths: let
     names =
       if builtins.elem "*" backups
-      then lib.attrNames config.services.restic.backups
+      then config.garden.services.restic.backups
       else backups;
   in
-    lib.listToAttrs (map (name: {
+    builtins.listToAttrs (map (name: {
         inherit name;
         value = {inherit paths;};
       })
