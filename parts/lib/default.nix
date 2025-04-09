@@ -17,7 +17,7 @@
       inherit (lib.hardware) isx86Linux ldTernary primaryMonitor monitor;
       inherit (lib.helpers) filterEnabled;
       inherit (lib.secrets) mkSecret mkSecretWithPath;
-      inherit (lib.services) mkResticNotify;
+      inherit (lib.services) mkResticNotify addBackupPaths;
       inherit (lib.validators) hasProfile;
     }
   );

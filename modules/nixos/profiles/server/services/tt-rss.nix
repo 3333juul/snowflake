@@ -19,27 +19,29 @@
   };
 in {
   config = mkIf cfg.enable {
-    services.tt-rss = {
-      enable = true;
-      selfUrlPath = "http://localhost";
-      virtualHost = "tt-rss";
-      themePackages = [themeFeedly];
+    services = {
+      tt-rss = {
+        enable = true;
+        selfUrlPath = "http://localhost";
+        virtualHost = "tt-rss";
+        themePackages = [themeFeedly];
 
-      database = {
-        type = "pgsql";
+        database = {
+          type = "pgsql";
+        };
       };
-    };
 
-    services.nginx = {
-      enable = true;
+      nginx = {
+        enable = true;
 
-      virtualHosts."${config.services.tt-rss.virtualHost}" = {
-        listen = [
-          {
-            port = 4124;
-            addr = "0.0.0.0";
-          }
-        ];
+        virtualHosts."${config.services.tt-rss.virtualHost}" = {
+          listen = [
+            {
+              port = 4124;
+              addr = "0.0.0.0";
+            }
+          ];
+        };
       };
     };
   };

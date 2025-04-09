@@ -6,6 +6,7 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
+  inherit (lib.helpers) addBackupPaths;
 
   user = "memos";
   group = "memos";
@@ -61,5 +62,7 @@ in {
 
       groups.${group} = {};
     };
+
+    services.restic.backups = addBackupPaths config ["*"] [dataDir];
   };
 }

@@ -31,8 +31,21 @@
   ```
   */
   filterEnabled = keys: attrs: filterAttrs (name: _: builtins.elem name keys) attrs;
+
+  addBackupPaths = config: backups: paths: let
+    names =
+      if builtins.elem "*" backups
+      then lib.attrNames config.services.restic.backups
+      else backups;
+  in
+    lib.listToAttrs (map (name: {
+        inherit name;
+        value = {inherit paths;};
+      })
+      names);
 in {
   inherit
     filterEnabled
+    addBackupPaths
     ;
 }

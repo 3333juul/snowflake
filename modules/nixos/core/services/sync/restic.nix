@@ -36,17 +36,11 @@ in {
         rcloneConfigFile = secrets.rclone.path;
         backupPrepareCommand = waitForNetwork;
 
-        paths = concatLists [
-          (optionals (hasProfile config ["desktop" "laptop"])
-            [
-              "${homeDir}/backups/cloud"
-              "${homeDir}/backups/hybrid"
-            ]
-            ++ cfg.basePaths)
-
-          (optionals (hasProfile config ["server"])
-            cfg.serverPaths)
-        ];
+        paths = optionals (hasProfile config ["desktop" "laptop"]) ([
+            "${homeDir}/backups/cloud"
+            "${homeDir}/backups/hybrid"
+          ]
+          ++ cfg.basePaths);
 
         pruneOpts = cfg.defPruneOpts;
 
@@ -61,12 +55,11 @@ in {
         repository = "/run/media/${mainUser}/drive/restic";
         passwordFile = secrets.restic-password.path;
 
-        paths =
-          [
+        paths = optionals (hasProfile config ["desktop" "laptop"]) ([
             "${homeDir}/backups/local"
             "${homeDir}/backups/hybrid"
           ]
-          ++ cfg.basePaths;
+          ++ cfg.basePaths);
 
         pruneOpts = cfg.defPruneOpts;
         timerConfig = null;
@@ -77,12 +70,11 @@ in {
         repository = "/mnt/data-hdd/restic";
         passwordFile = secrets.restic-password.path;
 
-        paths =
-          [
+        paths = optionals (hasProfile config ["desktop" "laptop"]) ([
             "${homeDir}/backups/local"
             "${homeDir}/backups/hybrid"
           ]
-          ++ cfg.basePaths;
+          ++ cfg.basePaths);
 
         pruneOpts = cfg.defPruneOpts;
 
