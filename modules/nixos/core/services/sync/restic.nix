@@ -43,7 +43,7 @@ in {
           ]
           ++ cfg.basePaths);
 
-        # NOTE: pruneOpts module don't distinguish between hosts, so it's better to keep repositories per host to avoid data loss.
+        # NOTE: pruneOpts module doesn't distinguish between hosts, so it's better to keep repositories per host to avoid data loss.
         # alternative: implement a custom function for this yourself.
         pruneOpts = cfg.defPruneOpts;
 
