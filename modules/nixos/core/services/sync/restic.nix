@@ -5,12 +5,13 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-  inherit (lib.lists) optionals concatLists;
+  inherit (lib.lists) optionals;
   inherit (lib.services) mkResticNotify;
   inherit (lib.helpers) filterEnabled;
   inherit (lib.validators) hasProfile;
   inherit (config.age) secrets;
   inherit (config.garden.system) mainUser;
+  inherit (config.networking) hostName;
 
   homeDir = config.users.users.${mainUser}.home;
   cfg = config.garden.services.restic;
@@ -31,7 +32,7 @@ in {
     services.restic.backups = filterEnabled cfg.backups {
       onedrive = {
         initialize = true;
-        repository = "rclone:onedrive:Restic/${config.networking.hostName}";
+        repository = "rclone:onedrive:Restic/${hostName}";
         passwordFile = secrets.restic-password.path;
         rcloneConfigFile = secrets.rclone.path;
         backupPrepareCommand = waitForNetwork;
@@ -42,6 +43,8 @@ in {
           ]
           ++ cfg.basePaths);
 
+        # NOTE: pruneOpts module don't distinguish between hosts, so it's better to keep repositories per host to avoid data loss.
+        # alternative: implement a custom function for this yourself.
         pruneOpts = cfg.defPruneOpts;
 
         timerConfig = {
@@ -52,7 +55,7 @@ in {
 
       local-external = {
         initialize = true;
-        repository = "/run/media/${mainUser}/drive/restic";
+        repository = "/run/media/${mainUser}/drive/restic/${hostName}";
         passwordFile = secrets.restic-password.path;
 
         paths = optionals (hasProfile config ["desktop" "laptop"]) ([
@@ -67,7 +70,7 @@ in {
 
       local-internal = {
         initialize = true;
-        repository = "/mnt/data-hdd/restic";
+        repository = "/mnt/data-hdd/restic/${hostName}}";
         passwordFile = secrets.restic-password.path;
 
         paths = optionals (hasProfile config ["desktop" "laptop"]) ([
