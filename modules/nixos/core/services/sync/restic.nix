@@ -5,26 +5,15 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
+  inherit (lib.lists) optionals concatLists;
   inherit (lib.services) mkResticNotify;
-  inherit (lib.secrets) mkSecret;
   inherit (lib.helpers) filterEnabled;
   inherit (lib.validators) hasProfile;
+  inherit (config.age) secrets;
   inherit (config.garden.system) mainUser;
-  inherit (config.garden.environment) flakePath;
 
   homeDir = config.users.users.${mainUser}.home;
   cfg = config.garden.services.restic;
-
-  baseBackup = [
-    flakePath
-    "${homeDir}/documents"
-    "${homeDir}/media/memes"
-    "${homeDir}/media/music"
-    "${homeDir}/media/pictures"
-    "${homeDir}/media/videos"
-    "${homeDir}/projects"
-    "${homeDir}/syncthing"
-  ];
 
   # https://github.com/NixOS/nixpkgs/issues/196547
   waitForNetwork = ''
@@ -37,41 +26,29 @@
   '';
 in {
   config = mkIf cfg.enable {
-    age.secrets = {
-      restic-password = mkSecret {
-        file = "restic/password";
-        owner = mainUser;
-        group = "users";
-      };
-    };
-
-    # update the progress once per minute.
-    environment.variables = {
-      RESTIC_PROGRESS_FPS = "0.016666";
-    };
-
     # for cli, use: sudo restic-<name> <cmd>, e.g., sudo restic-onedrive snapshots.
     # only enable these backups that are defined in `garden.services.restic.backups`.
     services.restic.backups = filterEnabled cfg.backups {
       onedrive = {
         initialize = true;
         repository = "rclone:onedrive:Restic/${config.networking.hostName}";
-        passwordFile = config.age.secrets.restic-password.path;
-        rcloneConfigFile = config.age.secrets.rclone.path;
+        passwordFile = secrets.restic-password.path;
+        rcloneConfigFile = secrets.rclone.path;
         backupPrepareCommand = waitForNetwork;
 
-        paths =
-          [
-            "${homeDir}/backups/cloud"
-            "${homeDir}/backups/hybrid"
-          ]
-          ++ baseBackup;
+        paths = concatLists [
+          (optionals (hasProfile config ["desktop" "laptop"])
+            [
+              "${homeDir}/backups/cloud"
+              "${homeDir}/backups/hybrid"
+            ]
+            ++ cfg.basePaths)
 
-        pruneOpts = [
-          "--keep-daily 7"
-          "--keep-weekly 5"
-          "--keep-monthly 12"
+          (optionals (hasProfile config ["server"])
+            cfg.serverPaths)
         ];
+
+        pruneOpts = cfg.defPruneOpts;
 
         timerConfig = {
           OnCalendar = "daily";
@@ -79,26 +56,46 @@ in {
         };
       };
 
-      local = {
+      local-external = {
         initialize = true;
-        repository = "/mnt/drive/restic/${config.networking.hostName}";
-        passwordFile = config.age.secrets.restic-password.path;
+        repository = "/run/media/${mainUser}/drive/restic";
+        passwordFile = secrets.restic-password.path;
 
         paths =
           [
             "${homeDir}/backups/local"
             "${homeDir}/backups/hybrid"
           ]
-          ++ baseBackup;
+          ++ cfg.basePaths;
 
-        pruneOpts = [
-          "--keep-daily 7"
-          "--keep-weekly 5"
-          "--keep-monthly 12"
-        ];
-
+        pruneOpts = cfg.defPruneOpts;
         timerConfig = null;
       };
+
+      local-internal = {
+        initialize = true;
+        repository = "/mnt/data-hdd/restic";
+        passwordFile = secrets.restic-password.path;
+
+        paths =
+          [
+            "${homeDir}/backups/local"
+            "${homeDir}/backups/hybrid"
+          ]
+          ++ cfg.basePaths;
+
+        pruneOpts = cfg.defPruneOpts;
+
+        timerConfig = {
+          OnCalendar = "daily";
+          Persistent = true;
+        };
+      };
+    };
+
+    # update the progress once per minute.
+    environment.variables = {
+      RESTIC_PROGRESS_FPS = "0.016666";
     };
 
     # generate systemd services for each enabled backup defined in `services.restic.backups`.

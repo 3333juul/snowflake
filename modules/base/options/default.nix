@@ -1,11 +1,11 @@
 {
   imports = [
     ./programs
+    ./services
     ./style
     ./system
     ./device.nix
     ./environment.nix
-    ./services.nix
     ./users.nix
   ];
 }
