@@ -7,6 +7,7 @@
   inherit (lib.types) listOf str;
   inherit (config.garden.system) mainUser;
   inherit (config.garden.environment) flakePath;
+  inherit (config.garden.services) restic;
 
   homeDir = config.users.users.${mainUser}.home;
 in {
@@ -70,4 +71,14 @@ in {
       indicator.enable = mkEnableOption "enable kdeconnect indicator";
     };
   };
+
+  config.assertions = [
+    {
+      assertion = restic.enable -> restic.backups != [];
+      message = ''
+        You've enabled Restic without specifying any backups in `garden.services.restic.backups`.
+        Declare the backups you want on this specific machine.
+      '';
+    }
+  ];
 }
