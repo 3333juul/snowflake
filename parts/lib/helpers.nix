@@ -54,8 +54,9 @@
   services.restic.backups = addBackupPaths config ["backup1" "backup2"] [
     "/path/1"
     "/path/2"
-  ]
+  ];
   => {
+  services.restic.backups = {
     backup1 = { paths = ["/path/1" "/path/2"]; };
     backup2 = { paths = ["/path/1" "/path/2"]; };
   };
@@ -70,7 +71,9 @@
   in
     builtins.listToAttrs (map (name: {
         inherit name;
-        value = {inherit paths;};
+        value = {
+          inherit paths;
+        };
       })
       names);
 in {
