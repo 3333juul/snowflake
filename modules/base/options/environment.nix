@@ -20,7 +20,7 @@ in {
         "zsh"
         "nushell"
       ];
-      default = "zsh";
+      default = "bash";
       description = "shell to be used";
     };
 

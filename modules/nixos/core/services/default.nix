@@ -1,6 +1,5 @@
 {
   imports = [
-    ./selfhosted
     ./sync
     ./system
   ];
