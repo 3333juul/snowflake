@@ -5,6 +5,7 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
+  inherit (lib.attrsets) mapAttrs;
   inherit (lib.lists) optionals;
   inherit (lib.services) mkResticNotify;
   inherit (lib.helpers) filterEnabled;
@@ -12,9 +13,11 @@
   inherit (config.age) secrets;
   inherit (config.garden.system) mainUser;
   inherit (config.networking) hostName;
+  inherit (config.garden.environment) flakePath;
 
-  homeDir = config.users.users.${mainUser}.home;
   cfg = config.garden.services.restic;
+  homeDir = config.users.users.${mainUser}.home;
+  acceptedTypes = ["desktop" "laptop"];
 
   # https://github.com/NixOS/nixpkgs/issues/196547
   waitForNetwork = ''
@@ -25,9 +28,34 @@
 
     echo "Internet is up, backup starting."
   '';
+
+  paths = mapAttrs (_: optionals (hasProfile config acceptedTypes)) {
+    common = [
+      flakePath
+      "${homeDir}/documents"
+      "${homeDir}/media/memes"
+      "${homeDir}/media/music"
+      "${homeDir}/media/pictures"
+      "${homeDir}/media/videos"
+      "${homeDir}/projects"
+      "${homeDir}/syncthing"
+      "${homeDir}/backups/hybrid"
+    ];
+    cloud = ["${homeDir}/backups/cloud"];
+    local = ["${homeDir}/backups/local"];
+  };
+
+  # NOTE: pruneOpts module doesn't distinguish between hosts, so it's better to keep repositories per host to avoid data loss.
+  # alternative: implement a custom function for this yourself.
+  defPruneOpts = [
+    "--keep-daily 7"
+    "--keep-weekly 5"
+    "--keep-monthly 12"
+  ];
 in {
   config = mkIf cfg.enable {
     # for cli, use: sudo restic-<name> <cmd>, e.g., sudo restic-onedrive snapshots.
+
     # only enable these backups that are defined in `garden.services.restic.backups`.
     services.restic.backups = filterEnabled cfg.backups {
       onedrive = {
@@ -36,16 +64,22 @@ in {
         passwordFile = secrets.restic-password.path;
         rcloneConfigFile = secrets.rclone.path;
         backupPrepareCommand = waitForNetwork;
+        paths = paths.common ++ paths.cloud;
+        pruneOpts = defPruneOpts;
 
-        paths = optionals (hasProfile config ["desktop" "laptop"]) ([
-            "${homeDir}/backups/cloud"
-            "${homeDir}/backups/hybrid"
-          ]
-          ++ cfg.basePaths);
+        timerConfig = {
+          OnCalendar = "daily";
+          Persistent = true;
+        };
+      };
 
-        # NOTE: pruneOpts module doesn't distinguish between hosts, so it's better to keep repositories per host to avoid data loss.
-        # alternative: implement a custom function for this yourself.
-        pruneOpts = cfg.defPruneOpts;
+      local-internal = {
+        initialize = true;
+        repository = "/mnt/data-hdd/restic/${hostName}";
+        passwordFile = secrets.restic-password.path;
+        paths = paths.common ++ paths.local;
+
+        pruneOpts = defPruneOpts;
 
         timerConfig = {
           OnCalendar = "daily";
@@ -57,40 +91,10 @@ in {
         initialize = true;
         repository = "/run/media/${mainUser}/drive/restic/${hostName}";
         passwordFile = secrets.restic-password.path;
-
-        paths = optionals (hasProfile config ["desktop" "laptop"]) ([
-            "${homeDir}/backups/local"
-            "${homeDir}/backups/hybrid"
-          ]
-          ++ cfg.basePaths);
-
-        pruneOpts = cfg.defPruneOpts;
+        paths = paths.common ++ paths.local;
+        pruneOpts = defPruneOpts;
         timerConfig = null;
       };
-
-      local-internal = {
-        initialize = true;
-        repository = "/mnt/data-hdd/restic/${hostName}}";
-        passwordFile = secrets.restic-password.path;
-
-        paths = optionals (hasProfile config ["desktop" "laptop"]) ([
-            "${homeDir}/backups/local"
-            "${homeDir}/backups/hybrid"
-          ]
-          ++ cfg.basePaths);
-
-        pruneOpts = cfg.defPruneOpts;
-
-        timerConfig = {
-          OnCalendar = "daily";
-          Persistent = true;
-        };
-      };
-    };
-
-    # update the progress once per minute.
-    environment.variables = {
-      RESTIC_PROGRESS_FPS = "0.016666";
     };
 
     # generate systemd services for each enabled backup defined in `services.restic.backups`.

@@ -5,11 +5,7 @@
 }: let
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.types) listOf str;
-  inherit (config.garden.system) mainUser;
-  inherit (config.garden.environment) flakePath;
   inherit (config.garden.services) restic;
-
-  homeDir = config.users.users.${mainUser}.home;
 in {
   options.garden.services = {
     rclone.enable = mkEnableOption "enable rclone";
@@ -34,35 +30,10 @@ in {
         description = "list of enabled restic backups";
       };
 
-      basePaths = mkOption {
-        type = listOf str;
-        default = [
-          flakePath
-          "${homeDir}/documents"
-          "${homeDir}/media/memes"
-          "${homeDir}/media/music"
-          "${homeDir}/media/pictures"
-          "${homeDir}/media/videos"
-          "${homeDir}/projects"
-          "${homeDir}/syncthing"
-        ];
-        description = "list of base paths to backup";
-      };
-
       serverPaths = mkOption {
         type = listOf str;
         default = [];
         description = "list of server paths to backup";
-      };
-
-      defPruneOpts = mkOption {
-        type = listOf str;
-        default = [
-          "--keep-daily 7"
-          "--keep-weekly 5"
-          "--keep-monthly 12"
-        ];
-        description = "default pruneOpts settings";
       };
     };
 
