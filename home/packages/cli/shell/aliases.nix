@@ -44,16 +44,4 @@ in {
     clients = "hyprctl -j clients | jless";
     monitors = "hyprctl -j monitors | jless";
   };
-
-  home.packages = let
-    nix-option = pkgs.writeShellScriptBin "nix-option" (
-      if pkgs.stdenv.hostPlatform.isDarwin
-      then ''
-        nix eval ${flakePath}#darwinConfigurations.$(hostname)."$1"
-      ''
-      else ''
-        nix eval ${flakePath}#nixosConfigurations.$(hostname)."$1"
-      ''
-    );
-  in [nix-option];
 }
