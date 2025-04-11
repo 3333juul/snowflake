@@ -71,8 +71,8 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    private-repo = {
-      url = "git+ssh://git@github.com/3333juul/website.git";
+    nix-private = {
+      url = "git+ssh://git@github.com/3333juul/nix-private.git";
     };
   };
 }

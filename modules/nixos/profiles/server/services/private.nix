@@ -8,18 +8,18 @@
 
   cfg = config.garden.services.private;
 in {
-  imports = [inputs.private-repo.nixosModules.default];
+  imports = [inputs.nix-private.nixosModules.default];
 
   config = mkIf cfg.enable {
     services.private = {
       enable = true;
+      glance.enable = cfg.glance.enable;
 
       website = {
-        enable = true;
+        inherit (cfg.website) enable;
+        scraper.enable = false;
         port = 1240;
       };
-
-      scraper.enable = true;
     };
   };
 }
