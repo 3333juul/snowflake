@@ -18,6 +18,7 @@
     ./editor/yazi.nix
 
     # lang
+    ./lang/diagnostics.nix
     ./lang/languages.nix
     ./lang/lsp.nix
     ./lang/treesitter.nix
