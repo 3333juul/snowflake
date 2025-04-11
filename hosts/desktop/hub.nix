@@ -6,8 +6,10 @@
 
       desktop = {
         type = "Hyprland";
+
         hyprland = {
           useFlake = true;
+          layout = "master";
           monitors = [
             "HDMI-A-1,1920x1080@60,0x0,1"
             "DVI-D-1,1920x1080@60,1920x0,1"
@@ -33,6 +35,7 @@
       spotify.enable = true;
       anki.enable = true;
       libreoffice.enable = true;
+      # astal.enable = true;
 
       imageEditor = {
         gimp.enable = true;
@@ -95,7 +98,8 @@
         enable = true;
         backups = [
           "onedrive"
-          "local"
+          "local-internal"
+          "local-external"
         ];
       };
 

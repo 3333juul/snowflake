@@ -23,6 +23,7 @@
       rss-bridge.enable = true;
       memos.enable = true;
       private.enable = true;
+      minecraftServer = false;
 
       restic = {
         enable = true;
