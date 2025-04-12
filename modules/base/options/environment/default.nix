@@ -12,6 +12,10 @@
   env = config.garden.environment;
   desktop = env.desktop.type;
 in {
+  imports = [
+    ./desktop.nix
+  ];
+
   options.garden.environment = {
     shell = mkOption {
       type = enum [
