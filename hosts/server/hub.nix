@@ -17,13 +17,17 @@
     };
 
     services = {
-      glance.enable = true;
       rclone.enable = true;
       tt-rss.enable = true;
       rss-bridge.enable = true;
       memos.enable = true;
-      private.enable = true;
-      minecraftServer = false;
+      minecraftServer.enable = false;
+
+      private = {
+        enable = true;
+        glance = true;
+        website = false;
+      };
 
       restic = {
         enable = true;

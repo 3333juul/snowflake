@@ -10,7 +10,6 @@
 
   user = "memos";
   group = "memos";
-  port = 5230;
   dataDir = "/var/lib/memos";
   package = inputs.self.packages.${pkgs.system}.memos;
   cfg = config.garden.services.memos;
@@ -22,7 +21,7 @@ in {
       wantedBy = ["multi-user.target"];
 
       environment = {
-        MEMOS_PORT = toString port;
+        MEMOS_PORT = toString cfg.port;
         MEMOS_MODE = "prod";
         MEMOS_DATA = dataDir;
       };

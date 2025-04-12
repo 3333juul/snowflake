@@ -37,7 +37,7 @@ in {
         virtualHosts."${config.services.tt-rss.virtualHost}" = {
           listen = [
             {
-              port = 4124;
+              inherit (cfg) port;
               addr = "0.0.0.0";
             }
           ];

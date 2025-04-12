@@ -1,6 +1,8 @@
 {lib, ...}: let
-  inherit (lib.modules) mkMerge;
+  inherit (lib.options) mkOption mkEnableOption;
   inherit (lib.attrsets) mapAttrs' nameValuePair;
+  inherit (lib.modules) mkMerge;
+  inherit (lib.types) str;
 
   # generate systemd services for each enabled backup defined in `services.restic.backups`.
   # if a backup fails, a desktop notification will be sent, displaying the last 5 lines of the backup log from the journal.
@@ -39,6 +41,49 @@
       (mapAttrs' (name: _: mkNotifyService name) backups)
       (mapAttrs' (name: _: mkOnFailureLink name) backups)
     ];
+
+  /*
+  *
+  A quick way to use my services abstraction
+
+  # Arguments
+
+  - [name]: The name of the service
+
+  # Type
+
+  ```
+  mkServiceOption :: String -> (Int -> String -> String -> AttrSet) -> AttrSet
+  ```
+  */
+  mkServiceOption = name: {
+    port ? 0,
+    host ? "127.0.0.1",
+    domain ? "",
+    extraConfig ? {},
+  }:
+    {
+      enable = mkEnableOption "Enable the ${name} service";
+
+      host = mkOption {
+        type = str;
+        default = host;
+        description = "The host for ${name} service";
+      };
+
+      port = mkOption {
+        type = lib.types.port;
+        default = port;
+        description = "The port for ${name} service";
+      };
+
+      domain = mkOption {
+        type = str;
+        default = domain;
+        description = "Domain name for the ${name} service";
+      };
+    }
+    // extraConfig;
 in {
-  inherit mkResticNotify;
+  inherit mkResticNotify mkServiceOption;
 }

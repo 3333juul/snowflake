@@ -13,12 +13,16 @@ in {
   config = mkIf cfg.enable {
     services.private = {
       enable = true;
-      glance.enable = cfg.glance.enable;
+
+      glance = {
+        inherit (cfg.glance) enable;
+        inherit (cfg.glance) port;
+      };
 
       website = {
         inherit (cfg.website) enable;
+        inherit (cfg.website) port;
         scraper.enable = false;
-        port = 1240;
       };
     };
   };

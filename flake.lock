@@ -623,15 +623,12 @@
       }
     },
     "nix-private": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_4"
-      },
       "locked": {
-        "lastModified": 1744387593,
-        "narHash": "sha256-UfvDYUfrJMElgiqqC5qo+pyLVPmG5emBe7QKTq5OkBE=",
+        "lastModified": 1744439027,
+        "narHash": "sha256-gaUTEFNlwB/8RNXpiuBnuCoje+5OjhD4MOqMB3pgWak=",
         "ref": "refs/heads/main",
-        "rev": "87862709bf03bf906e70d265238572cd49f69741",
-        "revCount": 10,
+        "rev": "14093bf021b8feedd2a89ad3a697479b39129962",
+        "revCount": 13,
         "type": "git",
         "url": "ssh://git@github.com/3333juul/nix-private.git"
       },
@@ -705,22 +702,6 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1744232761,
-        "narHash": "sha256-gbl9hE39nQRpZaLjhWKmEu5ejtQsgI5TWYrIVVJn30U=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "f675531bc7e6657c10a18b565cfebd8aa9e24c14",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_5": {
-      "locked": {
         "lastModified": 1743827369,
         "narHash": "sha256-rpqepOZ8Eo1zg+KJeWoq1HAOgoMCDloqv5r2EAa9TSA=",
         "owner": "NixOS",
@@ -735,7 +716,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_6": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1743076231,
         "narHash": "sha256-yQugdVfi316qUfqzN8JMaA2vixl+45GxNm4oUfXlbgw=",
@@ -757,7 +738,7 @@
         "flake-utils": "flake-utils_2",
         "mnw": "mnw",
         "nil": "nil",
-        "nixpkgs": "nixpkgs_6",
+        "nixpkgs": "nixpkgs_5",
         "systems": "systems_5"
       },
       "locked": {
@@ -807,7 +788,7 @@
         "hyprland": "hyprland",
         "nix-minecraft": "nix-minecraft",
         "nix-private": "nix-private",
-        "nixpkgs": "nixpkgs_5",
+        "nixpkgs": "nixpkgs_4",
         "nvf": "nvf",
         "spicetify-nix": "spicetify-nix",
         "systems": "systems_7",
