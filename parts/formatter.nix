@@ -10,6 +10,7 @@
 
     treefmt = {
       projectRootFile = "flake.nix";
+      flakeCheck = true;
 
       programs = {
         shellcheck.enable = true;
