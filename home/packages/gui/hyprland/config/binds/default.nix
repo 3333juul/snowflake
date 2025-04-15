@@ -1,13 +1,13 @@
 {
   lib,
-  config,
+  osConfig,
   pkgs,
   ...
 }: let
   inherit (lib.lists) optionals;
   inherit (lib.strings) optionalString;
 
-  cfg = config.garden.environment.desktop.hyprland.plugins;
+  cfg = osConfig.garden.environment.desktop.hyprland.plugins;
 in {
   imports = [
     ./dwindle.nix
@@ -23,7 +23,8 @@ in {
           "ALT, F4, exec, killall brave && hyprctl dispatch exit"
           "$mainMod SHIFT, F, exec, togglefloating"
           "$mainMod, M, fullscreen, 1"
-          "$mainMod, F, fullscreen"
+          "$mainMod CTRL, F, fullscreen"
+          "$mainMod, F, exec, wl-kbptr -o modes=floating,click -o mode_floating.source=detect"
           "$mainMod ALT CTRL, L, exec, hyprlock"
           "$mainMod SHIFT, M, exec, pypr zoom"
           "$mainMod SHIFT, P, exec, betterpin"
@@ -209,7 +210,8 @@ in {
         submap=cursor
 
         # Jump cursor to a position
-        bind=,a,exec,hyprctl dispatch submap reset && wl-kbptr && hyprctl dispatch submap cursor
+        # bind=,a,exec,hyprctl dispatch submap reset && wl-kbptr && hyprctl dispatch submap cursor
+        bind=,a,exec,hyprctl dispatch submap reset && wl-kbptr -o modes=floating,click -o mode_floating.source=detect && hyprctl dispatch submap cursor
 
         # Cursor movement
         binde=,j,exec,wlrctl pointer move 0 10
