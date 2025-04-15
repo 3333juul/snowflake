@@ -39,6 +39,18 @@ in {
         owner = mainUser;
         group = userGroup;
       };
+
+      restic-password = mkSecret {
+        file = "restic/password";
+        owner = mainUser;
+        group = userGroup;
+      };
+
+      todoist = mkSecret {
+        file = "todoist";
+        owner = mainUser;
+        group = userGroup;
+      };
     };
   };
 }

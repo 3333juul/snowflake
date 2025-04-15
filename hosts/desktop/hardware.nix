@@ -28,6 +28,11 @@
     options = ["fmask=0077" "dmask=0077"];
   };
 
+  fileSystems."/mnt/data-hdd" = {
+    device = "/dev/disk/by-uuid/5BB3F1DA2D5D9446";
+    fsType = "ntfs";
+  };
+
   swapDevices = [
     {device = "/dev/disk/by-uuid/79c03a5d-fbb0-4f51-9224-d899da70cbc1";}
   ];

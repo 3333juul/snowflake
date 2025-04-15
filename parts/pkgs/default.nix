@@ -11,6 +11,7 @@
       rofi = callPackage ./rofi.nix {};
       stremio-letterboxd = callPackage ./stremio-letterboxd.nix {}; # TODO:
       vocabsieve = callPackage ./vocabsieve.nix {};
+      wl-kbptr = callPackage ./wl-kbptr.nix {};
     };
   };
 }

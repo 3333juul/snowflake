@@ -15,6 +15,7 @@
       profiles = [
         "laptop"
         "graphical"
+        "server"
       ];
     };
 

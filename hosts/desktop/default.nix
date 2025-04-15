@@ -20,22 +20,20 @@
     system = {
       mainUser = "scay"; # TODO: change it after reinstalling the system
 
-      video.enable = true;
-      sound.enable = true;
-      bluetooth.enable = true;
-      printing.enable = false;
-
       boot = {
         loader = "grub";
       };
 
-      networking = {
-        tailscale = {
-          enable = false;
-          isServer = false;
-          isClient = false;
-        };
-      };
+      fs.support = [
+        "ext4"
+        "vfat"
+        "ntfs"
+      ];
+
+      video.enable = true;
+      sound.enable = true;
+      bluetooth.enable = true;
+      printing.enable = false;
 
       loginManager = {
         name = "greetd";
@@ -43,7 +41,18 @@
       };
 
       specialisations = {
+        enable = true;
         steamOS.enable = true;
+      };
+
+      networking = {
+        wirelessBackend = "iwd";
+
+        tailscale = {
+          enable = false;
+          isServer = false;
+          isClient = false;
+        };
       };
 
       virtualization = {

@@ -9,7 +9,6 @@
     agenix.url = "github:ryantm/agenix";
     hyprland.url = "github:hyprwm/hyprland";
     nvf.url = "github:notashelf/nvf";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     flake-parts = {
@@ -42,6 +41,11 @@
       flake = false;
     };
 
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # hyprland-easymotion = {
     #   url = "github:zakk4223/hyprland-easymotion/3388351d2af672f89b907404668c6076336270e9";
     #   inputs.hyprland.follows = "hyprland";
@@ -52,9 +56,23 @@
     #   inputs.hyprland.follows = "hyprland";
     # };
 
-    hyprgrass = {
-      url = "github:horriblename/hyprgrass";
-      inputs.hyprland.follows = "hyprland";
+    # hyprgrass = {
+    #   url = "github:horriblename/hyprgrass";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
+    #
+    # astal = {
+    #   url = "github:aylur/astal";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    #
+    # ags = {
+    #   url = "github:aylur/ags";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
+    nix-private = {
+      url = "git+ssh://git@github.com/3333juul/nix-private.git";
     };
   };
 }

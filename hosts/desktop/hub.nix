@@ -6,8 +6,10 @@
 
       desktop = {
         type = "Hyprland";
+
         hyprland = {
           useFlake = true;
+          layout = "master";
           monitors = [
             "HDMI-A-1,1920x1080@60,0x0,1"
             "DVI-D-1,1920x1080@60,1920x0,1"
@@ -26,12 +28,14 @@
       starship.enable = true;
       aichat.enable = false;
 
-      anki.enable = true;
-      discord.enable = true;
-      libreoffice.enable = true;
       brave.enable = true;
-      spotify.enable = true;
       mpv.enable = true;
+      notes.enable = true;
+      discord.enable = true;
+      spotify.enable = true;
+      anki.enable = true;
+      libreoffice.enable = true;
+      # astal.enable = true;
 
       imageEditor = {
         gimp.enable = true;
@@ -45,7 +49,7 @@
 
       editor = {
         vscodium.enable = true;
-        nvim.enable = true;
+        neovim.enable = true;
       };
 
       reading = {
@@ -78,7 +82,6 @@
 
     services = {
       glance.enable = true;
-      minecraftServer.enable = true;
       rclone.enable = true;
 
       syncthing = {
@@ -95,7 +98,8 @@
         enable = true;
         backups = [
           "onedrive"
-          "local"
+          "local-internal"
+          "local-external"
         ];
       };
 

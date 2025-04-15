@@ -84,7 +84,7 @@
       protoc-gen-validate
     ];
     outputPath = "gen";
-    hash = "sha256-LLmf9w4vlcakm/dBm6Zfc94HTwR/Hkc02tFXUXmXQ0g=";
+    hash = "sha256-JROqCfUaZiAaIrvM9PFzW9h/44E2N80eKph2ov9A1d0=";
   };
 
   protobufTypes = generateProtobufCode {

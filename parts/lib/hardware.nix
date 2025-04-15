@@ -83,26 +83,26 @@ let
 
   # Arguments
 
-  - [index] The index of the monitor to retrieve (0-based).
   - [config] The configuration that nixosConfigurations provides.
+  - [index] The index of the monitor to retrieve (0-based).
 
   # Type
 
   ```
-  monitor :: Int -> AttrSet -> String | Null
+  monitor :: AttrSet -> Int -> String | Null
   ```
 
   # Example
 
   ```nix
-  monitor 1 osConfig
+  monitor osConfig 1
   => "DP-1"
 
-  monitor 2 osConfig
+  monitor osConfig 2
   => null
   ```
   */
-  monitor = index: config:
+  monitor = config: index:
     if builtins.length config.garden.device.monitors > index
     then builtins.elemAt config.garden.device.monitors index
     else null;

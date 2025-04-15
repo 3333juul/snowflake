@@ -3,10 +3,10 @@
 in {
   programs.nh = {
     enable = true;
+    flake = flakePath;
     clean = {
       enable = true;
       extraArgs = "--keep-since 7d --keep 5";
     };
-    flake = flakePath;
   };
 }
