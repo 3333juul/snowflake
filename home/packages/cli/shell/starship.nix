@@ -22,7 +22,7 @@ in {
         "$os"
         "[](bg:color_green fg:color_orange)"
         "$hostname"
-        "[](bg:color_yellow fg:color_orange)"
+        "[](bg:color_yellow fg:color_green)"
         "$directory"
         "[](fg:color_yellow bg:color_aqua)"
         "$git_branch"
