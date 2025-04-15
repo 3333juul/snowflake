@@ -25,12 +25,12 @@
       starship.enable = true;
       aichat.enable = false;
 
-      notes.enable = true;
+      notes.enable = false;
       mpv.enable = true;
       anki.enable = false;
       discord.enable = false;
       libreoffice.enable = false;
-      brave.enable = false;
+      brave.enable = true;
       spotify.enable = false;
 
       imageEditor = {
@@ -77,7 +77,6 @@
     };
 
     services = {
-      glance.enable = false;
       restic.enable = false;
 
       syncthing = {

@@ -10,13 +10,16 @@ in {
   specialisation.hybrid-server = mkIf (cfg.enable && cfg.hybrid.server.enable) {
     configuration = {
       garden = {
-        system.security.tor.enable = mkForce true;
         environment.desktop.type = mkForce null;
 
-        networking.tailscale = {
-          enable = mkForce true;
-          isServer = mkForce true;
-          isClient = mkForce false;
+        system = {
+          security.tor.enable = mkForce true;
+
+          networking.tailscale = {
+            enable = mkForce true;
+            isServer = mkForce true;
+            isClient = mkForce false;
+          };
         };
 
         services = {
