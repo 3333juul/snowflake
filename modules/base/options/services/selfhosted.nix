@@ -21,7 +21,7 @@ in {
       enable = mkEnableOption "enable private services";
 
       website = mkServiceOption "private website" {
-        port = 1240;
+        port = 80;
       };
 
       glance = mkServiceOption "glance" {

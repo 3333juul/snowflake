@@ -47,6 +47,7 @@ in {
     specialisations = {
       enable = mkEnableOption "Enable specialisations";
       steamOS.enable = mkEnableOption "tv steam big picture specialisation";
+      hybrid.server.enable = mkEnableOption "server specialisation for hybrid machines";
     };
 
     printing = {

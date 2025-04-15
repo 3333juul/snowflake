@@ -6,7 +6,7 @@
 
   garden = {
     device = {
-      type = "laptop";
+      type = "hybrid";
       cpu = "intel";
       gpu = "intel";
       # hasTPM = "true"; # TODO
@@ -30,6 +30,11 @@
       loginManager = {
         name = "greetd";
         autoLogin.enable = false;
+      };
+
+      specialisations = {
+        enable = true;
+        hybrid.server.enable = true;
       };
 
       fs.support = [

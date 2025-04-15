@@ -22,7 +22,7 @@ in {
       website = {
         inherit (cfg.website) enable;
         inherit (cfg.website) port;
-        scraper.enable = false;
+        scraper.enable = true;
       };
     };
   };
