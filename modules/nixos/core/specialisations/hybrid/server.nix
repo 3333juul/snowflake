@@ -14,6 +14,7 @@ in {
 
         system = {
           security.tor.enable = mkForce true;
+          loginManager.name = mkForce "none";
 
           networking.tailscale = {
             enable = mkForce true;
