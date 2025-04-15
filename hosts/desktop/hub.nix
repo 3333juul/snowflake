@@ -81,7 +81,6 @@
     };
 
     services = {
-      glance.enable = true;
       rclone.enable = true;
 
       syncthing = {

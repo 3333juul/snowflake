@@ -24,6 +24,8 @@
         loader = "grub";
       };
 
+      security.tor.enable = true;
+
       fs.support = [
         "ext4"
         "vfat"
@@ -49,9 +51,9 @@
         wirelessBackend = "iwd";
 
         tailscale = {
-          enable = false;
+          enable = true;
           isServer = false;
-          isClient = false;
+          isClient = true;
         };
       };
 
