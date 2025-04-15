@@ -20,6 +20,8 @@ in {
       format = lib.concatStrings [
         "[█](color_orange)"
         "$os"
+        "[](bg:color_green fg:color_orange)"
+        "$hostname"
         "[](bg:color_yellow fg:color_orange)"
         "$directory"
         "[](fg:color_yellow bg:color_aqua)"
@@ -52,6 +54,13 @@ in {
         symbols = {
           NixOS = " ";
         };
+      };
+
+      hostname = {
+        disabled = false;
+        ssh_only = false;
+        style = "bg:color_green bold fg:color_fg0";
+        format = "[ $hostname ]($style)";
       };
 
       directory = {
