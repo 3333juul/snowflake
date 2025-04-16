@@ -9,9 +9,11 @@
       type = "hybrid";
       cpu = "intel";
       gpu = "intel";
+      monitors = [];
       # hasTPM = "true"; # TODO
       hasBluetooth = true;
       hasSound = true;
+      hasTouchscreen = false;
       keyboard = "pl";
     };
 
@@ -21,6 +23,12 @@
       boot = {
         loader = "systemd-boot";
       };
+
+      fs.support = [
+        "ext4"
+        "vfat"
+        "ntfs"
+      ];
 
       video.enable = true;
       sound.enable = true;
@@ -32,16 +40,12 @@
         autoLogin.enable = false;
       };
 
+      security.tor.enable = false;
+
       specialisations = {
         enable = true;
         hybrid.server.enable = true;
       };
-
-      fs.support = [
-        "ext4"
-        "vfat"
-        "ntfs"
-      ];
 
       networking = {
         wirelessBackend = "iwd";
@@ -59,6 +63,11 @@
         qemu.enable = false;
         podman.enable = false;
         distrobox.enable = false;
+      };
+
+      android = {
+        enable = false;
+        scrcpy.enable = false;
       };
     };
   };

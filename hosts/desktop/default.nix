@@ -24,8 +24,6 @@
         loader = "grub";
       };
 
-      security.tor.enable = true;
-
       fs.support = [
         "ext4"
         "vfat"
@@ -41,6 +39,8 @@
         name = "greetd";
         autoLogin.enable = false;
       };
+
+      security.tor.enable = true;
 
       specialisations = {
         enable = true;
