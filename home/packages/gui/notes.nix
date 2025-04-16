@@ -34,14 +34,11 @@ in {
         };
       };
 
-      # required for obsidian-nvim
-      options.conceallevel = 2;
-
       luaConfigRC = {
         # https://github.com/preservim/vim-markdown/issues/622
         markdownUnfold = ''
           vim.cmd [[
-            autocmd BufRead,BufNewFile *.markdown,*.md set foldlevelstart=6
+            autocmd BufRead,BufNewFile *.markdown,*.md set conceallevel=2 foldlevelstart=6
           ]]
         '';
       };
