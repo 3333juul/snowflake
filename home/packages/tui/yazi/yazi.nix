@@ -137,6 +137,7 @@ in {
             mime = "text/*";
             use = [
               "edit"
+              "open"
               "reveal"
               "ripdrag"
             ];
