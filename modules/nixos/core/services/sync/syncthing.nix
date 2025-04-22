@@ -73,6 +73,18 @@ in {
             };
           };
 
+          "s21/photoroom" = {
+            path = "${homeDir}/syncthing/s21/photoroom";
+            devices = ["s21"];
+            id = "s21-photoroom";
+            versioning = {
+              type = "simple";
+              params = {
+                keep = "10";
+              };
+            };
+          };
+
           "noteAir3/books" = {
             path = "${homeDir}/syncthing/note-air3/books";
             devices = ["noteAir3"];

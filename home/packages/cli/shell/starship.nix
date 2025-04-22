@@ -20,9 +20,8 @@ in {
       format = lib.concatStrings [
         "[█](color_orange)"
         "$os"
-        "[](bg:color_green fg:color_orange)"
         "$hostname"
-        "[](bg:color_yellow fg:color_green)"
+        "[](bg:color_yellow fg:color_orange)"
         "$directory"
         "[](fg:color_yellow bg:color_aqua)"
         "$git_branch"
@@ -58,8 +57,8 @@ in {
 
       hostname = {
         disabled = false;
-        ssh_only = false;
-        style = "bg:color_green bold fg:color_fg0";
+        ssh_only = true;
+        style = "bg:color_orange bold fg:color_fg0";
         format = "[ $hostname ]($style)";
       };
 

@@ -1,6 +1,6 @@
 {lib, ...}: let
   inherit (lib.options) mkEnableOption mkOption;
-  inherit (lib.types) enum listOf str int;
+  inherit (lib.types) enum listOf str int nullOr;
 in {
   options.garden.system = {
     security.tor.enable = mkEnableOption "Tor daemon";
@@ -20,14 +20,22 @@ in {
       '';
     };
 
-    boot.loader = mkOption {
-      type = enum [
-        "none"
-        "grub"
-        "systemd-boot"
-      ];
-      default = "none";
-      description = "The bootloader that should be used for the device.";
+    boot = {
+      loader = mkOption {
+        type = enum [
+          "none"
+          "grub"
+          "systemd-boot"
+        ];
+        default = "none";
+        description = "The bootloader that should be used for the device.";
+      };
+
+      grub.device = mkOption {
+        type = nullOr str;
+        default = "nodev";
+        description = "The device to install the bootloader to.";
+      };
     };
 
     video = {
