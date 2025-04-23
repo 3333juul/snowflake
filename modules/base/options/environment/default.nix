@@ -48,7 +48,7 @@ in {
 
     flakePath = mkOption {
       type = str;
-      default = "/${ldTernary pkgs "home" "Users"}/${sys.mainUser}/snowflake";
+      default = "/${ldTernary pkgs "home" "Users"}/${sys.mainUser}/projects/nix/snowflake";
       description = "The path to the configuration";
     };
   };
