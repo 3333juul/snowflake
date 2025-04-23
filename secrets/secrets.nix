@@ -19,14 +19,14 @@ let
     hybrid = [];
   };
 
-  giveAccess = hostKeys: userKeys: {
+  giveAccess = hostKeys: {
     publicKeys =
       types.hybrid
       ++ hostKeys
-      ++ [userKeys];
+      ++ [users.juul];
   };
 in {
-  "restic/password.age" = giveAccess (types.workstations ++ types.servers) users.juul;
-  "rclone.age" = giveAccess (types.workstations ++ types.servers) users.juul;
-  "todoist.age" = giveAccess types.workstations users.juul;
+  "restic/password.age" = giveAccess (types.workstations ++ types.servers);
+  "rclone.age" = giveAccess (types.workstations ++ types.servers);
+  "todoist.age" = giveAccess types.workstations;
 }
