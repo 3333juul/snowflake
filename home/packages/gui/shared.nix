@@ -19,7 +19,7 @@ in {
       stremio
       obs-studio
       signal-desktop
-      telegram-desktop
+      ayugram-desktop
     ];
   };
 }
