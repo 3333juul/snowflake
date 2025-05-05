@@ -8,10 +8,7 @@
       hyprland-easymotion = callPackage ./hyprland-easymotion.nix {};
       hyprNStack = callPackage ./hyprnstack.nix {};
       memos = callPackage ./memos.nix {};
-      rofi = callPackage ./rofi.nix {};
-      stremio-letterboxd = callPackage ./stremio-letterboxd.nix {}; # TODO:
       vocabsieve = callPackage ./vocabsieve.nix {};
-      wl-kbptr = callPackage ./wl-kbptr.nix {};
     };
   };
 }
