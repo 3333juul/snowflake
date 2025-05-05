@@ -9,9 +9,5 @@
 in {
   services.hyprpaper = mkIf (cfg == "Hyprland") {
     enable = true;
-    settings = {
-      ipc = "on";
-      splash = false;
-    };
   };
 }

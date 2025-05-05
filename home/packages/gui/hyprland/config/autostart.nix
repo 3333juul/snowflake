@@ -35,7 +35,6 @@ in {
 
         # Scripts
         "toggleurgent &"
-        "selectwallpaper --last &"
         #"windowstate &"
         #"wallshift &"
       ]
