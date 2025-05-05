@@ -136,12 +136,12 @@ in {
 
       documents = "${homeDir}/documents";
       download = "${homeDir}/downloads";
-      desktop = "${homeDir}/desktop";
+      desktop = "${homeDir}/.local/user/desktop";
       videos = "${homeDir}/media/videos";
       music = "${homeDir}/media/music";
       pictures = "${homeDir}/media/pictures";
-      publicShare = "${homeDir}/public/share";
-      templates = "${homeDir}/public/templates";
+      publicShare = "${homeDir}/.local/user/public/share";
+      templates = "${homeDir}/.local/user/templates";
 
       extraConfig =
         {
