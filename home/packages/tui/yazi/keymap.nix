@@ -72,6 +72,16 @@ in {
         run = "cd --interactive";
         desc = "Go to a directory interactively";
       }
+      {
+        on = ["z"];
+        run = "plugin zoxide";
+        desc = "Jump to a directory via zoxide";
+      }
+      {
+        on = ["Z"];
+        run = "plugin fzf";
+        desc = "Jump to a file/directory via fzf";
+      }
     ];
   };
 }
