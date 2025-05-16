@@ -5,9 +5,9 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.environment.desktop.type;
+  cfg = osConfig.garden.environment;
 in {
-  services.hyprpaper = mkIf (cfg == "Hyprland") {
+  services.hyprpaper = mkIf (cfg.isWM && cfg.isWayland) {
     enable = true;
   };
 }

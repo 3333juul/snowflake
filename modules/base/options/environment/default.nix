@@ -7,6 +7,7 @@
   inherit (lib.hardware) ldTernary;
   inherit (lib.options) mkOption;
   inherit (lib.types) enum bool str;
+  inherit (builtins) elem;
 
   sys = config.garden.system;
   env = config.garden.environment;
@@ -36,13 +37,13 @@ in {
 
     isWayland = mkOption {
       type = bool;
-      default = desktop == "Hyprland" || desktop == "sway" || desktop == "cosmic";
+      default = elem desktop ["Hyprland" "dwl" "sway" "cosmic"];
       description = "Inferred data based on the desktop environment. True if the environment is Wayland-based.";
     };
 
     isWM = mkOption {
       type = bool;
-      default = desktop == "Hyprland" || desktop == "sway";
+      default = elem desktop ["Hyprland" "dwl" "sway" "cosmic"];
       description = "Inferred data based on the desktop environment. True if the environment is a window manager.";
     };
 

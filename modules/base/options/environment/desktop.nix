@@ -10,6 +10,7 @@ in {
           "yabai"
           "sway"
           "cosmic"
+          "dwl"
         ]);
         default = null;
         description = "The desktop environment to be used.";
