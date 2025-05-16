@@ -28,7 +28,6 @@
       starship.enable = true;
       aichat.enable = false;
 
-      brave.enable = true;
       mpv.enable = true;
       notes.enable = true;
       discord.enable = true;
@@ -36,6 +35,11 @@
       anki.enable = true;
       libreoffice.enable = true;
       # astal.enable = true;
+
+      browser = {
+        brave.enable = true;
+        zen.enable = false;
+      };
 
       imageEditor = {
         gimp.enable = true;

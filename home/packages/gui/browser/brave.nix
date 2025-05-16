@@ -5,7 +5,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs;
+  cfg = osConfig.garden.programs.browser;
 in {
   programs.brave = mkIf cfg.brave.enable {
     enable = true;

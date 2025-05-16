@@ -6,13 +6,11 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs.gui;
+  cfg = osConfig.garden.programs.browser;
 in {
   imports = [inputs.zen-browser.homeModules.beta];
 
-  config = mkIf cfg.enable {
-    programs.zen-browser = {
-      enable = true;
-    };
+  programs.zen-browser = mkIf cfg.zen.enable {
+    enable = true;
   };
 }

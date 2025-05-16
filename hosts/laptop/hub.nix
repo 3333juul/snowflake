@@ -30,8 +30,12 @@
       anki.enable = false;
       discord.enable = false;
       libreoffice.enable = false;
-      brave.enable = true;
       spotify.enable = false;
+
+      browser = {
+        brave.enable = true;
+        zen.enable = false;
+      };
 
       imageEditor = {
         gimp.enable = false;

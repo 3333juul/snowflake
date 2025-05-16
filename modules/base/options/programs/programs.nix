@@ -9,7 +9,6 @@ in {
     anki.enable = mkEnableOption "enable anki";
     discord.enable = mkEnableOption "enable discord";
     libreoffice.enable = mkEnableOption "enable libreoffice";
-    brave.enable = mkEnableOption "enable brave";
     spotify.enable = mkEnableOption "enable spotify";
     mpv.enable = mkEnableOption "enable MPV";
     aichat.enable = mkEnableOption "enable aichat";
@@ -23,6 +22,11 @@ in {
       // {
         default = config.garden.environment.desktop.type == "Hyprland";
       };
+
+    browser = {
+      brave.enable = mkEnableOption "enable brave browser";
+      zen.enable = mkEnableOption "enable zen browser";
+    };
 
     imageEditor = {
       gimp.enable = mkEnableOption "enable GIMP";
