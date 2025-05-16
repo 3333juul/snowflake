@@ -6,6 +6,7 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
+  inherit (osConfig.garden.environment) isWayland;
 
   # inherit (inputs.nvf.lib.nvim.dag) entryAfter entryBefore;
 
@@ -36,7 +37,6 @@ in {
       enable = true;
       settings.vim = {
         viAlias = true;
-        useSystemClipboard = true;
         preventJunkFiles = true;
         options = {
           # make indents normal
@@ -45,11 +45,11 @@ in {
           softtabstop = 2;
         };
 
-        # luaConfigRC = {
-        #   markdownDisableFolding = entryBefore ["pluginConfigs"] ''
-        #     vim.g.vim_markdown_folding_disabled = 1
-        #   '';
-        # };
+        clipboard = {
+          enable = true;
+          providers.wl-copy.enable = isWayland;
+          providers.xclip.enable = !isWayland;
+        };
       };
     };
   };
