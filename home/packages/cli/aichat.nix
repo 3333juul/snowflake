@@ -8,7 +8,7 @@
 
   cfg = osConfig.garden.programs;
 in {
-  config = mkIf cfg.aichat.enable {
+  config = mkIf cfg.cli.enable {
     home.packages = with pkgs; [aichat];
   };
 }

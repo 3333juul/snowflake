@@ -8,7 +8,7 @@
 
   cfg = osConfig.garden.programs;
 in {
-  programs.mpv = mkIf cfg.mpv.enable {
+  programs.mpv = mkIf cfg.gui.enable {
     enable = true;
     package = pkgs.mpv;
     bindings = {

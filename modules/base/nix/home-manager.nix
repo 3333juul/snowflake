@@ -15,14 +15,16 @@ in {
     useUserPackages = true;
     useGlobalPkgs = true;
     extraSpecialArgs = {inherit inputs;};
+
     users.${mainUser} = {
       imports = ["${inputs.self}/home"];
+      programs.home-manager.enable = true;
+
       home = {
         username = mainUser;
         homeDirectory = "/home/${mainUser}";
         stateVersion = "24.05";
       };
-      programs.home-manager.enable = true;
     };
   };
 }

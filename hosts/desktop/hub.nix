@@ -26,15 +26,12 @@
 
       git.enable = true;
       starship.enable = true;
-      aichat.enable = false;
 
-      mpv.enable = true;
       notes.enable = true;
       discord.enable = true;
       spotify.enable = true;
       anki.enable = true;
       libreoffice.enable = true;
-      # astal.enable = true;
 
       browser = {
         brave.enable = true;

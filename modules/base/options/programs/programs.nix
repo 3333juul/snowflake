@@ -10,8 +10,6 @@ in {
     discord.enable = mkEnableOption "enable discord";
     libreoffice.enable = mkEnableOption "enable libreoffice";
     spotify.enable = mkEnableOption "enable spotify";
-    mpv.enable = mkEnableOption "enable MPV";
-    aichat.enable = mkEnableOption "enable aichat";
     git.enable = mkEnableOption "enable git";
     starship.enable = mkEnableOption "enable starship";
     notes.enable = mkEnableOption "enable notes";
@@ -19,9 +17,7 @@ in {
 
     waybar.enable =
       mkEnableOption "enables waybar"
-      // {
-        default = config.garden.environment.desktop.type == "Hyprland";
-      };
+      // {default = config.garden.environment.desktop.type == "Hyprland";};
 
     browser = {
       brave.enable = mkEnableOption "enable brave browser";

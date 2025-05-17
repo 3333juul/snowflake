@@ -8,13 +8,13 @@
   inherit (lib.hardware) monitor;
   inherit (osConfig.garden.device) type;
 
-  cfg = osConfig.garden.environment.desktop.type;
+  cfg = osConfig.garden.programs;
 
   modules = import ./modules.nix;
 in {
   imports = [./scripts];
 
-  config = mkIf (cfg == "Hyprland") {
+  config = mkIf cfg.waybar.enable {
     programs.waybar = {
       enable = true;
       package = pkgs.waybar;

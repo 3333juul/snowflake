@@ -6,8 +6,10 @@
 
       desktop = {
         type = "Hyprland";
+
         hyprland = {
           useFlake = false;
+          layout = "master";
           monitors = [
             "edP-1,1920x1080@60,1920x0,1.2"
           ];
@@ -23,10 +25,8 @@
 
       git.enable = true;
       starship.enable = true;
-      aichat.enable = false;
 
       notes.enable = false;
-      mpv.enable = true;
       anki.enable = false;
       discord.enable = false;
       libreoffice.enable = false;

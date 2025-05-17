@@ -21,10 +21,5 @@
     # Warn about packages without maintainers.
     # Good for knowing which packages might be very out of date or broken
     #showDerivationWarnings = ["maintainerless"];
-
-    # Overlays
-    #overlays = [
-    #  inputs.nur.overlay
-    #];
   };
 }

@@ -9,18 +9,8 @@
 in {
   # these are options that will cause a mass rebuild by enabling multiple packages
   options.garden.programs = {
-    cli.enable =
-      mkEnableOption "Enable CLI programs"
-      // {
-        default = true;
-      };
-
-    tui.enable =
-      mkEnableOption "Enable TUI programs"
-      // {
-        default = cfg.cli.enable;
-      };
-
+    cli.enable = mkEnableOption "Enable CLI programs" // {default = true;};
+    tui.enable = mkEnableOption "Enable TUI programs" // {default = cfg.cli.enable;};
     gui.enable = mkEnableOption "Enable GUI programs";
     gaming.enable = mkEnableOption "Enable gaming programs";
   };

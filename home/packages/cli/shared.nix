@@ -55,6 +55,8 @@ in {
         imagemagick
         ripdrag
         sptlrx
+
+        dotool
       ])
     ];
 }
