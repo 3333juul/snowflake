@@ -1,9 +1,16 @@
-{osConfig, ...}: let
+{
+  osConfig,
+  lib,
+  ...
+}: let
+  inherit (lib.attrsets) mapAttrsToList;
+
   dev = osConfig.garden.device;
   cfg = osConfig.garden.environment.desktop.hyprland;
+  monitorList = mapAttrsToList (name: conf: "${name},${conf}") cfg.monitors;
 in {
   wayland.windowManager.hyprland.settings = {
-    monitor = cfg.monitors;
+    monitor = monitorList;
 
     general = {
       "$mainMod" = "SUPER";

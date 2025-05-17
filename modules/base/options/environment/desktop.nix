@@ -1,6 +1,6 @@
 {lib, ...}: let
   inherit (lib.options) mkOption mkEnableOption;
-  inherit (lib.types) nullOr enum bool listOf str;
+  inherit (lib.types) nullOr enum bool attrsOf str;
 in {
   options.garden.environment = {
     desktop = {
@@ -24,9 +24,9 @@ in {
         };
 
         monitors = mkOption {
-          type = listOf str;
-          default = [];
-          description = "List of monitor configurations for Hyprland.";
+          type = attrsOf str;
+          default = {};
+          description = "Monitor configurations for Hyprland.";
         };
 
         layout = mkOption {

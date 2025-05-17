@@ -10,9 +10,7 @@
         hyprland = {
           useFlake = false;
           layout = "master";
-          monitors = [
-            "edP-1,1920x1080@60,1920x0,1.2"
-          ];
+          monitors.edP-1 = "1920x1080@60,1920x0,1.2";
         };
       };
     };
