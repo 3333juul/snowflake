@@ -47,9 +47,11 @@ in {
 
         clipboard = {
           enable = true;
-          providers.wl-copy.enable = isWayland;
-          providers.xclip.enable = !isWayland;
           registers = "unnamedplus";
+          providers = {
+            wl-copy.enable = isWayland;
+            xclip.enable = !isWayland;
+          };
         };
       };
     };
