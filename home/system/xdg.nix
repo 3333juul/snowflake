@@ -9,20 +9,21 @@
   inherit (lib.modules) mkIf;
   inherit (lib.attrsets) mapAttrsToList nameValuePair optionalAttrs;
   inherit (lib.lists) flatten;
+  inherit (osConfig.garden.programs) defaults;
   inherit (builtins) listToAttrs;
 
   homeDir = config.home.homeDirectory;
 
   defaultApps = {
-    browser = ["brave.desktop"];
+    browser = ["${defaults.browser}.desktop"];
     text = ["nvim.desktop"];
-    image = ["vimiv.desktop"];
+    image = ["${defaults.imageViewer}.desktop"];
     audio = ["mpv.desktop"];
     video = ["mpv.desktop"];
     directory = ["thunar.desktop"];
     office = ["libreoffice.desktop"];
     pdf = ["org.gnome.Evince.desktop"];
-    terminal = ["kitty.desktop"];
+    terminal = ["${defaults.terminal}.desktop"];
     archive = ["org.gnome.FileRoller.desktop"];
     mail = ["thunderbird.desktop"];
   };

@@ -35,7 +35,7 @@
 
       browser = {
         brave.enable = true;
-        zen.enable = false;
+        zen.enable = true;
       };
 
       imageEditor = {

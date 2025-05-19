@@ -57,6 +57,7 @@
       # Workspaces
       "workspace 2, class:(brave-browser)"
       "workspace 2, class:(Brave-browser)"
+      "workspace 2, class:(zen-beta)"
       "workspace 3, class:(VSCodium)"
       "workspace 3, title:(VSCodium)"
       "workspace 3, class:(neovim)"

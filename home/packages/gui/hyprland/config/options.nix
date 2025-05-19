@@ -54,6 +54,7 @@ in {
 
     binds = {
       allow_workspace_cycles = true;
+      hide_special_on_workspace_change = true;
     };
 
     master = {
