@@ -11,13 +11,17 @@ in {
       enable = true;
       xdgOpenUsePortal = true;
 
-      # config.common = {
-      #   default = ["gtk"];
-      #
-      #   "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
-      # };
+      config.common = {
+        default = ["gtk"];
 
-      extraPortals = [pkgs.xdg-desktop-portal-gtk];
+        "org.freedesktop.impl.portal.FileChooser" = ["termfilechooser"];
+        # "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
+      };
+
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-termfilechooser
+      ];
 
       wlr = {
         enable = true;
