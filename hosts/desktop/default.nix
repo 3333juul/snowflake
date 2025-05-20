@@ -9,7 +9,7 @@
       type = "desktop";
       cpu = "amd";
       gpu = "amd";
-      monitors = ["HDMI-A-1" "DVI-D-1"];
+      monitors = ["HDMI-A-1" "DP-3"];
       hasTPM = true;
       hasBluetooth = true;
       hasSound = true;
