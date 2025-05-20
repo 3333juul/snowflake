@@ -4,7 +4,7 @@
   ...
 }: let
   inherit (lib.lists) optionals;
-  inherit (osConfig.garden.programs) defaults;
+  inherit (osConfig.garden.programs.defaults) terminal editor browser fileManager screenLocker;
   inherit (builtins) concatLists genList;
 
   cfg = osConfig.garden.environment.desktop.hyprland.plugins;
@@ -36,11 +36,11 @@ in {
           "$mainMod ALT, semicolon, exec, hyprctl seterror disable"
 
           #== Application shortcuts =========================================================================
-          "$mainMod, RETURN, exec, ${defaults.terminal}"
-          "$mainMod, W, exec, ${defaults.browser}"
-          "$mainMod, C, exec, kitty --class ${defaults.editor} -e ${defaults.editor}"
-          "$mainMod, R, exec, kitty --class ${defaults.fileManager} -e ${defaults.fileManager}"
-          "$mainMod ALT CTRL, L, exec, ${defaults.screenLocker}"
+          "$mainMod, RETURN, exec, ${terminal}"
+          "$mainMod, W, exec, ${browser}"
+          "$mainMod, C, exec, kitty --class ${editor} -e ${editor}"
+          "$mainMod, R, exec, kitty --class ${fileManager} -e ${fileManager}"
+          "$mainMod ALT CTRL, L, exec, ${screenLocker}"
           "$mainMod, P, exec, pkill tofi || tofi-run | xargs hyprctl dispatch exec"
           "$mainMod, $mainMod_L, exec, pkill tofi || tofi-drun --drun-launch=true"
 

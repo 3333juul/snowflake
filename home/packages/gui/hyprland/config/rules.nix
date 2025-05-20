@@ -60,6 +60,7 @@
       "workspace 2, class:(zen-beta)"
       "workspace 3, class:(VSCodium)"
       "workspace 3, title:(VSCodium)"
+      "workspace 3, class:(nvim)"
       "workspace 3, class:(neovim)"
       "workspace 4, class:(thunar)"
       "workspace 4, class:(Thunar)"
@@ -71,6 +72,7 @@
       "workspace 7, class:(discord)"
       "workspace 7, class:(vesktop)"
       "workspace 8, class:(mpv)"
+      "workspace 8, class:(net.lutris.Lutris)"
       "workspace 8, class:(com.stremio.stremio)"
       "workspace 8 silent, class:(steam)"
 
