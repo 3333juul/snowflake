@@ -3,26 +3,26 @@
 DIR="$HOME/.config"
 ROFI_DIR="$DIR/rofi"
 ROFI_THEME_DIR="$ROFI_DIR/themes"
-ROFI_BIN_DIR="$FLAKE/home/scripts/bin"
+ROFI_BIN_DIR="$FLAKE/home/juul/scripts/bin"
 
 rofi="rofi -theme $ROFI_THEME_DIR/powermenu.rasi -p "PowerMenu" -dmenu -selected-row 2"
 tofi="tofi --width 250 --height 150"
 
 # Confirmation dialog
 confirm() {
-	ans=$($ROFI_BIN_DIR/confirm)
-	case $ans in
-	yes | y)
-		return 0
-		;;
-	no | n | '')
-		exit 0
-		;;
-	*)
-		rofi -theme $ROFI_THEME_DIR/askpass.rasi -e "Options  -  yes / y / no / n"
-		exit 0
-		;;
-	esac
+  ans=$($ROFI_BIN_DIR/confirm)
+  case $ans in
+  yes | y)
+    return 0
+    ;;
+  no | n | '')
+    exit 0
+    ;;
+  *)
+    rofi -theme $ROFI_THEME_DIR/askpass.rasi -e "Options  -  yes / y / no / n"
+    exit 0
+    ;;
+  esac
 }
 
 # Options
@@ -38,25 +38,25 @@ chosen=$(echo -e "$options" | $tofi)
 
 case $chosen in
 $suspend)
-	confirm
-	systemctl suspend
-	;;
+  confirm
+  systemctl suspend
+  ;;
 $reboot)
-	confirm
-	killall brave
-	systemctl reboot
-	;;
+  confirm
+  killall brave
+  systemctl reboot
+  ;;
 $lock)
-	hyprlock
-	;;
+  hyprlock
+  ;;
 $shutdown)
-	confirm
-	killall brave
-	systemctl poweroff
-	;;
+  confirm
+  killall brave
+  systemctl poweroff
+  ;;
 $logout)
-	confirm
-	killall brave
-	hyprctl dispatch exit
-	;;
+  confirm
+  killall brave
+  hyprctl dispatch exit
+  ;;
 esac

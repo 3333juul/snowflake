@@ -62,7 +62,7 @@ in {
 
     # Symlink all themes - the argument of this function must be a full path, not a Nix path type, otherwise it won't work
     xdg.configFile."rofi/themes" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${flakePath}/home/hm/packages/gui/launcher/rofi/themes";
+      source = config.lib.file.mkOutOfStoreSymlink "${flakePath}/home/juul/packages/gui/launcher/rofi/themes";
       recursive = true;
     };
   };
