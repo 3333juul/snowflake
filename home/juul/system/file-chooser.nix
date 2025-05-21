@@ -5,9 +5,10 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-  inherit (lib.validators) hasProfile;
+
+  cfg = osConfig.garden.environment.termFileChooser;
 in {
-  xdg = mkIf (hasProfile osConfig ["graphical"]) {
+  xdg = mkIf cfg.enable {
     configFile.".config/xdg-desktop-portal-termfilechooser/config".text = ''
       [filechooser]
       cmd=${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh

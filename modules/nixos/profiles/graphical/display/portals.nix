@@ -4,19 +4,25 @@
   config,
   ...
 }: let
-  cfg = config.garden.environment.desktop.type;
+  inherit (lib.modules) mkIf;
+  inherit (lib.attrsets) optionalAttrs;
+  inherit (config.garden.environment) isWM;
+  inherit (config.garden.environment) isWayland;
+
+  cfg = config.garden.environment.termFileChooser;
 in {
-  config = lib.mkIf (cfg == "Hyprland") {
+  config = mkIf isWM {
     xdg.portal = {
       enable = true;
       xdgOpenUsePortal = true;
 
-      config.common = {
-        default = ["gtk"];
-
-        "org.freedesktop.impl.portal.FileChooser" = ["termfilechooser"];
-        # "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
-      };
+      config.common =
+        {
+          default = ["gtk"];
+        }
+        // optionalAttrs cfg.enable {
+          "org.freedesktop.impl.portal.FileChooser" = ["termfilechooser"];
+        };
 
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
@@ -24,7 +30,7 @@ in {
       ];
 
       wlr = {
-        enable = true;
+        enable = isWayland;
         settings = {
           # screencast = {
           #   max_fps = 60;

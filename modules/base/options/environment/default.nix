@@ -4,8 +4,8 @@
   pkgs,
   ...
 }: let
+  inherit (lib.options) mkOption mkEnableOption;
   inherit (lib.hardware) ldTernary;
-  inherit (lib.options) mkOption;
   inherit (lib.types) enum bool str;
   inherit (builtins) elem;
 
@@ -58,6 +58,8 @@ in {
       default = "/${ldTernary pkgs "home" "Users"}/${sys.mainUser}/projects/nix/snowflake";
       description = "The path to the configuration";
     };
+
+    termFileChooser.enable = mkEnableOption "enable terminal file chooser";
   };
 
   config.assertions = [
