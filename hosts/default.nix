@@ -7,6 +7,10 @@
         "desktop"
         "graphical"
       ];
+      extraModules = {
+        useHomeManager = true;
+        useHjem = true;
+      };
     };
 
     laptop = {

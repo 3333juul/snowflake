@@ -5,6 +5,8 @@
 }: let
   inherit (inputs) self;
   inherit (lib.attrsets) mapAttrs filterAttrs;
+  inherit (lib.modules) mkForce;
+
   inherit (lib.lists) optionals concatLists;
   inherit (lib) nixosSystem;
   inherit (inputs.nix-darwin.lib) darwinSystem;
@@ -14,7 +16,7 @@
     class ? "nixos",
     arch ? "x86_64",
     profiles ? [],
-    extraModules ? [],
+    extraModules ? {},
   }: let
     isIso =
       elem "iso" profiles;
@@ -33,6 +35,20 @@
       if class == "darwin"
       then darwinSystem
       else nixosSystem;
+
+    homeModules = concatLists [
+      (optionals extraModules.useHomeManager [
+        "${self}/home"
+        inputs.home-manager.nixosModules.home-manager
+        {garden.environment.useHomeManager = mkForce true;}
+      ])
+
+      (optionals extraModules.useHjem [
+        "${self}/hjem"
+        inputs.hjem.nixosModules.default
+        {garden.environment.useHjem = mkForce true;}
+      ])
+    ];
   in
     systemEval
     {
@@ -54,10 +70,8 @@
         (map
           (profile: "${self}/modules/nixos/profiles/${profile}")
           profiles)
-        # extra modules
-        (map
-          (module: "${self}/modules/${module}")
-          extraModules)
+
+        homeModules
 
         [
           # set hostname

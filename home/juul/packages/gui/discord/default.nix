@@ -18,9 +18,11 @@
 in {
   config = mkIf cfg.discord.enable {
     home.packages = with pkgs; [
-      (discord.override {
-        withVencord = true;
-      })
+      # (discord.override {
+      #   withVencord = true;
+      # })
+
+      discord
       vesktop
     ];
 
@@ -28,4 +30,3 @@ in {
     # xdg.configFile."Vencord/settings/settings.json".text = builtins.toJSON userSettings;
   };
 }
-

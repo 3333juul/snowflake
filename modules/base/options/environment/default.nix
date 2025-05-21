@@ -31,8 +31,14 @@ in {
 
     useHomeManager = mkOption {
       type = bool;
-      default = true;
+      default = false;
       description = "Whether to use home-manager";
+    };
+
+    useHjem = mkOption {
+      type = bool;
+      default = false;
+      description = "Whether to use hjem";
     };
 
     isWayland = mkOption {

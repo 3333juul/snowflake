@@ -2,7 +2,6 @@
   garden = {
     environment = {
       shell = "zsh";
-      useHomeManager = true;
 
       desktop = {
         type = "Hyprland";

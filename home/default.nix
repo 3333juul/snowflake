@@ -1,9 +1,28 @@
 {
-  imports = [
-    ./packages
-    ./scripts
-    ./services
-    ./system
-    ./theme
-  ];
+  inputs,
+  config,
+  lib,
+  ...
+}: let
+  inherit (lib.modules) mkIf;
+
+  inherit (config.garden.environment) useHomeManager;
+  inherit (config.garden.system) mainUser;
+in {
+  home-manager = mkIf useHomeManager {
+    useUserPackages = true;
+    useGlobalPkgs = true;
+    extraSpecialArgs = {inherit inputs;};
+
+    users.${mainUser} = {
+      imports = ["${inputs.self}/home/juul"];
+      programs.home-manager.enable = true;
+
+      home = {
+        username = mainUser;
+        homeDirectory = "/home/${mainUser}";
+        stateVersion = "24.05";
+      };
+    };
+  };
 }
