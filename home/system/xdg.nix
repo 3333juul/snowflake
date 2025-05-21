@@ -14,8 +14,13 @@
 
   homeDir = config.home.homeDirectory;
 
+  browser =
+    if defaults.browser == "zen"
+    then "zen-beta"
+    else defaults.browser;
+
   defaultApps = {
-    browser = ["${defaults.browser}.desktop"];
+    browser = ["${browser}.desktop"];
     text = ["nvim.desktop"];
     image = ["${defaults.imageViewer}.desktop"];
     audio = ["mpv.desktop"];
