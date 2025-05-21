@@ -37,13 +37,13 @@
       else nixosSystem;
 
     homeModules = concatLists [
-      (optionals extraModules.useHomeManager [
+      (optionals extraModules.homeManager.enable [
         "${self}/home"
         inputs.home-manager.nixosModules.home-manager
         {garden.environment.useHomeManager = mkForce true;}
       ])
 
-      (optionals extraModules.useHjem [
+      (optionals extraModules.hjem.enable [
         "${self}/hjem"
         inputs.hjem.nixosModules.default
         {garden.environment.useHjem = mkForce true;}

@@ -4,14 +4,18 @@
   lib,
   ...
 }: let
-  inherit (lib.modules) mkIf;
+  inherit (lib.modules) mkIf mkAliasOptionModule;
 
   inherit (config.garden.environment) useHjem;
   inherit (config.garden.system) mainUser;
 in {
+  imports = [
+    ./juul
+    (mkAliasOptionModule ["hj"] ["hjem" "users" mainUser])
+  ];
+
   hjem = mkIf useHjem {
     extraModules = [
-      ./juul
       inputs.hjem-rum.hjemModules.default
     ];
     clobberByDefault = true;

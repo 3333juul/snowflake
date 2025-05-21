@@ -8,8 +8,8 @@
         "graphical"
       ];
       extraModules = {
-        useHomeManager = true;
-        useHjem = true;
+        homeManager.enable = true;
+        hjem.enable = true;
       };
     };
 
@@ -21,6 +21,9 @@
         "graphical"
         "server"
       ];
+      extraModules = {
+        homeManager.enable = true;
+      };
     };
 
     server = {
@@ -30,6 +33,9 @@
         "server"
         "headless"
       ];
+      extraModules = {
+        homeManager.enable = true;
+      };
     };
 
     darwin = {
