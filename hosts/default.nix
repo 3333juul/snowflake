@@ -7,6 +7,7 @@
         "desktop"
         "graphical"
       ];
+
       extraModules = {
         homeManager.enable = true;
         hjem.enable = true;
@@ -21,6 +22,7 @@
         "graphical"
         "server"
       ];
+
       extraModules = {
         homeManager.enable = true;
       };
@@ -33,6 +35,7 @@
         "server"
         "headless"
       ];
+
       extraModules = {
         homeManager.enable = true;
       };

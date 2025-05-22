@@ -15,7 +15,7 @@ in {
       source ${xdgConfig.configHome}/zsh/.zshenv
     '';
 
-    home-manager.users.${mainUser} = {
+    hm = {
       home.file.".zshenv".enable = false;
       programs.zsh = {
         dotDir = ".config/zsh";
