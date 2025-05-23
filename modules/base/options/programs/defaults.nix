@@ -40,7 +40,7 @@ in {
         "firefox"
         "zen"
       ];
-      default = "zen";
+      default = "brave";
     };
 
     editor = mkOption {
