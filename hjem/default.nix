@@ -4,9 +4,7 @@
   lib,
   ...
 }: let
-  inherit (lib.modules) mkIf mkAliasOptionModule;
-
-  inherit (config.garden.environment) useHjem;
+  inherit (lib.modules) mkAliasOptionModule;
   inherit (config.garden.system) mainUser;
 in {
   imports = [
@@ -14,7 +12,7 @@ in {
     (mkAliasOptionModule ["hj"] ["hjem" "users" mainUser])
   ];
 
-  hjem = mkIf useHjem {
+  hjem = {
     extraModules = [
       inputs.hjem-rum.hjemModules.default
     ];

@@ -4,16 +4,14 @@
   lib,
   ...
 }: let
-  inherit (lib.modules) mkIf mkAliasOptionModule;
-
-  inherit (config.garden.environment) useHomeManager;
+  inherit (lib.modules) mkAliasOptionModule;
   inherit (config.garden.system) mainUser;
 in {
   imports = [
     (mkAliasOptionModule ["hm"] ["home-manager" "users" mainUser])
   ];
 
-  home-manager = mkIf useHomeManager {
+  home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
     extraSpecialArgs = {inherit inputs;};
