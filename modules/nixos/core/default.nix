@@ -10,7 +10,6 @@
     ./specialisations
     ./virtualization
     ./android.nix
-    ./clean-zsh.nix
     ./fs.nix
   ];
 }

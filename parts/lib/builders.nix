@@ -4,12 +4,11 @@
   ...
 }: let
   inherit (inputs) self;
-  inherit (lib.attrsets) mapAttrs filterAttrs;
-  inherit (lib.modules) mkForce;
-
-  inherit (lib.lists) optionals concatLists;
-  inherit (lib) nixosSystem;
   inherit (inputs.nix-darwin.lib) darwinSystem;
+  inherit (lib) nixosSystem;
+  inherit (lib.lists) optionals concatLists;
+  inherit (lib.modules) mkForce;
+  inherit (lib.attrsets) mapAttrs filterAttrs;
   inherit (builtins) elem;
 
   mkHost = host: {
@@ -35,20 +34,6 @@
       if class == "darwin"
       then darwinSystem
       else nixosSystem;
-
-    homeModules = concatLists [
-      (optionals extraModules.homeManager.enable [
-        "${self}/home"
-        inputs.home-manager.nixosModules.home-manager
-        {garden.environment.useHomeManager = mkForce true;}
-      ])
-
-      (optionals extraModules.hjem.enable [
-        "${self}/hjem"
-        inputs.hjem.nixosModules.default
-        {garden.environment.useHjem = mkForce true;}
-      ])
-    ];
   in
     systemEval
     {
@@ -71,7 +56,19 @@
           (profile: "${self}/modules/nixos/profiles/${profile}")
           profiles)
 
-        homeModules
+        # extra modules: home-manager
+        (optionals extraModules.homeManager.enable [
+          "${self}/home"
+          inputs.home-manager.nixosModules.home-manager
+          {garden.environment.useHomeManager = mkForce true;}
+        ])
+
+        # extra modules: hjem
+        (optionals extraModules.hjem.enable [
+          "${self}/hjem"
+          inputs.hjem.nixosModules.default
+          {garden.environment.useHjem = mkForce true;}
+        ])
 
         [
           # set hostname
@@ -79,7 +76,7 @@
           # set system
           {nixpkgs.hostPlatform = system;}
           # set profiles in the module system
-          {garden.device.profiles = profiles;}
+          {garden.device.profiles = mkForce profiles;}
         ]
       ];
     };
