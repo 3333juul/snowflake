@@ -4,13 +4,14 @@
   osConfig,
   ...
 }: let
+  inherit (lib.lists) optionals;
   inherit (lib.modules) mkIf;
   inherit (lib.hardware) monitor;
-  inherit (osConfig.garden.device) type;
+  inherit (lib.validators) hasProfile;
 
   cfg = osConfig.garden.programs;
-
   modules = import ./modules.nix;
+  desktop = osConfig.garden.environment.desktop.type;
 in {
   imports = [./scripts];
 
@@ -26,7 +27,7 @@ in {
             layer = "top";
             height = 23;
             output = monitor osConfig 0;
-            modules-left = [
+            modules-left = optionals (desktop == "Hyprland") [
               "hyprland/workspaces"
               "hyprland/window"
             ];
@@ -35,7 +36,7 @@ in {
             ];
             modules-right = [
               "mpris"
-              (mkIf (type == "laptop") "battery")
+              (mkIf (hasProfile osConfig ["laptop"]) "battery")
               "custom/colorpicker"
               "custom/todoist"
               "cpu"
@@ -54,7 +55,7 @@ in {
             layer = "top";
             height = 23;
             output = monitor osConfig 1; # assign the second monitor as the output
-            modules-left = [
+            modules-left = optionals (desktop == "Hyprland") [
               "hyprland/workspaces"
               "hyprland/window"
             ];
