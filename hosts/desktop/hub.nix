@@ -23,7 +23,7 @@
       tui.enable = true;
       gui.enable = true;
       work.enable = true;
-      gaming-full.enable = true;
+      gamingFull.enable = true;
     };
 
     programs = {

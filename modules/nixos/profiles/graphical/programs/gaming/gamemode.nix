@@ -5,7 +5,7 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-  cfg = config.garden.presets.gaming;
+  cfg = config.garden.programs.gaming;
 
   startscript = pkgs.writeShellScript "gamemode-start" ''
     ${pkgs.libnotify}/bin/notify-send -a 'Gamemode' 'Optimizations activated'
@@ -15,7 +15,7 @@
     ${pkgs.libnotify}/bin/notify-send -a 'Gamemode' 'Optimizations deactivated'
   '';
 in {
-  config.programs.gamemode = mkIf cfg.enable {
+  config.programs.gamemode = mkIf cfg.gamemode.enable {
     enable = true;
     enableRenice = true;
     settings = {

@@ -15,8 +15,9 @@ in {
       [
         gamescope
         mangohud
-        winetricks
       ]
+      ++ optionals prg.wine.enable
+      [winetricks]
       ++ optionals prg.lutris.enable
       [lutris];
   };

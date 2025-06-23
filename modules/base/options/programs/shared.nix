@@ -15,6 +15,6 @@ in {
 
     work.enable = mkEnableOption "Enable work programs";
     gaming.enable = mkEnableOption "Enable gaming programs";
-    gaming-full.enable = mkEnableOption "Enable gaming programs";
+    gamingFull.enable = mkEnableOption "Enable gaming programs";
   };
 }

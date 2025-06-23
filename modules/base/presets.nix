@@ -45,13 +45,20 @@ in {
       };
     })
 
-    (mkIf presets.gaming-full.enable {
+    (mkIf presets.gaming.enable {
+      garden.programs.gaming = {
+        wine.enable = mkDefault true;
+        lutris.enable = mkDefault true;
+        gamemode.enable = mkDefault true;
+      };
+    })
+
+    (mkIf presets.gamingFull.enable {
       garden = {
         presets.gaming.enable = mkDefault true;
 
         programs.gaming = {
           steam.enable = mkDefault true;
-          lutris.enable = mkDefault true;
           minecraft.enable = mkDefault true;
         };
       };

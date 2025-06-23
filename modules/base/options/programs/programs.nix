@@ -61,9 +61,11 @@ in {
     };
 
     gaming = {
+      wine.enable = mkEnableOption "enable wine";
       lutris.enable = mkEnableOption "enable lutris";
       minecraft.enable = mkEnableOption "enable minecraft";
       steam.enable = mkEnableOption "enable steam";
+      gamemode.enable = mkEnableOption "enable gamemode";
     };
   };
 }
