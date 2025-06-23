@@ -42,7 +42,7 @@ default value of `false`.
 Example:
 
 ```nix
-options.garden.programs.cli.enable = mkEnableOption "enable CLI tools";
+options.garden.presets.cli.enable = mkEnableOption "enable CLI tools";
 ```
 
 ### Creating conditions based on the module options
@@ -55,7 +55,7 @@ Example:
 ```nix
 { config, lib, ... }: {
 
-  config = lib.mkIf config.garden.programs.cli.enable {
+  config = lib.mkIf config.garden.presets.cli.enable {
     # Enable CLI tools only if the option is set to true
     programs = {
       git.enable = true;

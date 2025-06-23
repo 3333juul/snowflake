@@ -6,10 +6,10 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs;
+  cfg = osConfig.garden;
 in {
   programs = {
-    git = mkIf cfg.git.enable {
+    git = mkIf cfg.programs.git.enable {
       enable = true;
 
       userName = "luravoid";
@@ -32,7 +32,7 @@ in {
       };
     };
 
-    lazygit = mkIf (cfg.tui.enable && cfg.git.enable) {
+    lazygit = mkIf (cfg.presets.tui.enable && cfg.programs.git.enable) {
       enable = true;
       settings = {
         quitOnTopLevelReturn = true;

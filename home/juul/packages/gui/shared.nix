@@ -6,7 +6,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs.gui;
+  cfg = osConfig.garden.presets.gui;
 in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [

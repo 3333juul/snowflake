@@ -7,7 +7,8 @@
   inherit (lib.modules) mkIf;
   inherit (lib.lists) optionals;
 
-  cfg = osConfig.garden.programs.gaming;
+  cfg = osConfig.garden.presets.gaming;
+  prg = osConfig.garden.programs.gaming;
 in {
   config = mkIf cfg.enable {
     home.packages = with pkgs;
@@ -16,7 +17,7 @@ in {
         mangohud
         winetricks
       ]
-      ++ optionals cfg.lutris.enable
+      ++ optionals prg.lutris.enable
       [lutris];
   };
 }

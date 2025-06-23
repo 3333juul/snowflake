@@ -5,9 +5,9 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs;
+  cfg = osConfig.garden.presets.tui;
 in {
-  config = mkIf cfg.tui.enable {
+  config = mkIf cfg.enable {
     programs.cava = {
       enable = true;
     };

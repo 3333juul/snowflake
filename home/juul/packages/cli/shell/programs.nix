@@ -6,7 +6,7 @@
   inherit (lib.modules) mkIf;
   inherit (osConfig.garden.environment) shell;
 
-  cfg = osConfig.garden.programs.cli;
+  cfg = osConfig.garden.presets.cli;
 in {
   programs = {
     zoxide = mkIf cfg.enable {

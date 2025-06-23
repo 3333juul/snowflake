@@ -7,7 +7,7 @@
   inherit (lib.lists) optionals;
   inherit (config.garden.system) mainUser;
 
-  cfg = config.garden.programs;
+  cfg = config.garden.presets;
 in {
   networking = {
     networkmanager.enable = true;

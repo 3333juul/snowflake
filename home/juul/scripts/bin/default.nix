@@ -6,7 +6,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs.gui;
+  cfg = osConfig.garden.presets.gui;
 
   mkScript = name: script: pkgs.writeShellScriptBin name (builtins.readFile script);
 

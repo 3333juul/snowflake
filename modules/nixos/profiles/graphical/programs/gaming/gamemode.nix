@@ -5,7 +5,7 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-  cfg = config.garden.programs.gaming;
+  cfg = config.garden.presets.gaming;
 
   startscript = pkgs.writeShellScript "gamemode-start" ''
     ${pkgs.libnotify}/bin/notify-send -a 'Gamemode' 'Optimizations activated'

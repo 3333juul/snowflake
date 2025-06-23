@@ -6,7 +6,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs.cli;
+  cfg = osConfig.garden.presets.cli;
 in {
   config = mkIf cfg.enable {
     programs.bat = {

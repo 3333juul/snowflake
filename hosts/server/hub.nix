@@ -8,13 +8,13 @@
       };
     };
 
-    programs = {
+    presets = {
       cli.enable = false;
       tui.enable = false;
       gui.enable = false;
-
-      git.enable = true;
     };
+
+    programs.git.enable = true;
 
     services = {
       rclone.enable = true;

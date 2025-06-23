@@ -7,7 +7,7 @@
   inherit (lib.lists) optionals concatLists;
   inherit (lib.validators) hasProfile;
 
-  cfg = osConfig.garden.programs;
+  cfg = osConfig.garden.presets;
 in {
   home.packages = with pkgs;
     concatLists [

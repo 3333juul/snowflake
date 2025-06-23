@@ -18,67 +18,19 @@
       };
     };
 
-    programs = {
+    presets = {
       cli.enable = true;
       tui.enable = true;
       gui.enable = true;
-      gaming.enable = true;
+      work.enable = true;
+      gaming-full.enable = true;
+    };
 
+    programs = {
       git.enable = true;
       starship.enable = true;
-
-      notes.enable = true;
-      discord.enable = true;
-      spotify.enable = true;
-      anki.enable = true;
-      libreoffice.enable = true;
-
-      browser = {
-        brave.enable = true;
-        zen.enable = true;
-      };
-
-      imageEditor = {
-        gimp.enable = true;
-        pinta.enable = false;
-      };
-
-      fileManager = {
-        thunar.enable = true;
-        yazi.enable = true;
-      };
-
-      editor = {
-        vscodium.enable = true;
-        neovim.enable = true;
-      };
-
-      reading = {
-        calibre.enable = true;
-        zotero.enable = true;
-      };
-
-      launcher = {
-        rofi.enable = true;
-        tofi.enable = true;
-      };
-
-      imageViewer = {
-        pqiv.enable = false;
-        swayimg.enable = false;
-        vimiv.enable = true;
-      };
-
-      terminal = {
-        foot.enable = true;
-        kitty.enable = true;
-      };
-
-      gaming = {
-        steam.enable = true;
-        lutris.enable = true;
-        minecraft.enable = true;
-      };
+      browser.zen.enable = true;
+      editor.vscodium.enable = true;
     };
 
     services = {

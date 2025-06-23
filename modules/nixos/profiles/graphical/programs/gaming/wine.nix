@@ -7,7 +7,7 @@
   inherit (lib.modules) mkIf;
 
   env = config.garden.environment;
-  cfg = config.garden.programs.gaming;
+  cfg = config.garden.presets.gaming;
 in {
   config = mkIf cfg.enable {
     # determine which version of wine to be used

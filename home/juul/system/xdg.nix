@@ -157,7 +157,7 @@ in {
           XDG_WALLPAPERS_DIR = "${homeDir}/media/pictures/wallpapers";
           XDG_RECORDINGS_DIR = "${homeDir}/media/videos/recordings";
         }
-        // optionalAttrs osConfig.garden.programs.gaming.enable {
+        // optionalAttrs osConfig.garden.presets.gaming.enable {
           XDG_GAMES_DIR = "${homeDir}/media/games";
         };
     };

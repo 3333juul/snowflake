@@ -6,7 +6,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = osConfig.garden.programs;
+  cfg = osConfig.garden.presets;
 in {
   programs.mpv = mkIf cfg.gui.enable {
     enable = true;
