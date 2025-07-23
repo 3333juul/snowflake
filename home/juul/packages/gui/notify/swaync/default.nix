@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-
-  cfg = osConfig.garden.environment.desktop.type;
+  inherit (osConfig.garden.environment) isWM;
+  inherit (osConfig.garden.programs) defaults;
 in {
-  config = mkIf (cfg == "Hyprland") {
+  config = mkIf (isWM && defaults.notifs == "swaync") {
     home.packages = with pkgs; [swaynotificationcenter];
     xdg.configFile."swaync/style.css".source = ./style.css;
     xdg.configFile."swaync/config.json".source = ./config.json;

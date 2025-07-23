@@ -6,7 +6,7 @@
 
   garden = {
     device = {
-      type = "hybrid";
+      type = "laptop";
       cpu = "intel";
       gpu = "intel";
       monitors = [];
@@ -43,8 +43,8 @@
       security.tor.enable = false;
 
       specialisations = {
-        enable = true;
-        hybrid.server.enable = true;
+        enable = false;
+        hybrid.server.enable = false;
       };
 
       networking = {

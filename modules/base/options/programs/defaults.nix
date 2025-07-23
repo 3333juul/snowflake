@@ -90,5 +90,13 @@ in {
       ];
       default = "vimiv";
     };
+
+    notifs = mkOption {
+      type = enum [
+        "dunst"
+        "swaync"
+      ];
+      default = "dunst";
+    };
   };
 }

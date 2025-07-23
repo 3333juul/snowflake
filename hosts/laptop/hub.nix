@@ -26,12 +26,17 @@
     };
 
     services = {
-      restic.enable = false;
+      restic = {
+        enable = true;
+        cli.enable = true;
+        backups = [
+          "onedrive"
+        ];
+      };
 
       syncthing = {
         enable = false;
         folders = [
-          "memes"
         ];
       };
 

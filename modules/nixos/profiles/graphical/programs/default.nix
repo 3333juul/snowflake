@@ -1,6 +1,6 @@
 {
   imports = [
-    ./dwl
+    # ./dwl
     ./gaming
     ./gui.nix
     ./hyprland.nix

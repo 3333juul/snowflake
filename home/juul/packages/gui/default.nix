@@ -7,8 +7,8 @@
     ./hyprland # wm
     ./img-viewer # image viewer applications
     ./launcher # launchers
+    ./notify # notifications
     ./spotify # music
-    ./swaync # notification manager
     ./terminal # terminals
     ./waybar # status bar
     ./anki.nix # flashcards

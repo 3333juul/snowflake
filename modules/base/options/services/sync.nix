@@ -23,6 +23,7 @@ in {
 
     restic = {
       enable = mkEnableOption "enable restic";
+      cli.enable = mkEnableOption "enable restic cli";
 
       backups = mkOption {
         type = listOf str;
