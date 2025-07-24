@@ -7,7 +7,7 @@
 }: let
   inherit (lib.modules) mkIf;
   inherit (lib.hardware) ldTernary;
-  inherit (lib.secrets) mkSecret;
+  inherit (lib.secrets) mkSecret mkSecretWithPath;
   inherit (pkgs.stdenv.hostPlatform) isDarwin;
   inherit (config.garden.system) mainUser;
 
@@ -34,8 +34,10 @@ in {
     secretsMountPoint = mkIf isDarwin "/private/tmp/agenix.d";
 
     secrets = {
-      rclone = mkSecret {
+      rclone = mkSecretWithPath {
         file = "rclone";
+        path = "/home/${mainUser}/.config/rclone/rclone.conf";
+        symlink = false;
         owner = mainUser;
         group = userGroup;
       };
