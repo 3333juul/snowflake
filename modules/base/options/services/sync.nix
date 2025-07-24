@@ -4,7 +4,7 @@
   ...
 }: let
   inherit (lib.options) mkEnableOption mkOption;
-  inherit (lib.types) listOf str;
+  inherit (lib.types) listOf str bool;
   inherit (config.garden.services) restic;
 in {
   options.garden.services = {
@@ -13,6 +13,18 @@ in {
     syncthing = {
       enable = mkEnableOption "enable syncthing";
       tray.enable = mkEnableOption "enable syncthing tray";
+
+      overrideFolders = mkOption {
+        type = bool;
+        default = true;
+        description = "Whether to use override folders";
+      };
+
+      overrideDevices = mkOption {
+        type = bool;
+        default = true;
+        description = "Whether to override devices";
+      };
 
       folders = mkOption {
         type = listOf str;

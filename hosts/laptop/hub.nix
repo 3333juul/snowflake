@@ -35,9 +35,9 @@
       };
 
       syncthing = {
-        enable = false;
-        folders = [
-        ];
+        enable = true;
+        overrideFolders = false;
+        folders = [];
       };
 
       kdeconnect = {

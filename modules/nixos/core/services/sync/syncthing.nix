@@ -25,8 +25,9 @@ in {
       user = mainUser;
       group = "users";
       guiAddress = "0.0.0.0:8384";
-      overrideDevices = true;
-      overrideFolders = true;
+      inherit (cfg) overrideDevices;
+      inherit (cfg) overrideFolders;
+
       settings = {
         devices = {
           "desktop" = mkIf (hostName != "desktop") {
