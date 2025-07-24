@@ -55,7 +55,7 @@ in {
             id = "s21-shared";
             versioning = {
               type = "simple";
-              params.keep = 10;
+              params.keep = "10";
             };
           };
 
@@ -66,7 +66,7 @@ in {
             type = "receiveonly";
             versioning = {
               type = "simple";
-              params.keep = 10;
+              params.keep = "10";
             };
           };
 
@@ -76,7 +76,7 @@ in {
             id = "s21-photoroom";
             versioning = {
               type = "simple";
-              params.keep = 10;
+              params.keep = "10";
             };
           };
 
@@ -86,7 +86,7 @@ in {
             id = "noteair3-books";
             versioning = {
               type = "simple";
-              params.keep = 10;
+              params.keep = "10";
             };
           };
 
@@ -96,7 +96,7 @@ in {
             id = "noteair3-koreader";
             versioning = {
               type = "simple";
-              params.keep = 10;
+              params.keep = "10";
             };
           };
 
@@ -106,7 +106,7 @@ in {
             id = "memes-folder";
             versioning = {
               type = "simple";
-              params.keep = 10;
+              params.keep = "10";
             };
           };
         };

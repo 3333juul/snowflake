@@ -38,8 +38,9 @@
 
       syncthing = {
         enable = true;
-        overrideFolders = false;
-        folders = [];
+        folders = [
+          "s21/photoroom"
+        ];
       };
 
       kdeconnect = {
