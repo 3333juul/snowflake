@@ -26,6 +26,8 @@
     };
 
     services = {
+      rclone.enable = true;
+
       restic = {
         enable = true;
         cli.enable = true;

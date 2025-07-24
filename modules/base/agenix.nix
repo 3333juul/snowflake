@@ -40,6 +40,7 @@ in {
         symlink = false;
         owner = mainUser;
         group = userGroup;
+        mode = "644";
       };
 
       restic-password = mkSecret {
