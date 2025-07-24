@@ -10,7 +10,7 @@
 
   cfg = config.garden.services.rclone;
 
-  mkMount = {
+  mkMountRclone = {
     remotePath,
     mountPoint,
     configFile,
@@ -34,15 +34,55 @@
       Type = "notify";
     };
   };
+  # mkMountRestic = {
+  #   repo,
+  #   mountPoint,
+  #   passwordFile,
+  #   configFile,
+  #   autostart ? false,
+  # }: {
+  #   description = "Restic snapshot mount";
+  #   wantedBy = optionals autostart ["multi-user.target"];
+  #
+  #   serviceConfig = {
+  #     ExecStop = "${pkgs.fuse3}/bin/fusermount3 -u ${mountPoint}";
+  #     # FIXME: find way to add fusermount to path
+  #     ExecStartPre = ''
+  #       export PATH=$PATH:${lib.makeBinPath [pkgs.fuse3]}
+  #       ${pkgs.coreutils}/bin/mkdir -p ${mountPoint}
+  #       ${pkgs.coreutils}/bin/chown ${mainUser} ${mountPoint}
+  #     '';
+  #
+  #     ExecStart = ''
+  #       ${pkgs.restic}/bin/restic -r ${repo} \
+  #         mount ${mountPoint}
+  #     '';
+  #     Environment = [
+  #       "RESTIC_PASSWORD_FILE=${passwordFile}"
+  #       "RCLONE_CONFIG=${configFile}"
+  #       "XDG_CACHE_HOME=/home/${mainUser}/.cache"
+  #     ];
+  #
+  #     Restart = "on-failure";
+  #     Type = "simple";
+  #   };
+  # };
 in {
   config = mkIf cfg.enable {
     systemd = {
       services = {
-        rclone-onedrive-mount = mkMount {
+        rclone-onedrive-mount = mkMountRclone {
           remotePath = "onedrive:";
           mountPoint = "/run/media/${mainUser}/rclone/onedrive";
           configFile = config.age.secrets.rclone.path;
         };
+
+        # restic-onedrive-mount = mkMountRestic {
+        #   repo = "rclone:onedrive:Restic/desktop";
+        #   mountPoint = "/run/media/${mainUser}/restic";
+        #   passwordFile = config.age.secrets.restic-password.path;
+        #   configFile = config.age.secrets.rclone.path;
+        # };
       };
     };
 
@@ -62,17 +102,24 @@ in {
         }
 
         case "$1" in
-          onedrive)
+          rclone-onedrive)
             toggle_mount "rclone-onedrive-mount"
             ;;
+          # restic-onedrive)
+          #   toggle_mount "restic-onedrive-mount"
+          #   ;;
           *)
             echo "Usage: tm <mount-name>"
             echo "Supported mounts:"
-            echo "1. onedrive"
+            echo "1. rclone-onedrive"
+            # echo "2. restic-onedrive"
             exit 1
             ;;
         esac
       '';
-    in [pkgs.rclone tm];
+    in [
+      tm
+      pkgs.rclone
+    ];
   };
 }
