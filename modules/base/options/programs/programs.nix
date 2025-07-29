@@ -12,7 +12,6 @@ in {
     spotify.enable = mkEnableOption "enable spotify";
     git.enable = mkEnableOption "enable git";
     starship.enable = mkEnableOption "enable starship";
-    notes.enable = mkEnableOption "enable notes";
     astal.enable = mkEnableOption "enable astal";
 
     waybar.enable =
@@ -58,6 +57,11 @@ in {
     terminal = {
       foot.enable = mkEnableOption "enable foot";
       kitty.enable = mkEnableOption "enable kitty";
+    };
+
+    notes = {
+      enable = mkEnableOption "enable notes";
+      handwriting.enable = mkEnableOption "enable handwriting notes";
     };
 
     gaming = {

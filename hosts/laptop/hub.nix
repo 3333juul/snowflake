@@ -23,6 +23,7 @@
     programs = {
       git.enable = true;
       starship.enable = true;
+      notes.enable = true;
     };
 
     services = {

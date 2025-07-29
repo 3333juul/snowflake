@@ -6,16 +6,20 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
+  inherit (lib.lists) optionals;
 
   homeDir = config.home.homeDirectory;
   cfg = osConfig.garden.programs;
   nvf = osConfig.garden.programs.editor.neovim;
 in {
   config = mkIf cfg.notes.enable {
-    home.packages = [
-      pkgs.obsidian
-      pkgs.affine
-    ];
+    home.packages =
+      [
+        pkgs.obsidian
+      ]
+      ++ optionals cfg.notes.handwriting.enable [
+        pkgs.affine
+      ];
 
     programs.nvf.settings.vim = mkIf nvf.enable {
       notes.obsidian = {
