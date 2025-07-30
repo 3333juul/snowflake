@@ -9,7 +9,7 @@
 in {
   imports = [
     (mkAliasOptionModule ["hm"] ["home-manager" "users" mainUser])
-    ./clean-zsh.nix
+    ./mixins
   ];
 
   home-manager = {
