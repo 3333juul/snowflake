@@ -21,7 +21,7 @@ in {
       #"--enable-wayland-ime"
 
       # enable hardware acceleration - vulkan api
-      "--enable-features=Vulkan"
+      # "--enable-features=Vulkan"
 
       # use the plain text store
       #"--password-store=basic"
