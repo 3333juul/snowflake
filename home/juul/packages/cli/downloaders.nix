@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   osConfig,
   ...
 }: let
@@ -12,8 +13,9 @@ in {
       enable = true;
     };
 
-    # home.packages = [
-    #   pkgs.instaloader
-    # ];
+    home.packages = [
+      #pkgs.instaloader
+      pkgs.yt-dlp-light
+    ];
   };
 }

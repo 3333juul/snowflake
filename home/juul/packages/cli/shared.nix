@@ -47,7 +47,6 @@ in {
         tesseract
         wf-recorder
         wl-clipboard # clipboard utils for wayland (wl-copy, wl-paste)
-        yt-dlp-light
         xdg-utils
         jless
         socat
