@@ -13,6 +13,7 @@ in {
     git.enable = mkEnableOption "enable git";
     starship.enable = mkEnableOption "enable starship";
     astal.enable = mkEnableOption "enable astal";
+    thunderbird.enable = mkEnableOption "enable thunderbird";
 
     waybar.enable =
       mkEnableOption "enables waybar"
@@ -46,6 +47,7 @@ in {
     launcher = {
       rofi.enable = mkEnableOption "enable rofi";
       tofi.enable = mkEnableOption "enable tofi";
+      vicinae.enable = mkEnableOption "enable vicinae";
     };
 
     imageViewer = {

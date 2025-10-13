@@ -55,6 +55,7 @@ in {
       type = nullOr (enum [
         "rofi"
         "tofi"
+        "vicinae"
         "cosmic-launcher"
       ]);
       default = "tofi";

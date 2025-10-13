@@ -9,7 +9,7 @@
         hyprland = {
           useFlake = false;
           layout = "master";
-          monitors.edP-1 = "1920x1080@60,1920x0,1.2";
+          monitors.eDP-1 = "1920x1080@60,0x0,1.2";
         };
       };
     };
@@ -18,12 +18,17 @@
       cli.enable = true;
       tui.enable = true;
       gui.enable = true;
+      gaming.enable = true;
     };
 
     programs = {
       git.enable = true;
       starship.enable = true;
       notes.enable = true;
+      thunderbird.enable = true;
+
+      launcher.vicinae.enable = true;
+      defaults.launcher = "vicinae";
     };
 
     services = {

@@ -10,6 +10,7 @@
     hyprland.url = "github:hyprwm/hyprland";
     nvf.url = "github:notashelf/nvf";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    vicinae.url = "github:vicinaehq/vicinae";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -59,6 +60,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-private = {
+      url = "git+ssh://git@github.com/3333juul/nix-private.git";
+    };
+
     # hyprland-easymotion = {
     #   url = "github:zakk4223/hyprland-easymotion/3388351d2af672f89b907404668c6076336270e9";
     #   inputs.hyprland.follows = "hyprland";
@@ -83,9 +88,5 @@
     #   url = "github:aylur/ags";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-
-    nix-private = {
-      url = "git+ssh://git@github.com/3333juul/nix-private.git";
-    };
   };
 }

@@ -131,6 +131,7 @@
       "blur, launcher"
       "dimaround, launcher"
       "noanim, launcher"
+      "noanim, vicinae"
       "animation slide right, swaync-control-center"
     ];
   };

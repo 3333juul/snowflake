@@ -2,6 +2,7 @@
   inherit (lib.options) mkEnableOption;
   inherit (lib.services) mkServiceOption;
 in {
+  # NOTE: remember what mkServiceOption does
   options.garden.services = {
     enable = mkEnableOption "enable services";
 

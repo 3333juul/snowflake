@@ -1,5 +1,13 @@
 {
-  programs.thunderbird = {
+  lib,
+  osConfig,
+  ...
+}: let
+  inherit (lib.modules) mkIf;
+
+  cfg = osConfig.garden.programs;
+in {
+  programs.thunderbird = mkIf cfg.thunderbird.enable {
     enable = true;
 
     profiles.personal = {

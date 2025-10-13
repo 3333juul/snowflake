@@ -34,7 +34,7 @@ in {
         "hyprctl setcursor Bibata-Modern-Ice 24 &"
 
         # Scripts
-        "toggleurgent &"
+        # "toggleurgent &"
         #"windowstate &"
         #"wallshift &"
       ]
@@ -44,9 +44,9 @@ in {
       ++ optionals spotify.enable [
         "[workspace special:music silent] spotify &"
       ]
-      ++ optionals (layout == "master") [
-        "groupbind-run &"
-      ]
+      # ++ optionals (layout == "master") [
+      #   "groupbind-run &"
+      # ]
       ++ optionals (plugins.hycov.enable && plugins.hyprland-easymotion.enable) [
         "hycov-easymotion &"
       ];

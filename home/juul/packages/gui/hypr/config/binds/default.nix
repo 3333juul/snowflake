@@ -4,7 +4,7 @@
   ...
 }: let
   inherit (lib.lists) optionals;
-  inherit (osConfig.garden.programs.defaults) terminal editor browser fileManager screenLocker;
+  inherit (osConfig.garden.programs.defaults) terminal editor browser fileManager screenLocker launcher;
   inherit (builtins) concatLists genList;
 
   cfg = osConfig.garden.environment.desktop.hyprland.plugins;
@@ -42,7 +42,13 @@ in {
           "$mainMod, R, exec, kitty --class ${fileManager} -e ${fileManager}"
           "$mainMod ALT CTRL, L, exec, ${screenLocker}"
           "$mainMod, P, exec, pkill tofi || tofi-run | xargs hyprctl dispatch exec"
-          "$mainMod, $mainMod_L, exec, pkill tofi || tofi-drun --drun-launch=true"
+
+          "$mainMod, $mainMod_L, exec, ${{
+              tofi = "pkill tofi || tofi-drun --drun-launch=true";
+              vicinae = "vicinae toggle";
+            }.${
+              launcher
+            }}"
 
           #== Scripts =======================================================================================
           "$mainMod CTRL, slash, exec, ocr"
