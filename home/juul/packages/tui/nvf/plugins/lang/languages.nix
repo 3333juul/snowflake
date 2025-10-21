@@ -7,7 +7,6 @@
     languages = {
       enableExtraDiagnostics = true;
       enableFormat = true;
-      enableLSP = true;
       enableTreesitter = true;
 
       bash.enable = true;

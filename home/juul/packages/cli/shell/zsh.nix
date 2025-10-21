@@ -31,13 +31,7 @@ in {
       }
     ];
 
-    initExtraFirst = ''
-      DISABLE_AUTO_UPDATE=true
-      DISABLE_MAGIC_FUNCTIONS=true
-      export "MICRO_TRUECOLOR=1"
-    '';
-
-    initExtra = ''
+    initContent = ''
       setopt share_history
       setopt hist_expire_dups_first
       setopt hist_ignore_dups

@@ -5,14 +5,19 @@
 {
   programs.ssh = {
     enable = true;
-    hashKnownHosts = true;
-    compression = true;
+    enableDefaultConfig = false;
 
-    includes = [
-    ];
+    includes = [];
 
     matchBlocks = {
-      "laptop".hostname = "192.168.12.44";
+      "*" = {
+        hashKnownHosts = true;
+        compression = true;
+      };
+
+      "laptop" = {
+        hostname = "192.168.12.44";
+      };
     };
   };
 }

@@ -18,7 +18,7 @@ in {
     hm = {
       home.file.".zshenv".enable = false;
       programs.zsh = {
-        dotDir = ".config/zsh";
+        dotDir = "${xdgConfig.configHome}/zsh";
         history.path = "${xdgConfig.stateHome}/zsh/history";
       };
     };
