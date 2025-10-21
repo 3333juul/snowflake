@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   osConfig,
   lib,
@@ -14,8 +13,6 @@ in {
   config = mkIf cfg.rofi.enable {
     programs.rofi = {
       enable = true;
-      #package =;
-      package = pkgs.rofi-wayland;
       extraConfig = {
         show-icons = true;
         icon-theme = "Zafiro";
