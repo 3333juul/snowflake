@@ -25,8 +25,8 @@
 
       private = {
         enable = true;
-        glance = true;
-        website = false;
+        glance.enable = true;
+        website.enable = false;
       };
 
       restic = {

@@ -5,10 +5,9 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = config.garden.environment.desktop.type;
+  cfg = config.garden.environment;
 in {
-  # TODO: Change to isWayland, remove variables not associated with wayland
-  environment.variables = mkIf (cfg == "Hyprland") {
+  environment.variables = mkIf cfg.isWayland {
     NIXOS_OZONE_WL = "1";
     _JAVA_AWT_WM_NONEREPARENTING = "1";
     ANKI_WAYLAND = "1";
