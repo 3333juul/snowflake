@@ -5,6 +5,7 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
+  inherit (lib.lists) optionals;
   inherit (lib.attrsets) optionalAttrs;
   inherit (config.garden.environment) isWM;
   inherit (config.garden.environment) isWayland;
@@ -24,10 +25,14 @@ in {
           "org.freedesktop.impl.portal.FileChooser" = ["termfilechooser"];
         };
 
-      extraPortals = [
-        pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-termfilechooser
-      ];
+      extraPortals =
+        [
+          pkgs.xdg-desktop-portal-gtk
+        ]
+        ++ optionals cfg.enable
+        [
+          pkgs.xdg-desktop-portal-termfilechooser
+        ];
 
       wlr = {
         enable = isWayland;

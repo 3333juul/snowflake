@@ -16,10 +16,10 @@ in {
       pavucontrol # gui volume control
       qalculate-gtk # calculator
       qbittorrent # torrent client
-      stremio
+      # stremio
       obs-studio
       signal-desktop
-      ayugram-desktop
+      # ayugram-desktop
     ];
   };
 }

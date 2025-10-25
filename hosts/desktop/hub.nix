@@ -4,7 +4,7 @@
       shell = "zsh";
 
       desktop = {
-        type = "Hyprland";
+        type = null;
 
         hyprland = {
           useFlake = false;
@@ -31,13 +31,14 @@
       starship.enable = true;
       browser.zen.enable = true;
       editor.vscodium.enable = true;
+      reading.calibre.enable = false;
     };
 
     services = {
       rclone.enable = true;
 
       syncthing = {
-        enable = true;
+        enable = false;
         tray.enable = false;
         folders = [
           "noteAir3/books"

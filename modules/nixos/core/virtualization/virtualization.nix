@@ -14,7 +14,7 @@ in {
       spiceUSBRedirection.enable = true;
 
       waydroid.enable = cfg.waydroid.enable;
-      lxd.enable = cfg.waydroid.enable;
+      # lxd.enable = cfg.waydroid.enable;
     };
   };
 }

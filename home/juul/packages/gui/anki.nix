@@ -13,7 +13,7 @@ in {
   config = mkIf cfg.anki.enable {
     home.packages = [
       pkgs.anki
-      vocabsieve
+      # vocabsieve
     ];
   };
 }
