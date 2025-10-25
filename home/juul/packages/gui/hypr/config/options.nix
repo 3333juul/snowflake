@@ -34,7 +34,7 @@ in {
       touchpad = {
         natural_scroll = true;
       };
-      natural_scroll = false;
+      natural_scroll = true;
     };
 
     misc = {
@@ -45,11 +45,6 @@ in {
       #initial_workspace_tracking = 0;
       enable_swallow = false;
       swallow_regex = "kitty";
-    };
-
-    gestures = {
-      workspace_swipe = true;
-      workspace_swipe_fingers = 3;
     };
 
     binds = {

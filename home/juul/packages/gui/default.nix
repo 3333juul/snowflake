@@ -12,10 +12,12 @@
     ./terminal # terminals
     ./waybar # status bar
     ./anki.nix # flashcards
+    ./hyprlock.nix
     ./img-editor.nix # image editor
     ./libreoffice.nix # office apps
     ./mpv.nix # media player
     ./notes.nix # note-taking apps
+    ./pyprland.nix
     ./reading.nix # reading apps
     ./shared.nix # shared gui packages
     ./thunderbird.nix # mail
