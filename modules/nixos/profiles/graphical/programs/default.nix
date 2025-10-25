@@ -3,7 +3,7 @@
     # ./dwl
     ./gaming
     ./gui.nix
-    ./hyprland.nix
+    ./hyprland
     ./thunar.nix
   ];
 }
