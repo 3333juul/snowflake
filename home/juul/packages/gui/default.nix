@@ -4,7 +4,6 @@
     ./browser # browsers
     ./discord # discord
     ./gaming # gaming
-    ./hypr # hypr ecosystem
     ./img-viewer # image viewer applications
     ./launcher # launchers
     ./notify # notifications
