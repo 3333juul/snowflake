@@ -18,11 +18,10 @@
 in {
   config = mkIf cfg.discord.enable {
     home.packages = with pkgs; [
-      # (discord.override {
-      #   withVencord = true;
-      # })
+      (discord.override {
+        withVencord = true;
+      })
 
-      discord
       vesktop
     ];
 

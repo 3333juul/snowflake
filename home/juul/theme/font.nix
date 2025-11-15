@@ -8,7 +8,7 @@
     nerd-fonts.terminess-ttf
 
     twemoji-color-font
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     terminus_font
     terminus_font_ttf
     font-awesome

@@ -1,7 +1,14 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   environment.systemPackages = let
     restore = pkgs.writeShellScriptBin "restore" ''
       set -e
+
+      # take password from secret
+      export RESTIC_PASSWORD_FILE=${config.age.secrets.restic-password.path}
 
       # list available remotes
       echo "🔗 Available Rclone remotes:"
@@ -12,9 +19,35 @@
       read -rp "📁 Enter the path to the Restic repository folder (e.g., restic-backup): " REPO_DIR
       REPO="rclone:$REMOTE:$REPO_DIR"
 
-      # show snapshots
-      echo -e "\n📸 Available snapshots in the repository:"
-      ${pkgs.restic}/bin/restic -r "$REPO" snapshots
+      echo -e "\n📸 Fetching snapshots..."
+      SNAPSHOTS=$(${pkgs.restic}/bin/restic -r "$REPO" snapshots --json)
+
+      if [[ -z "$SNAPSHOTS" ]]; then
+        echo "❌ No snapshots found!"
+        exit 1
+      fi
+
+      # choose snapshot with fzf
+      echo -e "\n📦 Select snapshot using fzf:"
+      SELECTED_SNAPSHOT=$(echo "$SNAPSHOTS" \
+        | ${pkgs.jq}/bin/jq -r '
+          sort_by(.time) | reverse |
+          .[] | "\(.id)\t\(.time)\t\(.paths | join(", "))"' \
+        | ${pkgs.fzf}/bin/fzf --delimiter='\t' --with-nth=2 \
+          --preview '
+            echo "Snapshot ID: {1}"
+            echo "Date: {2}"
+            echo ""
+            echo "{3}" | sed "s/^/• /" ')
+
+      if [[ -z "$SELECTED_SNAPSHOT" ]]; then
+        echo "❌ No snapshot selected."
+        exit 1
+      fi
+
+      SNAPSHOT_ID=$(echo "$SELECTED_SNAPSHOT" | cut -f1)
+
+      echo "✔️ Selected snapshot: $SNAPSHOT_ID"
 
       # ask what to restore
       read -rp $'\n📂 Enter the full path to the folder you want to restore: ' INCLUDE_PATH
@@ -24,10 +57,12 @@
       TARGET_PATH="''${TARGET_PATH:-$HOME/projects/restore}"
 
       # confirmation
-      echo -e "\n🔁 Restoring from the latest snapshot:"
+      echo -e "\n🔁 Restoring:"
       echo "   Repository:     $REPO"
-      echo "   Restoring:      $INCLUDE_PATH"
+      echo "   Snapshot:       $SNAPSHOT_ID"
+      echo "   Path:           $INCLUDE_PATH"
       echo "   Destination:    $TARGET_PATH"
+
       read -rp $'\nProceed with restore? (y/n): ' CONFIRM
       if [[ "$CONFIRM" != "y" ]]; then
         echo "❌ Operation cancelled."
@@ -35,7 +70,7 @@
       fi
 
       # run the restore command
-      ${pkgs.restic}/bin/restic -r "$REPO" restore latest --target "$TARGET_PATH" --include "$INCLUDE_PATH"
+      ${pkgs.restic}/bin/restic -r "$REPO" restore "$SNAPSHOT_ID" --target "$TARGET_PATH" --include "$INCLUDE_PATH"
     '';
   in [restore];
 }
