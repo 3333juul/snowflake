@@ -16,10 +16,13 @@ in {
       pavucontrol # gui volume control
       qalculate-gtk # calculator
       qbittorrent # torrent client
-      stremio
+      # stremio # TODO: broken, enable later
       obs-studio
       signal-desktop
       ayugram-desktop
+      # tor-browser
+
+      popsicle # live-media
     ];
   };
 }
