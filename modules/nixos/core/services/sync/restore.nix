@@ -33,12 +33,7 @@
         | ${pkgs.jq}/bin/jq -r '
           sort_by(.time) | reverse |
           .[] | "\(.id)\t\(.time)\t\(.paths | join(", "))"' \
-        | ${pkgs.fzf}/bin/fzf --delimiter='\t' --with-nth=2 \
-          --preview '
-            echo "Snapshot ID: {1}"
-            echo "Date: {2}"
-            echo ""
-            echo "{3}" | sed "s/^/• /" ')
+        | ${pkgs.fzf}/bin/fzf --delimiter='\t' --with-nth=2,3 --preview 'echo -e "Snapshot ID: {1}\nDate: {2}\nPaths: {3}"')
 
       if [[ -z "$SELECTED_SNAPSHOT" ]]; then
         echo "❌ No snapshot selected."
