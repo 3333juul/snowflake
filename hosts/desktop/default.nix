@@ -18,7 +18,7 @@
     };
 
     system = {
-      mainUser = "scay"; # TODO: change it after reinstalling the system
+      mainUser = "juul";
 
       boot = {
         loader = "grub";
