@@ -156,13 +156,13 @@
     max-length = 45;
   };
 
-  "custom/weather" = {
-    format = "{}";
-    tooltip = true;
-    interval = 3600;
-    exec = "$HOME/.config/waybar/scripts/weather.py";
-    return-type = "json";
-  };
+  # "custom/weather" = {
+  #   format = "{}";
+  #   tooltip = true;
+  #   interval = 3600;
+  #   exec = "weather.py";
+  #   return-type = "json";
+  # };
 
   "custom/todoist" = {
     format = "{icon} {}";
