@@ -26,16 +26,17 @@
       starship.enable = true;
       notes.enable = true;
       thunderbird.enable = true;
+      reading.calibre.enable = true;
 
       launcher.vicinae.enable = true;
       defaults.launcher = "vicinae";
     };
 
     services = {
-      rclone.enable = true;
+      rclone.enable = false;
 
       restic = {
-        enable = true;
+        enable = false;
         cli.enable = true;
         backups = [
           "onedrive"
