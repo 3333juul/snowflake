@@ -8,22 +8,14 @@
   inherit (lib) nixosSystem;
   inherit (lib.lists) optionals concatLists;
   inherit (lib.modules) mkForce;
-  inherit (lib.attrsets) mapAttrs filterAttrs recursiveUpdate;
+  inherit (lib.attrsets) mapAttrs filterAttrs;
   inherit (builtins) elem;
 
   mkHost = host: {
     class ? "nixos",
     arch ? "x86_64",
     profiles ? [],
-    extraModules ? {},
   }: let
-    em =
-      recursiveUpdate {
-        homeManager.enable = false;
-        hjem.enable = false;
-      }
-      extraModules;
-
     isIso =
       elem "iso" profiles;
 
@@ -56,26 +48,14 @@
           "${self}/modules/base"
           # modules per class: nixos, darwin
           "${self}/modules/${perClass}"
+          # home-manager modules
+          "${self}/home"
         ])
 
         # profile modules for different system types
         (map
           (profile: "${self}/modules/nixos/profiles/${profile}")
           profiles)
-
-        # extra modules: home-manager
-        (optionals em.homeManager.enable [
-          "${self}/home"
-          inputs.home-manager.nixosModules.home-manager
-          {garden.environment.useHomeManager = mkForce true;}
-        ])
-
-        # extra modules: hjem
-        (optionals em.hjem.enable [
-          "${self}/hjem"
-          inputs.hjem.nixosModules.default
-          {garden.environment.useHjem = mkForce true;}
-        ])
 
         [
           # set hostname

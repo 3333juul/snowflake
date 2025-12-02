@@ -8,6 +8,7 @@
   inherit (config.garden.system) mainUser;
 in {
   imports = [
+    inputs.home-manager.nixosModules.home-manager
     (mkAliasOptionModule ["hm"] ["home-manager" "users" mainUser])
     ./mixins
   ];

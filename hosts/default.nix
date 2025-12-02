@@ -7,11 +7,6 @@
         "desktop"
         "graphical"
       ];
-
-      extraModules = {
-        homeManager.enable = true;
-        hjem.enable = true;
-      };
     };
 
     laptop = {
@@ -22,10 +17,6 @@
         "graphical"
         "server"
       ];
-
-      extraModules = {
-        homeManager.enable = true;
-      };
     };
 
     server = {
@@ -35,10 +26,6 @@
         "server"
         "headless"
       ];
-
-      extraModules = {
-        homeManager.enable = true;
-      };
     };
 
     darwin = {
