@@ -40,25 +40,25 @@
         autoLogin.enable = false;
       };
 
-      security.tor.enable = true;
+      security.tor.enable = false;
 
       specialisations = {
-        enable = true;
-        steamOS.enable = true;
+        enable = false;
+        steamOS.enable = false;
       };
 
       networking = {
         wirelessBackend = "iwd";
 
         tailscale = {
-          enable = true;
+          enable = false;
           isServer = false;
           isClient = true;
         };
       };
 
       virtualization = {
-        enable = true;
+        enable = false;
         docker.enable = false;
         qemu.enable = true;
         podman.enable = false;
@@ -66,8 +66,8 @@
       };
 
       android = {
-        enable = true;
-        scrcpy.enable = true;
+        enable = false;
+        scrcpy.enable = false;
       };
     };
   };

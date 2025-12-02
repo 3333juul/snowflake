@@ -22,22 +22,22 @@
       cli.enable = true;
       tui.enable = true;
       gui.enable = true;
-      work.enable = true;
-      gamingFull.enable = true;
+      work.enable = false;
+      gamingFull.enable = false;
     };
 
     programs = {
       git.enable = true;
       starship.enable = true;
-      browser.zen.enable = true;
-      editor.vscodium.enable = true;
+      browser.zen.enable = false;
+      editor.vscodium.enable = false;
     };
 
     services = {
-      rclone.enable = true;
+      rclone.enable = false;
 
       syncthing = {
-        enable = true;
+        enable = false;
         tray.enable = false;
         folders = [
           "noteAir3/books"
@@ -48,7 +48,7 @@
       };
 
       restic = {
-        enable = true;
+        enable = false;
         backups = [
           "onedrive"
           "local-internal"
