@@ -47,6 +47,8 @@
         enable = true;
         folders = [
           "s21/photoroom"
+          "s21/shared"
+          "memes"
         ];
       };
 
