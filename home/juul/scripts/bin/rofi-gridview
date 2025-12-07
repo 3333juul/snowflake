@@ -8,93 +8,93 @@ sort_command="sort -r -n -k1,1"
 
 # Sorting menu
 choose_sorting_method() {
-	sorting_method=$(echo -e "Newest to Oldest\nOldest to Newest\nAlphabetical (A-Z)\nAlphabetical (Z-A)" | rofi -dmenu -i -p "Sorting" -theme launcher3)
-	case $sorting_method in
-	"Newest to Oldest")
-		sort_command="sort -r -n -k1,1"
-		;;
-	"Oldest to Newest")
-		sort_command="sort -n -k1,1"
-		;;
-	"Alphabetical (A-Z)")
-		sort_command="sort"
-		;;
-	"Alphabetical (Z-A)")
-		sort_command="sort -r"
-		;;
-	*)
-		exit 0
-		;;
-	esac
+  sorting_method=$(echo -e "Newest to Oldest\nOldest to Newest\nAlphabetical (A-Z)\nAlphabetical (Z-A)" | rofi -dmenu -i -p "Sorting" -theme launcher3)
+  case $sorting_method in
+  "Newest to Oldest")
+    sort_command="sort -r -n -k1,1"
+    ;;
+  "Oldest to Newest")
+    sort_command="sort -n -k1,1"
+    ;;
+  "Alphabetical (A-Z)")
+    sort_command="sort"
+    ;;
+  "Alphabetical (Z-A)")
+    sort_command="sort -r"
+    ;;
+  *)
+    exit 0
+    ;;
+  esac
 }
 
 # Find and show files
 display_files() {
-	local maxdepth_param="-maxdepth ${maxdepth}"
-	local file_types
+  local maxdepth_param="-maxdepth ${maxdepth}"
+  local file_types
 
-	# Define file types to search for based on whether videos should be included
-	file_types=(-iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp" -o -iname "*.mp4")
+  # Define file types to search for based on whether videos should be included
+  file_types=(-iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp" -o -iname "*.mp4" -o -iname "*.mov")
 
-	# Fetch and sort files
-	if [[ $sort_command == *"-n -k1,1"* ]]; then
-		files=$(find "$current_location" $maxdepth_param -type f \( "${file_types[@]}" \) -printf "%T@ %p\n" | $sort_command | cut -d' ' -f2-)
-	else
-		files=$(find "$current_location" $maxdepth_param -type f \( "${file_types[@]}" \) | $sort_command)
-	fi
+  # Fetch and sort files
+  if [[ $sort_command == *"-n -k1,1"* ]]; then
+    files=$(find "$current_location" $maxdepth_param -type f \( "${file_types[@]}" \) -printf "%T@ %p\n" | $sort_command | cut -d' ' -f2-)
+  else
+    files=$(find "$current_location" $maxdepth_param -type f \( "${file_types[@]}" \) | $sort_command)
+  fi
 
-	selected_file=$(echo "$files" | while IFS= read -r file; do
-		relative_path="${file#$current_location/}"
-		echo -en "$relative_path\0icon\x1fthumbnail://$file\n"
-	done | rofi -dmenu -i -p "$current_location" -kb-custom-1 "Ctrl+s" -theme rofi-gridview)
+  selected_file=$(echo "$files" | while IFS= read -r file; do
+    relative_path="${file#$current_location/}"
+    echo -en "$relative_path\0icon\x1fthumbnail://$file\n"
+  done | rofi -dmenu -i -p "$current_location" -kb-custom-1 "Ctrl+s" -theme rofi-gridview)
 
-	# Check if custom keybinding was pressed
-	if [[ $? -eq 10 ]]; then
-		choose_sorting_method
-		display_files # Reload files with new sorting
-	else
-		# If an file is selected
-		if [[ -n $selected_file ]]; then
-			full_path="$current_location/$selected_file"
-			# Display a menu with options for the selected file
-			action=$(echo -e "Open\nCopy file\nDrag & drop\nRename\nOpen in GIMP\nCopy path" | rofi -dmenu -i -p "Select action" -theme ~/.config/rofi/themes/launcher3.rasi)
-			case $action in
-			"Open")
-				xdg-open "$full_path"
-				;;
-			"Copy file")
-				mime_type=$(file --mime-type -b "$full_path")
-				wl-copy -t "$mime_type" <"$full_path"
-				;;
-			"Drag & drop")
-				ripdrag -s 100 -H 100 "$full_path"
-				;;
-			"Rename")
-				new_name=$(rofi -dmenu -i -p "New name" -theme launcher3 -theme-str "listview { enabled: false;}")
-				if [[ -n $new_name ]]; then
-					extension="${full_path##*.}"
-					mv "$full_path" "$(dirname "$full_path")/$new_name.$extension"
-				fi
-				;;
-			"Open in GIMP")
-				gimp "$full_path"
-				;;
-			"Copy path")
-				echo -n "$full_path" | wl-copy
-				;;
-			*)
-				echo "Exited"
-				;;
-			esac
-		fi
-	fi
+  # Check if custom keybinding was pressed
+  if [[ $? -eq 10 ]]; then
+    choose_sorting_method
+    display_files # Reload files with new sorting
+  else
+    # If an file is selected
+    if [[ -n $selected_file ]]; then
+      full_path="$current_location/$selected_file"
+      # Display a menu with options for the selected file
+      action=$(echo -e "Open\nCopy file\nDrag & drop\nRename\nOpen in GIMP\nCopy path" | rofi -dmenu -i -p "Select action" -theme ~/.config/rofi/themes/launcher3.rasi)
+      case $action in
+      "Open")
+        xdg-open "$full_path"
+        ;;
+      "Copy file")
+        mime_type=$(file --mime-type -b "$full_path")
+        wl-copy -t "$mime_type" <"$full_path"
+        ;;
+      "Drag & drop")
+        ripdrag -s 100 -H 100 "$full_path"
+        ;;
+      "Rename")
+        new_name=$(rofi -dmenu -i -p "New name" -theme launcher3 -theme-str "listview { enabled: false;}")
+        if [[ -n $new_name ]]; then
+          extension="${full_path##*.}"
+          mv "$full_path" "$(dirname "$full_path")/$new_name.$extension"
+        fi
+        ;;
+      "Open in GIMP")
+        gimp "$full_path"
+        ;;
+      "Copy path")
+        echo -n "$full_path" | wl-copy
+        ;;
+      *)
+        echo "Exited"
+        ;;
+      esac
+    fi
+  fi
 }
 
 case "$1" in
 --maxdepth)
-	maxdepth="$2"
-	shift
-	;;
+  maxdepth="$2"
+  shift
+  ;;
 esac
 
 display_files
