@@ -7,7 +7,7 @@
 }: let
   inherit (lib.modules) mkIf;
   inherit (lib.hardware) ldTernary;
-  inherit (lib.secrets) mkSecret mkSecretWithPath;
+  inherit (lib.secrets) mkSecret mkSecretHM;
   inherit (pkgs.stdenv.hostPlatform) isDarwin;
   inherit (config.garden.system) mainUser;
 
@@ -34,14 +34,11 @@ in {
     secretsMountPoint = mkIf isDarwin "/private/tmp/agenix.d";
 
     secrets = {
-      # rclone = mkSecretWithPath {
-      #   file = "rclone";
-      #   path = "/home/${mainUser}/.config/rclone/rclone.conf";
-      #   symlink = false;
-      #   owner = mainUser;
-      #   group = userGroup;
-      #   mode = "644";
-      # };
+      rclone = mkSecret {
+        file = "rclone";
+        owner = mainUser;
+        group = userGroup;
+      };
 
       restic-password = mkSecret {
         file = "restic/password";
@@ -53,6 +50,28 @@ in {
         file = "todoist";
         owner = mainUser;
         group = userGroup;
+      };
+    };
+  };
+
+  # home-manager secrets
+  hm = {
+    imports = [
+      inputs.agenix.homeManagerModules.default
+    ];
+
+    age = {
+      identityPaths = [
+        "/etc/ssh/ssh_host_ed25519_key"
+        "${sshDir}/id_ed25519"
+      ];
+
+      secrets = {
+        rclone = mkSecretHM {
+          file = "rclone";
+          path = "/home/${mainUser}/.config/rclone/rclone.conf";
+          symlink = false;
+        };
       };
     };
   };

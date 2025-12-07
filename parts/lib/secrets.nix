@@ -94,6 +94,17 @@
     // {
       inherit path symlink;
     };
+
+  # TODO: description
+  mkSecretHM = {
+    file,
+    path,
+    symlink ? true,
+    ...
+  }: {
+    file = "${self}/secrets/${file}.age";
+    inherit path symlink;
+  };
 in {
-  inherit mkSecret mkSecretWithPath;
+  inherit mkSecret mkSecretWithPath mkSecretHM;
 }
