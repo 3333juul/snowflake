@@ -31,7 +31,7 @@ in {
       settings = {
         devices = {
           "desktop" = mkIf (hostName != "desktop") {
-            id = "";
+            id = "KP5EC7X-NUYSYGT-UX4TL3A-IBFHFR3-IH4AEGP-VDDKYHZ-R5W2XNQ-CJHG4AO";
           };
 
           "laptop" = mkIf (hostName != "laptop") {
