@@ -34,12 +34,6 @@ in {
     secretsMountPoint = mkIf isDarwin "/private/tmp/agenix.d";
 
     secrets = {
-      rclone = mkSecret {
-        file = "rclone";
-        owner = mainUser;
-        group = userGroup;
-      };
-
       restic-password = mkSecret {
         file = "restic/password";
         owner = mainUser;
@@ -62,7 +56,6 @@ in {
 
     age = {
       identityPaths = [
-        "/etc/ssh/ssh_host_ed25519_key"
         "${sshDir}/id_ed25519"
       ];
 

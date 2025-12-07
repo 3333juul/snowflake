@@ -15,7 +15,6 @@ in {
 
         # take data from secrets
         export RESTIC_PASSWORD_FILE=${config.age.secrets.restic-password.path}
-        # export RCLONE_CONFIG=${config.age.secrets.rclone.path}
 
         # list available remotes
         echo "🔗 Available Rclone remotes:"

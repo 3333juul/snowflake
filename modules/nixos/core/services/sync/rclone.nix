@@ -9,6 +9,7 @@
   inherit (config.garden.system) mainUser;
 
   cfg = config.garden.services.rclone;
+  homeDir = config.users.users.${mainUser}.home;
 
   mkMountRclone = {
     remotePath,
@@ -41,7 +42,7 @@ in {
         rclone-onedrive-mount = mkMountRclone {
           remotePath = "onedrive:";
           mountPoint = "/run/media/${mainUser}/rclone/onedrive";
-          configFile = config.age.secrets.rclone.path;
+          configFile = "${homeDir}/.config/rclone/rclone.conf";
         };
       };
     };

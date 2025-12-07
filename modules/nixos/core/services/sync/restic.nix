@@ -62,7 +62,7 @@ in {
         initialize = true;
         repository = "rclone:onedrive:Restic/${hostName}";
         passwordFile = secrets.restic-password.path;
-        rcloneConfigFile = secrets.rclone.path;
+        rcloneConfigFile = "${homeDir}/.config/rclone/rclone.conf";
         backupPrepareCommand = waitForNetwork;
         paths = paths.common ++ paths.cloud;
         pruneOpts = defPruneOpts;
