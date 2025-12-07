@@ -9,7 +9,7 @@
       type = "desktop";
       cpu = "amd";
       gpu = "amd";
-      monitors = ["DP-2" "DP-3"];
+      monitors = ["DP-2"];
       hasTPM = true;
       hasBluetooth = true;
       hasSound = true;
@@ -21,7 +21,7 @@
       mainUser = "juul";
 
       boot = {
-        loader = "grub";
+        loader = "systemd-boot";
       };
 
       fs.support = [
