@@ -14,7 +14,7 @@
 
   # add these devices if they're not the current host
   desktop = mkIf (hostName != "desktop") "desktop";
-  # laptop = mkIf (hostName != "laptop") "laptop";
+  laptop = mkIf (hostName != "laptop") "laptop";
 in {
   config = mkIf cfg.enable {
     services.syncthing = {
@@ -31,12 +31,12 @@ in {
       settings = {
         devices = {
           "desktop" = mkIf (hostName != "desktop") {
-            id = "DQKQIC3-HGHTTVZ-5HTLAYD-XVI36WW-RD7W3NK-PWVZ2AR-LRV5AAV-2DJBQQR";
+            id = "";
           };
 
-          # "laptop" = mkIf (hostName != "laptop") {
-          #   id = "";
-          # };
+          "laptop" = mkIf (hostName != "laptop") {
+            id = "TRJGXHU-5GE4DGL-YH7DWFN-II5HH7B-UB6XR2A-OTWFEFJ-YJH3DRW-5SWGOQQ";
+          };
 
           "s21" = {
             id = "AH33REO-A7DKTJ2-WOW2PMV-RBMYWOY-7APMQ7H-F6OHHVW-QNPUAUB-KJTQLAK";
@@ -101,8 +101,8 @@ in {
           };
 
           "memes" = {
-            path = "${homeDir}/syncthing/memes";
-            devices = [desktop];
+            path = "${homeDir}/media/memes";
+            devices = [desktop laptop];
             id = "memes-folder";
             versioning = {
               type = "simple";

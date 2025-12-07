@@ -6,15 +6,16 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  cfg = config.garden.services.restic;
+  cfg = config.garden.services.restic.cli;
 in {
   config = mkIf cfg.enable {
     environment.systemPackages = let
       restore = pkgs.writeShellScriptBin "restore" ''
         set -e
 
-        # take password from secret
+        # take data from secrets
         export RESTIC_PASSWORD_FILE=${config.age.secrets.restic-password.path}
+        # export RCLONE_CONFIG=${config.age.secrets.rclone.path}
 
         # list available remotes
         echo "🔗 Available Rclone remotes:"
