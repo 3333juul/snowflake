@@ -4,7 +4,6 @@
   config,
   ...
 }: let
-  inherit (lib.lists) optionals;
   inherit (lib.modules) mkIf;
   inherit (config.garden.system) mainUser;
 
@@ -12,12 +11,10 @@
   cfg = sys.virtualization;
 in {
   config = mkIf (cfg.enable && (cfg.docker.enable || cfg.podman.enable)) {
-    environment.systemPackages =
-      [
-        pkgs.podman
-        pkgs.podman-compose
-      ]
-      ++ optionals sys.video.enable [pkgs.lxd-lts];
+    environment.systemPackages = [
+      pkgs.podman
+      pkgs.podman-compose
+    ];
 
     virtualisation.podman = {
       enable = true;
