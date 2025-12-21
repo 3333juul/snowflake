@@ -5,6 +5,7 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
+  inherit (lib.lists) optionals;
   inherit (lib.helpers) filterEnabled;
   inherit (config.garden.system) mainUser;
   inherit (config.networking) hostName;
@@ -13,8 +14,8 @@
   cfg = config.garden.services.syncthing;
 
   # add these devices if they're not the current host
-  desktop = mkIf (hostName != "desktop") "desktop";
-  laptop = mkIf (hostName != "laptop") "laptop";
+  desktop = optionals (hostName != "desktop") ["desktop"];
+  laptop = optionals (hostName != "laptop") ["laptop"];
 in {
   config = mkIf cfg.enable {
     services.syncthing = {
@@ -102,7 +103,7 @@ in {
 
           "memes" = {
             path = "${homeDir}/media/memes";
-            devices = [desktop laptop];
+            devices = desktop ++ laptop;
             id = "memes-folder";
             versioning = {
               type = "simple";
