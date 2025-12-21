@@ -47,11 +47,6 @@ in {
       swallow_regex = "kitty";
     };
 
-    gestures = {
-      workspace_swipe = true;
-      workspace_swipe_fingers = 3;
-    };
-
     binds = {
       allow_workspace_cycles = true;
       hide_special_on_workspace_change = true;

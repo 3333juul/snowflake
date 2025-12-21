@@ -41,7 +41,7 @@
           # "noteAir3/books"
           # "noteAir3/koreader"
           # "s21/shared"
-          # "s21/photoroom"
+          "s21/photoroom"
           "memes"
         ];
       };

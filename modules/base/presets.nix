@@ -35,7 +35,6 @@ in {
     (mkIf presets.work.enable {
       garden.programs = {
         notes.enable = mkDefault true;
-        anki.enable = mkDefault true;
         libreoffice.enable = mkDefault true;
 
         reading = {
