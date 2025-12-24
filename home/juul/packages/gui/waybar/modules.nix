@@ -219,4 +219,23 @@
     on-click-right = "swaync-client -d -sw";
     escape = true;
   };
+
+  "custom/lyrics" = {
+    return-type = "json";
+    format = "{icon}  {0}";
+    hide-empty-text = true;
+
+    format-icons = {
+      playing = "";
+      paused = "";
+      lyric = "";
+      music = "󰝚";
+      # no_lyric = "";
+      # getting = "";
+    };
+
+    exec-if = "which waybar-lyric";
+    exec = "waybar-lyric --quiet";
+    on-click = "waybar-lyric play-pause";
+  };
 }

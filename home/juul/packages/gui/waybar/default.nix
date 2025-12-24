@@ -4,10 +4,11 @@
   osConfig,
   ...
 }: let
-  inherit (lib.lists) optionals;
+  inherit (lib.lists) optionals concatLists;
   inherit (lib.modules) mkIf;
   inherit (lib.hardware) monitor;
   inherit (lib.validators) hasProfile;
+  inherit (osConfig.garden.programs) defaults;
 
   cfg = osConfig.garden.programs;
   modules = import ./modules.nix;
@@ -32,19 +33,32 @@ in {
               "hyprland/window"
             ];
             modules-center = [
-              "clock"
+              "custom/lyrics"
             ];
-            modules-right = [
-              "mpris"
-              (mkIf (hasProfile osConfig ["laptop"]) "battery")
-              "custom/colorpicker"
-              "custom/todoist"
-              "cpu"
-              "memory"
-              "temperature"
-              "pulseaudio"
-              "custom/notification"
-              "tray"
+            modules-right = concatLists [
+              # ["mpris"]
+
+              (optionals (hasProfile osConfig ["laptop"]) [
+                "battery"
+              ])
+
+              [
+                "custom/colorpicker"
+                "custom/todoist"
+                "cpu"
+                "memory"
+                "temperature"
+                "pulseaudio"
+              ]
+
+              (optionals (defaults.notifs == "swaync") [
+                "custom/notification"
+              ])
+
+              [
+                "tray"
+                "clock"
+              ]
             ];
           }
           // modules;
@@ -69,5 +83,9 @@ in {
           // modules);
       };
     };
+
+    home.packages = [
+      pkgs.waybar-lyric
+    ];
   };
 }
