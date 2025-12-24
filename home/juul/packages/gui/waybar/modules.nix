@@ -165,7 +165,7 @@
   # };
 
   "custom/todoist" = {
-    format = "{icon} {}";
+    format = "{icon} {text}";
     tooltip = true;
     on-click = "hyprctl dispatch togglespecialworkspace tasks";
     interval = 60;
@@ -191,7 +191,7 @@
   };
 
   "custom/colorpicker" = {
-    format = "{icon} {}";
+    format = "{icon} {text}";
     on-click = "colorpicker";
     on-click-right = "colorpicker -h";
     format-icons = {
