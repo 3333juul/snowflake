@@ -4,17 +4,11 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-  inherit (osConfig.garden.environment) shell;
 
   cfg = osConfig.garden.programs;
 in {
   programs.starship = mkIf cfg.starship.enable {
     enable = true;
-
-    enableZshIntegration = shell == "zsh";
-    enableBashIntegration = shell == "bash";
-    enableFishIntegration = shell == "fish";
-    enableNushellIntegration = shell == "nushell";
 
     settings = {
       format = lib.concatStrings [
