@@ -9,7 +9,6 @@ in {
     anki.enable = mkEnableOption "enable anki";
     discord.enable = mkEnableOption "enable discord";
     libreoffice.enable = mkEnableOption "enable libreoffice";
-    spotify.enable = mkEnableOption "enable spotify";
     git.enable = mkEnableOption "enable git";
     starship.enable = mkEnableOption "enable starship";
     astal.enable = mkEnableOption "enable astal";
@@ -64,6 +63,11 @@ in {
     notes = {
       enable = mkEnableOption "enable notes";
       handwriting.enable = mkEnableOption "enable handwriting notes";
+    };
+
+    spotify = {
+      enable = mkEnableOption "enable spotify";
+      tui.enable = mkEnableOption "enable spotify tui client";
     };
 
     gaming = {
