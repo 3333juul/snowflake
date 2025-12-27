@@ -5,6 +5,7 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
+  inherit (osConfig.garden.programs.defaults) terminal editor browser fileManager screenLocker launcher;
 
   cfg = osConfig.garden.environment.desktop;
 in {
@@ -21,6 +22,11 @@ in {
 
         # External monitor: 1080p, 60Hz, positioned to the right
         monitorrule=HDMI-A-1,0.55,1,tile,0,1,1920,0,1920,1080,60
+
+        exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY
+        exec-once=systemctl --user start waybar
+        exec-once=systemctl --user start hyprpaper
+        exec-once=vicinae server
 
         # Window effect
         blur=0
@@ -42,7 +48,7 @@ in {
         shadows_position_y = 0
         shadowscolor= 0x000000ff
 
-        border_radius=6
+        border_radius=0
         no_radius_when_single=0
         focused_opacity=1.0
         unfocused_opacity=1.0
@@ -166,11 +172,21 @@ in {
         # mod keys name: super,ctrl,alt,shift,none
 
         # reload config
-        bind=SUPER,r,reload_config
+        bind=SUPER+CTRL,r,reload_config
 
-        # menu and terminal
-        bind=SUPER,space,spawn,rofi -show drun
-        bind=SUPER,Return,spawn,kitty
+        # spawn programs
+        bind=SUPER,Return,spawn,${terminal}
+        bind=SUPER,space,spawn,${{
+            tofi = "pkill tofi || tofi-drun --drun-launch=true";
+            vicinae = "vicinae toggle";
+          }.${
+            launcher
+          }}
+
+        bind=SUPER,w,spawn,${browser}
+        bind=SUPER,c,spawn,kitty --class ${editor} -e ${editor}
+        bind=SUPER,r,spawn,kitty --class ${fileManager} -e ${fileManager}
+        bind=SUPER+ALT+CTRL,l,spawn,${screenLocker}
 
         # exit
         bind=SUPER+SHIFT,q,quit
@@ -221,6 +237,10 @@ in {
         bind=CTRL+SUPER,Left,tagtoleft,0
         bind=CTRL+SUPER,Right,tagtoright,0
 
+        # prev tagset
+        bind=SUPER,Tab,view,-1,0
+
+        # view tags
         bind=SUPER,1,view,1,0
         bind=SUPER,2,view,2,0
         bind=SUPER,3,view,3,0
@@ -290,15 +310,20 @@ in {
         axisbind=SUPER,DOWN,viewtoright_have_client
 
         #window rule
-        windowrule=isnamedscratchpad:1,width:1280,height:800,appid:Spotify
+        windowrule=isnamedscratchpad:1,width:1532,height:809,appid:spotify
 
         # scratchpad
-        bind=SUPER,s,toggle_named_scratchpad,Spotify,none,spotify
+        bind=SUPER,s,toggle_named_scratchpad,spotify,none,spotify
 
         # layer rule
         layerrule=animation_type_open:zoom,layer_name:rofi
         layerrule=animation_type_close:zoom,layer_name:rofi
       '';
+
+      # autostart_sh = ''
+      #   vicinae server
+      #   systemctl --user start waybar
+      # '';
     };
   };
 }

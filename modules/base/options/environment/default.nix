@@ -55,7 +55,7 @@ in {
 
     isWM = mkOption {
       type = bool;
-      default = elem desktop ["Hyprland" "dwl" "sway" "cosmic"];
+      default = elem desktop ["Hyprland" "dwl" "sway" "mango"];
       description = "Inferred data based on the desktop environment. True if the environment is a window manager.";
     };
 

@@ -8,7 +8,7 @@
 
   cfg = osConfig.garden.environment.desktop.type;
 in {
-  programs.hyprlock = mkIf (cfg == "Hyprland") {
+  programs.hyprlock = mkIf (cfg == "Hyprland" || cfg == "mango") {
     enable = true;
 
     settings = {
