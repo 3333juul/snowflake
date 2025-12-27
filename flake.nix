@@ -60,6 +60,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    vicinae-extensions = {
+      url = "github:vicinaehq/extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-private = {
       url = "git+ssh://git@github.com/3333juul/nix-private.git";
     };
