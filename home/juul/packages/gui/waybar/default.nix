@@ -28,10 +28,14 @@ in {
             layer = "top";
             height = 23;
             output = monitor osConfig 0;
-            modules-left = optionals (desktop == "Hyprland") [
-              "hyprland/workspaces"
-              "hyprland/window"
-            ];
+            modules-left =
+              optionals (desktop == "Hyprland") [
+                "hyprland/workspaces"
+                "hyprland/window"
+              ]
+              ++ optionals (builtins.elem desktop ["dwl" "mango"]) [
+                "dwl/tags"
+              ];
             modules-center = [
               "custom/lyrics"
             ];

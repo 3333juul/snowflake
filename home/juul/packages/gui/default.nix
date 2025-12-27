@@ -2,6 +2,7 @@
   imports = [
     ./ags # widgets
     ./browser # browsers
+    ./de # desktop environments
     ./discord # discord
     ./gaming # gaming
     ./hypr # hypr ecosystem

@@ -43,7 +43,13 @@ in {
 
     isWayland = mkOption {
       type = bool;
-      default = elem desktop ["Hyprland" "dwl" "sway" "cosmic"];
+      default = elem desktop [
+        "Hyprland"
+        "dwl"
+        "sway"
+        "cosmic"
+        "mango"
+      ];
       description = "Inferred data based on the desktop environment. True if the environment is Wayland-based.";
     };
 

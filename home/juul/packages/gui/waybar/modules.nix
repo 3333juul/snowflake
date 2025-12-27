@@ -230,7 +230,7 @@
       paused = "";
       lyric = "";
       music = "󰝚";
-      # no_lyric = "";
+      no_lyric = "󰝚";
       # getting = "";
     };
 

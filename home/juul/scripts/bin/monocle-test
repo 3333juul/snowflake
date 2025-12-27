@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+current_layout=$(mmsg -g -l | awk '{print $NF}')
+
+if [ "$current_layout" = "M" ]; then
+  mmsg -l "T"
+else
+  mmsg -l "M"
+fi

@@ -4,6 +4,7 @@
   ...
 }: let
   inherit (lib.options) mkEnableOption;
+  inherit (builtins) elem;
 in {
   options.garden.programs = {
     anki.enable = mkEnableOption "enable anki";
@@ -16,7 +17,7 @@ in {
 
     waybar.enable =
       mkEnableOption "enables waybar"
-      // {default = config.garden.environment.desktop.type == "Hyprland";};
+      // {default = elem config.garden.environment.desktop.type ["Hyprland" "mango"];};
 
     browser = {
       brave.enable = mkEnableOption "enable brave browser";

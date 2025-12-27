@@ -91,6 +91,25 @@ button:hover {
   margin: 1 0px;
 }
 
+#tags button {
+  padding: 2px 1px;
+  background-color: transparent;
+  color: #ebdbb2;
+  margin: 0 0px;
+  border: transparent;
+}
+#tags button.occupied {
+  color: #ebdbb2;
+}
+#tags button.focused {
+  color: #ebdbb2;
+  background-color: #495d59;
+}
+#tags button.urgent {
+  color: #ebdbb2;
+  background: #761411;
+}
+
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
   margin-left: 1;
