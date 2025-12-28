@@ -19,6 +19,7 @@ in {
     ./look.nix
     ./options.nix
     ./plugins.nix
+    ./pyprland.nix
     ./rules.nix
   ];
 
