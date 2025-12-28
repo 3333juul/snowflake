@@ -1,5 +1,5 @@
 {
   imports = [
-    ./mango.nix
+    ./mango
   ];
 }
