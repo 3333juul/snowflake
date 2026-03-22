@@ -8,6 +8,7 @@
       hyprland-easymotion = callPackage ./hyprland-easymotion.nix {};
       hyprNStack = callPackage ./hyprnstack.nix {};
       memos = callPackage ./memos.nix {};
+      somewm = callPackage ./somewm.nix {};
       vocabsieve = callPackage ./vocabsieve.nix {};
     };
   };

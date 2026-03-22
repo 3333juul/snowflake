@@ -38,7 +38,7 @@ in {
               "mpris"
               (mkIf (hasProfile osConfig ["laptop"]) "battery")
               "custom/colorpicker"
-              "custom/todoist"
+              # "custom/todoist"
               "cpu"
               "memory"
               "temperature"

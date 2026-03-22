@@ -13,7 +13,7 @@ in {
     efiSupport = true;
     enableCryptodisk = mkDefault false;
     inherit (cfg.grub) device;
-    theme = pkgs.minimal-grub-theme;
+    theme = null; #pkgs.minimal-grub-theme;
     backgroundColor = null;
     splashImage = null;
   };

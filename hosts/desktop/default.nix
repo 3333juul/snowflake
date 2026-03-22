@@ -21,7 +21,7 @@
       mainUser = "juul";
 
       boot = {
-        loader = "systemd-boot";
+        loader = "grub";
       };
 
       fs.support = [

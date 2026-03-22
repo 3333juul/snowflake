@@ -18,6 +18,7 @@
     ./notes.nix # note-taking apps
     ./reading.nix # reading apps
     ./shared.nix # shared gui packages
+    ./somewm.nix # wayland awesomewm port
     ./thunderbird.nix # mail
     ./vscodium.nix # editor
     ./wl-kbptr.nix # vimium for the entire desktop
