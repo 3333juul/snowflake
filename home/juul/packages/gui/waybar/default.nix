@@ -39,17 +39,30 @@ in {
             modules-center = [
               "custom/lyrics"
             ];
-            modules-right = [
-              "mpris"
-              (mkIf (hasProfile osConfig ["laptop"]) "battery")
-              "custom/colorpicker"
-              # "custom/todoist"
-              "cpu"
-              "memory"
-              "temperature"
-              "pulseaudio"
-              "custom/notification"
-              "tray"
+            modules-right = concatLists [
+              # ["mpris"]
+
+              (optionals (hasProfile osConfig ["laptop"]) [
+                "battery"
+              ])
+
+              [
+                "custom/colorpicker"
+                "custom/todoist"
+                "cpu"
+                "memory"
+                "temperature"
+                "pulseaudio"
+              ]
+
+              (optionals (defaults.notifs == "swaync") [
+                "custom/notification"
+              ])
+
+              [
+                "tray"
+                "clock"
+              ]
             ];
           }
           // modules;
