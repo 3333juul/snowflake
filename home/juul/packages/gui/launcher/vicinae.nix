@@ -2,6 +2,7 @@
   inputs,
   osConfig,
   lib,
+  pkgs,
   ...
 }: let
   inherit (lib.modules) mkIf;

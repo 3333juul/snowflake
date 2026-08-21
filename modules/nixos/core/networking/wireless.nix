@@ -7,7 +7,6 @@ in {
 
     networking.wireless = {
       # wpa_supplicant
-      enable = wirelessBackend == "wpa_supplicant";
       userControlled.enable = true;
       allowAuxiliaryImperativeNetworks = true;
 
@@ -17,7 +16,7 @@ in {
 
       # iwd
       iwd = {
-        enable = wirelessBackend == "iwd";
+        #enable = wirelessBackend == "iwd";
 
         settings = {
           Settings.AutoConnect = true;

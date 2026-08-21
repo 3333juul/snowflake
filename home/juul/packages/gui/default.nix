@@ -2,9 +2,9 @@
   imports = [
     ./ags # widgets
     ./browser # browsers
+    ./de # desktop environments
     ./discord # discord
     ./gaming # gaming
-    ./hypr # hypr ecosystem
     ./img-viewer # image viewer applications
     ./launcher # launchers
     ./notify # notifications
@@ -12,6 +12,7 @@
     ./terminal # terminals
     ./waybar # status bar
     ./anki.nix # flashcards
+    ./hyprlock.nix # screen locker
     ./img-editor.nix # image editor
     ./libreoffice.nix # office apps
     ./mpv.nix # media player

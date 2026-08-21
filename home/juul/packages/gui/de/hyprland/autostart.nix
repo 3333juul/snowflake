@@ -16,9 +16,6 @@ in {
         # Bar
         "waybar &"
 
-        # Notifications
-        "swaync &"
-
         # Systray applets
         "blueman-applet &"
         "nm-applet &"
@@ -34,7 +31,7 @@ in {
         "hyprctl setcursor Bibata-Modern-Ice 24 &"
 
         # Scripts
-        # "toggleurgent &"
+        #"toggleurgent &"
         #"windowstate &"
         #"wallshift &"
       ]

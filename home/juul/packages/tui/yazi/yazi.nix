@@ -5,17 +5,12 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-  inherit (osConfig.garden.environment) shell;
 
   cfg = osConfig.garden.programs.fileManager;
 in {
   programs.yazi = mkIf cfg.yazi.enable {
     enable = true;
     #package = inputs.yazi.packages.${pkgs.system}.yazi;
-    enableZshIntegration = shell == "zsh";
-    enableBashIntegration = shell == "bash";
-    enableFishIntegration = shell == "fish";
-    enableNushellIntegration = shell == "nushell";
 
     settings = {
       manager = {

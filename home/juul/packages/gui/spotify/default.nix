@@ -11,7 +11,10 @@
 
   cfg = osConfig.garden.programs;
 in {
-  imports = [inputs.spicetify-nix.homeManagerModules.default];
+  imports = [
+    ./tui.nix
+    inputs.spicetify-nix.homeManagerModules.default
+  ];
 
   programs.spicetify = mkIf cfg.spotify.enable {
     enable = true;

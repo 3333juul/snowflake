@@ -4,12 +4,12 @@
   ...
 }: let
   inherit (lib.options) mkEnableOption;
+  inherit (builtins) elem;
 in {
   options.garden.programs = {
     anki.enable = mkEnableOption "enable anki";
     discord.enable = mkEnableOption "enable discord";
     libreoffice.enable = mkEnableOption "enable libreoffice";
-    spotify.enable = mkEnableOption "enable spotify";
     git.enable = mkEnableOption "enable git";
     starship.enable = mkEnableOption "enable starship";
     astal.enable = mkEnableOption "enable astal";
@@ -17,7 +17,7 @@ in {
 
     waybar.enable =
       mkEnableOption "enables waybar"
-      // {default = config.garden.environment.desktop.type == "Hyprland";};
+      // {default = elem config.garden.environment.desktop.type ["Hyprland" "mango"];};
 
     browser = {
       brave.enable = mkEnableOption "enable brave browser";
@@ -64,6 +64,11 @@ in {
     notes = {
       enable = mkEnableOption "enable notes";
       handwriting.enable = mkEnableOption "enable handwriting notes";
+    };
+
+    spotify = {
+      enable = mkEnableOption "enable spotify";
+      tui.enable = mkEnableOption "enable spotify tui client";
     };
 
     gaming = {

@@ -4,10 +4,11 @@
   osConfig,
   ...
 }: let
-  inherit (lib.lists) optionals;
+  inherit (lib.lists) optionals concatLists;
   inherit (lib.modules) mkIf;
   inherit (lib.hardware) monitor;
   inherit (lib.validators) hasProfile;
+  inherit (osConfig.garden.programs) defaults;
 
   cfg = osConfig.garden.programs;
   modules = import ./modules.nix;
@@ -27,12 +28,16 @@ in {
             layer = "top";
             height = 23;
             output = monitor osConfig 0;
-            modules-left = optionals (desktop == "Hyprland") [
-              "hyprland/workspaces"
-              "hyprland/window"
-            ];
+            modules-left =
+              optionals (desktop == "Hyprland") [
+                "hyprland/workspaces"
+                "hyprland/window"
+              ]
+              ++ optionals (builtins.elem desktop ["dwl" "mango"]) [
+                "dwl/tags"
+              ];
             modules-center = [
-              "clock"
+              "custom/lyrics"
             ];
             modules-right = [
               "mpris"
@@ -69,5 +74,9 @@ in {
           // modules);
       };
     };
+
+    home.packages = [
+      pkgs.waybar-lyric
+    ];
   };
 }

@@ -10,6 +10,7 @@ in {
           "yabai"
           "sway"
           "cosmic"
+          "mango"
           "dwl"
         ]);
         default = null;
