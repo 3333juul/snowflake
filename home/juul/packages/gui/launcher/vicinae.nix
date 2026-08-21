@@ -13,7 +13,6 @@ in {
   config = mkIf cfg.vicinae.enable {
     services.vicinae = {
       enable = true;
-      autoStart = true;
     };
   };
 }

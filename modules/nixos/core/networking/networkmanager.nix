@@ -10,7 +10,9 @@
   cfg = config.garden.presets;
 in {
   networking = {
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+    };
   };
 
   environment.systemPackages = optionals cfg.gui.enable [

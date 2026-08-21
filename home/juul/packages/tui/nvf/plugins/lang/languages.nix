@@ -29,12 +29,11 @@
 
       rust = {
         enable = false;
-        crates.enable = false;
       };
 
       markdown = {
         enable = true;
-        format.type = "prettierd";
+        format.type = ["prettier"];
       };
     };
   };

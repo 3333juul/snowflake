@@ -25,7 +25,7 @@ in {
       packages = with pkgs; [
         # Libraries and programs to ensure
         # that QT applications load without issues, e.g. missing libs.
-        libsForQt5.qt5.qtwayland # qt5
+        qt5.qtwayland # qt5
         kdePackages.qtwayland # qt6
         qt6.qtwayland
         kdePackages.qqc2-desktop-style
