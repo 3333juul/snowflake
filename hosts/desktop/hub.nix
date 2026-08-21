@@ -4,7 +4,7 @@
       shell = "zsh";
 
       desktop = {
-        type = "Hyprland";
+        type = "mango";
 
         hyprland = {
           useFlake = false;

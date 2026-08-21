@@ -33,8 +33,8 @@ in {
                 "hyprland/workspaces"
                 "hyprland/window"
               ]
-              ++ optionals (builtins.elem desktop ["dwl" "mango"]) [
-                "dwl/tags"
+              ++ optionals (desktop == "mango") [
+                "mango/workspaces"
               ];
             modules-center = [
               "custom/lyrics"
