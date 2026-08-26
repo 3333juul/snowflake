@@ -16,5 +16,19 @@ in {
     (optionals cfg.calibre.enable [
       pkgs.calibre
     ])
+
+    [
+      # pdf reader
+      pkgs.evince
+
+      # TODO:
+
+      #   pkgs.sioyek
+      #   pkgs.zathura
+      #
+      #   # pdf operations
+      #   pkgs.scantailor-advanced
+      #   pkgs.briss # pdf cropping
+    ]
   ];
 }
