@@ -32,6 +32,8 @@
         "animation_type_open:zoom,layer_name:rofi"
         "animation_type_close:zoom,layer_name:rofi"
       ];
+
+      devicerule = ["name:UGREEN Mouse,natural_scrolling:1"];
     };
   };
 }

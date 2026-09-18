@@ -20,7 +20,6 @@
       kitty-scrollback = ./kitty-scrollback;
       launcher = ./launcher;
       man-zathura = ./man-zathura;
-      monocle-test = ./monocle-test;
       ocr = ./ocr;
       organize-downloads = ./organize-downloads;
       powermenu = ./powermenu;

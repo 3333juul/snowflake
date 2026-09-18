@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+monitor=$(mmsg get last_open_surface | jq -r '.monitor')
+current_layout=$(mmsg get monitor "$monitor" | jq -r '.layout_symbol')
+
+if [ "$current_layout" = "M" ]; then
+  mmsg dispatch setlayout, tile
+else
+  mmsg dispatch setlayout, monocle
+fi

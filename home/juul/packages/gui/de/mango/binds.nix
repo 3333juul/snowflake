@@ -23,6 +23,7 @@ in {
         "SUPER,c,spawn,kitty --class ${editor} -e ${editor}"
         "SUPER,r,spawn,kitty --class ${fileManager} -e ${fileManager}"
         "SUPER+ALT+CTRL,l,spawn,${screenLocker}"
+        "SUPER,P,spawn,sh -c 'pkill tofi || tofi-run | xargs hyprctl dispatch exec'"
         "SUPER,space,spawn,${{
             tofi = ''sh -c "pkill tofi || tofi-drun --drun-launch=true"'';
             vicinae = "vicinae toggle";
@@ -48,7 +49,7 @@ in {
 
         # Switch window status
         "SUPER,g,toggleglobal,"
-        "ALT,Tab,toggleoverview,"
+        "ALT,Tab,togglejump,"
         "ALT,backslash,togglefloating,"
         "ALT,a,togglemaximizescreen,"
         "ALT,f,togglefullscreen,"
@@ -64,7 +65,7 @@ in {
 
         # Switch layout
         "SUPER,n,switch_layout"
-        "SUPER,m,spawn,monocle-test"
+        "SUPER,m,spawn,togglemonocle"
 
         # Tag switch
         "SUPER,Left,viewtoleft,0"
