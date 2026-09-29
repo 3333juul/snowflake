@@ -4,5 +4,6 @@
     ./hyprpaper.nix
     ./hyprsunset.nix
     # ./kdeconnect.nix
+    ./swaybg.nix
   ];
 }

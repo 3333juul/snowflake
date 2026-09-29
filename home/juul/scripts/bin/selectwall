@@ -1,0 +1,85 @@
+#!/bin/bash
+
+wallpapers_dir="$HOME/media/pictures/wallpapers"
+theme="wallpaper"
+mode="fill" # fill | fit | stretch | center | tile
+
+if [[ "$1" == "--preview" ]]; then
+  export PREVIEW=true
+fi
+
+# select a wallpaper using rofi
+select_wallpaper() {
+  wallpapers=$(find "$wallpapers_dir" -type f)
+
+  selected_wallpaper=$(echo "$wallpapers" | while IFS= read -r a; do
+    echo -en "${a##*/}\0icon\x1fthumbnail://$a\n"
+  done | rofi -dmenu -i -p "WALLPAPER" -theme $theme)
+
+  echo "$selected_wallpaper"
+}
+
+# select a monitor using rofi, or "All" for every output
+select_monitor() {
+  monitors=$(swaymsg -t get_outputs -r | jq -r '.[].name')
+  monitor_count=$(echo "$monitors" | wc -l)
+
+  selected_monitor=$( (echo "All"; echo "$monitors") | PREVIEW=false rofi -dmenu -p "MONITOR" -theme $theme -no-show-icons -theme-str "window { width: 350px; } listview { lines: $((monitor_count + 1)); columns: 1;}")
+
+  echo "$selected_monitor"
+}
+
+# kill the swaybg instance(s) for the given monitor ("All" = every instance)
+kill_swaybg() {
+  local monitor=$1
+
+  if [[ "$monitor" == "All" ]]; then
+    pkill -x swaybg
+  else
+    # swaybg processes are matched by their -o <output> argument,
+    # since there's one process per monitor and no IPC to target just one
+    pkill -f "swaybg -o $monitor "
+  fi
+
+  # give the old process(es) a moment to release before starting new ones
+  sleep 0.1
+}
+
+# start swaybg for the given monitor with the given wallpaper
+set_wallpaper() {
+  local monitor=$1
+  local wallpaper_path=$2
+
+  if [[ "$monitor" == "All" ]]; then
+    swaybg -i "$wallpaper_path" -m "$mode" &
+  else
+    swaybg -o "$monitor" -i "$wallpaper_path" -m "$mode" &
+  fi
+  disown
+}
+
+# argument handling
+case "$1" in
+--path)
+  if [[ -n $2 && -f $2 ]]; then
+    selected_monitor=$(select_monitor)
+    if [[ -n $selected_monitor ]]; then
+      kill_swaybg "$selected_monitor"
+      set_wallpaper "$selected_monitor" "$2"
+    fi
+  else
+    echo "Invalid or missing wallpaper path."
+  fi
+  ;;
+
+*)
+  selected_wallpaper=$(select_wallpaper)
+  if [[ -n $selected_wallpaper ]]; then
+    selected_monitor=$(select_monitor)
+    if [[ -n $selected_monitor ]]; then
+      kill_swaybg "$selected_monitor"
+      set_wallpaper "$selected_monitor" "$wallpapers_dir/$selected_wallpaper"
+    fi
+  fi
+  ;;
+esac

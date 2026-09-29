@@ -99,5 +99,13 @@ in {
       ];
       default = "dunst";
     };
+
+    wallDaemon = mkOption {
+      type = enum [
+        "hyprpaper"
+        "swaybg"
+      ];
+      default = "swaybg";
+    };
   };
 }

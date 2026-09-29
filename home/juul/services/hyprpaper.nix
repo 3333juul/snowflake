@@ -4,10 +4,9 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-
-  cfg = osConfig.garden.environment;
+  inherit (osConfig.garden.programs.defaults) wallDaemon;
 in {
-  services.hyprpaper = mkIf (cfg.isWM && cfg.isWayland) {
+  services.hyprpaper = mkIf (wallDaemon == "hyprpaper") {
     enable = true;
   };
 }

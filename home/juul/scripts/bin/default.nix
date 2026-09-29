@@ -29,6 +29,7 @@
       rofi-gridview = ./rofi-gridview;
       rofi-translate = ./rofi-translate;
       s-img = ./s-img;
+      selectwall = ./selectwall;
       yazi-dir = ./yazi-dir;
     })
     // {
