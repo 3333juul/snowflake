@@ -11,6 +11,7 @@
     nvf.url = "github:notashelf/nvf";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     vicinae.url = "github:vicinaehq/vicinae";
+    waybar.url = "github:Alexays/Waybar";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";

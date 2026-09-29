@@ -45,6 +45,14 @@
     separate-outputs = true;
   };
 
+  "mango/workspaces" = {
+    format = "{icon}";
+    hide-empty = false;
+    on-click = "activate";
+    on-click-right = "toggle";
+    overview-label = "OVERVIEW";
+  };
+
   idle_inhibitor = {
     format = "{icon}";
     format-icons = {

@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   osConfig,
   ...
 }: let
@@ -14,13 +15,15 @@
   modules = import ./modules.nix;
   desktop = osConfig.garden.environment.desktop.type;
 in {
-  imports = [./scripts];
+  imports = [
+    ./scripts
+    ./style.nix
+  ];
 
   config = mkIf cfg.waybar.enable {
     programs.waybar = {
       enable = true;
-      package = pkgs.waybar;
-      style = ./style.css;
+      package = inputs.waybar.packages.${pkgs.system}.default;
       settings = {
         mainBar =
           {
@@ -47,8 +50,8 @@ in {
               ])
 
               [
-                "custom/colorpicker"
-                "custom/todoist"
+                # "custom/colorpicker"
+                # "custom/todoist"
                 "cpu"
                 "memory"
                 "temperature"
