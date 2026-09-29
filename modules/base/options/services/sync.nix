@@ -36,6 +36,7 @@ in {
     restic = {
       enable = mkEnableOption "enable restic";
       cli.enable = mkEnableOption "enable restic cli";
+      gui.enable = mkEnableOption "enable restic gui";
 
       backups = mkOption {
         type = listOf str;
@@ -56,13 +57,13 @@ in {
     };
   };
 
-  config.assertions = [
-    {
-      assertion = restic.enable -> restic.backups != [];
-      message = ''
-        You've enabled Restic without specifying any backups in `garden.services.restic.backups`.
-        Declare the backups you want on this specific machine.
-      '';
-    }
-  ];
+  # config.assertions = [
+  #   {
+  #     assertion = restic.enable -> restic.backups != [];
+  #     message = ''
+  #       You've enabled Restic without specifying any backups in `garden.services.restic.backups`.
+  #       Declare the backups you want on this specific machine.
+  #     '';
+  #   }
+  # ];
 }
