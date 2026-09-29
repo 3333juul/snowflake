@@ -47,8 +47,9 @@
       };
 
       restic = {
-        enable = false;
+        enable = true;
         cli.enable = true;
+        gui.enable = true;
         backups = [
           # "onedrive"
           # "local-internal"
