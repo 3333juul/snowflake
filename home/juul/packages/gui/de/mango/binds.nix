@@ -23,6 +23,7 @@ in {
         "SUPER,c,spawn,kitty --class ${editor} -e ${editor}"
         "SUPER,r,spawn,kitty --class ${fileManager} -e ${fileManager}"
         "SUPER+ALT+CTRL,l,spawn,${screenLocker}"
+        "SUPER+CTRL,e,spawn,ocr-lookup"
         "SUPER,P,spawn,sh -c 'pkill tofi || tofi-run | xargs hyprctl dispatch exec'"
         "SUPER,space,spawn,${{
             tofi = ''sh -c "pkill tofi || tofi-drun --drun-launch=true"'';
