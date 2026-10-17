@@ -20,7 +20,6 @@
 in {
   imports = [inputs.agenix.nixosModules.default];
 
-  config = mkIf cfg.enableSecrets {
     environment.systemPackages = [
       inputs.agenix.packages.${pkgs.system}.default
     ];
@@ -71,5 +70,4 @@ in {
         };
       };
     };
-  };
-}
+  }
