@@ -20,6 +20,7 @@ NixOS config, designed with modularity, efficiency, and clarity as its top prior
   - [desktop](hosts/desktop/) Main machine
   - [laptop](hosts/laptop/) Low/mid spec thinkpad
   - [server](hosts/server/) TODO
+  - [wsl](hosts/wsl/) NixOS under WSL
   - [darwin](hosts/darwin/) TODO
 - [modules](modules) Modular system configuration
   - [base](modules/base/) Base modules, common between all systems

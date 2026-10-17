@@ -3,6 +3,8 @@
   inherit (lib.types) enum listOf str int nullOr;
 in {
   options.garden.system = {
+    enableSecrets = mkEnableOption "agenix secrets management";
+
     security.tor.enable = mkEnableOption "Tor daemon";
     bluetooth.enable = mkEnableOption "Should the device load bluetooth drivers and enable blueman";
     sound.enable = mkEnableOption "Does the device have sound and its related programs be enabled";

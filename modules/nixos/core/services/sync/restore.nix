@@ -7,8 +7,9 @@
   inherit (lib.modules) mkIf;
 
   cfg = config.garden.services.restic.cli;
+  secretsEnabled = config.garden.system.enableSecrets;
 in {
-  config = mkIf cfg.enable {
+  config = mkIf (cfg.enable && secretsEnabled) {
     environment.systemPackages = let
       restore = pkgs.writeShellScriptBin "restore" ''
         set -e

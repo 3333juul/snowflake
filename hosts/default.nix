@@ -28,6 +28,14 @@
       ];
     };
 
+    wsl = {
+      class = "nixos";
+      arch = "x86_64";
+      profiles = [
+        "wsl"
+      ];
+    };
+
     darwin = {
       class = "darwin";
       arch = "x86_64";

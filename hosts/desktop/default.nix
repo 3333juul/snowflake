@@ -19,6 +19,7 @@
 
     system = {
       mainUser = "juul";
+      enableSecrets = true;
 
       boot = {
         loader = "systemd-boot";

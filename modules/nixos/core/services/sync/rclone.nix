@@ -9,6 +9,7 @@
   inherit (config.garden.system) mainUser;
 
   cfg = config.garden.services.rclone;
+  secretsEnabled = config.garden.system.enableSecrets;
   homeDir = config.users.users.${mainUser}.home;
 
   mkMountRclone = {
@@ -36,7 +37,7 @@
     };
   };
 in {
-  config = mkIf cfg.enable {
+  config = mkIf (cfg.enable && secretsEnabled) {
     systemd = {
       services = {
         rclone-onedrive-mount = mkMountRclone {

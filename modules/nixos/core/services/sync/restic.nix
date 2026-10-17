@@ -16,6 +16,7 @@
   inherit (config.garden.environment) flakePath;
 
   cfg = config.garden.services.restic;
+  secretsEnabled = config.garden.system.enableSecrets;
   homeDir = config.users.users.${mainUser}.home;
   acceptedTypes = ["desktop" "laptop"];
 
@@ -57,7 +58,7 @@ in {
     # for cli, use: sudo restic-<name> <cmd>, e.g., sudo restic-onedrive snapshots.
 
     # only enable these backups that are defined in `garden.services.restic.backups`.
-    services.restic.backups = filterEnabled cfg.backups {
+    services.restic.backups = mkIf secretsEnabled (filterEnabled cfg.backups {
       onedrive = {
         initialize = true;
         repository = "rclone:onedrive:Restic/${hostName}";
@@ -95,7 +96,7 @@ in {
         pruneOpts = defPruneOpts;
         timerConfig = null;
       };
-    };
+    });
 
     # enable cli / gui
     environment.systemPackages =
@@ -106,7 +107,7 @@ in {
     # if a backup fails, a desktop notification will be sent, displaying the last 5 lines of the backup log from the journal.
     # inspo: https://www.arthurkoziel.com/restic-backups-b2-nixos/
     systemd.services =
-      mkIf (hasProfile config ["graphical"])
+      mkIf (hasProfile config ["graphical"] && secretsEnabled)
       (mkResticNotify pkgs {
         inherit (config.services.restic) backups;
         user = mainUser;

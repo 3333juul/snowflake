@@ -15,35 +15,39 @@
   sshDir = homeDir + "/.ssh";
 
   userGroup = ldTernary pkgs "users" "admin";
+
+  cfg = config.garden.system;
 in {
   imports = [inputs.agenix.nixosModules.default];
 
-  environment.systemPackages = [
-    inputs.agenix.packages.${pkgs.system}.default
-  ];
-
-  age = {
-    # check the main users ssh key and the system key to see if it is safe
-    # to decrypt the secrets
-    identityPaths = [
-      "/etc/ssh/ssh_host_ed25519_key"
-      "${sshDir}/id_ed25519"
+  config = mkIf cfg.enableSecrets {
+    environment.systemPackages = [
+      inputs.agenix.packages.${pkgs.system}.default
     ];
 
-    secretsDir = mkIf isDarwin "/private/tmp/agenix";
-    secretsMountPoint = mkIf isDarwin "/private/tmp/agenix.d";
+    age = {
+      # check the main users ssh key and the system key to see if it is safe
+      # to decrypt the secrets
+      identityPaths = [
+        "/etc/ssh/ssh_host_ed25519_key"
+        "${sshDir}/id_ed25519"
+      ];
 
-    secrets = {
-      restic-password = mkSecret {
-        file = "restic/password";
-        owner = mainUser;
-        group = userGroup;
-      };
+      secretsDir = mkIf isDarwin "/private/tmp/agenix";
+      secretsMountPoint = mkIf isDarwin "/private/tmp/agenix.d";
 
-      todoist = mkSecret {
-        file = "todoist";
-        owner = mainUser;
-        group = userGroup;
+      secrets = {
+        restic-password = mkSecret {
+          file = "restic/password";
+          owner = mainUser;
+          group = userGroup;
+        };
+
+        todoist = mkSecret {
+          file = "todoist";
+          owner = mainUser;
+          group = userGroup;
+        };
       };
     };
   };
@@ -54,7 +58,7 @@ in {
       inputs.agenix.homeManagerModules.default
     ];
 
-    age = {
+    age = mkIf cfg.enableSecrets {
       identityPaths = [
         "${sshDir}/id_ed25519"
       ];

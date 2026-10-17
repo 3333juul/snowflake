@@ -1,8 +1,13 @@
 {
   pkgs,
+  lib,
   osConfig,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
+  secretsEnabled = osConfig.garden.system.enableSecrets;
+
   todoist-waybar =
     pkgs.writers.writePython3Bin "todoist-waybar" {
       libraries = [pkgs.python3Packages.requests];
@@ -72,5 +77,7 @@
           main()
     '';
 in {
-  home.packages = [todoist-waybar];
+  config = mkIf secretsEnabled {
+    home.packages = [todoist-waybar];
+  };
 }
