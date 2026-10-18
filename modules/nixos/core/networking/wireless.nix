@@ -1,6 +1,8 @@
 {config, ...}: let
   inherit (config.garden.system.networking) wirelessBackend;
 in {
+
+  # TODO:
   config = {
     # enable wireless database, it helps keeping wifi speedy
     hardware.wirelessRegulatoryDatabase = true;
