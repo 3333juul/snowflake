@@ -20,6 +20,7 @@
 in {
   imports = [inputs.agenix.nixosModules.default];
 
+  config = mkIf cfg.enableSecrets {
     environment.systemPackages = [
       inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
@@ -46,6 +47,7 @@ in {
           file = "todoist";
           owner = mainUser;
           group = userGroup;
+        };
       };
     };
   };
@@ -56,7 +58,7 @@ in {
       inputs.agenix.homeManagerModules.default
     ];
 
-    age = {
+    age = mkIf cfg.enableSecrets {
       identityPaths = [
         "${sshDir}/id_ed25519"
       ];
@@ -67,7 +69,7 @@ in {
           path = "/home/${mainUser}/.config/rclone/rclone.conf";
           symlink = false;
         };
-       };
       };
     };
-  }
+  };
+}
