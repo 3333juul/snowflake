@@ -46,7 +46,6 @@ in {
           file = "todoist";
           owner = mainUser;
           group = userGroup;
-        };
       };
     };
   };
@@ -57,7 +56,7 @@ in {
       inputs.agenix.homeManagerModules.default
     ];
 
-    age = mkIf cfg.enableSecrets {
+    age = {
       identityPaths = [
         "${sshDir}/id_ed25519"
       ];
@@ -68,6 +67,7 @@ in {
           path = "/home/${mainUser}/.config/rclone/rclone.conf";
           symlink = false;
         };
+       };
       };
     };
   }
