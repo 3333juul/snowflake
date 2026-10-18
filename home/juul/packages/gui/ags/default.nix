@@ -19,10 +19,10 @@ in {
         name = packageName;
         entry = "app.ts";
         extraPackages = [
-          inputs.ags.packages.${pkgs.system}.battery
-          inputs.ags.packages.${pkgs.system}.bluetooth
-          inputs.ags.packages.${pkgs.system}.hyprland
-          inputs.ags.packages.${pkgs.system}.network
+          inputs.ags.packages.${pkgs.stdenv.hostPlatform.system}.battery
+          inputs.ags.packages.${pkgs.stdenv.hostPlatform.system}.bluetooth
+          inputs.ags.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
+          inputs.ags.packages.${pkgs.stdenv.hostPlatform.system}.network
         ];
       };
     in {

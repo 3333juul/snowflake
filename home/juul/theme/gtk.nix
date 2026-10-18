@@ -7,7 +7,7 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-  inherit (inputs.self.packages.${pkgs.system}) gruvbox-material-gtk;
+  inherit (inputs.self.packages.${pkgs.stdenv.hostPlatform.system}) gruvbox-material-gtk;
 
   cfg = osConfig.garden.style;
 in {

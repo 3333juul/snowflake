@@ -14,19 +14,19 @@ in {
   wayland.windowManager.hyprland = {
     plugins = concatLists [
       (optionals cfg.hycov.enable [
-        inputs.hycov.packages.${pkgs.system}.hycov
+        inputs.hycov.packages.${pkgs.stdenv.hostPlatform.system}.hycov
       ])
 
       (optionals cfg.hyprNStack.enable [
-        inputs.self.packages.${pkgs.system}.hyprNStack
+        inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.hyprNStack
       ])
 
       (optionals cfg.hyprland-easymotion.enable [
-        inputs.hyprland-easymotion.packages.${pkgs.system}.hyprland-easymotion
+        inputs.hyprland-easymotion.packages.${pkgs.stdenv.hostPlatform.system}.hyprland-easymotion
       ])
 
       (optionals (cfg.hyprgrass.enable && hasTouchscreen) [
-        inputs.hyprgrass.packages.${pkgs.system}.default
+        inputs.hyprgrass.packages.${pkgs.stdenv.hostPlatform.system}.default
       ])
     ];
 

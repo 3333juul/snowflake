@@ -9,7 +9,7 @@
 
     includes = [];
 
-    matchBlocks = {
+    settings = {
       "*" = {
         hashKnownHosts = true;
         compression = true;

@@ -5,7 +5,7 @@
   osConfig,
   ...
 }: let
-  inherit (pkgs.stdenv) isLinux;
+  inherit (pkgs.stdenv.hostPlatform) isLinux;
   inherit (lib.modules) mkIf;
   inherit (lib.attrsets) mapAttrsToList nameValuePair optionalAttrs;
   inherit (lib.lists) flatten;
@@ -139,6 +139,7 @@ in {
     userDirs = mkIf isLinux {
       enable = true;
       createDirectories = true;
+      setSessionVariables = true;
 
       documents = "${homeDir}/documents";
       download = "${homeDir}/downloads";
@@ -151,14 +152,14 @@ in {
 
       extraConfig =
         {
-          XDG_PROJECTS_DIR = "${homeDir}/projects";
-          XDG_TORRENTS_DIR = "${homeDir}/downloads/torrents";
-          XDG_SCREENSHOTS_DIR = "${homeDir}/media/pictures/screenshots";
-          XDG_WALLPAPERS_DIR = "${homeDir}/media/pictures/wallpapers";
-          XDG_RECORDINGS_DIR = "${homeDir}/media/videos/recordings";
+          PROJECTS = "${homeDir}/projects";
+          TORRENTS = "${homeDir}/downloads/torrents";
+          SCREENSHOTS = "${homeDir}/media/pictures/screenshots";
+          WALLPAPERS = "${homeDir}/media/pictures/wallpapers";
+          RECORDINGS = "${homeDir}/media/videos/recordings";
         }
         // optionalAttrs osConfig.garden.presets.gaming.enable {
-          XDG_GAMES_DIR = "${homeDir}/media/games";
+          GAMES = "${homeDir}/media/games";
         };
     };
 

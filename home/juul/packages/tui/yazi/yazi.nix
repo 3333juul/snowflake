@@ -10,7 +10,8 @@
 in {
   programs.yazi = mkIf cfg.yazi.enable {
     enable = true;
-    #package = inputs.yazi.packages.${pkgs.system}.yazi;
+    shellWrapperName = "yy";
+    #package = inputs.yazi.packages.${pkgs.stdenv.hostPlatform.system}.yazi;
 
     settings = {
       manager = {

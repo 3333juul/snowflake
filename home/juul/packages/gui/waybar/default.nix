@@ -23,7 +23,7 @@ in {
   config = mkIf cfg.waybar.enable {
     programs.waybar = {
       enable = true;
-      package = inputs.waybar.packages.${pkgs.system}.default;
+      package = inputs.waybar.packages.${pkgs.stdenv.hostPlatform.system}.default;
       settings = {
         mainBar =
           {

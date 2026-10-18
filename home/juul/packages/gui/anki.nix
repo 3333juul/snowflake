@@ -6,7 +6,7 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-  inherit (inputs.self.packages.${pkgs.system}) vocabsieve;
+  inherit (inputs.self.packages.${pkgs.stdenv.hostPlatform.system}) vocabsieve;
 
   cfg = osConfig.garden.programs;
 in {

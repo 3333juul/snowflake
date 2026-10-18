@@ -7,7 +7,7 @@
 }: let
   inherit (lib.modules) mkIf;
 
-  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 
   cfg = osConfig.garden.programs;
 in {

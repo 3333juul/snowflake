@@ -11,7 +11,7 @@
   user = "memos";
   group = "memos";
   dataDir = "/var/lib/memos";
-  package = inputs.self.packages.${pkgs.system}.memos;
+  package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.memos;
   cfg = config.garden.services.memos;
 in {
   config = mkIf cfg.enable {
