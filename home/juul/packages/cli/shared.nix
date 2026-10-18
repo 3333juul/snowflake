@@ -24,6 +24,7 @@ in {
         unzip
         jq
         python3
+        ocrmypdf
 
         # nix tools
         nix-prefetch-github
