@@ -6,9 +6,10 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
+  inherit (osConfig.garden.environment) isWM;
   inherit (osConfig.garden.programs.defaults) wallDaemon;
 in {
-  config = mkIf (wallDaemon == "swaybg") {
+  config = mkIf (isWM && wallDaemon == "swaybg") {
     systemd.user.services.swaybg = {
       Unit = {
         Description = "swaybg wallpaper daemon";

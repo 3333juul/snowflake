@@ -11,14 +11,14 @@
   wrl = osConfig.garden.system.networking.wirelessBackend;
 in {
   config = mkIf cfg.enable {
-    home.packages = with pkgs;
-      [
+    home.packages =
+      with pkgs; [
         tty-clock # clock
-        bluetui # bluetooth
         programmer-calculator # calculator
       ]
+      # bluetooth
+      ++ optionals osConfig.garden.device.hasBluetooth [bluetui]
       # wifi
-      ++ optionals (wrl == "iwd")
-      [impala];
+      ++ optionals (wrl == "iwd" && osConfig.garden.device.type != "wsl") [impala];
   };
 }

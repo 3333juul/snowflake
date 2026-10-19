@@ -7,7 +7,7 @@
 
   cfg = osConfig.garden.presets.tui;
 in {
-  config = mkIf cfg.enable {
+  config = mkIf (cfg.enable && osConfig.garden.system.sound.enable) {
     programs.cava = {
       enable = true;
     };

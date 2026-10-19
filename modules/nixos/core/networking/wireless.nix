@@ -1,9 +1,13 @@
-{config, ...}: let
+{
+  config,
+  lib,
+  ...
+}: let
+  inherit (lib.modules) mkIf;
   inherit (config.garden.system.networking) wirelessBackend;
 in {
-
   # TODO:
-  config = {
+  config = mkIf (config.garden.device.type != "wsl") {
     # enable wireless database, it helps keeping wifi speedy
     hardware.wirelessRegulatoryDatabase = true;
 
