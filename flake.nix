@@ -79,30 +79,5 @@
     nix-private = {
       url = "git+ssh://git@github.com/3333juul/nix-private.git";
     };
-
-    # hyprland-easymotion = {
-    #   url = "github:zakk4223/hyprland-easymotion/3388351d2af672f89b907404668c6076336270e9";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
-    #
-    # hycov = {
-    #   url = "github:bighu630/hycov";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
-
-    # hyprgrass = {
-    #   url = "github:horriblename/hyprgrass";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
-    #
-    # astal = {
-    #   url = "github:aylur/astal";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    #
-    # ags = {
-    #   url = "github:aylur/ags";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
 }

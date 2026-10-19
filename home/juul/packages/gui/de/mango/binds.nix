@@ -24,14 +24,18 @@ in {
         "SUPER,r,spawn,kitty --class ${fileManager} -e ${fileManager}"
         "SUPER+ALT+CTRL,l,spawn,${screenLocker}"
         "SUPER+CTRL,e,spawn,ocr-lookup"
-        "SUPER,P,spawn,sh -c 'pkill tofi || tofi-run | xargs hyprctl dispatch exec'"
+        "SUPER,P,spawn_shell,pkill tofi || tofi-run | xargs -r sh -c"
         "SUPER,space,spawn,${{
             tofi = ''sh -c "pkill tofi || tofi-drun --drun-launch=true"'';
             vicinae = "vicinae toggle";
           }.${
             launcher
           }}"
-
+        # Launcher scripts
+        "SUPER+CTRL,d,spawn_shell,pkill tofi || quicklinks --kitty"
+        "SUPER+CTRL,x,spawn_shell,pkill tofi || powermenu"
+        "SUPER+CTRL,c,spawn_shell,pkill tofi || cliphist list | tofi | cliphist decode | wl-copy"
+        "SUPER+CTRL,g,spawn_shell,cd ~/media/memes && rofi-gridview"
         # Switch window focus
         "SUPER,J,focusstack,next"
         "SUPER,K,focusstack,prev"
@@ -49,6 +53,8 @@ in {
         "SUPER+SHIFT,Right,exchange_client,right"
 
         # Switch window status
+        "SUPER+SHIFT,f,togglefloating,"
+        "SUPER+CTRL,f,togglefullscreen,"
         "SUPER,g,toggleglobal,"
         "ALT,Tab,togglejump,"
         "ALT,backslash,togglefloating,"
@@ -57,7 +63,7 @@ in {
         "ALT+SHIFT,f,togglefakefullscreen,"
         "SUPER,i,minimized,"
         "SUPER,o,toggleoverlay,"
-        "SUPER+SHIFT,I,restore_minimized"
+        "SUPER+SHIFT,I,restore_minimized,"
         "ALT,z,toggle_scratchpad"
 
         # Scroller layout
@@ -70,9 +76,7 @@ in {
 
         # Tag switch
         "SUPER,Left,viewtoleft,0"
-        "CTRL,Left,viewtoleft_have_client,0"
         "SUPER,Right,viewtoright,0"
-        "CTRL,Right,viewtoright_have_client,0"
         "CTRL+SUPER,Left,tagtoleft,0"
         "CTRL+SUPER,Right,tagtoright,0"
 
@@ -105,22 +109,18 @@ in {
         "SUPER+SHIFT,1,tag,1,0"
         "SUPER+SHIFT,2,tag,2,0"
         "SUPER+SHIFT,3,tag,3,0"
-        "SUPER+SHIFT,4,tag,5,0"
+        "SUPER+SHIFT,4,tag,4,0"
+        "SUPER+SHIFT,5,tag,5,0"
         "SUPER+SHIFT,6,tag,6,0"
         "SUPER+SHIFT,7,tag,7,0"
         "SUPER+SHIFT,8,tag,8,0"
         "SUPER+SHIFT,9,tag,9,0"
 
         # Monitor switch
-        "alt+shift,Left,focusmon,left"
-        "alt+shift,Right,focusmon,right"
-        "SUPER+Alt,Left,tagmon,left"
-        "SUPER+Alt,Right,tagmon,right"
-
-        # Gaps
-        "ALT+SHIFT,X,incgaps,1"
-        "ALT+SHIFT,Z,incgaps,-1"
-        "ALT+SHIFT,R,togglegaps"
+        "SUPER,comma,focusmon,right"
+        "SUPER,period,focusmon,left"
+        "SUPER+SHIFT,comma,tagmon,right"
+        "SUPER+SHIFT,period,tagmon,left"
 
         # Move window
         "CTRL+SHIFT,Up,movewin,+0,-50"
@@ -136,6 +136,17 @@ in {
 
         # Scratchpad
         "SUPER,s,toggle_named_scratchpad,spotify,none,spotify"
+        "SUPER,backslash,toggle_special_tag,"
+        "SUPER+SHIFT,backslash,tag_special_tag,"
+
+        # Media and brightness
+        "NONE,XF86AudioMute,spawn,changevolume mute"
+        "NONE,XF86AudioRaiseVolume,spawn,changevolume up"
+        "NONE,XF86AudioLowerVolume,spawn,changevolume down"
+        "NONE,XF86MonBrightnessUp,spawn,brightnessctl set 5%+"
+        "NONE,XF86MonBrightnessDown,spawn,brightnessctl set 5%-"
+        "SUPER,XF86MonBrightnessUp,spawn,brightnessctl set 100%+"
+        "SUPER,XF86MonBrightnessDown,spawn,brightnessctl set 100%-"
       ];
 
       # Mouse button bindings

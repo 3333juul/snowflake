@@ -44,5 +44,7 @@ in {
         };
       };
     };
+
+    garden.services.restic.extraPaths = ["/var/lib/tt-rss"];
   };
 }
