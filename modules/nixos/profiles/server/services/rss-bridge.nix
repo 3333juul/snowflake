@@ -4,7 +4,6 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-  inherit (lib.helpers) addBackupPaths;
 
   cfg = config.garden.services.rss-bridge;
   dataDir = "/var/lib/rss-bridge";
@@ -30,8 +29,8 @@ in {
           };
         };
       };
-
-      restic.backups = addBackupPaths config ["*"] [dataDir];
     };
+
+    garden.services.restic.extraPaths = [dataDir];
   };
 }

@@ -46,9 +46,10 @@
     local = ["${homeDir}/backups/local"];
   };
 
-  # NOTE: pruneOpts module doesn't distinguish between hosts, so it's better to keep repositories per host to avoid data loss.
-  # alternative: implement a custom function for this yourself.
+  # NOTE: scope the retention policy to this host, so `forget --prune` never
+  # touches snapshots belonging to another machine sharing the repository.
   defPruneOpts = [
+    "--host ${hostName}"
     "--keep-daily 7"
     "--keep-weekly 5"
     "--keep-monthly 12"
@@ -61,11 +62,11 @@ in {
     services.restic.backups = mkIf secretsEnabled (filterEnabled cfg.backups {
       onedrive = {
         initialize = true;
-        repository = "rclone:onedrive:Restic/${hostName}";
+        repository = "rclone:onedrive:Restic";
         passwordFile = secrets.restic-password.path;
         rcloneConfigFile = "${homeDir}/.config/rclone/rclone.conf";
         backupPrepareCommand = waitForNetwork;
-        paths = paths.common ++ paths.cloud;
+        paths = paths.common ++ paths.cloud ++ cfg.extraPaths;
         pruneOpts = defPruneOpts;
 
         timerConfig = {
@@ -76,9 +77,9 @@ in {
 
       local-internal = {
         initialize = true;
-        repository = "/mnt/data-hdd/restic/${hostName}";
+        repository = "/mnt/data-hdd/restic";
         passwordFile = secrets.restic-password.path;
-        paths = paths.common ++ paths.local;
+        paths = paths.common ++ paths.local ++ cfg.extraPaths;
 
         pruneOpts = defPruneOpts;
 
@@ -90,9 +91,9 @@ in {
 
       local-external = {
         initialize = true;
-        repository = "/run/media/${mainUser}/drive/restic/${hostName}";
+        repository = "/run/media/${mainUser}/drive/restic";
         passwordFile = secrets.restic-password.path;
-        paths = paths.common ++ paths.local;
+        paths = paths.common ++ paths.local ++ cfg.extraPaths;
         pruneOpts = defPruneOpts;
         timerConfig = null;
       };

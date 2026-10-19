@@ -5,7 +5,6 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-  inherit (lib.helpers) addBackupPaths;
 
   cfg = config.garden.services;
   dataDir = "/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
@@ -33,8 +32,8 @@ in {
           }
         ];
       };
-
-      restic.backups = addBackupPaths config ["*"] [dataDir];
     };
+
+    garden.services.restic.extraPaths = [dataDir];
   };
 }

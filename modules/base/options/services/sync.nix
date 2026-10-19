@@ -44,6 +44,12 @@ in {
         description = "list of enabled restic backups";
       };
 
+      extraPaths = mkOption {
+        type = listOf str;
+        default = [];
+        description = "additional paths appended to every enabled backup";
+      };
+
       serverPaths = mkOption {
         type = listOf str;
         default = [];
