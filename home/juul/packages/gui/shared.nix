@@ -15,7 +15,7 @@ in {
       pavucontrol # gui volume control
       qalculate-gtk # calculator
       qbittorrent # torrent client
-      # stremio # TODO: broken, enable later
+      stremio-linux-shell
       obs-studio
       signal-desktop
       ayugram-desktop
