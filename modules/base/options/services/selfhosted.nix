@@ -1,6 +1,6 @@
 {lib, ...}: let
   inherit (lib.options) mkEnableOption;
-  inherit (lib.services) mkServiceOption;
+  inherit (lib.serviceHelpers) mkServiceOption;
 in {
   # NOTE: remember what mkServiceOption does
   options.garden.services = {

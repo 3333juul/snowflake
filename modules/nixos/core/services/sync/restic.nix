@@ -7,7 +7,7 @@
   inherit (lib.modules) mkIf;
   inherit (lib.attrsets) mapAttrs;
   inherit (lib.lists) optionals;
-  inherit (lib.services) mkResticNotify;
+  inherit (lib.serviceHelpers) mkResticNotify;
   inherit (lib.helpers) filterEnabled;
   inherit (lib.validators) hasProfile;
   inherit (config.age) secrets;

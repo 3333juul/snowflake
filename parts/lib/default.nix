@@ -10,14 +10,16 @@
       hardware = import ./hardware.nix;
       helpers = import ./helpers.nix {inherit lib;};
       secrets = import ./secrets.nix {inherit inputs;};
-      services = import ./services.nix {inherit lib;};
+      # NOTE: not `services` — nixpkgs' lib exposes `lib.services` itself
+      # (e.g. `lib.services.configure`, used by its own NixOS modules)
+      serviceHelpers = import ./services.nix {inherit lib;};
       validators = import ./validators.nix {inherit lib;};
 
       inherit (lib.builders) mkHosts;
       inherit (lib.hardware) isx86Linux ldTernary primaryMonitor monitor;
       inherit (lib.helpers) filterEnabled;
       inherit (lib.secrets) mkSecret mkSecretWithPath mkSecretHM;
-      inherit (lib.services) mkResticNotify mkServiceOption;
+      inherit (lib.serviceHelpers) mkResticNotify mkServiceOption;
       inherit (lib.validators) hasProfile;
     }
   );
