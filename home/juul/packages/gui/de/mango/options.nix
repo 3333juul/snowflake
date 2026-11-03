@@ -12,24 +12,23 @@
 
       # Master-Stack Layout Setting
       new_is_master = 0;
-      default_mfact = 0.55;
-      default_nmaster = 1;
-      smartgaps = 0;
+      default_master_factor = 0.55;
+      default_master_count = 1;
+      smart_gaps = 0;
 
       # Overview Setting
       hotarea_size = 10;
       enable_hotarea = 1;
-      ov_tab_mode = 0;
-      overviewgappi = 5;
-      overviewgappo = 30;
+      overview_gap_inner = 5;
+      overview_gap_outer = 30;
 
       # Misc
       no_border_when_single = 0;
       axis_bind_apply_timeout = 100;
       focus_on_activate = 1;
-      idleinhibit_ignore_visible = 0;
-      sloppyfocus = 1;
-      warpcursor = 1;
+      idle_inhibit_ignore_visible = 0;
+      sloppy_focus = 1;
+      warp_cursor = 1;
       focus_cross_monitor = 0;
       focus_cross_tag = 0;
       enable_floating_snap = 0;
@@ -40,7 +39,7 @@
       # Keyboard
       repeat_rate = 25;
       repeat_delay = 600;
-      numlockon = 0;
+      numlock_on = 0;
       xkb_rules_layout = "pl";
       xkb_rules_options = "caps:escape";
 
@@ -51,9 +50,9 @@
       tap_and_drag = 1;
       drag_lock = 1;
       trackpad_natural_scrolling = 0;
-      disable_while_typing = 1;
-      left_handed = 0;
-      middle_button_emulation = 0;
+      trackpad_disable_while_typing = 1;
+      trackpad_left_handed = 0;
+      trackpad_middle_button_emulation = 0;
       swipe_min_threshold = 1;
 
       # Mouse

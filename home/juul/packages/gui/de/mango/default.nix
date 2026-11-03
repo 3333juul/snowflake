@@ -1,6 +1,7 @@
 {
   inputs,
   lib,
+  pkgs,
   osConfig,
   ...
 }: let
@@ -22,5 +23,9 @@ in {
     wayland.windowManager.mango = {
       enable = true;
     };
+
+    home.packages = [
+      pkgs.xdg-desktop-portal-wlr
+    ];
   };
 }

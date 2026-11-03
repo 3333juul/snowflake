@@ -39,10 +39,6 @@ in {
         # Switch window focus
         "SUPER,J,focusstack,next"
         "SUPER,K,focusstack,prev"
-        "SUPER,Left,focusdir,left"
-        "SUPER,Right,focusdir,right"
-        "SUPER,Up,focusdir,up"
-        "SUPER,Down,focusdir,down"
 
         # Swap window
         "SUPER+SHIFT,j,exchange_stack_client,next"
