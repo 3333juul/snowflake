@@ -11,7 +11,7 @@ in {
   imports = [
     inputs.mango.hmModules.mango
     # ./animations.nix
-    #  ./autostart.nix
+    ./autostart.nix
     ./binds.nix
     ./look.nix
     ./options.nix
