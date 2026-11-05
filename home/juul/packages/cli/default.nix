@@ -1,7 +1,7 @@
 {
   imports = [
+    ./ai
     ./shell
-    ./aichat.nix
     ./bat.nix
     ./downloaders.nix
     ./fastfetch.nix

@@ -9,6 +9,6 @@
   cfg = osConfig.garden.presets;
 in {
   config = mkIf cfg.cli.enable {
-    home.packages = with pkgs; [aichat];
+    home.packages = with pkgs; [codex];
   };
 }
