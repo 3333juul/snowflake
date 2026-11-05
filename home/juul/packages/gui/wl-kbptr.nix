@@ -5,8 +5,7 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
-
-  cfg = osConfig.garden.environment.desktop;
+  inherit (osConfig.garden.environment) isWM;
 
   settings = {
     general = {
@@ -68,7 +67,7 @@
     };
   };
 in {
-  config = mkIf (cfg.type == "Hyprland") {
+  config = mkIf isWM {
     home.packages = with pkgs; [
       (wl-kbptr.overrideAttrs {
         src = fetchFromGitHub {

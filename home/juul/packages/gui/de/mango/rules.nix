@@ -29,6 +29,8 @@
 
       # Layer rules
       layer_rule = [
+        # wl-kbptr uses the selection layer namespace (also used by slurp).
+        "layer_name:^selection$,no_animation:1,no_blur:1"
         "animation_type_open:zoom,layer_name:rofi"
         "animation_type_close:zoom,layer_name:rofi"
       ];

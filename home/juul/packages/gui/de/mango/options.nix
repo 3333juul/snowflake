@@ -10,6 +10,9 @@
       scroller_default_proportion_single = 1.0;
       scroller_proportion_preset = "0.5,0.8,1.0";
 
+      # Monocle Layout Setting
+      monocle_tab_mode = 1;
+
       # Master-Stack Layout Setting
       new_is_master = 0;
       default_master_factor = 0.55;
@@ -33,7 +36,6 @@
       focus_cross_tag = 0;
       enable_floating_snap = 0;
       snap_distance = 30;
-      cursor_size = 24;
       drag_tile_to_tile = 1;
 
       # Keyboard

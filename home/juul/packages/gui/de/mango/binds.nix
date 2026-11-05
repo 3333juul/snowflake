@@ -8,9 +8,24 @@
     screenLocker
     launcher
     ;
+
+  launcherCmd =
+    {
+      tofi = ''sh -c "pkill tofi || tofi-drun --drun-launch=true"'';
+      vicinae = "vicinae toggle";
+    }.${
+      launcher
+    };
 in {
   wayland.windowManager.mango = {
     settings = {
+      # Tapping Super alone opens the launcher
+      # (a Super+key binding cancels the pending tap binding)
+      bindr = [
+        "Super,Super_L,spawn,${launcherCmd}"
+        "Super,Super_R,spawn,${launcherCmd}"
+      ];
+
       # Reload / quit
       bind = [
         "SUPER+CTRL,r,reload_config"
@@ -18,6 +33,7 @@ in {
         "SUPER,q,killclient,"
 
         # Spawn programs
+        "SUPER,f,spawn,wl-kbptr -o modes=floating,click -o mode_floating.source=detect"
         "SUPER,Return,spawn,${terminal}"
         "SUPER,w,spawn,${browser}"
         "SUPER,c,spawn,kitty --class ${editor} -e ${editor}"
@@ -25,12 +41,7 @@ in {
         "SUPER+ALT+CTRL,l,spawn,${screenLocker}"
         "SUPER+CTRL,e,spawn,ocr-lookup"
         "SUPER,P,spawn_shell,pkill tofi || tofi-run | xargs -r sh -c"
-        "SUPER,space,spawn,${{
-            tofi = ''sh -c "pkill tofi || tofi-drun --drun-launch=true"'';
-            vicinae = "vicinae toggle";
-          }.${
-            launcher
-          }}"
+        "SUPER,space,spawn,${launcherCmd}"
         # Launcher scripts
         "SUPER+CTRL,d,spawn_shell,pkill tofi || quicklinks --kitty"
         "SUPER+CTRL,x,spawn_shell,pkill tofi || powermenu"
@@ -149,8 +160,6 @@ in {
       mousebind = [
         "SUPER,btn_left,moveresize,curmove"
         "SUPER,btn_right,moveresize,curresize"
-        "NONE,btn_left,toggleoverview,1"
-        "NONE,btn_right,killclient,0"
       ];
 
       # Axis bindings
