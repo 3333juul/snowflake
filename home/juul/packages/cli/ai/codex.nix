@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   osConfig,
   ...
@@ -9,6 +8,6 @@
   cfg = osConfig.garden.presets;
 in {
   config = mkIf cfg.cli.enable {
-    home.packages = with pkgs; [codex];
+    programs.codex.enable = true;
   };
 }
