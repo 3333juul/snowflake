@@ -146,6 +146,11 @@ in {
         "SUPER,backslash,toggle_special_tag,"
         "SUPER+SHIFT,backslash,tag_special_tag,"
 
+        # Screenshot
+        "SUPER+CTRL,s,spawn,screenshot sf"
+        "NONE,Print,spawn,screenshot m"
+        "SUPER,Print,spawn,screenshot p"
+
         # Media and brightness
         "NONE,XF86AudioMute,spawn,changevolume mute"
         "NONE,XF86AudioRaiseVolume,spawn,changevolume up"

@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+action=${1:-}
+case "$action" in
+  p|s|sf|m) ;;
+  *) printf 'Usage: screenshot {p|s|sf|m} [save-directory]\n' >&2; exit 1 ;;
+esac
+
+pictures_dir=${XDG_PICTURES_DIR:-$HOME/media/pictures}
+save_dir=${2:-$pictures_dir/screenshots}
+swpy_dir=${XDG_CONFIG_HOME:-$HOME/.config}/swappy
+save_file=$(date +'screnshoot_%Y-%m-%d_%Hh%Mm%Ss.png')
+work_dir=$(mktemp -d "${XDG_RUNTIME_DIR:-/tmp}/screenshot.XXXXXX")
+temp_screenshot=$work_dir/screenshot.png
+freeze_pid=
+
+stop_freeze() {
+  if [[ -n "$freeze_pid" ]]; then
+    kill "$freeze_pid" 2>/dev/null || true
+    wait "$freeze_pid" 2>/dev/null || true
+    freeze_pid=
+  fi
+}
+cleanup() {
+  stop_freeze
+  rm -rf -- "$work_dir"
+}
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+
+case "$action" in
+  p) grim "$temp_screenshot" ;;
+  m)
+    monitor=$(mmsg get all-monitors | jq -er '.monitors[] | select(.active == true) | .name')
+    grim -o "$monitor" "$temp_screenshot"
+    ;;
+  s|sf)
+    if [[ "$action" == sf ]]; then
+      mkfifo "$work_dir/ready"
+      # Open both ends so a failed freezer cannot leave the script blocked on open().
+      exec 3<> "$work_dir/ready"
+      printf -v ready_command 'printf "ready\\n" > %q' "$work_dir/ready"
+      wayfreeze --after-freeze-timeout 100 --after-freeze-cmd "$ready_command" &
+      freeze_pid=$!
+      if ! read -r -t 5 <&3; then
+        printf 'Unable to freeze the screen.\n' >&2
+        exit 1
+      fi
+      exec 3>&-
+    fi
+    geometry=$(slurp -d) || exit 0
+    [[ -n "$geometry" ]] || exit 0
+    grim -g "$geometry" "$temp_screenshot"
+    stop_freeze
+    ;;
+esac
+
+wl-copy --type image/png < "$temp_screenshot"
+mkdir -p -- "$save_dir" "$swpy_dir"
+printf '[Default]\nsave_dir=%s\nsave_filename_format=%s\n' "$save_dir" "$save_file" > "$swpy_dir/config"
+swappy -f "$temp_screenshot"
+
+if [[ -f "$save_dir/$save_file" ]]; then
+  notify-send -a Screenshot -i "$save_dir/$save_file" -t 2200 "Screenshot saved at $save_dir/$save_file"
+fi
